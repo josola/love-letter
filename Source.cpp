@@ -105,13 +105,13 @@ void switchPlayer()
 	}
 }
 
-void discardPlayedCard(int inputNum)
+void discardPlayedCard()
 {
 	//Expression to aquire input number from within vectors.
-	auto it = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), inputNum);
-	cout << suitorNames[currentSuitor] << " played " << cardNames[inputNum] << endl;
+	auto it = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
+	cout << suitorNames[currentSuitor] << " played " << cardNames[cardNum] << endl;
 	//Discard played card from current suitor hand to up pile.
-	upPile.push_back(inputNum);
+	upPile.push_back(cardNum);
 	if (it != suitor[currentSuitor].end())
 	{
 		suitor[currentSuitor].erase(it);
@@ -174,28 +174,28 @@ LOOP:
 	if (suitorObjectContainer[playerNum].handmaidStatus())
 	{
 		cout << suitorNames[playerNum] << " is untargetable." << endl;
-		if (suitorCount > 2)
+		if (suitorCount == 2)
 		{
-			goto LOOP;
+			return;
 		}
 		else
 		{
-			return;
+			goto LOOP;
 		}
 	}
 }
 
-void playCard(int inputNum)
+void playCard()
 {
-	switch (inputNum)
+	switch (cardNum)
 	{
 	case 0:
-		discardPlayedCard(0);
+		discardPlayedCard();
 		//Current suitor object gains spy bonus.
 		suitorObjectContainer[currentSuitor].getSpy();
 		break;
 	case 1:
-		discardPlayedCard(1);
+		discardPlayedCard();
 		targetSuitor();
 		//LOOPB:
 		//	//Prompt current suitor for card guess.
@@ -240,7 +240,7 @@ void playCard(int inputNum)
 		//	}
 		break;
 	case 2:
-		discardPlayedCard(2);
+		discardPlayedCard();
 		targetSuitor();
 		/*cout << suitorNames[playerNum] << " hand: " << endl;
 		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
@@ -249,7 +249,7 @@ void playCard(int inputNum)
 		}*/
 		break;
 	case 3:
-		discardPlayedCard(3);
+		discardPlayedCard();
 		targetSuitor();
 		////Print target suitor hand along with current suitor hand.
 		//cout << suitorNames[currentSuitor] << " hand: " << endl;
@@ -304,12 +304,12 @@ void playCard(int inputNum)
 		//}
 		break;
 	case 4:
-		discardPlayedCard(4);
+		discardPlayedCard();
 		////Current suitor object gains Handmaid protection.
 		//suitorObjectContainer[currentSuitor].getHandmaid();
 		break;
 	case 5:
-		discardPlayedCard(5);
+		discardPlayedCard();
 	LOOPE:
 		targetSuitor();
 		//Check for Handmaid protection (Prince requires more checks than standard Handmaid check).
@@ -398,7 +398,7 @@ void playCard(int inputNum)
 		}
 		break;
 	case 6:
-		discardPlayedCard(6);
+		discardPlayedCard();
 		//	//Draw two cards.
 		//	for (int i = 0; i < 2; i++)
 		//	{
@@ -464,14 +464,14 @@ void playCard(int inputNum)
 		//	}
 		break;
 	case 7:
-		discardPlayedCard(7);
+		discardPlayedCard();
 		targetSuitor();
 		break;
 	case 8:
-		discardPlayedCard(8);
+		discardPlayedCard();
 		break;
 	case 9:
-		discardPlayedCard(9);
+		discardPlayedCard();
 		break;
 	}
 }
@@ -649,7 +649,7 @@ void playerTurn()
 		}
 		if (cardNum >= 0 && cardNum <= 9 && cin)
 		{
-			playCard(cardNum);
+			playCard();
 		}
 		else
 		{
