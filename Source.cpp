@@ -120,7 +120,9 @@ void discardPlayedCard(int inputNum)
 void printActiveSuitors()
 {
 	cout << "Suitors fighting for the Princess: " << endl;
+	//Up current suitor to conform to vector rules (begin at 0).
 	currentSuitor++;
+	//Check if suitor is out (suitor hand is empty). Do not print current suitor name.
 	for (unsigned int i = 0; i < suitor.size(); i++)
 	{
 		if (!suitor[i].empty() && suitors[i] != currentSuitor)
@@ -128,6 +130,7 @@ void printActiveSuitors()
 			cout << suitorNames[i] << " ";
 		}
 	}
+	//Decrement current suitor to conform to human readability (start at 1). 
 	currentSuitor--;
 	cout << endl;
 }
