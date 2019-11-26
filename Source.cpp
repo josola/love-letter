@@ -79,7 +79,7 @@ void switchPlayer()
 	//Check if current suitor is at begining of vector.
 	if (currentSuitor == suitors[0] - 1)
 	{
-		for (unsigned int i = 1; i < suitors.size(); ++i)
+		for (unsigned int i = 1; i < suitors.size(); i++)
 		{
 			currentSuitor++;
 		}
@@ -93,7 +93,7 @@ void switchPlayer()
 	{
 		if (currentSuitor == suitors[0])
 		{
-			for (unsigned int j = 1; j < suitors.size(); ++j)
+			for (unsigned int i = 1; i < suitors.size(); i++)
 			{
 				currentSuitor++;
 			}
@@ -119,8 +119,8 @@ void playCard(int inputNum)
 		{
 			suitor[currentSuitor].erase(it);
 		}
-		////Current suitor object gains spy bonus.
-		//suitorObjectContainer[currentSuitor].getSpy();
+		//Current suitor object gains spy bonus.
+		suitorObjectContainer[currentSuitor].getSpy();
 		break;
 	case 1:
 		cout << suitorNames[currentSuitor] << " played " << cardNames[inputNum] << endl;
@@ -628,7 +628,7 @@ void initialSetup()
 	if (roundCount == 1)
 	{
 		cout << "-- WELCOME TO LOVE LETTER --" << endl;
-		//Determine how many players 'suitors' will be playing.
+		//Determine how many suitors will be playing.
 	LOOPA:
 		cout << "How many suitors will be playing: " << endl;
 		cin >> suitorCount;
@@ -664,7 +664,7 @@ void initialSetup()
 		{
 			suitors.push_back(i);
 		}
-		for (int i = 1; i < suitorCount + 1; ++i)
+		for (int i = 1; i < suitorCount + 1; i++)
 		{
 			vector<int> hand;
 			suitor.push_back(hand);
@@ -676,7 +676,7 @@ void initialSetup()
 		cout << "I have a suitor number (1 - " << suitor.size() << ") in my head. Guess it!" << endl;
 		cout << target << endl;
 	LOOP:
-		for (unsigned int i = 0; i < suitor.size() + 1; ++i)
+		for (unsigned int i = 0; i < suitor.size() + 1; i++)
 		{
 			cout << suitorNames.at(i) << " guess: " << endl;
 			cin >> guess;
@@ -708,7 +708,7 @@ void initialSetup()
 		{
 			suitors.push_back(i);
 		}
-		for (int i = 1; i < suitorCount + 1; ++i)
+		for (int i = 1; i < suitorCount + 1; i++)
 		{
 			vector<int> hand;
 			suitor.push_back(hand);
@@ -724,16 +724,16 @@ void initialSetup()
 		//Discard one card to down pile.
 		downPile.push_back(deck[0]);
 		deck.erase(deck.begin());
-		for (unsigned int i = 0; i < 3; ++i)
+		for (unsigned int i = 0; i < 3; i++)
 		{
 			upPile.push_back(deck[i]);
 			deck.erase(deck.begin());
 		}
 		//Discard three cards to up pile.
 		cout << "Up pile: " << endl;
-		for (unsigned int j = 0; j < upPile.size(); ++j)
+		for (unsigned int i = 0; i < upPile.size(); i++)
 		{
-			cout << cardNames.at(upPile[j]) << " ";
+			cout << cardNames.at(upPile[i]) << " ";
 		}
 		cout << endl;
 	}
@@ -743,7 +743,7 @@ void initialSetup()
 		deck.erase(deck.begin());
 	}
 	//Deal starting hand.
-	for (unsigned int i = 0; i < suitor.size(); ++i)
+	for (unsigned int i = 0; i < suitor.size(); i++)
 	{
 		suitor.at(i).push_back(deck[0]);
 		deck.erase(deck.begin());
@@ -816,7 +816,7 @@ void endRound()
 	{
 		//Print remaining suitor hands.
 		cout << "The deck is empty, suitors compare hands" << endl;
-		for (unsigned int i = 0; i < suitor.size(); ++i)
+		for (unsigned int i = 0; i < suitor.size(); i++)
 		{
 			cout << suitorNames[i] << " hand: " << suitor[i][0] << endl;
 		}
@@ -848,17 +848,21 @@ void endRound()
 				if (suitorObjectContainer[i].spyStatus())
 				{
 					tempVector.push_back(i);
-					tempVictor = suitors[i];
 				}
 			}
 			if (tempVector.size() > 1)
 			{
-				cout << "Multiple surviving suitors had the Spy. No one gets a bonus." << endl;
+				cout << "Multiple suitors had the Spy. No one gets a bonus." << endl;
 			}
-			if (!tempVector.empty())
+			if (tempVector.size() == 1)
 			{
-				cout << suitorNames[tempVictor] << "Has the Spy, they gain an extra favor token <3" << endl;
-				suitorObjectContainer[tempVictor].upTokenCount();
+				cout << suitorNames.at(tempVector[0]) << " Has the Spy, they gain an extra favor token <3" << endl;
+				suitorObjectContainer.at(tempVector[0]).upTokenCount();
+				cout << suitorNames.at(tempVector[0]) << " token count: " << suitorObjectContainer.at(tempVector[0]).getTokenCount() << endl;
+			}
+			if (tempVector.empty())
+			{
+				cout << "No one had the Spy this round." << endl;
 			}
 		}
 	}
@@ -866,7 +870,7 @@ void endRound()
 	else
 	{
 		//Designate remaining suitor as winner.
-		for (unsigned int i = 0; i < suitors.size(); ++i)
+		for (unsigned int i = 0; i < suitors.size(); i++)
 		{
 			if (suitors[i] > 0)
 			{
