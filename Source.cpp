@@ -89,7 +89,7 @@ void switchSuitor()
 		}
 	}
 	//check if suitor is out.
-	else if (suitor[currentSuitor].empty())
+	if (suitor[currentSuitor].empty())
 	{
 	LOOP:
 		while (suitor[currentSuitor].empty())
@@ -112,6 +112,7 @@ void switchSuitor()
 	else
 	{
 		currentSuitor--;
+		//Check if suitor is out.
 		if (suitor[currentSuitor].empty())
 		{
 			goto LOOP;
@@ -264,66 +265,55 @@ void playCard()
 	case 2:
 		discardPlayedCard();
 		targetSuitor();
-		/*cout << suitorNames[playerNum] << " hand: " << endl;
+		//Print target suitor hand.
+		cout << suitorNames[playerNum] << " hand: " << endl;
 		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
 		{
 			cout << cardNames.at(suitor[playerNum][i]) << endl;
-		}*/
+		}
 		break;
 	case 3:
 		discardPlayedCard();
 		targetSuitor();
-		////Print target suitor hand along with current suitor hand.
-		//cout << suitorNames[currentSuitor] << " hand: " << endl;
-		//cout << cardNames.at(suitor[currentSuitor][0]) << endl;
-		//cout << suitorNames[playerNum] << " hand: " << endl;
-		//cout << cardNames.at(suitor[playerNum][0]) << endl;
-		////Check for equal hand value.
-		//if (suitor[currentSuitor][0] == suitor[playerNum][0])
-		//{
-		//	cout << "Tie! Both suitors remain in the game." << endl;
-		//	break;
-		//}
-		//else
-		//{
-		//	//Assign highest value card to a temporary value.
-		//	tempVictor = max(suitor[currentSuitor][0], suitor[playerNum][0]);
-		//	//Check current suitor hand value against temporary highest value.
-		//	if (suitor[currentSuitor][0] == tempVictor)
-		//	{
-		//		cout << suitorNames[currentSuitor] << " is victorious! " << suitorNames[playerNum] << " is out!" << endl;
-		//		//Discard target suitor hand to up pile.
-		//		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
-		//		{
-		//			upPile.push_back(suitor[playerNum][i]);
-		//		}
-		//		suitor[playerNum].erase(suitor[playerNum].begin(), suitor[playerNum].end());
-		//		//Remove target suitor from game.
-		//		if (suitorObjectContainer[playerNum].spyStatus())
-		//		{
-		//			suitorObjectContainer[playerNum].loseSpy();
-		//		}
-		//		suitors[playerNum] = 0;
-		//		suitorCount--;
-		//	}
-		//	//Check target suitor hand value against temporary highest value.
-		//	else {
-		//		cout << suitorNames[playerNum] << " is victorious! " << suitorNames[currentSuitor] << " is out!" << endl;
-		//		//Discard current suitor hand to up pile.
-		//		for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-		//		{
-		//			upPile.push_back(suitor[currentSuitor][i]);
-		//		}
-		//		suitor[currentSuitor].erase(suitor[currentSuitor].begin(), suitor[currentSuitor].end());
-		//		//Remove current suitor from game.
-		//		if (suitorObjectContainer[currentSuitor].spyStatus())
-		//		{
-		//			suitorObjectContainer[currentSuitor].loseSpy();
-		//		}
-		//		suitors[currentSuitor] = 0;
-		//		suitorCount--;
-		//	}
-		//}
+		//Print target suitor hand along with current suitor hand.
+		cout << suitorNames[currentSuitor] << " hand: " << endl;
+		cout << cardNames.at(suitor[currentSuitor][0]) << endl;
+		cout << suitorNames[playerNum] << " hand: " << endl;
+		cout << cardNames.at(suitor[playerNum][0]) << endl;
+		//Check for equal hand value.
+		if (suitor[currentSuitor][0] == suitor[playerNum][0])
+		{
+			cout << "Tie! Both suitors remain in the game." << endl;
+			break;
+		}
+		else
+		{
+			//Assign highest value card to a temporary value.
+			tempVictor = max(suitor[currentSuitor][0], suitor[playerNum][0]);
+			//Check current suitor hand value against temporary highest value.
+			if (suitor[currentSuitor][0] == tempVictor)
+			{
+				cout << suitorNames[currentSuitor] << " is victorious! " << suitorNames[playerNum] << " is out!" << endl;
+				//Remove target suitor from game.
+				removeSuitor();
+			}
+			//Check target suitor hand value against temporary highest value.
+			else {
+				cout << suitorNames[playerNum] << " is victorious! " << suitorNames[currentSuitor] << " is out!" << endl;
+				//Discard current suitor hand to up pile.
+				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+				{
+					upPile.push_back(suitor[currentSuitor][i]);
+				}
+				suitor[currentSuitor].clear();
+				//Remove current suitor from game.
+				if (suitorObjectContainer[currentSuitor].spyStatus())
+				{
+					suitorObjectContainer[currentSuitor].loseSpy();
+				}
+				suitorCount--;
+			}
+		}
 		break;
 	case 4:
 		discardPlayedCard();
@@ -748,7 +738,7 @@ void endRound()
 		//Designate remaining suitor as winner.
 		for (unsigned int i = 0; i < suitors.size(); i++)
 		{
-			if (suitors[i] > 0)
+			if (!suitor[i].empty())
 			{
 				winner = --suitors[i];
 			}
@@ -759,6 +749,7 @@ void endRound()
 		{
 			cout << suitorNames[winner] << " has the Spy, they gain an extra favor token <3" << endl;
 			suitorObjectContainer[winner].upTokenCount();
+			suitorObjectContainer[winner].loseSpy();
 			cout << suitorNames[winner] << " token count: " << suitorObjectContainer[winner].getTokenCount() << endl;
 		}
 	}
