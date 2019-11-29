@@ -340,7 +340,7 @@ void playCard()
 					{
 						upPile.push_back(i);
 					}
-					suitor[currentSuitor].erase(suitor[currentSuitor].begin(), suitor[currentSuitor].end());
+					suitor[currentSuitor].clear();
 					//Remove current suitor from game.
 					if (suitorObjectContainer[currentSuitor].spyStatus())
 					{
@@ -350,12 +350,12 @@ void playCard()
 					suitorCount--;
 					break;
 				}
-				//Discard current suitor hand when there are more than two active suitors and the other active suitor has handmaid protection.
+				//Discard current suitor hand when there are two active suitors and the other active suitor has handmaid protection.
 				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
 				{
 					upPile.push_back(i);
 				}
-				suitor[currentSuitor].erase(suitor[currentSuitor].begin(), suitor[currentSuitor].end());
+				suitor[currentSuitor].clear();
 				//Draw into current suitor hand from deck.
 				suitor[currentSuitor].push_back(deck[0]);
 				deck.erase(deck.begin());
@@ -368,19 +368,7 @@ void playCard()
 		if (find(suitor[playerNum].begin(), suitor[playerNum].end(), 9) != suitor[playerNum].end())
 		{
 			cout << suitorNames[playerNum] << " had the Princess! " << suitorNames[playerNum] << " is out!" << endl;
-			//Discard target suitor hand to up pile.
-			for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
-			{
-				upPile.push_back(i);
-			}
-			suitor[playerNum].erase(suitor[playerNum].begin(), suitor[playerNum].end());
-			//Remove target suitor from game.
-			if (suitorObjectContainer[playerNum].spyStatus())
-			{
-				suitorObjectContainer[playerNum].loseSpy();
-			}
-			suitors[playerNum] = 0;
-			suitorCount--;
+			removeSuitor();
 			break;
 		}
 		//When the deck is empty, the target suitor must discard their hand and draw the card in the face down pile to their hand.
@@ -410,71 +398,87 @@ void playCard()
 		}
 		break;
 	case 6:
+	{
 		discardPlayedCard();
-		//	//Draw two cards.
-		//	for (int i = 0; i < 2; i++)
-		//	{
-		//		suitor[--currentSuitor].push_back(deck[0]);
-		//		deck.erase(deck.begin());
-		//	}
-		//	//Print current suitor hand.
-		//	cout << suitorNames[currentSuitor] << " hand: " << endl;
-		//	for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-		//	{
-		//		cout << cardNames[i] << " ";
-		//	}
-		//	cout << endl;
-		//LOOPF:
-		//	cout << "First card to put back: " << endl;
-		//	cin >> inputNum;
-		//	//Check for proper input.
-		//	if (inputNum < 0 || inputNum > 9 || !cin)
-		//	{
-		//		invalidInput();
-		//		goto LOOPF;
-		//	}
-		//	//Check if input card is not in hand.
-		//	if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), inputNum) != suitor[currentSuitor].end()))
-		//	{
-		//		cout << cardNames[inputNum] << " is not in your hand." << endl;
-		//		goto LOOPF;
-		//	}
-		//	//Discard input card to bottom of deck.
-		//	else
-		//	{
-		//		deck.push_back(inputNum);
-		//		if (it != suitor[currentSuitor].end())
-		//		{
-		//			suitor[currentSuitor].erase(it);
-		//		}
-		//	}
-		//	cout << endl;
-		//LOOPG:
-		//	cout << "Second card to put back: " << endl;
-		//	cin >> inputNum;
-		//	//Check for proper input.
-		//	if (inputNum < 0 || inputNum > 9 || !cin)
-		//	{
-		//		invalidInput();
-		//		goto LOOPG;
-		//	}
-		//	//Check if input card is not in hand.
-		//	if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), inputNum) != suitor[currentSuitor].end()))
-		//	{
-		//		cout << cardNames[inputNum] << " is not in your hand." << endl;
-		//		goto LOOPG;
-		//	}
-		//	//Discard input card to bottom of deck.
-		//	else
-		//	{
-		//		deck.push_back(inputNum);
-		//		if (it != suitor[currentSuitor].end())
-		//		{
-		//			suitor[currentSuitor].erase(it);
-		//		}
-		//		cout << endl;
-		//	}
+		//Draw two cards.
+		for (int i = 0; i < 2; i++)
+		{
+			suitor[currentSuitor].push_back(deck[0]);
+			deck.erase(deck.begin());
+		}
+		//Print current suitor hand.
+		cout << suitorNames[currentSuitor] << " hand: " << endl;
+		for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+		{
+			cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+		}
+		cout << endl;
+	LOOPC:
+		cout << "First card to put back: " << endl;
+		cin >> cardNum;
+		auto itA = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
+		//Check for proper input.
+		if (cardNum < 0 || cardNum > 9 || !cin)
+		{
+			invalidInput();
+			goto LOOPC;
+		}
+		//Check if input card is not in hand.
+		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+		{
+			cout << cardNames[cardNum] << " is not in your hand." << endl;
+			goto LOOPC;
+		}
+		//Discard input card to bottom of deck.
+		else
+		{
+			deck.push_back(cardNum);
+			if (itA != suitor[currentSuitor].end())
+			{
+				suitor[currentSuitor].erase(itA);
+			}
+			//Print current suitor hand.
+			cout << suitorNames[currentSuitor] << " hand: " << endl;
+			for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+			{
+				cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+			}
+			cout << endl;
+		}
+	LOOPD:
+		cout << "Second card to put back: " << endl;
+		cin >> cardNum;
+		auto itB = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
+		//Check for proper input.
+		if (cardNum < 0 || cardNum > 9 || !cin)
+		{
+			invalidInput();
+			goto LOOPD;
+		}
+		//Check if input card is not in hand.
+		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+		{
+			cout << cardNames[cardNum] << " is not in your hand." << endl;
+			goto LOOPD;
+		}
+		//Discard input card to bottom of deck.
+		else
+		{
+			deck.push_back(cardNum);
+			if (itB != suitor[currentSuitor].end())
+			{
+				suitor[currentSuitor].erase(itB);
+			}
+			//Print current suitor hand.
+			cout << suitorNames[currentSuitor] << " hand: " << endl;
+			for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+			{
+				cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+			}
+			cout << endl;
+		}
 		break;
+	}
 	case 7:
 		discardPlayedCard();
 		targetSuitor();
