@@ -406,99 +406,165 @@ void playCard()
 	case 6:
 	{
 		discardPlayedCard();
-		//Draw two cards.
-		for (int i = 0; i < 2; i++)
+		if (deck.empty())
 		{
-			suitor[currentSuitor].push_back(deck[0]);
-			deck.erase(deck.begin());
+			cout << "The deck is empty. The " << cardNames[6] << " plays with no effect." << endl;
+			return;
 		}
-		//Print current suitor hand.
-		cout << suitorNames[currentSuitor] << " hand: " << endl;
-		for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+		if (deck.size() >= 2)
 		{
-			cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-		}
-		cout << endl;
-	LOOPC:
-		cout << "First card to put back: " << endl;
-		cin >> cardNum;
-		auto itA = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
-		//Check for proper input.
-		if (cardNum < 0 || cardNum > 9 || !cin)
-		{
-			invalidInput();
-			goto LOOPC;
-		}
-		//Check if input card is not in hand.
-		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
-		{
-			cout << cardNames[cardNum] << " is not in your hand." << endl;
-			goto LOOPC;
-		}
-		//Discard input card to bottom of deck.
-		else
-		{
-			deck.push_back(cardNum);
-			if (itA != suitor[currentSuitor].end())
+			//Draw two cards.
+			for (int i = 0; i < 2; i++)
 			{
-				suitor[currentSuitor].erase(itA);
+				suitor[currentSuitor].push_back(deck[0]);
+				deck.erase(deck.begin());
 			}
-			if (cardNum == 9)
+			//Print current suitor hand.
+			cout << suitorNames[currentSuitor] << " hand: " << endl;
+			for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
 			{
-				cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
-				removeSuitor(1);
-				break;
+				cout << cardNames.at(suitor[currentSuitor][i]) << " ";
 			}
+			cout << endl;
+		LOOPC:
+			cout << "First card to put back: " << endl;
+			cin >> cardNum;
+			auto itA = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
+			//Check for proper input.
+			if (cardNum < 0 || cardNum > 9 || !cin)
+			{
+				invalidInput();
+				goto LOOPC;
+			}
+			//Check if input card is not in hand.
+			if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+			{
+				cout << cardNames[cardNum] << " is not in your hand." << endl;
+				goto LOOPC;
+			}
+			//Discard input card to bottom of deck.
 			else
 			{
-				//Print current suitor hand.
-				cout << suitorNames[currentSuitor] << " hand: " << endl;
-				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+				deck.push_back(cardNum);
+				if (itA != suitor[currentSuitor].end())
 				{
-					cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+					suitor[currentSuitor].erase(itA);
 				}
-				cout << endl;
+				if (cardNum == 9)
+				{
+					cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
+					removeSuitor(1);
+					break;
+				}
+				else
+				{
+					//Print current suitor hand.
+					cout << suitorNames[currentSuitor] << " hand: " << endl;
+					for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+					{
+						cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+					}
+					cout << endl;
+				}
 			}
-		}
-	LOOPD:
-		cout << "Second card to put back: " << endl;
-		cin >> cardNum;
-		auto itB = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
-		//Check for proper input.
-		if (cardNum < 0 || cardNum > 9 || !cin)
-		{
-			invalidInput();
-			goto LOOPD;
-		}
-		//Check if input card is not in hand.
-		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
-		{
-			cout << cardNames[cardNum] << " is not in your hand." << endl;
-			goto LOOPD;
-		}
-		//Discard input card to bottom of deck.
-		else
-		{
-			deck.push_back(cardNum);
-			if (itB != suitor[currentSuitor].end())
+		LOOPD:
+			cout << "Second card to put back: " << endl;
+			cin >> cardNum;
+			auto itB = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
+			//Check for proper input.
+			if (cardNum < 0 || cardNum > 9 || !cin)
 			{
-				suitor[currentSuitor].erase(itB);
+				invalidInput();
+				goto LOOPD;
 			}
-			if (cardNum == 9)
+			//Check if input card is not in hand.
+			if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
 			{
-				cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
-				removeSuitor(1);
-				break;
+				cout << cardNames[cardNum] << " is not in your hand." << endl;
+				goto LOOPD;
 			}
+			//Discard input card to bottom of deck.
 			else
 			{
-				//Print current suitor hand.
-				cout << suitorNames[currentSuitor] << " hand: " << endl;
-				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+				deck.push_back(cardNum);
+				if (itB != suitor[currentSuitor].end())
 				{
-					cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+					suitor[currentSuitor].erase(itB);
 				}
-				cout << endl;
+				if (cardNum == 9)
+				{
+					cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
+					removeSuitor(1);
+					break;
+				}
+				else
+				{
+					//Print current suitor hand.
+					cout << suitorNames[currentSuitor] << " hand: " << endl;
+					for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+					{
+						cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+					}
+					cout << endl;
+				}
+			}
+		}
+		if (deck.size() == 1)
+		{
+			cout << "There is only one card in the deck." << endl;
+			//Draw the last card.
+			for (int i = 0; i < 1; i++)
+			{
+				suitor[currentSuitor].push_back(deck[0]);
+				deck.erase(deck.begin());
+			}
+			//Print current suitor hand.
+			cout << suitorNames[currentSuitor] << " hand: " << endl;
+			for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+			{
+				cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+			}
+			cout << endl;
+		LOOPE:
+			cout << "Card to put back: " << endl;
+			cin >> cardNum;
+			auto itC = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
+			//Check for proper input.
+			if (cardNum < 0 || cardNum > 9 || !cin)
+			{
+				invalidInput();
+				goto LOOPE;
+			}
+			//Check if input card is not in hand.
+			if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+			{
+				cout << cardNames[cardNum] << " is not in your hand." << endl;
+				goto LOOPE;
+			}
+			//Discard input card to bottom of deck.
+			else
+			{
+				deck.push_back(cardNum);
+				if (itC != suitor[currentSuitor].end())
+				{
+					suitor[currentSuitor].erase(itC);
+				}
+				if (cardNum == 9)
+				{
+					cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
+					removeSuitor(1);
+					break;
+				}
+				else
+				{
+					//Print current suitor hand.
+					cout << suitorNames[currentSuitor] << " hand: " << endl;
+					for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+					{
+						cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+					}
+					cout << endl;
+				}
 			}
 		}
 		break;
@@ -706,7 +772,7 @@ void suitorTurn()
 				cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
 				cout << suitorNames.at(currentSuitor) << " play a card: " << endl;
 				cin >> cardNum;
-				if (cardNum != 8 && !cin)
+				if (cardNum != 8 || !cin)
 				{
 					cout << "You MUST play your " << cardNames[8] << endl;
 					cin.clear();
@@ -827,7 +893,7 @@ void endRound()
 	suitorObjectContainer[winner].upTokenCount();
 	cout << suitorNames[winner] << " gains one[1] favor token <3" << endl;
 	cout << suitorNames[winner] << " total tokens: " << suitorObjectContainer[winner].getTokenCount() << endl;
-	//Remove Handmaid protection.
+	//Remove Handmaid protection from all Suitors.
 	for (unsigned int i = 0; i < suitor.size(); i++)
 	{
 		suitorObjectContainer[i].loseHandmaid();
