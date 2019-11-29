@@ -706,9 +706,11 @@ void suitorTurn()
 				cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
 				cout << suitorNames.at(currentSuitor) << " play a card: " << endl;
 				cin >> cardNum;
-				if (cardNum != 8 || !cin)
+				if (cardNum != 8 && !cin)
 				{
 					cout << "You MUST play your " << cardNames[8] << endl;
+					cin.clear();
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
 					goto LOOPB;
 				}
 				else
@@ -825,6 +827,11 @@ void endRound()
 	suitorObjectContainer[winner].upTokenCount();
 	cout << suitorNames[winner] << " gains one[1] favor token <3" << endl;
 	cout << suitorNames[winner] << " total tokens: " << suitorObjectContainer[winner].getTokenCount() << endl;
+	//Remove Handmaid protection.
+	for (unsigned int i = 0; i < suitor.size(); i++)
+	{
+		suitorObjectContainer[i].loseHandmaid();
+	}
 	//Check if winner has enough tokens to win game.
 	if (suitorObjectContainer[winner].getTokenCount() < totalTokensWins)
 	{
