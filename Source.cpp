@@ -443,13 +443,22 @@ void playCard()
 			{
 				suitor[currentSuitor].erase(itA);
 			}
-			//Print current suitor hand.
-			cout << suitorNames[currentSuitor] << " hand: " << endl;
-			for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+			if (cardNum == 9)
 			{
-				cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+				cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
+				removeSuitor(1);
+				break;
 			}
-			cout << endl;
+			else
+			{
+				//Print current suitor hand.
+				cout << suitorNames[currentSuitor] << " hand: " << endl;
+				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+				{
+					cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+				}
+				cout << endl;
+			}
 		}
 	LOOPD:
 		cout << "Second card to put back: " << endl;
@@ -475,13 +484,22 @@ void playCard()
 			{
 				suitor[currentSuitor].erase(itB);
 			}
-			//Print current suitor hand.
-			cout << suitorNames[currentSuitor] << " hand: " << endl;
-			for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+			if (cardNum == 9)
 			{
-				cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+				cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
+				removeSuitor(1);
+				break;
 			}
-			cout << endl;
+			else
+			{
+				//Print current suitor hand.
+				cout << suitorNames[currentSuitor] << " hand: " << endl;
+				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+				{
+					cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+				}
+				cout << endl;
+			}
 		}
 		break;
 	}
