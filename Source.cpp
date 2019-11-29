@@ -673,28 +673,50 @@ void suitorTurn()
 			goto LOOP;
 		}
 		//Play card.
-	LOOPB:
+	LOOPA:
 		cout << suitorNames.at(currentSuitor) << " hand: " << endl;
 		for (unsigned int i = 0; i < suitor.at(currentSuitor).size(); i++)
 		{
 			cout << cardNames.at(suitor[currentSuitor][i]) << " ";
 		}
 		cout << endl;
-		cout << suitorNames.at(currentSuitor) << " play a card: " << endl;
-		cin >> cardNum;
-		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+		if (suitor[currentSuitor][0] == 8 || suitor[currentSuitor][1] == 8)
 		{
-			cout << "You don't have " << cardNames[cardNum] << " in your hand." << endl;
-			goto LOOPB;
-		}
-		if (cardNum >= 0 && cardNum <= 9 && cin)
-		{
-			playCard();
+			if (suitor[currentSuitor][1] == 5 || suitor[currentSuitor][1] == 7 || suitor[currentSuitor][0] == 5 || suitor[currentSuitor][0] == 7)
+			{
+			LOOPB:
+				cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
+				cout << suitorNames.at(currentSuitor) << " play a card: " << endl;
+				cin >> cardNum;
+				if (cardNum != 8 || !cin)
+				{
+					cout << "You MUST play your " << cardNames[8] << endl;
+					goto LOOPB;
+				}
+				else
+				{
+					playCard();
+				}
+			}
 		}
 		else
 		{
-			invalidInput();
-			goto LOOPB;
+			cout << suitorNames.at(currentSuitor) << " play a card: " << endl;
+			cin >> cardNum;
+			if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+			{
+				cout << "You don't have " << cardNames[cardNum] << " in your hand." << endl;
+				goto LOOPA;
+			}
+			if (cardNum >= 0 && cardNum <= 9 && cin)
+			{
+				playCard();
+			}
+			else
+			{
+				invalidInput();
+				goto LOOPA;
+			}
 		}
 		if (suitorCount > 1)
 		{
