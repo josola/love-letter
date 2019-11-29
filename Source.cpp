@@ -482,6 +482,22 @@ void playCard()
 	case 7:
 		discardPlayedCard();
 		targetSuitor();
+		//Swap contents of currentSuitor position to targetSuitor position and back.
+		suitor[currentSuitor].swap(suitor[playerNum]);
+		//Print current suitor hand.
+		cout << suitorNames[currentSuitor] << " hand: " << endl;
+		for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+		{
+			cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+		}
+		cout << endl;
+		//Print target suitor hand.
+		cout << suitorNames[playerNum] << " hand: " << endl;
+		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
+		{
+			cout << cardNames.at(suitor[playerNum][i]) << " ";
+		}
+		cout << endl;
 		break;
 	case 8:
 		discardPlayedCard();
