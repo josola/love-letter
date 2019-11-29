@@ -713,28 +713,25 @@ void suitorTurn()
 				}
 				else
 				{
-					playCard();
+					return;
 				}
 			}
 		}
+		cout << suitorNames.at(currentSuitor) << " play a card: " << endl;
+		cin >> cardNum;
+		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+		{
+			cout << "You don't have " << cardNames[cardNum] << " in your hand." << endl;
+			goto LOOPA;
+		}
+		if (cardNum >= 0 && cardNum <= 9 && cin)
+		{
+			playCard();
+		}
 		else
 		{
-			cout << suitorNames.at(currentSuitor) << " play a card: " << endl;
-			cin >> cardNum;
-			if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
-			{
-				cout << "You don't have " << cardNames[cardNum] << " in your hand." << endl;
-				goto LOOPA;
-			}
-			if (cardNum >= 0 && cardNum <= 9 && cin)
-			{
-				playCard();
-			}
-			else
-			{
-				invalidInput();
-				goto LOOPA;
-			}
+			invalidInput();
+			goto LOOPA;
 		}
 		if (suitorCount > 1)
 		{
@@ -752,7 +749,10 @@ void endRound()
 		cout << "The deck is empty, suitors compare hands" << endl;
 		for (unsigned int i = 0; i < suitor.size(); i++)
 		{
-			cout << suitorNames[i] << " hand: " << suitor[i][0] << endl;
+			if (!suitor[i].empty())
+			{
+				cout << suitorNames[i] << " hand: " << suitor[i][0] << endl;
+			}
 		}
 		//Assign highest suitor hand value as winner.
 		for (unsigned int i = 0; i < suitor.size(); i++)
