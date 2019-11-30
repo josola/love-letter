@@ -732,17 +732,25 @@ void suitorTurn()
 {
 	while (suitorCount > 1 && !deck.empty())
 	{
+		//Remove Handmaid if suitor has it.
 		if (suitorObjectContainer[currentSuitor].handmaidStatus())
 		{
 			suitorObjectContainer[currentSuitor].loseHandmaid();
 		}
-		//Draw card to player hand.
-		cout << suitorNames.at(currentSuitor) << " hand: ";
-		for (unsigned int i = 0; i < suitor.at(currentSuitor).size(); i++)
+		if (!deck.empty())
 		{
-			cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+			//Draw card to player hand.
+			cout << suitorNames.at(currentSuitor) << " hand: ";
+			for (unsigned int i = 0; i < suitor.at(currentSuitor).size(); i++)
+			{
+				cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+			}
+			cout << endl;
 		}
-		cout << endl;
+		else
+		{
+			return;
+		}
 	LOOP:
 		cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
 		cin >> input;
@@ -756,35 +764,14 @@ void suitorTurn()
 			invalidInput();
 			goto LOOP;
 		}
-		//Play card.
 	LOOPA:
+		//Play card.
 		cout << suitorNames.at(currentSuitor) << " hand: " << endl;
 		for (unsigned int i = 0; i < suitor.at(currentSuitor).size(); i++)
 		{
 			cout << cardNames.at(suitor[currentSuitor][i]) << " ";
 		}
 		cout << endl;
-		if (suitor[currentSuitor][0] == 8 || suitor[currentSuitor][1] == 8)
-		{
-			if (suitor[currentSuitor][1] == 5 || suitor[currentSuitor][1] == 7 || suitor[currentSuitor][0] == 5 || suitor[currentSuitor][0] == 7)
-			{
-			LOOPB:
-				cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
-				cout << suitorNames.at(currentSuitor) << " play a card: " << endl;
-				cin >> cardNum;
-				if (cardNum != 8 || !cin)
-				{
-					cout << "You MUST play your " << cardNames[8] << endl;
-					cin.clear();
-					cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					goto LOOPB;
-				}
-				else
-				{
-					return;
-				}
-			}
-		}
 		cout << suitorNames.at(currentSuitor) << " play a card: " << endl;
 		cin >> cardNum;
 		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
@@ -792,19 +779,27 @@ void suitorTurn()
 			cout << "You don't have " << cardNames[cardNum] << " in your hand." << endl;
 			goto LOOPA;
 		}
-		if (cardNum >= 0 && cardNum <= 9 && cin)
-		{
-			playCard();
-		}
-		else
+		if (cardNum < 0 && cardNum > 9 && !cin)
 		{
 			invalidInput();
 			goto LOOPA;
 		}
+		if (suitor[currentSuitor][0] == 8 || suitor[currentSuitor][1] == 8 && cardNum != 8)
+		{
+			if (suitor[currentSuitor][0||1] == 5 || suitor[currentSuitor][0||1] == 7)
+			{
+				cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
+				cin.clear();
+				cin.ignore(numeric_limits<streamsize>::max(), '\n');
+				goto LOOPA;
+			}
+		}
+		playCard();
 		if (suitorCount > 1)
 		{
 			switchSuitor();
 		}
+
 	}
 }
 
@@ -836,7 +831,7 @@ void endRound()
 		//Assign vector position of highest hand value as winner.
 		for (unsigned int i = 0; i < suitor.size(); i++)
 		{
-			if (suitor[i][0] == winner)
+			if (!suitor[i].empty() && suitor[i][0] == winner)
 			{
 				winner = i;
 				break;
