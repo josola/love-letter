@@ -2,6 +2,6 @@
 
 int main()
 {
-	gameState();
+	PlayGame();
 	return 0;
 }

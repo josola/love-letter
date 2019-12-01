@@ -5,33 +5,101 @@
 #include <ctime>
 #include <string>
 #include <algorithm>
+
 #include "Resources.h"
 
 using namespace std;
 
-//Check for Handmaid protection.
-void checkHandmaid()
+//Game functions.
+bool TargetHasHandmaidProtection()
 {
 	if (suitorObjectContainer[playerNum].handmaidStatus())
 	{
-		cout << suitorNames[playerNum] << " is untargetable." << endl;
-		if (suitorCount == 2)
-		{
-			return;
-		}
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
-
-void invalidInput()
+void ClearInput()
 {
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	cout << "invalid input" << endl;
 }
-
-void switchSuitor()
+auto CurrentSuitor()
 {
-	//Check if current suitor is at begining of vector.
+	return suitorNames[currentSuitor];
+}
+auto TargetSuitor()
+{
+	return suitorNames[playerNum];
+}
+bool CheckProperCardInput()
+{
+	if (cardNum >= spy && cardNum <= princess && cin)
+	{
+		return true;
+	}
+	else
+	{
+		cout << cardNum << " is not an available card input. Please input a card value between 0 and 9." << endl;
+		return false;
+	}
+}
+bool CheckCardIsInHand()
+{
+	if (find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end())
+	{
+		return true;
+	}
+	else
+	{
+		cout << "You don't have " << cardNames[cardNum] << " in your hand." << endl;
+		return false;
+	}
+}
+bool CheckCountessRestriction()
+{
+	if (suitor[currentSuitor][0] == 8 || suitor[currentSuitor][1] == 8 && cardNum != 8)
+	{
+		if (suitor[currentSuitor][0 || 1] == 5 || suitor[currentSuitor][0 || 1] == 7)
+		{
+			cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
+			return true;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
+bool IsSuitorPlaying()
+{
+	if (!suitor[playerNum].empty())
+	{
+		return true;
+	}
+	if (suitor[playerNum].empty())
+	{
+		cout << TargetSuitor() << " is out." << endl;
+		return false;
+	}
+}
+bool CheckProperSuitorInput()
+{
+	if (playerNum >= 0 && playerNum <= suitor.size() && cin)
+	{
+		return true;
+	}
+	else
+	{
+		cout << playerNum << " is not an available player. Please choose an active player by their number eg. SUITOR 1 would be 1." << endl;
+		return false;
+	}
+}
+void SwitchSuitor()
+{
 	if (currentSuitor == suitors[0] - 1)
 	{
 		for (unsigned int i = 1; i < suitor.size(); i++)
@@ -43,7 +111,6 @@ void switchSuitor()
 			return;
 		}
 	}
-	//check if suitor is out.
 	if (suitor[currentSuitor].empty())
 	{
 	LOOP:
@@ -63,37 +130,29 @@ void switchSuitor()
 		}
 		return;
 	}
-	//Perform standard suitor switch.
 	else
 	{
 		currentSuitor--;
-		//Check if suitor is out.
 		if (suitor[currentSuitor].empty())
 		{
 			goto LOOP;
 		}
 	}
 }
-
-void discardPlayedCard()
+void DiscardPlayedCard()
 {
-	//Expression to aquire input number from within vectors.
 	auto it = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
-	cout << suitorNames[currentSuitor] << " played " << cardNames[cardNum] << endl;
-	//Discard played card from current suitor hand to up pile.
+	cout << CurrentSuitor() << " played " << cardNames[cardNum] << endl;
 	upPile.push_back(cardNum);
 	if (it != suitor[currentSuitor].end())
 	{
 		suitor[currentSuitor].erase(it);
 	}
 }
-
-void printActiveSuitors()
+void PrintActiveSuitors()
 {
 	cout << "Suitors fighting for the Princess: " << endl;
-	//Up current suitor to conform to vector rules (begin at 0).
 	currentSuitor++;
-	//Check if suitor is out (suitor hand is empty). Do not print current suitor name.
 	for (unsigned int i = 0; i < suitor.size(); i++)
 	{
 		if (!suitor[i].empty() && suitors[i] != currentSuitor)
@@ -101,466 +160,104 @@ void printActiveSuitors()
 			cout << suitorNames[i] << " ";
 		}
 	}
-	//Decrement current suitor to conform to human readability (start at 1). 
 	currentSuitor--;
 	cout << endl;
 }
-
-void targetSuitor()
+void PrintCurrentSuitorHand()
+{
+	cout << CurrentSuitor() << " hand: " << endl;
+	for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+	{
+		cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+	}
+	cout << endl;
+}
+void PrintTargetSuitorHand()
+{
+	cout << TargetSuitor() << " hand: " << endl;
+	for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
+	{
+		cout << cardNames.at(suitor[playerNum][i]) << endl;
+	}
+}
+void ChooseTargetSuitor()
 {
 LOOP:
-	printActiveSuitors();
-	//Prompt current suitor to target suitor.
-	cout << suitorNames[currentSuitor] << " target suitor: " << endl;
+	PrintActiveSuitors();
+	cout << CurrentSuitor() << " choose target suitor: " << endl;
 	cin >> playerNum;
-	//Decrement playerNum to conform to vector rules (begin at 0).
 	playerNum--;
-	//Check for valid input.
-	if (playerNum < 0 || playerNum > suitors.size() - 1 || !cin)
+	CheckProperSuitorInput();
+	IsSuitorPlaying();
+	TargetHasHandmaidProtection();
+	if (!CheckProperSuitorInput() || !IsSuitorPlaying())
 	{
-		invalidInput();
+		ClearInput();
 		goto LOOP;
 	}
-	//Check if target suitor is out.
-	if (suitor[playerNum].empty())
+	if (TargetHasHandmaidProtection())
 	{
-		cout << suitorNames[playerNum] << " is out." << endl;
+		cout << TargetSuitor() << " has Handmaid protection." << endl;
+		ClearInput();
 		goto LOOP;
 	}
-	//Check if target suitor input is current suitor.
 	if (playerNum == currentSuitor)
 	{
-		if (cardNum == 5)
+		if (cardNum == prince)
 		{
 			return;
 		}
 		else
 		{
 			cout << "You cannot choose yourself." << endl;
+			ClearInput();
 			goto LOOP;
 		}
 	}
-
 }
-
-void removeSuitor(bool effectedSuitor)
+void RemoveSuitor(bool effectedSuitor)
 {
 	if (effectedSuitor)
 	{
-		//Discard target suitor hand to up pile.
 		for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
 		{
 			upPile.push_back(suitor[currentSuitor][i]);
 		}
 		suitor[currentSuitor].clear();
-		//Remove target suitor from game.
 		if (suitorObjectContainer[currentSuitor].spyStatus())
 		{
 			suitorObjectContainer[currentSuitor].loseSpy();
 		}
-		suitorCount--;
+		activeSuitors--;
 	}
 	if (!effectedSuitor)
 	{
-		//Discard target suitor hand to up pile.
 		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
 		{
 			upPile.push_back(suitor[playerNum][i]);
 		}
 		suitor[playerNum].clear();
-		//Remove target suitor from game.
 		if (suitorObjectContainer[playerNum].spyStatus())
 		{
 			suitorObjectContainer[playerNum].loseSpy();
 		}
-		suitorCount--;
+		activeSuitors--;
 	}
 }
-
-void playCard()
+void InitialSetup()
 {
-	switch (cardNum)
-	{
-	case 0:
-		discardPlayedCard();
-		//Current suitor object gains spy bonus.
-		suitorObjectContainer[currentSuitor].getSpy();
-		break;
-	case 1:
-		discardPlayedCard();
-		targetSuitor();
-	LOOPA:
-		//Prompt current suitor for card guess.
-		cout << suitorNames[currentSuitor] << " card guess: " << endl;
-		//Print target suitor hand for testing only.
-		for (unsigned int i = 0; i < suitor.at(playerNum).size(); i++)
-		{
-			cout << cardNames.at(suitor[playerNum][i]) << " ";
-		}
-		cout << endl;
-		cin >> cardNum;
-		//Check for valid input.
-		if (cardNum < 0 || cardNum > 9 || !cin)
-		{
-			invalidInput();
-			goto LOOPA;
-		}
-		//Guards cannot target other guards.
-		if (cardNum == 1)
-		{
-			cout << "You cannot guess a Guard." << endl;
-			goto LOOPA;
-		}
-		//Check for correct card guess.
-		if (suitor[playerNum][0] == cardNum)
-		{
-			cout << "Match! " << suitorNames[playerNum] << " is out." << endl;
-			removeSuitor(0);
-		}
-		else
-		{
-			cout << "no match" << endl;
-			break;
-		}
-		break;
-	case 2:
-		discardPlayedCard();
-		targetSuitor();
-		//Print target suitor hand.
-		cout << suitorNames[playerNum] << " hand: " << endl;
-		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
-		{
-			cout << cardNames.at(suitor[playerNum][i]) << endl;
-		}
-		break;
-	case 3:
-		discardPlayedCard();
-		targetSuitor();
-		//Print target suitor hand along with current suitor hand.
-		cout << suitorNames[currentSuitor] << " hand: " << endl;
-		cout << cardNames.at(suitor[currentSuitor][0]) << endl;
-		cout << suitorNames[playerNum] << " hand: " << endl;
-		cout << cardNames.at(suitor[playerNum][0]) << endl;
-		//Check for equal hand value.
-		if (suitor[currentSuitor][0] == suitor[playerNum][0])
-		{
-			cout << "Tie! Both suitors remain in the game." << endl;
-			break;
-		}
-		else
-		{
-			//Assign highest value card to a temporary value.
-			tempVictor = max(suitor[currentSuitor][0], suitor[playerNum][0]);
-			//Check current suitor hand value against temporary highest value.
-			if (suitor[currentSuitor][0] == tempVictor)
-			{
-				cout << suitorNames[currentSuitor] << " is victorious! " << suitorNames[playerNum] << " is out!" << endl;
-				//Remove target suitor from game.
-				removeSuitor(0);
-			}
-			//Check target suitor hand value against temporary highest value.
-			else {
-				cout << suitorNames[playerNum] << " is victorious! " << suitorNames[currentSuitor] << " is out!" << endl;
-				//Discard current suitor hand to up pile.
-				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-				{
-					upPile.push_back(suitor[currentSuitor][i]);
-				}
-				suitor[currentSuitor].clear();
-				//Remove current suitor from game.
-				if (suitorObjectContainer[currentSuitor].spyStatus())
-				{
-					suitorObjectContainer[currentSuitor].loseSpy();
-				}
-				suitorCount--;
-			}
-		}
-		break;
-	case 4:
-		discardPlayedCard();
-		//Current suitor object gains Handmaid protection.
-		suitorObjectContainer[currentSuitor].getHandmaid();
-		break;
-	case 5:
-		discardPlayedCard();
-	LOOPB:
-		targetSuitor();
-		//Check for Handmaid protection (Prince requires more checks than standard Handmaid check).
-		if (suitorObjectContainer[playerNum].handmaidStatus())
-		{
-			if (suitorCount == 2)
-			{
-				//Prince must be played on current suitor if only other active suitor has handmaid protection.
-				cout << "The Prince applies only to you." << endl;
-				//Check for Princess in current suitor hand.
-				if (find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), 9) != suitor[currentSuitor].end())
-				{
-					cout << "You had the Princess! You're out!" << endl;
-					removeSuitor(1);
-					break;
-				}
-				//Discard current suitor hand when there are two active suitors and the other active suitor has handmaid protection.
-				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-				{
-					upPile.push_back(i);
-				}
-				suitor[currentSuitor].clear();
-				//Draw into current suitor hand from deck.
-				suitor[currentSuitor].push_back(deck[0]);
-				deck.erase(deck.begin());
-				break;
-			}
-			cout << suitorNames[playerNum] << " is untargetable." << endl;
-			goto LOOPB;
-		}
-		//Check for Princess in target suitor hand.
-		if (find(suitor[playerNum].begin(), suitor[playerNum].end(), 9) != suitor[playerNum].end())
-		{
-			cout << suitorNames[playerNum] << " had the Princess! " << suitorNames[playerNum] << " is out!" << endl;
-			removeSuitor(0);
-			break;
-		}
-		//When the deck is empty, the target suitor must discard their hand and draw the card in the face down pile to their hand.
-		if (deck.empty())
-		{
-			//Discard target suitor hand.
-			for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
-			{
-				upPile.push_back(i);
-			}
-			//Draw into target suitor hand from face down pile.
-			suitor[playerNum].push_back(downPile[0]);
-			downPile.erase(downPile.begin(), downPile.end());
-		}
-		//Perform basic Prince function.
-		else
-		{
-			//Discard target suitor hand to up pile.
-			for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
-			{
-				upPile.push_back(i);
-			}
-			//Draw into target suitor hand from deck.
-			suitor[playerNum].erase(suitor[playerNum].begin(), suitor[playerNum].end());
-			suitor[playerNum].push_back(deck[0]);
-			deck.erase(deck.begin());
-		}
-		break;
-	case 6:
-	{
-		discardPlayedCard();
-		if (deck.empty())
-		{
-			cout << "The deck is empty. The " << cardNames[6] << " plays with no effect." << endl;
-			return;
-		}
-		if (deck.size() >= 2)
-		{
-			//Draw two cards.
-			for (int i = 0; i < 2; i++)
-			{
-				suitor[currentSuitor].push_back(deck[0]);
-				deck.erase(deck.begin());
-			}
-			//Print current suitor hand.
-			cout << suitorNames[currentSuitor] << " hand: " << endl;
-			for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-			{
-				cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-			}
-			cout << endl;
-		LOOPC:
-			cout << "First card to put back: " << endl;
-			cin >> cardNum;
-			auto itA = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
-			//Check for proper input.
-			if (cardNum < 0 || cardNum > 9 || !cin)
-			{
-				invalidInput();
-				goto LOOPC;
-			}
-			//Check if input card is not in hand.
-			if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
-			{
-				cout << cardNames[cardNum] << " is not in your hand." << endl;
-				goto LOOPC;
-			}
-			//Discard input card to bottom of deck.
-			else
-			{
-				deck.push_back(cardNum);
-				if (itA != suitor[currentSuitor].end())
-				{
-					suitor[currentSuitor].erase(itA);
-				}
-				if (cardNum == 9)
-				{
-					cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
-					removeSuitor(1);
-					break;
-				}
-				else
-				{
-					//Print current suitor hand.
-					cout << suitorNames[currentSuitor] << " hand: " << endl;
-					for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-					{
-						cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-					}
-					cout << endl;
-				}
-			}
-		LOOPD:
-			cout << "Second card to put back: " << endl;
-			cin >> cardNum;
-			auto itB = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
-			//Check for proper input.
-			if (cardNum < 0 || cardNum > 9 || !cin)
-			{
-				invalidInput();
-				goto LOOPD;
-			}
-			//Check if input card is not in hand.
-			if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
-			{
-				cout << cardNames[cardNum] << " is not in your hand." << endl;
-				goto LOOPD;
-			}
-			//Discard input card to bottom of deck.
-			else
-			{
-				deck.push_back(cardNum);
-				if (itB != suitor[currentSuitor].end())
-				{
-					suitor[currentSuitor].erase(itB);
-				}
-				if (cardNum == 9)
-				{
-					cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
-					removeSuitor(1);
-					break;
-				}
-				else
-				{
-					//Print current suitor hand.
-					cout << suitorNames[currentSuitor] << " hand: " << endl;
-					for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-					{
-						cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-					}
-					cout << endl;
-				}
-			}
-		}
-		if (deck.size() == 1)
-		{
-			cout << "There is only one card in the deck." << endl;
-			//Draw the last card.
-			for (int i = 0; i < 1; i++)
-			{
-				suitor[currentSuitor].push_back(deck[0]);
-				deck.erase(deck.begin());
-			}
-			//Print current suitor hand.
-			cout << suitorNames[currentSuitor] << " hand: " << endl;
-			for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-			{
-				cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-			}
-			cout << endl;
-		LOOPE:
-			cout << "Card to put back: " << endl;
-			cin >> cardNum;
-			auto itC = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
-			//Check for proper input.
-			if (cardNum < 0 || cardNum > 9 || !cin)
-			{
-				invalidInput();
-				goto LOOPE;
-			}
-			//Check if input card is not in hand.
-			if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
-			{
-				cout << cardNames[cardNum] << " is not in your hand." << endl;
-				goto LOOPE;
-			}
-			//Discard input card to bottom of deck.
-			else
-			{
-				deck.push_back(cardNum);
-				if (itC != suitor[currentSuitor].end())
-				{
-					suitor[currentSuitor].erase(itC);
-				}
-				if (cardNum == 9)
-				{
-					cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
-					removeSuitor(1);
-					break;
-				}
-				else
-				{
-					//Print current suitor hand.
-					cout << suitorNames[currentSuitor] << " hand: " << endl;
-					for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-					{
-						cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-					}
-					cout << endl;
-				}
-			}
-		}
-		break;
-	}
-	case 7:
-		discardPlayedCard();
-		targetSuitor();
-		//Swap contents of currentSuitor position to targetSuitor position and back.
-		suitor[currentSuitor].swap(suitor[playerNum]);
-		//Print current suitor hand.
-		cout << suitorNames[currentSuitor] << " hand: " << endl;
-		for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-		{
-			cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-		}
-		cout << endl;
-		//Print target suitor hand.
-		cout << suitorNames[playerNum] << " hand: " << endl;
-		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
-		{
-			cout << cardNames.at(suitor[playerNum][i]) << " ";
-		}
-		cout << endl;
-		break;
-	case 8:
-		discardPlayedCard();
-		break;
-	case 9:
-		discardPlayedCard();
-		cout << suitorNames[currentSuitor] << " is out!" << endl;
-		removeSuitor(1);
-		break;
-	}
-}
-
-void initialSetup()
-{
-	//Begin initial round.
 	if (roundCount == 1)
 	{
 		cout << "-- WELCOME TO LOVE LETTER --" << endl;
-		//Determine how many suitors will be playing.
-	LOOPA:
+	LOOP:
 		cout << "How many suitors will be playing: " << endl;
-		cin >> suitorCount;
-		//Check for valid input.
-		if (suitorCount < 2 || suitorCount > 6 || !cin)
+		cin >> activeSuitors;
+		if (activeSuitors < 2 || activeSuitors > 6 || !cin)
 		{
-			invalidInput();
-			goto LOOPA;
+			ClearInput();
+			goto LOOP;
 		}
-		//Set number of favor tokens to win based off of number of suitors playing.
-		switch (suitorCount)
+		switch (activeSuitors)
 		{
 		case 2:
 			totalTokensWins = 6;
@@ -578,25 +275,22 @@ void initialSetup()
 			totalTokensWins = 3;
 			break;
 		}
-		//Set suitorCount to go back to after round end.
-		originalSuitorCount = suitorCount;
-		//Fill to number of suitors in-game;
-		for (int i = 1; i < suitorCount + 1; i++)
+		originalSuitorCount = activeSuitors;
+		for (int i = 1; i < activeSuitors + 1; i++)
 		{
 			suitors.push_back(i);
 		}
-		for (int i = 1; i < suitorCount + 1; i++)
+		for (int i = 1; i < activeSuitors + 1; i++)
 		{
 			vector<int> hand;
 			suitor.push_back(hand);
 		}
-		//Determine which suitor will start the game.
 		srand((int)time(NULL));
 		int target = rand() % suitor.size() + 1;
 		unsigned int guess;
 		cout << "I have a suitor number (1 - " << suitor.size() << ") in my head. Guess it!" << endl;
 		cout << target << endl;
-	LOOP:
+	LOOPA:
 		for (unsigned int i = 0; i < suitor.size() + 1; i++)
 		{
 			cout << suitorNames.at(i) << " guess: " << endl;
@@ -613,23 +307,21 @@ void initialSetup()
 			else
 			{
 				cout << suitorNames.at(i) << " messed it up, everyone try again." << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				goto LOOP;
+				ClearInput();
+				goto LOOPA;
 			}
 		}
 	}
-	//Begin next round.
 	else
 	{
 		deck = { 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 9 };
 		cout << "-- ROUND " << roundCount << " --" << endl;
-		suitorCount = originalSuitorCount;
-		for (int i = 1; i < suitorCount + 1; i++)
+		activeSuitors = originalSuitorCount;
+		for (int i = 1; i < activeSuitors + 1; i++)
 		{
 			suitors.push_back(i);
 		}
-		for (int i = 1; i < suitorCount + 1; i++)
+		for (int i = 1; i < activeSuitors + 1; i++)
 		{
 			vector<int> hand;
 			suitor.push_back(hand);
@@ -638,11 +330,9 @@ void initialSetup()
 		currentSuitor = winner;
 		winner = 0;
 	}
-	//Shuffle deck, discard one card face down and possibly three cards face up.
 	random_shuffle(deck.begin(), deck.end());
-	if (suitorCount == 2)
+	if (activeSuitors == 2)
 	{
-		//Discard one card to down pile.
 		downPile.push_back(deck[0]);
 		deck.erase(deck.begin());
 		for (unsigned int i = 0; i < 3; i++)
@@ -650,7 +340,6 @@ void initialSetup()
 			upPile.push_back(deck[i]);
 			deck.erase(deck.begin());
 		}
-		//Discard three cards to up pile.
 		cout << "Up pile: " << endl;
 		for (unsigned int i = 0; i < upPile.size(); i++)
 		{
@@ -658,100 +347,21 @@ void initialSetup()
 		}
 		cout << endl;
 	}
-	if (suitorCount > 2)
+	if (activeSuitors > 2)
 	{
 		downPile.push_back(deck[0]);
 		deck.erase(deck.begin());
 	}
-	//Deal starting hand.
 	for (unsigned int i = 0; i < suitor.size(); i++)
 	{
 		suitor.at(i).push_back(deck[0]);
 		deck.erase(deck.begin());
 	}
 }
-
-void suitorTurn()
+void EndRound()
 {
-	while (suitorCount > 1 && !deck.empty())
-	{
-		//Remove Handmaid if suitor has it.
-		if (suitorObjectContainer[currentSuitor].handmaidStatus())
-		{
-			suitorObjectContainer[currentSuitor].loseHandmaid();
-		}
-		if (!deck.empty())
-		{
-			//Draw card to player hand.
-			cout << suitorNames.at(currentSuitor) << " hand: ";
-			for (unsigned int i = 0; i < suitor.at(currentSuitor).size(); i++)
-			{
-				cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-			}
-			cout << endl;
-		}
-		else
-		{
-			return;
-		}
-	LOOP:
-		cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
-		cin >> input;
-		if (input == 'd')
-		{
-			suitor.at(currentSuitor).push_back(deck[0]);
-			deck.erase(deck.begin());
-		}
-		else
-		{
-			invalidInput();
-			goto LOOP;
-		}
-	LOOPA:
-		//Play card.
-		cout << suitorNames.at(currentSuitor) << " hand: " << endl;
-		for (unsigned int i = 0; i < suitor.at(currentSuitor).size(); i++)
-		{
-			cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-		}
-		cout << endl;
-		cout << suitorNames.at(currentSuitor) << " play a card: " << endl;
-		cin >> cardNum;
-		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
-		{
-			cout << "You don't have " << cardNames[cardNum] << " in your hand." << endl;
-			goto LOOPA;
-		}
-		if (cardNum < 0 && cardNum > 9 && !cin)
-		{
-			invalidInput();
-			goto LOOPA;
-		}
-		if (suitor[currentSuitor][0] == 8 || suitor[currentSuitor][1] == 8 && cardNum != 8)
-		{
-			if (suitor[currentSuitor][0 || 1] == 5 || suitor[currentSuitor][0 || 1] == 7)
-			{
-				cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				goto LOOPA;
-			}
-		}
-		playCard();
-		if (suitorCount > 1)
-		{
-			switchSuitor();
-		}
-
-	}
-}
-
-void endRound()
-{
-	//When the deck is empty, remaining suitors compare hands. The highest hand between remaining suitors wins the round.
 	if (deck.empty())
 	{
-		//Print remaining suitor hands.
 		cout << "The deck is empty, suitors compare hands" << endl;
 		for (unsigned int i = 0; i < suitor.size(); i++)
 		{
@@ -760,7 +370,6 @@ void endRound()
 				cout << suitorNames[i] << " hand: " << suitor[i][0] << endl;
 			}
 		}
-		//Assign highest suitor hand value as winner.
 		for (unsigned int i = 0; i < suitor.size(); i++)
 		{
 			if (!suitor[i].empty())
@@ -771,7 +380,6 @@ void endRound()
 				}
 			}
 		}
-		//Assign vector position of highest hand value as winner.
 		for (unsigned int i = 0; i < suitor.size(); i++)
 		{
 			if (!suitor[i].empty() && suitor[i][0] == winner)
@@ -780,9 +388,8 @@ void endRound()
 				break;
 			}
 		}
-		if (suitorCount > 1)
+		if (activeSuitors > 1)
 		{
-			//Check remaining suitors for duplicate Spy bonus.
 			for (unsigned int i = 0; i < suitor.size(); i++)
 			{
 				if (suitorObjectContainer[i].spyStatus())
@@ -806,10 +413,8 @@ void endRound()
 			}
 		}
 	}
-	//When there are no more than one active suitors.
 	else
 	{
-		//Designate remaining suitor as winner.
 		for (unsigned int i = 0; i < suitors.size(); i++)
 		{
 			if (!suitor[i].empty())
@@ -818,7 +423,6 @@ void endRound()
 			}
 		}
 		cout << "Round over. " << suitorNames[winner] << " is the last suitor standing." << endl;
-		//Check remaining suitor for Spy bonus.
 		if (suitorObjectContainer[winner].spyStatus())
 		{
 			cout << suitorNames[winner] << " has the Spy, they gain an extra favor token <3" << endl;
@@ -827,52 +431,432 @@ void endRound()
 			cout << suitorNames[winner] << " token count: " << suitorObjectContainer[winner].getTokenCount() << endl;
 		}
 	}
-	//Give winner a favor token.
 	suitorObjectContainer[winner].upTokenCount();
 	cout << suitorNames[winner] << " gains one[1] favor token <3" << endl;
 	cout << suitorNames[winner] << " total tokens: " << suitorObjectContainer[winner].getTokenCount() << endl;
-	//Remove Handmaid protection from all Suitors.
 	for (unsigned int i = 0; i < suitor.size(); i++)
 	{
 		suitorObjectContainer[i].loseHandmaid();
 	}
-	//Check if winner has enough tokens to win game.
 	if (suitorObjectContainer[winner].getTokenCount() < totalTokensWins)
 	{
-		//Suitor does not have required number of favor tokens to win, start new round.
 		++roundCount;
-		//Clear suitor, suitors, downPile, and upPile vectors.
 		suitor.clear();
 		suitors.clear();
 		downPile.clear();
 		upPile.clear();
-		suitorCount = 0;
+		activeSuitors = 0;
 	}
 	if (suitorObjectContainer[winner].getTokenCount() == totalTokensWins)
 	{
-		//Suitor has enough favor tokens to win the game, game over.
 		cout << suitorNames[winner] << " has won the heart of the princess." << endl;
 		cout << "-- GAME OVER --" << endl;
-		//Clear suitor, suitors, downPile, and upPile vectors.
 		suitor.clear();
 		suitors.clear();
 		downPile.clear();
 		upPile.clear();
-		suitorCount = 0;
+		activeSuitors = 0;
 		gameOver = true;
 	}
 }
 
-void gameState()
+//Card functions.
+void Spy()
 {
-	initialSetup();
+	suitorObjectContainer[currentSuitor].getSpy();
+}
+void Guard()
+{
+LOOP:
+	cout << CurrentSuitor() << " guess a card: " << endl;
+	cin >> cardNum;
+	CheckProperCardInput();
+	TargetHasHandmaidProtection();
+	if (!CheckProperCardInput())
+	{
+		ClearInput();
+		goto LOOP;
+	}
+	if (TargetHasHandmaidProtection())
+	{
+		if (activeSuitors == 2)
+		{
+			return;
+		}
+		else
+		{
+			goto LOOP;
+		}
+	}
+	if (cardNum == guard)
+	{
+		cout << "You can guess any card OTHER than a Guard." << endl;
+		ClearInput();
+		goto LOOP;
+	}
+	if (suitor[playerNum][0] == cardNum)
+	{
+		cout << "Match! " << suitorNames[playerNum] << " is out." << endl;
+		RemoveSuitor(0);
+	}
+	else
+	{
+		cout << "no match" << endl;
+	}
+}
+void Priest()
+{
+	PrintTargetSuitorHand();
+}
+void Baron()
+{
+	PrintCurrentSuitorHand();
+	PrintTargetSuitorHand();
+	if (suitor[currentSuitor][0] == suitor[playerNum][0])
+	{
+		cout << "Tie! Both suitors remain in the game." << endl;
+		return;
+	}
+	else
+	{
+		tempVictor = max(suitor[currentSuitor][0], suitor[playerNum][0]);
+		if (suitor[currentSuitor][0] == tempVictor)
+		{
+			cout << CurrentSuitor() << " is victorious! " << TargetSuitor() << " is out!" << endl;
+			RemoveSuitor(0);
+		}
+		else {
+			cout << TargetSuitor() << " is victorious! " << CurrentSuitor() << " is out!" << endl;
+			RemoveSuitor(1);
+		}
+	}
+}
+void Handmaid()
+{
+	suitorObjectContainer[currentSuitor].getHandmaid();
+}
+void Prince()
+{
+LOOPB:
+	ChooseTargetSuitor();
+	if (TargetHasHandmaidProtection())
+	{
+		if (activeSuitors == 2)
+		{
+			cout << "The Prince applies only to you." << endl;
+			if (find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), 9) != suitor[currentSuitor].end())
+			{
+				cout << "You had the Princess! You're out!" << endl;
+				RemoveSuitor(1);
+				return;
+			}
+			for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+			{
+				upPile.push_back(i);
+			}
+			suitor[currentSuitor].clear();
+			suitor[currentSuitor].push_back(deck[0]);
+			deck.erase(deck.begin());
+			return;
+		}
+		cout << suitorNames[playerNum] << " is untargetable." << endl;
+		goto LOOPB;
+	}
+	if (find(suitor[playerNum].begin(), suitor[playerNum].end(), 9) != suitor[playerNum].end())
+	{
+		cout << suitorNames[playerNum] << " had the Princess! " << suitorNames[playerNum] << " is out!" << endl;
+		RemoveSuitor(0);
+		return;
+	}
+	if (deck.empty())
+	{
+		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
+		{
+			upPile.push_back(i);
+		}
+		suitor[playerNum].push_back(downPile[0]);
+		downPile.erase(downPile.begin(), downPile.end());
+	}
+	else
+	{
+		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
+		{
+			upPile.push_back(i);
+		}
+		suitor[playerNum].erase(suitor[playerNum].begin(), suitor[playerNum].end());
+		suitor[playerNum].push_back(deck[0]);
+		deck.erase(deck.begin());
+	}
+}
+void Chancellor()
+{
+	if (deck.empty())
+	{
+		cout << "The deck is empty. The " << cardNames[6] << " plays with no effect." << endl;
+		return;
+	}
+	if (deck.size() >= 2)
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			suitor[currentSuitor].push_back(deck[0]);
+			deck.erase(deck.begin());
+		}
+		PrintCurrentSuitorHand();
+	LOOPC:
+		cout << "First card to put back: " << endl;
+		cin >> cardNum;
+		auto itA = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
+		if (cardNum < 0 || cardNum > 9 || !cin)
+		{
+			ClearInput();
+			goto LOOPC;
+		}
+		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+		{
+			cout << cardNames[cardNum] << " is not in your hand." << endl;
+			goto LOOPC;
+		}
+		else
+		{
+			deck.push_back(cardNum);
+			if (itA != suitor[currentSuitor].end())
+			{
+				suitor[currentSuitor].erase(itA);
+			}
+			if (cardNum == 9)
+			{
+				cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
+				RemoveSuitor(1);
+				return;
+			}
+			else
+			{
+				cout << suitorNames[currentSuitor] << " hand: " << endl;
+				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+				{
+					cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+				}
+				cout << endl;
+			}
+		}
+	LOOPD:
+		cout << "Second card to put back: " << endl;
+		cin >> cardNum;
+		auto itB = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
+		if (cardNum < 0 || cardNum > 9 || !cin)
+		{
+			ClearInput();
+			goto LOOPD;
+		}
+		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+		{
+			cout << cardNames[cardNum] << " is not in your hand." << endl;
+			goto LOOPD;
+		}
+		else
+		{
+			deck.push_back(cardNum);
+			if (itB != suitor[currentSuitor].end())
+			{
+				suitor[currentSuitor].erase(itB);
+			}
+			if (cardNum == 9)
+			{
+				cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
+				RemoveSuitor(1);
+				return;
+			}
+			else
+			{
+				cout << suitorNames[currentSuitor] << " hand: " << endl;
+				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+				{
+					cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+				}
+				cout << endl;
+			}
+		}
+	}
+	if (deck.size() == 1)
+	{
+		cout << "There is only one card in the deck." << endl;
+		for (int i = 0; i < 1; i++)
+		{
+			suitor[currentSuitor].push_back(deck[0]);
+			deck.erase(deck.begin());
+		}
+		cout << suitorNames[currentSuitor] << " hand: " << endl;
+		for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+		{
+			cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+		}
+		cout << endl;
+	LOOPE:
+		cout << "Card to put back: " << endl;
+		cin >> cardNum;
+		auto itC = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
+		if (cardNum < 0 || cardNum > 9 || !cin)
+		{
+			ClearInput();
+			goto LOOPE;
+		}
+		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+		{
+			cout << cardNames[cardNum] << " is not in your hand." << endl;
+			goto LOOPE;
+		}
+		else
+		{
+			deck.push_back(cardNum);
+			if (itC != suitor[currentSuitor].end())
+			{
+				suitor[currentSuitor].erase(itC);
+			}
+			if (cardNum == 9)
+			{
+				cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
+				RemoveSuitor(1);
+				return;
+			}
+			else
+			{
+				cout << suitorNames[currentSuitor] << " hand: " << endl;
+				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
+				{
+					cout << cardNames.at(suitor[currentSuitor][i]) << " ";
+				}
+				cout << endl;
+			}
+		}
+	}
+}
+void King()
+{
+	suitor[currentSuitor].swap(suitor[playerNum]);
+	cout << CurrentSuitor() << "'s hand is now..." << endl;
+	PrintCurrentSuitorHand();
+	cout << TargetSuitor() << "'s hand is now..." << endl;
+	PrintTargetSuitorHand();
+}
+void Princess()
+{
+	cout << suitorNames[currentSuitor] << " is out!" << endl;
+	RemoveSuitor(1);
+}
+
+//Dependent game functions.
+void PlayCard()
+{
+	switch (cardNum)
+	{
+	case 0:
+		Spy();
+		break;
+	case 1:
+		Guard();
+		break;
+	case 2:
+		Priest();
+		break;
+	case 3:
+		Baron();
+		break;
+	case 4:
+		Handmaid();
+		break;
+	case 5:
+		Prince();
+		break;
+	case 6:
+		Chancellor();
+		break;
+	case 7:
+		King();
+		break;
+	case 9:
+		Princess();
+		break;
+	}
+}
+void SuitorTurn()
+{
+	while (activeSuitors > 1 && !deck.empty())
+	{
+		if (suitorObjectContainer[currentSuitor].handmaidStatus())
+		{
+			suitorObjectContainer[currentSuitor].loseHandmaid();
+		}
+		if (!deck.empty())
+		{
+			PrintCurrentSuitorHand();
+		}
+		else
+		{
+			return;
+		}
+	LOOP:
+		cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
+		cin >> input;
+		if (input == 'd')
+		{
+			suitor.at(currentSuitor).push_back(deck[0]);
+			deck.erase(deck.begin());
+		}
+		else
+		{
+			ClearInput();
+			goto LOOP;
+		}
+	LOOPA:
+		PrintCurrentSuitorHand();
+		cout << CurrentSuitor() << " play a card: " << endl;
+		cin >> cardNum;
+		CheckProperCardInput();
+		if (!CheckProperCardInput() || !CheckCardIsInHand())
+		{
+			ClearInput();
+			goto LOOPA;
+		}
+		CheckCountessRestriction();
+		if (CheckCountessRestriction())
+		{
+			ClearInput();
+			goto LOOPA;
+		}
+		DiscardPlayedCard();
+		if (cardNum == guard || cardNum == priest || cardNum == baron || cardNum == king)
+		{
+			ChooseTargetSuitor();
+			if (TargetHasHandmaidProtection() && activeSuitors == 2)
+			{
+				return;
+			}
+			else
+			{
+				PlayCard();
+			}
+		}
+		else
+		{
+			PlayCard();
+		}
+		if (activeSuitors > 1)
+		{
+			SwitchSuitor();
+		}
+	}
+}
+void PlayGame()
+{
+	InitialSetup();
 	while (!gameOver)
 	{
-		if (suitorCount == 0)
+		if (activeSuitors == 0)
 		{
-			initialSetup();
+			InitialSetup();
 		}
-		suitorTurn();
-		endRound();
+		SuitorTurn();
+		EndRound();
 	}
 }
