@@ -5,67 +5,22 @@
 #include <ctime>
 #include <string>
 #include <algorithm>
+#include "Resources.h"
 
 using namespace std;
 
-int suitorCount, currentSuitor, cardNum, originalSuitorCount, roundCount = 1, tempVictor, totalTokensWins;
-auto winner = 0;
-unsigned int playerNum;
-bool gameOver = false;
-char input;
-vector<string> suitorNames = { "SUITOR 1", "SUITOR 2", "SUITOR 3", "SUITOR 4", "SUITOR 5", "SUITOR 6" };
-vector<string> cardNames = { "SPY[0]", "GUARD[1]", "PRIEST[2]", "BARON[3]", "HANDMAID[4]", "PRINCE[5]", "CHANCELLOR[6]", "KING[7]", "COUNTESS[8]", "PRINCESS[9]" };
-vector<unsigned int> deck = { 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 9 };
-vector<unsigned int> tempVector;
-vector<unsigned int> suitors;
-vector<unsigned int> upPile;
-vector<unsigned int> downPile;
-vector<vector<int> > suitor;
-
-class Suitor
+//Check for Handmaid protection.
+void checkHandmaid()
 {
-private:
-	bool hasSpy = false;
-	bool hasHandmaid = false;
-	int tokenCount = 0;
-
-public:
-	void getSpy()
+	if (suitorObjectContainer[playerNum].handmaidStatus())
 	{
-		hasSpy = true;
+		cout << suitorNames[playerNum] << " is untargetable." << endl;
+		if (suitorCount == 2)
+		{
+			return;
+		}
 	}
-	void loseSpy()
-	{
-		hasSpy = false;
-	}
-	bool spyStatus()
-	{
-		return hasSpy;
-	}
-	void getHandmaid()
-	{
-		hasHandmaid = true;
-	}
-	void loseHandmaid()
-	{
-		hasHandmaid = false;
-	}
-	bool handmaidStatus()
-	{
-		return hasHandmaid;
-	}
-	int getTokenCount()
-	{
-		return tokenCount;
-	}
-	void upTokenCount()
-	{
-		tokenCount++;
-	}
-};
-
-Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
-vector<Suitor> suitorObjectContainer{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
+}
 
 void invalidInput()
 {
@@ -185,19 +140,7 @@ LOOP:
 			goto LOOP;
 		}
 	}
-	//Check for Handmaid protection.
-	if (suitorObjectContainer[playerNum].handmaidStatus())
-	{
-		cout << suitorNames[playerNum] << " is untargetable." << endl;
-		if (suitorCount == 2)
-		{
-			return;
-		}
-		else
-		{
-			goto LOOP;
-		}
-	}
+
 }
 
 void removeSuitor(bool effectedSuitor)
@@ -786,7 +729,7 @@ void suitorTurn()
 		}
 		if (suitor[currentSuitor][0] == 8 || suitor[currentSuitor][1] == 8 && cardNum != 8)
 		{
-			if (suitor[currentSuitor][0||1] == 5 || suitor[currentSuitor][0||1] == 7)
+			if (suitor[currentSuitor][0 || 1] == 5 || suitor[currentSuitor][0 || 1] == 7)
 			{
 				cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
 				cin.clear();
@@ -920,7 +863,7 @@ void endRound()
 	}
 }
 
-int main()
+void gameState()
 {
 	initialSetup();
 	while (!gameOver)
@@ -932,5 +875,4 @@ int main()
 		suitorTurn();
 		endRound();
 	}
-	return 0;
 }
