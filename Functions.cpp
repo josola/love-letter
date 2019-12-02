@@ -598,6 +598,7 @@ LOOPB:
 	{
 		if (activeSuitors == 2)
 		{
+			cout << TargetSuitor() << " has Handmaid protection." << endl;
 			cout << "The Prince applies only to you." << endl;
 			if (find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), 9) != suitor[currentSuitor].end())
 			{
@@ -869,6 +870,7 @@ void SuitorTurn()
 			ChooseTargetSuitor();
 			if (TargetHandmaidProtected() && activeSuitors == 2)
 			{
+				cout << TargetSuitor() << " has Handmaid protection." << endl;
 				cout << "Moving on to next active Suitor..." << endl;
 				this_thread::sleep_for(chrono::seconds(3));
 				ClearScreen();
