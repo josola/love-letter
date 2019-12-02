@@ -9,6 +9,7 @@ Function delcarations that are used in Functions.cpp
 bool TargetHandmaidProtected();
 void PrintFaceUpPile();
 void PrintDeckSize();
+void PrintSuitorsWithSpy();
 auto CurrentSuitor();
 auto TargetSuitor();
 bool ProperCardInput();

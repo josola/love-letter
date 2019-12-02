@@ -43,6 +43,18 @@ void PrintDeckSize()
 	cout << "Number of cards in the deck: " << deck.size() << endl;
 	cout << "--\n";
 }
+void PrintSuitorsWithSpy()
+{
+	cout << "Suitors with Spy bonus: " << endl;
+	for (unsigned int i = 0; i < suitor.size(); i++)
+	{
+		if (suitorObjectContainer[i].spyStatus())
+		{
+			cout << suitorNames[i] << " ";
+		}
+	}
+	cout << "\n--\n";
+}
 void ClearInput()
 {
 	cin.clear();
@@ -350,6 +362,7 @@ void InitialSetup()
 				goto LOOPA;
 			}
 		}
+		tempVector.clear();
 	}
 	else
 	{
@@ -811,6 +824,7 @@ void SuitorTurn()
 			PrintDeckSize();
 			PrintActiveSuitors();
 			PrintFaceUpPile();
+			PrintSuitorsWithSpy();
 			PrintCurrentSuitorHand();
 		}
 		else
