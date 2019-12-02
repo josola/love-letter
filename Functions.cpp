@@ -11,7 +11,7 @@
 using namespace std;
 
 //Game functions.
-bool TargetHasHandmaidProtection()
+bool TargetHandmaidProtected()
 {
 	if (suitorObjectContainer[playerNum].handmaidStatus())
 	{
@@ -35,7 +35,7 @@ auto TargetSuitor()
 {
 	return suitorNames[playerNum];
 }
-bool CheckProperCardInput()
+bool ProperCardInput()
 {
 	if (cardNum >= spy && cardNum <= princess && cin)
 	{
@@ -47,7 +47,7 @@ bool CheckProperCardInput()
 		return false;
 	}
 }
-bool CheckCardIsInHand()
+bool CardInHand()
 {
 	if (find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end())
 	{
@@ -59,7 +59,7 @@ bool CheckCardIsInHand()
 		return false;
 	}
 }
-bool CheckCountessRestriction()
+bool CountessRestriction()
 {
 	if (suitor[currentSuitor][0] == 8 || suitor[currentSuitor][1] == 8 && cardNum != 8)
 	{
@@ -86,7 +86,7 @@ bool IsSuitorPlaying()
 		return false;
 	}
 }
-bool CheckProperSuitorInput()
+bool ProperSuitorInput()
 {
 	if (playerNum >= 0 && playerNum <= suitor.size() && cin)
 	{
@@ -187,15 +187,12 @@ LOOP:
 	cout << CurrentSuitor() << " choose target suitor: " << endl;
 	cin >> playerNum;
 	playerNum--;
-	CheckProperSuitorInput();
-	IsSuitorPlaying();
-	TargetHasHandmaidProtection();
-	if (!CheckProperSuitorInput() || !IsSuitorPlaying())
+	if (!ProperSuitorInput() || !IsSuitorPlaying())
 	{
 		ClearInput();
 		goto LOOP;
 	}
-	if (TargetHasHandmaidProtection())
+	if (TargetHandmaidProtected())
 	{
 		cout << TargetSuitor() << " has Handmaid protection." << endl;
 		ClearInput();
@@ -289,7 +286,6 @@ void InitialSetup()
 		int target = rand() % suitor.size() + 1;
 		unsigned int guess;
 		cout << "I have a suitor number (1 - " << suitor.size() << ") in my head. Guess it!" << endl;
-		cout << target << endl;
 	LOOPA:
 		for (unsigned int i = 0; i < suitor.size() + 1; i++)
 		{
@@ -470,14 +466,12 @@ void Guard()
 LOOP:
 	cout << CurrentSuitor() << " guess a card: " << endl;
 	cin >> cardNum;
-	CheckProperCardInput();
-	TargetHasHandmaidProtection();
-	if (!CheckProperCardInput())
+	if (!ProperCardInput())
 	{
 		ClearInput();
 		goto LOOP;
 	}
-	if (TargetHasHandmaidProtection())
+	if (TargetHandmaidProtected())
 	{
 		if (activeSuitors == 2)
 		{
@@ -539,7 +533,7 @@ void Prince()
 {
 LOOPB:
 	ChooseTargetSuitor();
-	if (TargetHasHandmaidProtection())
+	if (TargetHandmaidProtected())
 	{
 		if (activeSuitors == 2)
 		{
@@ -603,19 +597,19 @@ void Chancellor()
 			deck.erase(deck.begin());
 		}
 		PrintCurrentSuitorHand();
-	LOOPC:
+	LOOP:
 		cout << "First card to put back: " << endl;
 		cin >> cardNum;
 		auto itA = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
-		if (cardNum < 0 || cardNum > 9 || !cin)
+		if (!ProperCardInput())
 		{
 			ClearInput();
-			goto LOOPC;
+			goto LOOP;
 		}
-		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+		if (!CardInHand())
 		{
-			cout << cardNames[cardNum] << " is not in your hand." << endl;
-			goto LOOPC;
+			ClearInput();
+			goto LOOP;
 		}
 		else
 		{
@@ -632,27 +626,22 @@ void Chancellor()
 			}
 			else
 			{
-				cout << suitorNames[currentSuitor] << " hand: " << endl;
-				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-				{
-					cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-				}
-				cout << endl;
+				PrintCurrentSuitorHand();
 			}
 		}
-	LOOPD:
+	LOOPA:
 		cout << "Second card to put back: " << endl;
 		cin >> cardNum;
 		auto itB = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
-		if (cardNum < 0 || cardNum > 9 || !cin)
+		if (!ProperCardInput())
 		{
 			ClearInput();
-			goto LOOPD;
+			goto LOOPA;
 		}
-		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+		if (!CardInHand())
 		{
-			cout << cardNames[cardNum] << " is not in your hand." << endl;
-			goto LOOPD;
+			ClearInput();
+			goto LOOPA;
 		}
 		else
 		{
@@ -669,12 +658,7 @@ void Chancellor()
 			}
 			else
 			{
-				cout << suitorNames[currentSuitor] << " hand: " << endl;
-				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-				{
-					cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-				}
-				cout << endl;
+				PrintCurrentSuitorHand();
 			}
 		}
 	}
@@ -686,25 +670,20 @@ void Chancellor()
 			suitor[currentSuitor].push_back(deck[0]);
 			deck.erase(deck.begin());
 		}
-		cout << suitorNames[currentSuitor] << " hand: " << endl;
-		for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-		{
-			cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-		}
-		cout << endl;
-	LOOPE:
+		PrintCurrentSuitorHand();
+	LOOPB:
 		cout << "Card to put back: " << endl;
 		cin >> cardNum;
 		auto itC = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
-		if (cardNum < 0 || cardNum > 9 || !cin)
+		if (!ProperCardInput())
 		{
 			ClearInput();
-			goto LOOPE;
+			goto LOOPB;
 		}
-		if (!(find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum) != suitor[currentSuitor].end()))
+		if (!CardInHand())
 		{
-			cout << cardNames[cardNum] << " is not in your hand." << endl;
-			goto LOOPE;
+			ClearInput();
+			goto LOOPB;
 		}
 		else
 		{
@@ -721,12 +700,7 @@ void Chancellor()
 			}
 			else
 			{
-				cout << suitorNames[currentSuitor] << " hand: " << endl;
-				for (unsigned int i = 0; i < suitor[currentSuitor].size(); i++)
-				{
-					cout << cardNames.at(suitor[currentSuitor][i]) << " ";
-				}
-				cout << endl;
+				PrintCurrentSuitorHand();
 			}
 		}
 	}
@@ -812,14 +786,12 @@ void SuitorTurn()
 		PrintCurrentSuitorHand();
 		cout << CurrentSuitor() << " play a card: " << endl;
 		cin >> cardNum;
-		CheckProperCardInput();
-		if (!CheckProperCardInput() || !CheckCardIsInHand())
+		if (!ProperCardInput() || !CardInHand())
 		{
 			ClearInput();
 			goto LOOPA;
 		}
-		CheckCountessRestriction();
-		if (CheckCountessRestriction())
+		if (CountessRestriction())
 		{
 			ClearInput();
 			goto LOOPA;
@@ -828,7 +800,7 @@ void SuitorTurn()
 		if (cardNum == guard || cardNum == priest || cardNum == baron || cardNum == king)
 		{
 			ChooseTargetSuitor();
-			if (TargetHasHandmaidProtection() && activeSuitors == 2)
+			if (TargetHandmaidProtected() && activeSuitors == 2)
 			{
 				return;
 			}

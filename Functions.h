@@ -1,14 +1,14 @@
 #pragma once
 
 //Game functions.
-bool TargetHasHandmaidProtection();
+bool TargetHandmaidProtected();
 auto CurrentSuitor();
 auto TargetSuitor();
-bool CheckProperCardInput();
-bool CheckCardIsInHand();
-bool CheckCountessRestriction();
+bool ProperCardInput();
+bool CardInHand();
+bool CountessRestriction();
 bool IsSuitorPlaying();
-bool CheckProperSuitorInput();
+bool ProperSuitorInput();
 void SwitchSuitor();
 void DiscardPlayedCard();
 void PrintActiveSuitors();
