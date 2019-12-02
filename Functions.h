@@ -7,6 +7,8 @@ Function delcarations that are used in Functions.cpp
 
 //Game functions.
 bool TargetHandmaidProtected();
+void PrintFaceUpPile();
+void PrintDeckSize();
 auto CurrentSuitor();
 auto TargetSuitor();
 bool ProperCardInput();

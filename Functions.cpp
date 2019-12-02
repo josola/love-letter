@@ -29,6 +29,20 @@ bool TargetHandmaidProtected()
 		return false;
 	}
 }
+void PrintFaceUpPile()
+{
+	cout << "Cards in face up pile: " << endl;
+	for (unsigned int i = 0; i < upPile.size(); i++)
+	{
+		cout << cardNames.at(upPile[i]) << " ";
+	}
+	cout << "\n--\n";
+}
+void PrintDeckSize()
+{
+	cout << "Number of cards in the deck: " << deck.size() << endl;
+	cout << "--\n";
+}
 void ClearInput()
 {
 	cin.clear();
@@ -162,7 +176,7 @@ void DiscardPlayedCard()
 }
 void PrintActiveSuitors()
 {
-	cout << "Suitors fighting for the Princess: " << endl;
+	cout << "Rival Suitors: " << endl;
 	currentSuitor++;
 	for (unsigned int i = 0; i < suitor.size(); i++)
 	{
@@ -172,7 +186,7 @@ void PrintActiveSuitors()
 		}
 	}
 	currentSuitor--;
-	cout << endl;
+	cout << "\n--\n";
 }
 void PrintCurrentSuitorHand()
 {
@@ -195,7 +209,6 @@ void ChooseTargetSuitor()
 {
 LOOP:
 	PrintActiveSuitors();
-	cout << "--\n";
 	cout << CurrentSuitor() << " choose target suitor: " << endl;
 	cin >> playerNum;
 	cout << "--\n";
@@ -366,12 +379,7 @@ void InitialSetup()
 			upPile.push_back(deck[i]);
 			deck.erase(deck.begin());
 		}
-		cout << "Cards in face up pile: " << endl;
-		for (unsigned int i = 0; i < upPile.size(); i++)
-		{
-			cout << cardNames.at(upPile[i]) << " ";
-		}
-		cout << "\n--\n";
+		PrintFaceUpPile();
 	}
 	if (activeSuitors > 2)
 	{
@@ -800,6 +808,9 @@ void SuitorTurn()
 		}
 		if (!deck.empty())
 		{
+			PrintDeckSize();
+			PrintActiveSuitors();
+			PrintFaceUpPile();
 			PrintCurrentSuitorHand();
 		}
 		else
