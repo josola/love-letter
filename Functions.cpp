@@ -5,6 +5,8 @@
 #include <ctime>
 #include <string>
 #include <algorithm>
+#include <thread>
+#include <chrono>
 
 #include "Resources.h"
 
@@ -68,6 +70,10 @@ bool CountessRestriction()
 			cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
 			return true;
 		}
+		else
+		{
+			return false;
+		}
 	}
 	else
 	{
@@ -80,7 +86,7 @@ bool IsSuitorPlaying()
 	{
 		return true;
 	}
-	if (suitor[playerNum].empty())
+	else
 	{
 		cout << TargetSuitor() << " is out." << endl;
 		return false;
@@ -142,7 +148,7 @@ void SwitchSuitor()
 void DiscardPlayedCard()
 {
 	auto it = find(suitor[currentSuitor].begin(), suitor[currentSuitor].end(), cardNum);
-	cout << CurrentSuitor() << " played " << cardNames[cardNum] << endl;
+	cout << CurrentSuitor() << " played " << cardNames[cardNum] << "\n--\n";
 	upPile.push_back(cardNum);
 	if (it != suitor[currentSuitor].end())
 	{
@@ -184,8 +190,10 @@ void ChooseTargetSuitor()
 {
 LOOP:
 	PrintActiveSuitors();
+	cout << "--\n";
 	cout << CurrentSuitor() << " choose target suitor: " << endl;
 	cin >> playerNum;
+	cout << "--\n";
 	playerNum--;
 	if (!ProperSuitorInput() || !IsSuitorPlaying())
 	{
@@ -249,6 +257,7 @@ void InitialSetup()
 	LOOP:
 		cout << "How many suitors will be playing: " << endl;
 		cin >> activeSuitors;
+		cout << "--\n";
 		if (activeSuitors < 2 || activeSuitors > 6 || !cin)
 		{
 			ClearInput();
@@ -295,7 +304,7 @@ void InitialSetup()
 			{
 				if (guess == target)
 				{
-					cout << suitorNames.at(i) << " got it!" << endl;
+					cout << suitorNames.at(i) << " got it!\n--" << endl;
 					currentSuitor = i;
 					break;
 				}
@@ -336,12 +345,12 @@ void InitialSetup()
 			upPile.push_back(deck[i]);
 			deck.erase(deck.begin());
 		}
-		cout << "Up pile: " << endl;
+		cout << "Cards in face up pile: " << endl;
 		for (unsigned int i = 0; i < upPile.size(); i++)
 		{
 			cout << cardNames.at(upPile[i]) << " ";
 		}
-		cout << endl;
+		cout << "\n--\n";
 	}
 	if (activeSuitors > 2)
 	{
@@ -353,6 +362,10 @@ void InitialSetup()
 		suitor.at(i).push_back(deck[0]);
 		deck.erase(deck.begin());
 	}
+}
+void ClearScreen()
+{
+	cout << "\033[2J\033[1;1H";
 }
 void EndRound()
 {
@@ -442,6 +455,9 @@ void EndRound()
 		downPile.clear();
 		upPile.clear();
 		activeSuitors = 0;
+		cout << "Moving on to the next round..." << endl;
+		this_thread::sleep_for(chrono::seconds(3));
+		ClearScreen();
 	}
 	if (suitorObjectContainer[winner].getTokenCount() == totalTokensWins)
 	{
@@ -772,6 +788,7 @@ void SuitorTurn()
 	LOOP:
 		cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
 		cin >> input;
+		cout << "--\n";
 		if (input == 'd')
 		{
 			suitor.at(currentSuitor).push_back(deck[0]);
@@ -815,6 +832,9 @@ void SuitorTurn()
 		}
 		if (activeSuitors > 1)
 		{
+			cout << "Moving on to next active Suitor..." << endl;
+			this_thread::sleep_for(chrono::seconds(3));
+			ClearScreen();
 			SwitchSuitor();
 		}
 	}

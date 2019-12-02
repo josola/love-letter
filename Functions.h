@@ -21,6 +21,7 @@ void InitialSetup();
 void SuitorTurn();
 void EndRound();
 void PlayCard();
+void ClearScreen();
 void PlayGame();
 
 //Card functions.
