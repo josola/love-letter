@@ -232,13 +232,16 @@ LOOP:
 	}
 	if (TargetHandmaidProtected())
 	{
-		cout << TargetSuitor() << " has Handmaid protection." << endl;
-		ClearInput();
-		goto LOOP;
-	}
-	else
-	{
-		return;
+		if (activeSuitors == 2)
+		{
+			return;
+		}
+		else
+		{
+			cout << TargetSuitor() << " has Handmaid protection." << endl;
+			ClearInput();
+			goto LOOP;
+		}
 	}
 	if (playerNum == currentSuitor)
 	{
@@ -866,6 +869,10 @@ void SuitorTurn()
 			ChooseTargetSuitor();
 			if (TargetHandmaidProtected() && activeSuitors == 2)
 			{
+				cout << "Moving on to next active Suitor..." << endl;
+				this_thread::sleep_for(chrono::seconds(3));
+				ClearScreen();
+				SwitchSuitor();
 				return;
 			}
 			else
