@@ -65,7 +65,7 @@ bool CountessRestriction()
 {
 	if (suitor[currentSuitor][0] == 8 || suitor[currentSuitor][1] == 8 && cardNum != 8)
 	{
-		if (suitor[currentSuitor][0 || 1] == 5 || suitor[currentSuitor][0 || 1] == 7)
+		if (suitor[currentSuitor][0] == 5 || suitor[currentSuitor][0] == 7 || suitor[currentSuitor][1] == 5 || suitor[currentSuitor][1] == 7)
 		{
 			cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
 			return true;
@@ -205,6 +205,10 @@ LOOP:
 		cout << TargetSuitor() << " has Handmaid protection." << endl;
 		ClearInput();
 		goto LOOP;
+	}
+	else
+	{
+		return;
 	}
 	if (playerNum == currentSuitor)
 	{
@@ -796,6 +800,7 @@ void SuitorTurn()
 		}
 		else
 		{
+			cout << "Input is not valid, please input 'd' to draw a card." << endl;
 			ClearInput();
 			goto LOOP;
 		}
