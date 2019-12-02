@@ -45,7 +45,7 @@ bool ProperCardInput()
 	}
 	else
 	{
-		cout << cardNum << " is not an available card input. Please input a card value between 0 and 9." << endl;
+		cout << "Invalid input, please input a card value between 0 and 9." << endl;
 		return false;
 	}
 }
@@ -100,7 +100,7 @@ bool ProperSuitorInput()
 	}
 	else
 	{
-		cout << playerNum << " is not an available player. Please choose an active player by their number eg. SUITOR 1 would be 1." << endl;
+		cout << "Invalid input, please choose an active player by their number eg. SUITOR 1 would be 1." << endl;
 		return false;
 	}
 }
@@ -264,6 +264,7 @@ void InitialSetup()
 		cout << "--\n";
 		if (activeSuitors < 2 || activeSuitors > 6 || !cin)
 		{
+			cout << "Invalid input, please input a number of Suitors between 2 and 6." << endl;
 			ClearInput();
 			goto LOOP;
 		}
@@ -315,7 +316,7 @@ void InitialSetup()
 			}
 			else
 			{
-				cout << suitorNames.at(i) << " messed it up, everyone try again." << endl;
+				cout << "Invalid input, please input a guess between 1 and " << activeSuitors << '.' << endl;
 				ClearInput();
 				goto LOOPA;
 			}
@@ -800,7 +801,7 @@ void SuitorTurn()
 		}
 		else
 		{
-			cout << "Input is not valid, please input 'd' to draw a card." << endl;
+			cout << "Invalid input, please input 'd' to draw a card." << endl;
 			ClearInput();
 			goto LOOP;
 		}
