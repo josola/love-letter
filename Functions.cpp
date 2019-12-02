@@ -303,21 +303,32 @@ void InitialSetup()
 		}
 		srand((int)time(NULL));
 		int target = rand() % suitor.size() + 1;
-		unsigned int guess;
+		unsigned int guess = 0;
 		cout << "I have a suitor number (1 - " << suitor.size() << ") in my head. Guess it!" << endl;
 	LOOPA:
 		for (unsigned int i = 0; i < suitor.size() + 1; i++)
 		{
+		LOOPB:
 			cout << suitorNames.at(i) << " guess: " << endl;
 			cin >> guess;
 			if (guess <= suitor.size() && guess >= 1)
 			{
+				for (unsigned int i = 0; i < tempVector.size(); i++)
+				{
+					if (guess == tempVector.at(i))
+					{
+						cout << guess << " has already been guessed. Try again." << endl;
+						ClearInput();
+						goto LOOPB;
+					}
+				}
 				if (guess == target)
 				{
 					cout << suitorNames.at(i) << " got it!\n--" << endl;
 					currentSuitor = i;
 					break;
 				}
+				tempVector.push_back(guess);
 			}
 			else
 			{
