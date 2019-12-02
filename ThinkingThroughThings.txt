@@ -1,5 +1,0 @@
--- THINKING THROUGH THINGS --
-
-Deciding who goes first:
-
-Number of Suitors are acquired through input. Total number of Suitors are spread through the rest of the game.
