@@ -1,3 +1,8 @@
+/*
+Jordan Sola 2019
+Function delcarations that are used in Functions.cpp
+*/
+
 #pragma once
 
 //Game functions.

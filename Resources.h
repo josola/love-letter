@@ -1,3 +1,8 @@
+/*
+Jordan Sola 2019
+Variables and objects that are used in Functions.cpp
+*/
+
 #pragma once
 
 #include <string>

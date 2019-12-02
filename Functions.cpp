@@ -1,3 +1,8 @@
+/*
+Jordan Sola 2019
+Functions used in Main.cpp
+*/
+
 #include <iostream>
 #include <vector>
 #include <cmath>
