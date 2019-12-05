@@ -103,6 +103,10 @@ bool CountessRestriction()
 				cout << "You have the " << cardNames.at(suitor[currentSuitor][0]) << " and the " << cardNames.at(suitor[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
 				return true;
 			}
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{
@@ -372,7 +376,7 @@ void InitialSetup()
 	}
 	else
 	{
-		deck = { 5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8, };
+		deck = { 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 9 };
 		cout << "-- ROUND " << roundCount << " --" << endl;
 		activeSuitors = originalSuitorCount;
 		for (int i = 1; i < activeSuitors + 1; i++)
@@ -616,6 +620,7 @@ LOOPB:
 			suitor[currentSuitor].clear();
 			suitor[currentSuitor].push_back(deck[0]);
 			deck.erase(deck.begin());
+			PrintCurrentSuitorHand();
 			return;
 		}
 		cout << suitorNames[playerNum] << " is untargetable." << endl;
@@ -635,6 +640,10 @@ LOOPB:
 		}
 		suitor[playerNum].push_back(downPile[0]);
 		downPile.erase(downPile.begin(), downPile.end());
+		if (playerNum == currentSuitor)
+		{
+			PrintCurrentSuitorHand();
+		}
 	}
 	else
 	{
@@ -645,6 +654,10 @@ LOOPB:
 		suitor[playerNum].erase(suitor[playerNum].begin(), suitor[playerNum].end());
 		suitor[playerNum].push_back(deck[0]);
 		deck.erase(deck.begin());
+		if (playerNum == currentSuitor)
+		{
+			PrintCurrentSuitorHand();
+		}
 	}
 }
 void Chancellor()

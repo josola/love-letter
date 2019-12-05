@@ -61,7 +61,7 @@ bool gameOver = false;
 char input;
 std::vector<std::string> suitorNames = { "SUITOR 1", "SUITOR 2", "SUITOR 3", "SUITOR 4", "SUITOR 5", "SUITOR 6" };
 std::vector<std::string> cardNames = { "SPY[0]", "GUARD[1]", "PRIEST[2]", "BARON[3]", "HANDMAID[4]", "PRINCE[5]", "CHANCELLOR[6]", "KING[7]", "COUNTESS[8]", "PRINCESS[9]" };
-std::vector<unsigned int> deck = { 5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8,5,7,8, };
+std::vector<unsigned int> deck = { 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 9 };
 std::vector<unsigned int> tempVector;
 std::vector<unsigned int> suitors;
 std::vector<unsigned int> upPile;
