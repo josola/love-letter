@@ -634,6 +634,7 @@ LOOPB:
 	}
 	if (deck.empty())
 	{
+		cout << suitorNames[playerNum] << " discards their hand, then redraws." << endl;
 		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
 		{
 			upPile.push_back(i);
@@ -647,6 +648,7 @@ LOOPB:
 	}
 	else
 	{
+		cout << suitorNames[playerNum] << " discards their hand, then redraws." << endl;
 		for (unsigned int i = 0; i < suitor[playerNum].size(); i++)
 		{
 			upPile.push_back(i);
