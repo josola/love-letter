@@ -824,6 +824,7 @@ void PlayCard()
 }
 void SuitorTurn()
 {
+LOOP:
 	while (activeSuitors > 1 && !deck.empty())
 	{
 		if (suitorObjectContainer[currentSuitor].handmaidStatus())
@@ -842,7 +843,6 @@ void SuitorTurn()
 		{
 			return;
 		}
-	LOOP:
 		cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
 		cin >> input;
 		cout << "--\n";
@@ -882,7 +882,7 @@ void SuitorTurn()
 				this_thread::sleep_for(chrono::seconds(3));
 				ClearScreen();
 				SwitchSuitor();
-				return;
+				goto LOOP;
 			}
 			else
 			{
