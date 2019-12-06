@@ -12,7 +12,6 @@ bool TargetHandmaidProtected()
 {
 	if (suitorObjectContainer[playerNum].handmaidStatus())
 	{
-		handmaidCounter++;
 		return true;
 	}
 	else
@@ -603,6 +602,7 @@ void Baron()
 void Handmaid()
 {
 	suitorObjectContainer[currentSuitor].getHandmaid();
+	suitorsWithHandmaid.push_back(currentSuitor);
 }
 void Prince()
 {
@@ -848,6 +848,8 @@ LOOP:
 		if (suitorObjectContainer[currentSuitor].handmaidStatus())
 		{
 			suitorObjectContainer[currentSuitor].loseHandmaid();
+			auto itD = find(suitorsWithHandmaid.begin(), suitorsWithHandmaid.end(), currentSuitor);
+			suitorsWithHandmaid.erase(itD);
 		}
 		if (!deck.empty())
 		{
@@ -902,21 +904,14 @@ LOOP:
 				SwitchSuitor();
 				goto LOOP;
 			}
-			if (TargetHandmaidProtected() && activeSuitors == 3)
+			if (suitorsWithHandmaid.size() == activeSuitors - 1)
 			{
-				handmaidCounter++;
 				cout << TargetSuitor() << " has Handmaid protection." << endl;
-				if (handmaidCounter == 2)
-				{
-					handmaidCounter == 0;
-					cout << "All other Suitors have Handmaid protection." << endl;
-					cout << "Moving on to next active Suitor..." << endl;
-					this_thread::sleep_for(chrono::seconds(3));
-					ClearScreen();
-					SwitchSuitor();
-					goto LOOP;
-				}
-				ClearInput();
+				cout << "All target Suitors have Handmaid protection." << endl;
+				cout << "Moving on to next active Suitor..." << endl;
+				this_thread::sleep_for(chrono::seconds(3));
+				ClearScreen();
+				SwitchSuitor();
 				goto LOOP;
 			}
 			else
