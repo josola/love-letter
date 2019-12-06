@@ -894,6 +894,7 @@ LOOP:
 			if (TargetHandmaidProtected() && activeSuitors == 2)
 			{
 				cout << TargetSuitor() << " has Handmaid protection." << endl;
+				cout << "--\n";
 				cout << "Moving on to next active Suitor..." << endl;
 				this_thread::sleep_for(chrono::seconds(3));
 				ClearScreen();
@@ -904,6 +905,7 @@ LOOP:
 			{
 				cout << TargetSuitor() << " has Handmaid protection." << endl;
 				cout << "All target Suitors have Handmaid protection." << endl;
+				cout << "--\n";
 				cout << "Moving on to next active Suitor..." << endl;
 				this_thread::sleep_for(chrono::seconds(3));
 				ClearScreen();
@@ -921,6 +923,7 @@ LOOP:
 		}
 		if (activeSuitors > 1)
 		{
+			cout << "--\n";
 			cout << "Moving on to next active Suitor..." << endl;
 			this_thread::sleep_for(chrono::seconds(3));
 			ClearScreen();
