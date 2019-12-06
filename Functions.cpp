@@ -12,6 +12,7 @@ bool TargetHandmaidProtected()
 {
 	if (suitorObjectContainer[playerNum].handmaidStatus())
 	{
+		handmaidCounter++;
 		return true;
 	}
 	else
@@ -222,6 +223,21 @@ LOOP:
 	cin >> playerNum;
 	cout << "--\n";
 	playerNum--;
+	if (!tempInput.empty())
+	{
+		for (unsigned int i = 0; i < tempInput.size(); i++)
+		{
+			if (tempInput.at(i) == playerNum)
+			{
+				cout << "You already chose " << suitorNames.at(tempInput[i]) << " please choose a different Suitor." << endl;
+				goto LOOP;
+			}
+			else
+			{
+				return;
+			}
+		}
+	}
 	if (!ProperSuitorInput() || !IsSuitorPlaying())
 	{
 		ClearInput();
@@ -233,9 +249,11 @@ LOOP:
 		{
 			return;
 		}
+
 		else
 		{
 			cout << TargetSuitor() << " has Handmaid protection." << endl;
+			tempInput.push_back(playerNum);
 			ClearInput();
 			goto LOOP;
 		}
@@ -884,6 +902,23 @@ LOOP:
 				SwitchSuitor();
 				goto LOOP;
 			}
+			if (TargetHandmaidProtected() && activeSuitors == 3)
+			{
+				handmaidCounter++;
+				cout << TargetSuitor() << " has Handmaid protection." << endl;
+				if (handmaidCounter == 2)
+				{
+					handmaidCounter == 0;
+					cout << "All other Suitors have Handmaid protection." << endl;
+					cout << "Moving on to next active Suitor..." << endl;
+					this_thread::sleep_for(chrono::seconds(3));
+					ClearScreen();
+					SwitchSuitor();
+					goto LOOP;
+				}
+				ClearInput();
+				goto LOOP;
+			}
 			else
 			{
 				PlayCard();
@@ -900,6 +935,7 @@ LOOP:
 			ClearScreen();
 			SwitchSuitor();
 		}
+		tempInput.clear();
 	}
 }
 void PlayGame()

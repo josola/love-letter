@@ -60,7 +60,7 @@ public:
 Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
 std::vector<Suitor> suitorObjectContainer{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
 
-int activeSuitors, currentSuitor, originalSuitorCount, roundCount = 1, tempVictor, totalTokensWins, cardNum;
+int activeSuitors, currentSuitor, originalSuitorCount, roundCount = 1, tempVictor, totalTokensWins, cardNum, handmaidCounter;
 const int spy = 0, guard = 1, priest = 2, baron = 3, handmaid = 4, prince = 5, chancellor = 6, king = 7, countess = 8, princess = 9;
 auto winner = 0;
 unsigned int playerNum = 0;
@@ -73,4 +73,5 @@ std::vector<unsigned int> tempVector;
 std::vector<unsigned int> suitors;
 std::vector<unsigned int> upPile;
 std::vector<unsigned int> downPile;
+std::vector<unsigned int> tempInput;
 std::vector<std::vector<int> > suitor;
