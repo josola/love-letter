@@ -5,8 +5,15 @@ Variables and objects that are used in Functions.cpp
 
 #pragma once
 
-#include <string>
+#include <iostream>
 #include <vector>
+#include <cmath>
+#include <random>
+#include <ctime>
+#include <string>
+#include <algorithm>
+#include <thread>
+#include <chrono>
 
 class Suitor
 {
@@ -57,7 +64,7 @@ int activeSuitors, currentSuitor, originalSuitorCount, roundCount = 1, tempVicto
 const int spy = 0, guard = 1, priest = 2, baron = 3, handmaid = 4, prince = 5, chancellor = 6, king = 7, countess = 8, princess = 9;
 auto winner = 0;
 unsigned int playerNum = 0;
-bool gameOver = false;
+bool gameOver = false, returnValue;
 char input;
 std::vector<std::string> suitorNames = { "SUITOR 1", "SUITOR 2", "SUITOR 3", "SUITOR 4", "SUITOR 5", "SUITOR 6" };
 std::vector<std::string> cardNames = { "SPY[0]", "GUARD[1]", "PRIEST[2]", "BARON[3]", "HANDMAID[4]", "PRINCE[5]", "CHANCELLOR[6]", "KING[7]", "COUNTESS[8]", "PRINCESS[9]" };

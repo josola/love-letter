@@ -3,16 +3,6 @@ Jordan Sola 2019
 Functions used in Main.cpp
 */
 
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <random>
-#include <ctime>
-#include <string>
-#include <algorithm>
-#include <thread>
-#include <chrono>
-
 #include "Resources.h"
 
 using namespace std;
@@ -402,7 +392,6 @@ void InitialSetup()
 			upPile.push_back(deck[i]);
 			deck.erase(deck.begin());
 		}
-		PrintFaceUpPile();
 	}
 	if (activeSuitors > 2)
 	{
