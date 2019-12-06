@@ -231,10 +231,6 @@ LOOP:
 				cout << "You already chose " << suitorNames.at(tempInput[i]) << " please choose a different Suitor." << endl;
 				goto LOOP;
 			}
-			else
-			{
-				return;
-			}
 		}
 	}
 	if (!ProperSuitorInput() || !IsSuitorPlaying())
