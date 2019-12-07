@@ -267,6 +267,10 @@ void RemoveSuitor(int suitor)
 	}
 	activeSuitorCount--;
 }
+void ShuffleDeck()
+{
+	random_shuffle(deck.begin(), deck.end());
+}
 
 
 
@@ -540,7 +544,7 @@ void Princess()
 	RemoveSuitor(1);
 }
 
-//Dependent game functions.
+//Dependent on card functions.
 void PlayCard()
 {
 	switch (cardNum)
@@ -677,7 +681,7 @@ void InitialSetup()
 		currentSuitor = winner;
 		winner = 0;
 	}
-	random_shuffle(deck.begin(), deck.end());
+	ShuffleDeck();
 	if (activeSuitorCount == 2)
 	{
 		downPile.push_back(deck[0]);
