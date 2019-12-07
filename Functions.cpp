@@ -602,73 +602,76 @@ void InitialSetup()
 			ClearInput();
 			goto LOOP;
 		}
-		switch (activeSuitorCount)
+		else
 		{
-		case 2:
-			tokenCountToWin = 6;
-			break;
-		case 3:
-			tokenCountToWin = 5;
-			break;
-		case 4:
-			tokenCountToWin = 4;
-			break;
-		case 5:
-			tokenCountToWin = 3;
-			break;
-		case 6:
-			tokenCountToWin = 3;
-			break;
-		}
-		originalSuitorCount = activeSuitorCount;
-		for (int i = 1; i < activeSuitorCount + 1; i++)
-		{
-			suitors.push_back(i);
-		}
-		for (int i = 1; i < activeSuitorCount + 1; i++)
-		{
-			vector<int> hand;
-			activeSuitorHands.push_back(hand);
-		}
-		srand((int)time(NULL));
-		int target = rand() % activeSuitorHands.size() + 1;
-		unsigned int guess = 0;
-		cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << endl;
-	LOOPA:
-		for (unsigned int i = 0; i < activeSuitorHands.size() + 1; i++)
-		{
-		LOOPB:
-			cout << suitorNames.at(i) << " guess: " << endl;
-			cin >> guess;
-			if (guess <= activeSuitorHands.size() && guess >= 1)
+			originalSuitorCount = activeSuitorCount;
+			switch (activeSuitorCount)
 			{
-				for (unsigned int i = 0; i < tempVector.size(); i++)
+			case 2:
+				tokenCountToWin = 6;
+				break;
+			case 3:
+				tokenCountToWin = 5;
+				break;
+			case 4:
+				tokenCountToWin = 4;
+				break;
+			case 5:
+				tokenCountToWin = 3;
+				break;
+			case 6:
+				tokenCountToWin = 3;
+				break;
+			}
+			for (int i = 1; i < activeSuitorCount + 1; i++)
+			{
+				suitors.push_back(i);
+			}
+			for (int i = 1; i < activeSuitorCount + 1; i++)
+			{
+				vector<int> hand;
+				activeSuitorHands.push_back(hand);
+			}
+			srand((int)time(NULL));
+			int target = rand() % activeSuitorHands.size() + 1;
+			unsigned int guess = 0;
+			cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << endl;
+		LOOPA:
+			for (unsigned int i = 0; i < activeSuitorHands.size() + 1; i++)
+			{
+			LOOPB:
+				cout << suitorNames.at(i) << " guess: " << endl;
+				cin >> guess;
+				if (guess <= activeSuitorHands.size() && guess >= 1)
 				{
-					if (guess == tempVector.at(i))
+					for (unsigned int i = 0; i < tempVector.size(); i++)
 					{
-						cout << guess << " has already been guessed. Try again." << endl;
-						ClearInput();
-						goto LOOPB;
+						if (guess == tempVector.at(i))
+						{
+							cout << guess << " has already been guessed. Try again." << endl;
+							ClearInput();
+							goto LOOPB;
+						}
 					}
+					if (guess == target)
+					{
+						ClearScreen();
+						cout << suitorNames.at(i) << " got it!" << endl;
+						PrintSeperator();
+						currentSuitor = i;
+						break;
+					}
+					tempVector.push_back(guess);
 				}
-				if (guess == target)
+				else
 				{
-					ClearScreen();
-					cout << suitorNames.at(i) << " got it!" << endl;
-					PrintSeperator();
-					currentSuitor = i;
-					break;
+					cout << "Invalid input, please input a guess between 1 and " << activeSuitorCount << '.' << endl;
+					ClearInput();
+					goto LOOPA;
 				}
-				tempVector.push_back(guess);
 			}
-			else
-			{
-				cout << "Invalid input, please input a guess between 1 and " << activeSuitorCount << '.' << endl;
-				ClearInput();
-				goto LOOPA;
-			}
+			tempVector.clear();
 		}
-		tempVector.clear();
 	}
 	else
 	{
