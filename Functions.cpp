@@ -680,6 +680,7 @@ void BeginRound()
 	ResetDeck();
 	ShuffleDeck();
 	cout << "-- ROUND " << roundCount << " --" << endl;
+	//Check for starting round.
 	if (roundCount != startingRound)
 	{
 		activeSuitorCount = originalSuitorCount;
@@ -696,6 +697,7 @@ void BeginRound()
 		currentSuitor = winner;
 		winner = 0;
 	}
+	//Check for two Suitor game.
 	else if (activeSuitorCount == minSuitorsPlaying)
 	{
 		downPile.push_back(playingDeck[0]);
@@ -706,11 +708,13 @@ void BeginRound()
 			playingDeck.erase(playingDeck.begin());
 		}
 	}
+	//Discard top card of deck to face down pile, no matter the activeSuitorCount.
 	else
 	{
 		downPile.push_back(playingDeck[0]);
 		playingDeck.erase(playingDeck.begin());
 	}
+	//Deal starting hand.
 	for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 	{
 		activeSuitorHands.at(i).push_back(playingDeck[0]);
