@@ -95,11 +95,8 @@ bool CountessRestriction()
 }
 bool IsSuitorPlaying()
 {
-	switch (activeSuitorHands[playerNum].empty())
-	{
-	case 0: { return true; }
-	default: { cout << TargetSuitor() << " is out." << endl; return false; }
-	}
+	if (!activeSuitorHands[playerNum].empty()) { return true; }
+	else { return false; }
 }
 bool ProperSuitorInput()
 {
