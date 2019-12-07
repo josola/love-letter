@@ -159,7 +159,6 @@ void SwitchSuitor()
 }
 void DiscardPlayedCard()
 {
-
 	cout << CurrentSuitor() << " played " << cardNames[cardNum] << endl;
 	PrintSeperator();
 	upPile.push_back(cardNum);
@@ -178,8 +177,8 @@ void PrintActiveSuitors()
 		}
 	}
 	cout << endl;
-	currentSuitor--;
 	PrintSeperator();
+	currentSuitor--;
 }
 void PrintCurrentSuitorHand()
 {
