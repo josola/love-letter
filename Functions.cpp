@@ -682,11 +682,11 @@ void BeginRound()
 	if (roundCount != startingRound)
 	{
 		activeSuitorCount = originalSuitorCount;
-		for (int i = 1; i < activeSuitorCount + 1; i++)
+		for (i = 1; i < activeSuitorCount + 1; ++i)
 		{
 			suitors.push_back(i);
 		}
-		for (int i = 1; i < activeSuitorCount + 1; i++)
+		for (i = 1; i < activeSuitorCount + 1; ++i)
 		{
 			vector<int> hand;
 			activeSuitorHands.push_back(hand);
@@ -700,7 +700,7 @@ void BeginRound()
 	{
 		downPile.push_back(playingDeck[0]);
 		playingDeck.erase(playingDeck.begin());
-		for (unsigned int i = 0; i < 3; i++)
+		for (i = 0; i < 3; ++i)
 		{
 			upPile.push_back(playingDeck[i]);
 			playingDeck.erase(playingDeck.begin());
@@ -711,7 +711,7 @@ void BeginRound()
 		downPile.push_back(playingDeck[0]);
 		playingDeck.erase(playingDeck.begin());
 	}
-	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+	for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 	{
 		activeSuitorHands.at(i).push_back(playingDeck[0]);
 		playingDeck.erase(playingDeck.begin());
@@ -910,6 +910,8 @@ void EndRound()
 		gameOver = true;
 	}
 }
+
+//Game state.
 void PlayGame()
 {
 	InitialSetup();
