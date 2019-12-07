@@ -9,6 +9,10 @@ using namespace std;
 
 //Game functions.
 void ClearScreen() { cout << "\033[2J\033[1;1H"; }
+void PrintSeperator()
+{
+	cout << "--" << endl;
+}
 bool TargetHandmaidProtected()
 {
 	if (suitorObjects[playerNum].HandmaidStatus()) { return true; }
@@ -21,7 +25,8 @@ void PrintFaceUpPile()
 	{
 		cout << cardNames.at(upPile[i]) << " ";
 	}
-	cout << '\n' << seperator << endl;
+	cout << endl;
+	PrintSeperator();
 }
 void PrintDeckSize()
 {
