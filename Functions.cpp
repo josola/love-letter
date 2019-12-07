@@ -30,7 +30,7 @@ void PrintFaceUpPile()
 }
 void PrintDeckSize()
 {
-	cout << "Number of cards in the deck: " << deck.size() << endl;
+	cout << "Number of cards in the deck: " << playingDeck.size() << endl;
 	PrintSeperator();
 }
 void PrintSuitorsWithSpy()
@@ -269,10 +269,12 @@ void RemoveSuitor(int suitor)
 }
 void ShuffleDeck()
 {
-	random_shuffle(deck.begin(), deck.end());
+	random_shuffle(playingDeck.begin(), playingDeck.end());
 }
-
-
+void ResetDeck()
+{
+	playingDeck.assign(baseDeck.begin(), baseDeck.end());
+}
 
 //Card functions.
 void Spy() { suitorObjects[currentSuitor].GainSpy(); }
@@ -363,8 +365,8 @@ LOOPB:
 				upPile.push_back(activeSuitorHands[playerNum][i]);
 			}
 			activeSuitorHands[currentSuitor].clear();
-			activeSuitorHands[currentSuitor].push_back(deck[0]);
-			deck.erase(deck.begin());
+			activeSuitorHands[currentSuitor].push_back(playingDeck[0]);
+			playingDeck.erase(playingDeck.begin());
 			PrintCurrentSuitorHand();
 			return;
 		}
@@ -377,7 +379,7 @@ LOOPB:
 		RemoveSuitor(playerNum);
 		return;
 	}
-	if (deck.empty())
+	if (playingDeck.empty())
 	{
 		cout << suitorNames[playerNum] << " discards their hand, then redraws." << endl;
 		for (i = 0, iLength = activeSuitorHands[playerNum].size(); i < iLength; ++i)
@@ -399,8 +401,8 @@ LOOPB:
 			upPile.push_back(activeSuitorHands[playerNum][i]);
 		}
 		activeSuitorHands[playerNum].erase(activeSuitorHands[playerNum].begin(), activeSuitorHands[playerNum].end());
-		activeSuitorHands[playerNum].push_back(deck[0]);
-		deck.erase(deck.begin());
+		activeSuitorHands[playerNum].push_back(playingDeck[0]);
+		playingDeck.erase(playingDeck.begin());
 		if (playerNum == currentSuitor)
 		{
 			PrintCurrentSuitorHand();
@@ -409,17 +411,17 @@ LOOPB:
 }
 void Chancellor()
 {
-	if (deck.empty())
+	if (playingDeck.empty())
 	{
 		cout << "The deck is empty. The " << cardNames[6] << " plays with no effect." << endl;
 		return;
 	}
-	if (deck.size() >= 2)
+	if (playingDeck.size() >= 2)
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			activeSuitorHands[currentSuitor].push_back(deck[0]);
-			deck.erase(deck.begin());
+			activeSuitorHands[currentSuitor].push_back(playingDeck[0]);
+			playingDeck.erase(playingDeck.begin());
 		}
 		PrintCurrentSuitorHand();
 	LOOP:
@@ -438,7 +440,7 @@ void Chancellor()
 		}
 		else
 		{
-			deck.push_back(cardNum);
+			playingDeck.push_back(cardNum);
 			if (itA != activeSuitorHands[currentSuitor].end())
 			{
 				activeSuitorHands[currentSuitor].erase(itA);
@@ -470,7 +472,7 @@ void Chancellor()
 		}
 		else
 		{
-			deck.push_back(cardNum);
+			playingDeck.push_back(cardNum);
 			if (itB != activeSuitorHands[currentSuitor].end())
 			{
 				activeSuitorHands[currentSuitor].erase(itB);
@@ -487,13 +489,13 @@ void Chancellor()
 			}
 		}
 	}
-	if (deck.size() == 1)
+	if (playingDeck.size() == 1)
 	{
 		cout << "There is only one card in the deck." << endl;
 		for (int i = 0; i < 1; i++)
 		{
-			activeSuitorHands[currentSuitor].push_back(deck[0]);
-			deck.erase(deck.begin());
+			activeSuitorHands[currentSuitor].push_back(playingDeck[0]);
+			playingDeck.erase(playingDeck.begin());
 		}
 		PrintCurrentSuitorHand();
 	LOOPB:
@@ -512,7 +514,7 @@ void Chancellor()
 		}
 		else
 		{
-			deck.push_back(cardNum);
+			playingDeck.push_back(cardNum);
 			if (itC != activeSuitorHands[currentSuitor].end())
 			{
 				activeSuitorHands[currentSuitor].erase(itC);
@@ -665,7 +667,7 @@ void InitialSetup()
 	}
 	else
 	{
-		deck = { spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess };
+		ResetDeck();
 		cout << "-- ROUND " << roundCount << " --" << endl;
 		activeSuitorCount = originalSuitorCount;
 		for (int i = 1; i < activeSuitorCount + 1; i++)
@@ -684,29 +686,29 @@ void InitialSetup()
 	ShuffleDeck();
 	if (activeSuitorCount == 2)
 	{
-		downPile.push_back(deck[0]);
-		deck.erase(deck.begin());
+		downPile.push_back(playingDeck[0]);
+		playingDeck.erase(playingDeck.begin());
 		for (unsigned int i = 0; i < 3; i++)
 		{
-			upPile.push_back(deck[i]);
-			deck.erase(deck.begin());
+			upPile.push_back(playingDeck[i]);
+			playingDeck.erase(playingDeck.begin());
 		}
 	}
 	if (activeSuitorCount > 2)
 	{
-		downPile.push_back(deck[0]);
-		deck.erase(deck.begin());
+		downPile.push_back(playingDeck[0]);
+		playingDeck.erase(playingDeck.begin());
 	}
 	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
 	{
-		activeSuitorHands.at(i).push_back(deck[0]);
-		deck.erase(deck.begin());
+		activeSuitorHands.at(i).push_back(playingDeck[0]);
+		playingDeck.erase(playingDeck.begin());
 	}
 }
 void SuitorTurn()
 {
 LOOP:
-	while (activeSuitorCount > 1 && !deck.empty())
+	while (activeSuitorCount > 1 && !playingDeck.empty())
 	{
 		if (suitorObjects[currentSuitor].HandmaidStatus())
 		{
@@ -714,7 +716,7 @@ LOOP:
 			auto itD = find(suitorsWithHandmaid.begin(), suitorsWithHandmaid.end(), currentSuitor);
 			suitorsWithHandmaid.erase(itD);
 		}
-		if (!deck.empty())
+		if (!playingDeck.empty())
 		{
 			PrintDeckSize();
 			PrintActiveSuitors();
@@ -728,8 +730,8 @@ LOOP:
 		PrintSeperator();
 		if (input == 'd')
 		{
-			activeSuitorHands.at(currentSuitor).push_back(deck[0]);
-			deck.erase(deck.begin());
+			activeSuitorHands.at(currentSuitor).push_back(playingDeck[0]);
+			playingDeck.erase(playingDeck.begin());
 		}
 		else
 		{
@@ -794,7 +796,7 @@ LOOP:
 }
 void EndRound()
 {
-	if (deck.empty())
+	if (playingDeck.empty())
 	{
 		cout << "The deck is empty, suitors compare hands" << endl;
 		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)

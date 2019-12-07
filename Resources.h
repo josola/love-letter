@@ -116,7 +116,32 @@ std::vector<std::string> cardNames
 	"PRINCESS[9]"
 };
 
-std::vector<int> deck
+std::vector<int> baseDeck
+{
+	spy,
+	spy,
+	guard,
+	guard,
+	guard,
+	guard,
+	guard,
+	guard,
+	priest,
+	priest,
+	baron,
+	baron,
+	handmaid,
+	handmaid,
+	prince,
+	prince,
+	chancellor,
+	chancellor,
+	king,
+	countess,
+	princess
+};
+
+std::vector<int> playingDeck
 {
 	spy,
 	spy,
