@@ -678,6 +678,7 @@ LOOP:
 void BeginRound()
 {
 	ResetDeck();
+	ShuffleDeck();
 	cout << "-- ROUND " << roundCount << " --" << endl;
 	if (roundCount != startingRound)
 	{
@@ -695,8 +696,7 @@ void BeginRound()
 		currentSuitor = winner;
 		winner = 0;
 	}
-	ShuffleDeck();
-	if (activeSuitorCount == minSuitorsPlaying)
+	else if (activeSuitorCount == minSuitorsPlaying)
 	{
 		downPile.push_back(playingDeck[0]);
 		playingDeck.erase(playingDeck.begin());
