@@ -12,8 +12,8 @@ bool TargetHandmaidProtected()
 {
 	switch (suitorObjects[playerNum].HandmaidStatus())
 	{
-	case 1: { return true; }
 	case 0: { return false; }
+	default: { return true; }
 	}
 }
 void PrintFaceUpPile()
@@ -47,14 +47,8 @@ void ClearInput()
 	cin.clear();
 	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
-auto CurrentSuitor()
-{
-	return suitorNames[currentSuitor];
-}
-auto TargetSuitor()
-{
-	return suitorNames[playerNum];
-}
+auto CurrentSuitor() { return suitorNames[currentSuitor]; }
+auto TargetSuitor() { return suitorNames[playerNum]; }
 bool ProperCardInput()
 {
 	if (cardNum >= spy && cardNum <= princess && cin) { return true; }
@@ -64,27 +58,29 @@ bool ProperCardInput()
 		return false;
 	}
 }
-bool CardInHand()
+bool CardInHand(int suitor, int card)
 {
-	if (find(activeSuitorHands[currentSuitor].begin(), activeSuitorHands[currentSuitor].end(), cardNum) != activeSuitorHands[currentSuitor].end()) { return true; }
-	else
+	switch (find(activeSuitorHands[suitor].begin(), activeSuitorHands[suitor].end(), card) != activeSuitorHands[suitor].end())
 	{
-		cout << "You don't have " << cardNames[cardNum] << " in your hand." << endl;
-		return false;
+	case 0: { cout << "You don't have " << cardNames[card] << " in your hand." << endl; return false; }
+	default: { return true; }
 	}
+}
+int HandPosition(int suitor, int pos)
+{
+	cardPosition = activeSuitorHands[suitor][pos];
+	return cardPosition;
 }
 bool CountessRestriction()
 {
-	if (activeSuitorHands[currentSuitor][0] == 8 || activeSuitorHands[currentSuitor][1] == 8)
+	if (CardInHand(currentSuitor, countess) && cardNum != countess)
 	{
-		if (cardNum != 8)
+		if (CardInHand(currentSuitor, prince) || CardInHand(currentSuitor, king))
 		{
-			if (activeSuitorHands[currentSuitor][0] == 5 || activeSuitorHands[currentSuitor][0] == 7 || activeSuitorHands[currentSuitor][1] == 5 || activeSuitorHands[currentSuitor][1] == 7)
-			{
-				cout << "You have the " << cardNames.at(activeSuitorHands[currentSuitor][0]) << " and the " << cardNames.at(activeSuitorHands[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
-				return true;
-			}
-			else { return false; }
+			cout << "You have the " << cardNames[HandPosition(currentSuitor, 0)]
+				<< " and the " << cardNames[HandPosition(currentSuitor, 1)]
+				<< ". You MUST play the " << cardNames[countess] << " this turn." << endl;
+			return true;
 		}
 		else { return false; }
 	}
@@ -95,7 +91,7 @@ bool IsSuitorPlaying()
 	switch (activeSuitorHands[playerNum].empty())
 	{
 	case 0: { return true; }
-	case 1: { cout << TargetSuitor() << " is out." << endl; return false; }
+	default: { cout << TargetSuitor() << " is out." << endl; return false; }
 	}
 }
 bool ProperSuitorInput()
@@ -394,10 +390,7 @@ void InitialSetup()
 		deck.erase(deck.begin());
 	}
 }
-void ClearScreen()
-{
-	cout << "\033[2J\033[1;1H";
-}
+void ClearScreen() { cout << "\033[2J\033[1;1H"; }
 void EndRound()
 {
 	if (deck.empty())
@@ -504,10 +497,7 @@ void EndRound()
 }
 
 //Card functions.
-void Spy()
-{
-	suitorObjects[currentSuitor].GainSpy();
-}
+void Spy() { suitorObjects[currentSuitor].GainSpy(); }
 void Guard()
 {
 LOOP:
@@ -545,10 +535,7 @@ LOOP:
 		cout << "no match" << endl;
 	}
 }
-void Priest()
-{
-	PrintTargetSuitorHand();
-}
+void Priest() { PrintTargetSuitorHand(); }
 void Baron()
 {
 	PrintCurrentSuitorHand();
@@ -666,7 +653,7 @@ void Chancellor()
 			ClearInput();
 			goto LOOP;
 		}
-		if (!CardInHand())
+		if (!CardInHand(currentSuitor, cardNum))
 		{
 			ClearInput();
 			goto LOOP;
@@ -698,7 +685,7 @@ void Chancellor()
 			ClearInput();
 			goto LOOPA;
 		}
-		if (!CardInHand())
+		if (!CardInHand(currentSuitor, cardNum))
 		{
 			ClearInput();
 			goto LOOPA;
@@ -740,7 +727,7 @@ void Chancellor()
 			ClearInput();
 			goto LOOPB;
 		}
-		if (!CardInHand())
+		if (!CardInHand(currentSuitor, cardNum))
 		{
 			ClearInput();
 			goto LOOPB;
@@ -854,7 +841,7 @@ LOOP:
 		PrintCurrentSuitorHand();
 		cout << CurrentSuitor() << " play a card: " << endl;
 		cin >> cardNum;
-		if (!ProperCardInput() || !CardInHand())
+		if (!ProperCardInput() || !CardInHand(currentSuitor, cardNum))
 		{
 			ClearInput();
 			goto LOOPA;

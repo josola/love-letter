@@ -61,7 +61,8 @@ cardNum,
 roundCount = 1,
 tempVictor,
 i,
-iLength;
+iLength,
+cardPosition;
 
 static const int
 spy = 0,
