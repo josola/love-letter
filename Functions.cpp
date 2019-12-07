@@ -203,7 +203,7 @@ LOOP:
 	PrintActiveSuitors();
 	cout << CurrentSuitor() << " choose target suitor: " << endl;
 	cin >> playerNum;
-	cout << "--" << endl;
+	PrintSeperator();
 	playerNum--;
 	if (!tempInput.empty())
 	{
