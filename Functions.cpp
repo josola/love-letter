@@ -702,7 +702,7 @@ void InitialSetup()
 			playingDeck.erase(playingDeck.begin());
 		}
 	}
-	if (activeSuitorCount > 2)
+	else
 	{
 		downPile.push_back(playingDeck[0]);
 		playingDeck.erase(playingDeck.begin());
