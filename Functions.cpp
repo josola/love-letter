@@ -341,7 +341,7 @@ void InitialSetup()
 	}
 	else
 	{
-		deck = { 0, 0, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 9 };
+		deck = { spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess };
 		cout << "-- ROUND " << roundCount << " --" << endl;
 		activeSuitorCount = originalSuitorCount;
 		for (int i = 1; i < activeSuitorCount + 1; i++)
@@ -568,7 +568,7 @@ LOOPB:
 				RemoveSuitor(currentSuitor);
 				return;
 			}
-			for (unsigned int i = 0; i < activeSuitorHands[currentSuitor].size(); i++)
+			for (i = 0, iLength = activeSuitorHands[currentSuitor].size(); i < iLength; ++i)
 			{
 				upPile.push_back(activeSuitorHands[playerNum][i]);
 			}
@@ -590,7 +590,7 @@ LOOPB:
 	if (deck.empty())
 	{
 		cout << suitorNames[playerNum] << " discards their hand, then redraws." << endl;
-		for (unsigned int i = 0; i < activeSuitorHands[playerNum].size(); i++)
+		for (i = 0, iLength = activeSuitorHands[playerNum].size(); i < iLength; ++i)
 		{
 			upPile.push_back(activeSuitorHands[playerNum][i]);
 		}
