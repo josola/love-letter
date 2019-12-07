@@ -698,7 +698,7 @@ void BeginRound()
 		winner = 0;
 	}
 	//Check for two Suitor game.
-	else if (activeSuitorCount == minSuitorsPlaying)
+	if (activeSuitorCount == minSuitorsPlaying)
 	{
 		downPile.push_back(playingDeck[0]);
 		playingDeck.erase(playingDeck.begin());
@@ -867,11 +867,11 @@ void EndRound()
 	}
 	else
 	{
-		for (i = 0, iLength = suitors.size(); i < iLength; ++i)
+		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)//
 		{
 			if (!activeSuitorHands[i].empty())
 			{
-				winner = --suitors[i];
+				winner = i;//
 			}
 		}
 		cout << "Round over. " << suitorNames[winner] << " is the last suitor standing." << endl;
