@@ -216,9 +216,14 @@ LOOP:
 			}
 		}
 	}
-	if (!ProperSuitorInput() || !IsSuitorPlaying())
+	if (!ProperSuitorInput())
 	{
 		ClearInput();
+		goto LOOP;
+	}
+	if (!IsSuitorPlaying())
+	{
+		cout << TargetSuitor() << " is out." << endl;
 		goto LOOP;
 	}
 	if (TargetHandmaidProtected())
