@@ -115,6 +115,9 @@ bool ProperSuitorInput()
 }
 void SwitchSuitor()
 {
+	cout << "Moving on to next active Suitor..." << endl;
+	this_thread::sleep_for(chrono::seconds(3));
+	ClearScreen();
 	if (currentSuitor == suitors[0] - 1)
 	{
 		for (i = 1, iLength = activeSuitorHands.size(); i < iLength; ++i)
@@ -859,9 +862,6 @@ LOOP:
 			{
 				cout << TargetSuitor() << " has Handmaid protection." << endl;
 				PrintSeperator();
-				cout << "Moving on to next active Suitor..." << endl;
-				this_thread::sleep_for(chrono::seconds(3));
-				ClearScreen();
 				SwitchSuitor();
 				goto LOOP;
 			}
@@ -870,9 +870,6 @@ LOOP:
 				cout << TargetSuitor() << " has Handmaid protection." << endl;
 				cout << "All target Suitors have Handmaid protection." << endl;
 				PrintSeperator();
-				cout << "Moving on to next active Suitor..." << endl;
-				this_thread::sleep_for(chrono::seconds(3));
-				ClearScreen();
 				SwitchSuitor();
 				goto LOOP;
 			}
@@ -887,9 +884,6 @@ LOOP:
 		}
 		if (activeSuitorCount > 1)
 		{
-			cout << "Moving on to next active Suitor..." << endl;
-			this_thread::sleep_for(chrono::seconds(3));
-			ClearScreen();
 			SwitchSuitor();
 		}
 		tempInput.clear();
