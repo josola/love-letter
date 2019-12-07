@@ -10,19 +10,16 @@ using namespace std;
 //Game functions.
 bool TargetHandmaidProtected()
 {
-	if (suitorObjects[playerNum].HandmaidStatus())
+	switch (suitorObjects[playerNum].HandmaidStatus())
 	{
-		return true;
-	}
-	else
-	{
-		return false;
+	case 1: { return true; }
+	case 0: { return false; }
 	}
 }
 void PrintFaceUpPile()
 {
 	cout << "Cards in face up pile: " << endl;
-	for (unsigned int i = 0; i < upPile.size(); i++)
+	for (i = 0, iLength = upPile.size(); i < iLength; ++i)
 	{
 		cout << cardNames.at(upPile[i]) << " ";
 	}
@@ -35,15 +32,15 @@ void PrintDeckSize()
 }
 void PrintSuitorsWithSpy()
 {
-	cout << "Suitors with Spy bonus: " << endl;
-	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+	cout << "Spy bonus: " << endl;
+	for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 	{
-		if (suitorObjects[i].SpyStatus())
+		if (!activeSuitorHands[i].empty())
 		{
-			cout << suitorNames[i] << " ";
+			if (suitorObjects[i].SpyStatus()) { cout << suitorNames[i] << endl; }
 		}
 	}
-	cout << "\n--\n";
+	cout << "--\n";
 }
 void ClearInput()
 {
@@ -60,10 +57,7 @@ auto TargetSuitor()
 }
 bool ProperCardInput()
 {
-	if (cardNum >= spy && cardNum <= princess && cin)
-	{
-		return true;
-	}
+	if (cardNum >= spy && cardNum <= princess && cin) { return true; }
 	else
 	{
 		cout << "Invalid input, please input a card value between 0 and 9." << endl;
@@ -72,10 +66,7 @@ bool ProperCardInput()
 }
 bool CardInHand()
 {
-	if (find(activeSuitorHands[currentSuitor].begin(), activeSuitorHands[currentSuitor].end(), cardNum) != activeSuitorHands[currentSuitor].end())
-	{
-		return true;
-	}
+	if (find(activeSuitorHands[currentSuitor].begin(), activeSuitorHands[currentSuitor].end(), cardNum) != activeSuitorHands[currentSuitor].end()) { return true; }
 	else
 	{
 		cout << "You don't have " << cardNames[cardNum] << " in your hand." << endl;
@@ -93,31 +84,18 @@ bool CountessRestriction()
 				cout << "You have the " << cardNames.at(activeSuitorHands[currentSuitor][0]) << " and the " << cardNames.at(activeSuitorHands[currentSuitor][1]) << ". You MUST play the " << cardNames[8] << " this turn." << endl;
 				return true;
 			}
-			else
-			{
-				return false;
-			}
+			else { return false; }
 		}
-		else
-		{
-			return false;
-		}
+		else { return false; }
 	}
-	else
-	{
-		return false;
-	}
+	else { return false; }
 }
 bool IsSuitorPlaying()
 {
-	if (!activeSuitorHands[playerNum].empty())
+	switch (activeSuitorHands[playerNum].empty())
 	{
-		return true;
-	}
-	else
-	{
-		cout << TargetSuitor() << " is out." << endl;
-		return false;
+	case 0: { return true; }
+	case 1: { cout << TargetSuitor() << " is out." << endl; return false; }
 	}
 }
 bool ProperSuitorInput()
@@ -244,7 +222,6 @@ LOOP:
 		{
 			return;
 		}
-
 		else
 		{
 			cout << TargetSuitor() << " has Handmaid protection." << endl;

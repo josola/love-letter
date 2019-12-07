@@ -18,43 +18,20 @@ Variables and objects that are used in Functions.cpp
 class Suitor
 {
 private:
-	bool hasSpy = false;
-	bool hasHandmaid = false;
+	bool
+		hasSpy = false,
+		hasHandmaid = false;
 	int tokenCount = 0;
 
 public:
-	void GainSpy()
-	{
-		hasSpy = true;
-	}
-	void RemoveSpy()
-	{
-		hasSpy = false;
-	}
-	bool SpyStatus()
-	{
-		return hasSpy;
-	}
-	void GainHandmaid()
-	{
-		hasHandmaid = true;
-	}
-	void RemoveHandmaid()
-	{
-		hasHandmaid = false;
-	}
-	bool HandmaidStatus()
-	{
-		return hasHandmaid;
-	}
-	int GetTokenCount()
-	{
-		return tokenCount;
-	}
-	void GainToken()
-	{
-		tokenCount++;
-	}
+	void GainSpy() { hasSpy = true; }
+	void RemoveSpy() { hasSpy = false; }
+	bool SpyStatus() { return hasSpy; }
+	void GainHandmaid() { hasHandmaid = true; }
+	void RemoveHandmaid() { hasHandmaid = false; }
+	bool HandmaidStatus() { return hasHandmaid; }
+	int GetTokenCount() { return tokenCount; }
+	void GainToken() { tokenCount++; }
 };
 
 Suitor
@@ -82,7 +59,9 @@ currentSuitor,
 tokenCountToWin,
 cardNum,
 roundCount = 1,
-tempVictor;
+tempVictor,
+i,
+iLength;
 
 static const int
 spy = 0,
@@ -115,7 +94,7 @@ std::vector<std::string> suitorNames
 {
 	"SUITOR 1",
 	"SUITOR 2",
-	"SUITOR 3"
+	"SUITOR 3",
 	"SUITOR 4",
 	"SUITOR 5",
 	"SUITOR 6"
