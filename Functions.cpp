@@ -159,14 +159,12 @@ void SwitchSuitor()
 }
 void DiscardPlayedCard()
 {
-	auto it = find(activeSuitorHands[currentSuitor].begin(), activeSuitorHands[currentSuitor].end(), cardNum);
+
 	cout << CurrentSuitor() << " played " << cardNames[cardNum] << endl;
 	PrintSeperator();
 	upPile.push_back(cardNum);
-	if (it != activeSuitorHands[currentSuitor].end())
-	{
-		activeSuitorHands[currentSuitor].erase(it);
-	}
+	auto it = find(activeSuitorHands[currentSuitor].begin(), activeSuitorHands[currentSuitor].end(), cardNum);
+	activeSuitorHands[currentSuitor].erase(it);
 }
 void PrintActiveSuitors()
 {
