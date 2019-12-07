@@ -8,6 +8,7 @@ Functions used in Main.cpp
 using namespace std;
 
 //Game functions.
+void ClearScreen() { cout << "\033[2J\033[1;1H"; }
 bool TargetHandmaidProtected()
 {
 	switch (suitorObjects[playerNum].HandmaidStatus())
@@ -180,15 +181,16 @@ void PrintCurrentSuitorHand()
 	{
 		cout << cardNames[HandPosition(currentSuitor, i)] << " ";
 	}
-	cout << endl;
+	cout << "\n--" << endl;
 }
 void PrintTargetSuitorHand()
 {
 	cout << TargetSuitor() << " hand: " << endl;
 	for (i = 0, iLength = activeSuitorHands[playerNum].size(); i < iLength; ++i)
 	{
-		cout << cardNames[HandPosition(playerNum, i)] << endl;
+		cout << cardNames[HandPosition(playerNum, i)] << " ";
 	}
+	cout << "\n--" << endl;
 }
 void ChooseTargetSuitor()
 {
@@ -321,6 +323,7 @@ void InitialSetup()
 				}
 				if (guess == target)
 				{
+					ClearScreen();
 					cout << suitorNames.at(i) << " got it!\n--" << endl;
 					currentSuitor = i;
 					break;
@@ -376,7 +379,6 @@ void InitialSetup()
 		deck.erase(deck.begin());
 	}
 }
-void ClearScreen() { cout << "\033[2J\033[1;1H"; }
 void EndRound()
 {
 	if (deck.empty())
@@ -560,7 +562,7 @@ LOOPB:
 		{
 			cout << TargetSuitor() << " has Handmaid protection." << endl;
 			cout << "The Prince applies to you." << endl;
-			if (find(activeSuitorHands[currentSuitor].begin(), activeSuitorHands[currentSuitor].end(), 9) != activeSuitorHands[currentSuitor].end())
+			if (find(activeSuitorHands[currentSuitor].begin(), activeSuitorHands[currentSuitor].end(), princess) != activeSuitorHands[currentSuitor].end())
 			{
 				cout << "You had the Princess! You're out!" << endl;
 				RemoveSuitor(currentSuitor);
@@ -602,7 +604,7 @@ LOOPB:
 	else
 	{
 		cout << suitorNames[playerNum] << " discards their hand, then redraws." << endl;
-		for (unsigned int i = 0; i < activeSuitorHands[playerNum].size(); i++)
+		for (iLength = activeSuitorHands[playerNum].size(); i < iLength; ++i)
 		{
 			upPile.push_back(i);
 		}
