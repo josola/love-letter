@@ -21,7 +21,7 @@ void PrintFaceUpPile()
 	{
 		cout << cardNames.at(upPile[i]) << " ";
 	}
-	cout << "\n--" << endl;
+	cout << '\n' << seperator << endl;
 }
 void PrintDeckSize()
 {
