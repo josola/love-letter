@@ -701,7 +701,6 @@ LOOP:
 				{
 					ClearScreen();
 					cout << suitorNames.at(i) << " got it!" << endl;
-					PrintSeperator();
 					currentSuitor = i;
 					break;
 				}
@@ -915,10 +914,6 @@ void PlayGame()
 	InitialSetup();
 	while (!gameOver)
 	{
-		if (activeSuitorCount == 0)
-		{
-			InitialSetup();
-		}
 		BeginRound();
 		SuitorTurn();
 		EndRound();
