@@ -11,11 +11,8 @@ using namespace std;
 void ClearScreen() { cout << "\033[2J\033[1;1H"; }
 bool TargetHandmaidProtected()
 {
-	switch (suitorObjects[playerNum].HandmaidStatus())
-	{
-	case 0: { return false; }
-	default: { return true; }
-	}
+	if (suitorObjects[playerNum].HandmaidStatus()) { return true; }
+	else { return false; }
 }
 void PrintFaceUpPile()
 {
