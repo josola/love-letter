@@ -90,7 +90,7 @@ std::vector<std::vector<int> > activeSuitorHands;
 auto winner = 0;
 unsigned int playerNum = 0;
 bool gameOver = false;
-char input, seperator[] = "--";
+char input;
 
 std::vector<std::string> suitorNames
 {

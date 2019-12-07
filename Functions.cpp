@@ -30,7 +30,8 @@ void PrintFaceUpPile()
 }
 void PrintDeckSize()
 {
-	cout << "Number of cards in the deck: " << deck.size() << '\n' << seperator << endl;
+	cout << "Number of cards in the deck: " << deck.size() << endl;
+	PrintSeperator();
 }
 void PrintSuitorsWithSpy()
 {
@@ -42,7 +43,8 @@ void PrintSuitorsWithSpy()
 			if (suitorObjects[i].SpyStatus()) { cout << suitorNames[i] << " "; }
 		}
 	}
-	cout << '\n' << seperator << endl;
+	cout << endl;
+	PrintSeperator();
 }
 void ClearInput()
 {
@@ -155,7 +157,8 @@ void SwitchSuitor()
 void DiscardPlayedCard()
 {
 	auto it = find(activeSuitorHands[currentSuitor].begin(), activeSuitorHands[currentSuitor].end(), cardNum);
-	cout << CurrentSuitor() << " played " << cardNames[cardNum] << '\n' << seperator << endl;
+	cout << CurrentSuitor() << " played " << cardNames[cardNum] << endl;
+	PrintSeperator();
 	upPile.push_back(cardNum);
 	if (it != activeSuitorHands[currentSuitor].end())
 	{
@@ -173,8 +176,9 @@ void PrintActiveSuitors()
 			cout << suitorNames[i] << " ";
 		}
 	}
+	cout << endl;
 	currentSuitor--;
-	cout << '\n' << seperator << endl;
+	PrintSeperator();
 }
 void PrintCurrentSuitorHand()
 {
@@ -183,7 +187,8 @@ void PrintCurrentSuitorHand()
 	{
 		cout << cardNames[HandPosition(currentSuitor, i)] << " ";
 	}
-	cout << '\n' << seperator << endl;
+	cout << endl;
+	PrintSeperator();
 }
 void PrintTargetSuitorHand()
 {
@@ -192,7 +197,8 @@ void PrintTargetSuitorHand()
 	{
 		cout << cardNames[HandPosition(playerNum, i)] << " ";
 	}
-	cout << '\n' << seperator << endl;
+	cout << endl;
+	PrintSeperator();
 }
 void ChooseTargetSuitor()
 {
@@ -267,7 +273,7 @@ void InitialSetup()
 	LOOP:
 		cout << "How many suitors will be playing: " << endl;
 		cin >> activeSuitorCount;
-		cout << seperator << endl;
+		PrintSeperator();
 		if (activeSuitorCount < 2 || activeSuitorCount > 6 || !cin)
 		{
 			cout << "Invalid input, please input a number of Suitors between 2 and 6." << endl;
@@ -327,7 +333,7 @@ void InitialSetup()
 				{
 					ClearScreen();
 					cout << suitorNames.at(i) << " got it!" << endl;
-					cout << seperator << endl;
+					PrintSeperator();
 					currentSuitor = i;
 					break;
 				}
@@ -813,7 +819,7 @@ LOOP:
 		else { return; }
 		cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
 		cin >> input;
-		cout << seperator << endl;
+		PrintSeperator();
 		if (input == 'd')
 		{
 			activeSuitorHands.at(currentSuitor).push_back(deck[0]);
@@ -829,7 +835,7 @@ LOOP:
 		PrintCurrentSuitorHand();
 		cout << CurrentSuitor() << " play a card: " << endl;
 		cin >> cardNum;
-		cout << seperator << endl;
+		PrintSeperator();
 		if (!ProperCardInput())
 		{
 			ClearInput();
@@ -852,7 +858,7 @@ LOOP:
 			if (TargetHandmaidProtected() && activeSuitorCount == 2)
 			{
 				cout << TargetSuitor() << " has Handmaid protection." << endl;
-				cout << seperator << endl;
+				PrintSeperator();
 				cout << "Moving on to next active Suitor..." << endl;
 				this_thread::sleep_for(chrono::seconds(3));
 				ClearScreen();
@@ -863,7 +869,7 @@ LOOP:
 			{
 				cout << TargetSuitor() << " has Handmaid protection." << endl;
 				cout << "All target Suitors have Handmaid protection." << endl;
-				cout << seperator << endl;
+				PrintSeperator();
 				cout << "Moving on to next active Suitor..." << endl;
 				this_thread::sleep_for(chrono::seconds(3));
 				ClearScreen();
