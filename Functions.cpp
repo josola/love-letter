@@ -570,7 +570,7 @@ LOOPB:
 			}
 			for (unsigned int i = 0; i < activeSuitorHands[currentSuitor].size(); i++)
 			{
-				upPile.push_back(i);
+				upPile.push_back(activeSuitorHands[playerNum][i]);
 			}
 			activeSuitorHands[currentSuitor].clear();
 			activeSuitorHands[currentSuitor].push_back(deck[0]);
@@ -592,7 +592,7 @@ LOOPB:
 		cout << suitorNames[playerNum] << " discards their hand, then redraws." << endl;
 		for (unsigned int i = 0; i < activeSuitorHands[playerNum].size(); i++)
 		{
-			upPile.push_back(i);
+			upPile.push_back(activeSuitorHands[playerNum][i]);
 		}
 		activeSuitorHands[playerNum].push_back(downPile[0]);
 		downPile.erase(downPile.begin(), downPile.end());
@@ -604,9 +604,9 @@ LOOPB:
 	else
 	{
 		cout << suitorNames[playerNum] << " discards their hand, then redraws." << endl;
-		for (iLength = activeSuitorHands[playerNum].size(); i < iLength; ++i)
+		for (i = 0, iLength = activeSuitorHands[playerNum].size(); i < iLength; ++i)
 		{
-			upPile.push_back(i);
+			upPile.push_back(activeSuitorHands[playerNum][i]);
 		}
 		activeSuitorHands[playerNum].erase(activeSuitorHands[playerNum].begin(), activeSuitorHands[playerNum].end());
 		activeSuitorHands[playerNum].push_back(deck[0]);
