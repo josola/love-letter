@@ -280,48 +280,7 @@ void ResetDeck()
 {
 	playingDeck.assign(baseDeck.begin(), baseDeck.end());
 }
-void BeginRound()
-{
-	ResetDeck();
-	cout << "-- ROUND " << roundCount << " --" << endl;
-	if (roundCount != startingRound)
-	{
-		activeSuitorCount = originalSuitorCount;
-		for (int i = 1; i < activeSuitorCount + 1; i++)
-		{
-			suitors.push_back(i);
-		}
-		for (int i = 1; i < activeSuitorCount + 1; i++)
-		{
-			vector<int> hand;
-			activeSuitorHands.push_back(hand);
-		}
-		cout << suitorNames.at(winner) << " won the last round. " << suitorNames.at(winner) << " goes first." << endl;
-		currentSuitor = winner;
-		winner = 0;
-	}
-	ShuffleDeck();
-	if (activeSuitorCount == minSuitorsPlaying)
-	{
-		downPile.push_back(playingDeck[0]);
-		playingDeck.erase(playingDeck.begin());
-		for (unsigned int i = 0; i < 3; i++)
-		{
-			upPile.push_back(playingDeck[i]);
-			playingDeck.erase(playingDeck.begin());
-		}
-	}
-	else
-	{
-		downPile.push_back(playingDeck[0]);
-		playingDeck.erase(playingDeck.begin());
-	}
-	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
-	{
-		activeSuitorHands.at(i).push_back(playingDeck[0]);
-		playingDeck.erase(playingDeck.begin());
-	}
-}
+
 void SetWinningTokenCount()
 {
 	switch (activeSuitorCount)
@@ -714,6 +673,48 @@ LOOP:
 			}
 		}
 		tempVector.clear();
+	}
+}
+void BeginRound()
+{
+	ResetDeck();
+	cout << "-- ROUND " << roundCount << " --" << endl;
+	if (roundCount != startingRound)
+	{
+		activeSuitorCount = originalSuitorCount;
+		for (int i = 1; i < activeSuitorCount + 1; i++)
+		{
+			suitors.push_back(i);
+		}
+		for (int i = 1; i < activeSuitorCount + 1; i++)
+		{
+			vector<int> hand;
+			activeSuitorHands.push_back(hand);
+		}
+		cout << suitorNames.at(winner) << " won the last round. " << suitorNames.at(winner) << " goes first." << endl;
+		currentSuitor = winner;
+		winner = 0;
+	}
+	ShuffleDeck();
+	if (activeSuitorCount == minSuitorsPlaying)
+	{
+		downPile.push_back(playingDeck[0]);
+		playingDeck.erase(playingDeck.begin());
+		for (unsigned int i = 0; i < 3; i++)
+		{
+			upPile.push_back(playingDeck[i]);
+			playingDeck.erase(playingDeck.begin());
+		}
+	}
+	else
+	{
+		downPile.push_back(playingDeck[0]);
+		playingDeck.erase(playingDeck.begin());
+	}
+	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+	{
+		activeSuitorHands.at(i).push_back(playingDeck[0]);
+		playingDeck.erase(playingDeck.begin());
 	}
 }
 void SuitorTurn()
