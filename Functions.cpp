@@ -267,233 +267,8 @@ void RemoveSuitor(int suitor)
 	}
 	activeSuitorCount--;
 }
-void InitialSetup()
-{
-	if (roundCount == 1)
-	{
-		cout << "-- WELCOME TO LOVE LETTER --" << endl;
-	LOOP:
-		cout << "How many suitors will be playing: " << endl;
-		cin >> activeSuitorCount;
-		PrintSeperator();
-		if (activeSuitorCount < 2 || activeSuitorCount > 6 || !cin)
-		{
-			cout << "Invalid input, please input a number of Suitors between 2 and 6." << endl;
-			ClearInput();
-			goto LOOP;
-		}
-		switch (activeSuitorCount)
-		{
-		case 2:
-			tokenCountToWin = 6;
-			break;
-		case 3:
-			tokenCountToWin = 5;
-			break;
-		case 4:
-			tokenCountToWin = 4;
-			break;
-		case 5:
-			tokenCountToWin = 3;
-			break;
-		case 6:
-			tokenCountToWin = 3;
-			break;
-		}
-		originalSuitorCount = activeSuitorCount;
-		for (int i = 1; i < activeSuitorCount + 1; i++)
-		{
-			suitors.push_back(i);
-		}
-		for (int i = 1; i < activeSuitorCount + 1; i++)
-		{
-			vector<int> hand;
-			activeSuitorHands.push_back(hand);
-		}
-		srand((int)time(NULL));
-		int target = rand() % activeSuitorHands.size() + 1;
-		unsigned int guess = 0;
-		cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << endl;
-	LOOPA:
-		for (unsigned int i = 0; i < activeSuitorHands.size() + 1; i++)
-		{
-		LOOPB:
-			cout << suitorNames.at(i) << " guess: " << endl;
-			cin >> guess;
-			if (guess <= activeSuitorHands.size() && guess >= 1)
-			{
-				for (unsigned int i = 0; i < tempVector.size(); i++)
-				{
-					if (guess == tempVector.at(i))
-					{
-						cout << guess << " has already been guessed. Try again." << endl;
-						ClearInput();
-						goto LOOPB;
-					}
-				}
-				if (guess == target)
-				{
-					ClearScreen();
-					cout << suitorNames.at(i) << " got it!" << endl;
-					PrintSeperator();
-					currentSuitor = i;
-					break;
-				}
-				tempVector.push_back(guess);
-			}
-			else
-			{
-				cout << "Invalid input, please input a guess between 1 and " << activeSuitorCount << '.' << endl;
-				ClearInput();
-				goto LOOPA;
-			}
-		}
-		tempVector.clear();
-	}
-	else
-	{
-		deck = { spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess };
-		cout << "-- ROUND " << roundCount << " --" << endl;
-		activeSuitorCount = originalSuitorCount;
-		for (int i = 1; i < activeSuitorCount + 1; i++)
-		{
-			suitors.push_back(i);
-		}
-		for (int i = 1; i < activeSuitorCount + 1; i++)
-		{
-			vector<int> hand;
-			activeSuitorHands.push_back(hand);
-		}
-		cout << suitorNames.at(winner) << " won the last round. " << suitorNames.at(winner) << " goes first." << endl;
-		currentSuitor = winner;
-		winner = 0;
-	}
-	random_shuffle(deck.begin(), deck.end());
-	if (activeSuitorCount == 2)
-	{
-		downPile.push_back(deck[0]);
-		deck.erase(deck.begin());
-		for (unsigned int i = 0; i < 3; i++)
-		{
-			upPile.push_back(deck[i]);
-			deck.erase(deck.begin());
-		}
-	}
-	if (activeSuitorCount > 2)
-	{
-		downPile.push_back(deck[0]);
-		deck.erase(deck.begin());
-	}
-	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
-	{
-		activeSuitorHands.at(i).push_back(deck[0]);
-		deck.erase(deck.begin());
-	}
-}
-void EndRound()
-{
-	if (deck.empty())
-	{
-		cout << "The deck is empty, suitors compare hands" << endl;
-		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
-		{
-			if (!activeSuitorHands[i].empty())
-			{
-				cout << suitorNames[i] << " hand: " << activeSuitorHands[i][0] << endl;
-			}
-		}
-		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
-		{
-			if (!activeSuitorHands[i].empty())
-			{
-				if (winner < activeSuitorHands[i][0])
-				{
-					winner = activeSuitorHands[i][0];
-				}
-			}
-		}
-		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
-		{
-			if (!activeSuitorHands[i].empty() && activeSuitorHands[i][0] == winner)
-			{
-				winner = i;
-				break;
-			}
-		}
-		if (activeSuitorCount > 1)
-		{
-			for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
-			{
-				if (suitorObjects[i].SpyStatus())
-				{
-					tempVector.push_back(i);
-				}
-			}
-			if (tempVector.size() > 1)
-			{
-				cout << "Multiple suitors had the Spy. No one gets a bonus." << endl;
-			}
-			if (tempVector.size() == 1)
-			{
-				cout << suitorNames.at(tempVector[0]) << " Has the Spy, they gain an extra favor token <3" << endl;
-				suitorObjects.at(tempVector[0]).GainToken();
-				cout << suitorNames.at(tempVector[0]) << " token count: " << suitorObjects.at(tempVector[0]).GetTokenCount() << endl;
-			}
-			if (tempVector.empty())
-			{
-				cout << "No one had the Spy this round." << endl;
-			}
-		}
-	}
-	else
-	{
-		for (i = 0, iLength = suitors.size(); i < iLength; ++i)
-		{
-			if (!activeSuitorHands[i].empty())
-			{
-				winner = --suitors[i];
-			}
-		}
-		cout << "Round over. " << suitorNames[winner] << " is the last suitor standing." << endl;
-		if (suitorObjects[winner].SpyStatus())
-		{
-			cout << suitorNames[winner] << " has the Spy, they gain an extra favor token <3" << endl;
-			suitorObjects[winner].GainToken();
-			suitorObjects[winner].RemoveSpy();
-			cout << suitorNames[winner] << " token count: " << suitorObjects[winner].GetTokenCount() << endl;
-		}
-	}
-	suitorObjects[winner].GainToken();
-	cout << suitorNames[winner] << " gains one[1] favor token <3" << endl;
-	cout << suitorNames[winner] << " total tokens: " << suitorObjects[winner].GetTokenCount() << endl;
-	for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
-	{
-		suitorObjects[i].RemoveHandmaid();
-	}
-	if (suitorObjects[winner].GetTokenCount() < tokenCountToWin)
-	{
-		++roundCount;
-		activeSuitorHands.clear();
-		suitors.clear();
-		downPile.clear();
-		upPile.clear();
-		activeSuitorCount = 0;
-		cout << "Moving on to the next round..." << endl;
-		this_thread::sleep_for(chrono::seconds(3));
-		ClearScreen();
-	}
-	if (suitorObjects[winner].GetTokenCount() == tokenCountToWin)
-	{
-		cout << suitorNames[winner] << " has won the heart of the princess." << endl;
-		cout << "-- GAME OVER --" << endl;
-		activeSuitorHands.clear();
-		suitors.clear();
-		downPile.clear();
-		upPile.clear();
-		activeSuitorCount = 0;
-		gameOver = true;
-	}
-}
+
+
 
 //Card functions.
 void Spy() { suitorObjects[currentSuitor].GainSpy(); }
@@ -799,6 +574,131 @@ void PlayCard()
 		break;
 	}
 }
+
+//Main gameplay functions.
+void InitialSetup()
+{
+	if (roundCount == 1)
+	{
+		cout << "-- WELCOME TO LOVE LETTER --" << endl;
+	LOOP:
+		cout << "How many suitors will be playing: " << endl;
+		cin >> activeSuitorCount;
+		PrintSeperator();
+		if (activeSuitorCount < 2 || activeSuitorCount > 6 || !cin)
+		{
+			cout << "Invalid input, please input a number of Suitors between 2 and 6." << endl;
+			ClearInput();
+			goto LOOP;
+		}
+		switch (activeSuitorCount)
+		{
+		case 2:
+			tokenCountToWin = 6;
+			break;
+		case 3:
+			tokenCountToWin = 5;
+			break;
+		case 4:
+			tokenCountToWin = 4;
+			break;
+		case 5:
+			tokenCountToWin = 3;
+			break;
+		case 6:
+			tokenCountToWin = 3;
+			break;
+		}
+		originalSuitorCount = activeSuitorCount;
+		for (int i = 1; i < activeSuitorCount + 1; i++)
+		{
+			suitors.push_back(i);
+		}
+		for (int i = 1; i < activeSuitorCount + 1; i++)
+		{
+			vector<int> hand;
+			activeSuitorHands.push_back(hand);
+		}
+		srand((int)time(NULL));
+		int target = rand() % activeSuitorHands.size() + 1;
+		unsigned int guess = 0;
+		cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << endl;
+	LOOPA:
+		for (unsigned int i = 0; i < activeSuitorHands.size() + 1; i++)
+		{
+		LOOPB:
+			cout << suitorNames.at(i) << " guess: " << endl;
+			cin >> guess;
+			if (guess <= activeSuitorHands.size() && guess >= 1)
+			{
+				for (unsigned int i = 0; i < tempVector.size(); i++)
+				{
+					if (guess == tempVector.at(i))
+					{
+						cout << guess << " has already been guessed. Try again." << endl;
+						ClearInput();
+						goto LOOPB;
+					}
+				}
+				if (guess == target)
+				{
+					ClearScreen();
+					cout << suitorNames.at(i) << " got it!" << endl;
+					PrintSeperator();
+					currentSuitor = i;
+					break;
+				}
+				tempVector.push_back(guess);
+			}
+			else
+			{
+				cout << "Invalid input, please input a guess between 1 and " << activeSuitorCount << '.' << endl;
+				ClearInput();
+				goto LOOPA;
+			}
+		}
+		tempVector.clear();
+	}
+	else
+	{
+		deck = { spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess };
+		cout << "-- ROUND " << roundCount << " --" << endl;
+		activeSuitorCount = originalSuitorCount;
+		for (int i = 1; i < activeSuitorCount + 1; i++)
+		{
+			suitors.push_back(i);
+		}
+		for (int i = 1; i < activeSuitorCount + 1; i++)
+		{
+			vector<int> hand;
+			activeSuitorHands.push_back(hand);
+		}
+		cout << suitorNames.at(winner) << " won the last round. " << suitorNames.at(winner) << " goes first." << endl;
+		currentSuitor = winner;
+		winner = 0;
+	}
+	random_shuffle(deck.begin(), deck.end());
+	if (activeSuitorCount == 2)
+	{
+		downPile.push_back(deck[0]);
+		deck.erase(deck.begin());
+		for (unsigned int i = 0; i < 3; i++)
+		{
+			upPile.push_back(deck[i]);
+			deck.erase(deck.begin());
+		}
+	}
+	if (activeSuitorCount > 2)
+	{
+		downPile.push_back(deck[0]);
+		deck.erase(deck.begin());
+	}
+	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+	{
+		activeSuitorHands.at(i).push_back(deck[0]);
+		deck.erase(deck.begin());
+	}
+}
 void SuitorTurn()
 {
 LOOP:
@@ -886,6 +786,110 @@ LOOP:
 			SwitchSuitor();
 		}
 		tempInput.clear();
+	}
+}
+void EndRound()
+{
+	if (deck.empty())
+	{
+		cout << "The deck is empty, suitors compare hands" << endl;
+		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
+		{
+			if (!activeSuitorHands[i].empty())
+			{
+				cout << suitorNames[i] << " hand: " << activeSuitorHands[i][0] << endl;
+			}
+		}
+		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
+		{
+			if (!activeSuitorHands[i].empty())
+			{
+				if (winner < activeSuitorHands[i][0])
+				{
+					winner = activeSuitorHands[i][0];
+				}
+			}
+		}
+		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
+		{
+			if (!activeSuitorHands[i].empty() && activeSuitorHands[i][0] == winner)
+			{
+				winner = i;
+				break;
+			}
+		}
+		if (activeSuitorCount > 1)
+		{
+			for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
+			{
+				if (suitorObjects[i].SpyStatus())
+				{
+					tempVector.push_back(i);
+				}
+			}
+			if (tempVector.size() > 1)
+			{
+				cout << "Multiple suitors had the Spy. No one gets a bonus." << endl;
+			}
+			if (tempVector.size() == 1)
+			{
+				cout << suitorNames.at(tempVector[0]) << " Has the Spy, they gain an extra favor token <3" << endl;
+				suitorObjects.at(tempVector[0]).GainToken();
+				cout << suitorNames.at(tempVector[0]) << " token count: " << suitorObjects.at(tempVector[0]).GetTokenCount() << endl;
+			}
+			if (tempVector.empty())
+			{
+				cout << "No one had the Spy this round." << endl;
+			}
+		}
+	}
+	else
+	{
+		for (i = 0, iLength = suitors.size(); i < iLength; ++i)
+		{
+			if (!activeSuitorHands[i].empty())
+			{
+				winner = --suitors[i];
+			}
+		}
+		cout << "Round over. " << suitorNames[winner] << " is the last suitor standing." << endl;
+		if (suitorObjects[winner].SpyStatus())
+		{
+			cout << suitorNames[winner] << " has the Spy, they gain an extra favor token <3" << endl;
+			suitorObjects[winner].GainToken();
+			suitorObjects[winner].RemoveSpy();
+			cout << suitorNames[winner] << " token count: " << suitorObjects[winner].GetTokenCount() << endl;
+		}
+	}
+	suitorObjects[winner].GainToken();
+	cout << suitorNames[winner] << " gains one[1] favor token <3" << endl;
+	cout << suitorNames[winner] << " total tokens: " << suitorObjects[winner].GetTokenCount() << endl;
+	for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
+	{
+		suitorObjects[i].RemoveHandmaid();
+	}
+	if (suitorObjects[winner].GetTokenCount() < tokenCountToWin)
+	{
+		++roundCount;
+		activeSuitorHands.clear();
+		suitors.clear();
+		downPile.clear();
+		upPile.clear();
+		activeSuitorCount = 0;
+		cout << "Moving on to the next round..." << endl;
+		this_thread::sleep_for(chrono::seconds(3));
+		ClearScreen();
+	}
+	if (suitorObjects[winner].GetTokenCount() == tokenCountToWin)
+	{
+		cout << suitorNames[winner] << " has won the heart of the princess." << endl;
+		cout << "-- GAME OVER --" << endl;
+		activeSuitorHands.clear();
+		suitors.clear();
+		downPile.clear();
+		upPile.clear();
+		activeSuitorCount = 0;
+		gameOver = true;
 	}
 }
 void PlayGame()
