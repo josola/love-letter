@@ -280,6 +280,69 @@ void ResetDeck()
 {
 	playingDeck.assign(baseDeck.begin(), baseDeck.end());
 }
+void BeginRound()
+{
+	ResetDeck();
+	cout << "-- ROUND " << roundCount << " --" << endl;
+	if (roundCount != startingRound)
+	{
+		activeSuitorCount = originalSuitorCount;
+		for (int i = 1; i < activeSuitorCount + 1; i++)
+		{
+			suitors.push_back(i);
+		}
+		for (int i = 1; i < activeSuitorCount + 1; i++)
+		{
+			vector<int> hand;
+			activeSuitorHands.push_back(hand);
+		}
+		cout << suitorNames.at(winner) << " won the last round. " << suitorNames.at(winner) << " goes first." << endl;
+		currentSuitor = winner;
+		winner = 0;
+	}
+	ShuffleDeck();
+	if (activeSuitorCount == minSuitorsPlaying)
+	{
+		downPile.push_back(playingDeck[0]);
+		playingDeck.erase(playingDeck.begin());
+		for (unsigned int i = 0; i < 3; i++)
+		{
+			upPile.push_back(playingDeck[i]);
+			playingDeck.erase(playingDeck.begin());
+		}
+	}
+	else
+	{
+		downPile.push_back(playingDeck[0]);
+		playingDeck.erase(playingDeck.begin());
+	}
+	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+	{
+		activeSuitorHands.at(i).push_back(playingDeck[0]);
+		playingDeck.erase(playingDeck.begin());
+	}
+}
+void SetWinningTokenCount()
+{
+	switch (activeSuitorCount)
+	{
+	case 2:
+		tokenCountToWin = 6;
+		break;
+	case 3:
+		tokenCountToWin = 5;
+		break;
+	case 4:
+		tokenCountToWin = 4;
+		break;
+	case 5:
+		tokenCountToWin = 3;
+		break;
+	case 6:
+		tokenCountToWin = 3;
+		break;
+	}
+}
 
 //Card functions.
 void Spy() { suitorObjects[currentSuitor].GainSpy(); }
@@ -589,95 +652,21 @@ void PlayCard()
 //Main gameplay functions.
 void InitialSetup()
 {
-	if (roundCount == startingRound)
+	cout << "-- WELCOME TO LOVE LETTER --" << endl;
+LOOP:
+	cout << "How many suitors will be playing: " << endl;
+	cin >> activeSuitorCount;
+	PrintSeperator();
+	if (!ProperSuitorCount())
 	{
-		cout << "-- WELCOME TO LOVE LETTER --" << endl;
-	LOOP:
-		cout << "How many suitors will be playing: " << endl;
-		cin >> activeSuitorCount;
-		PrintSeperator();
-		if (!ProperSuitorCount())
-		{
-			cout << "Invalid input, please input a number of Suitors between 2 and 6." << endl;
-			ClearInput();
-			goto LOOP;
-		}
-		else
-		{
-			originalSuitorCount = activeSuitorCount;
-			switch (activeSuitorCount)
-			{
-			case 2:
-				tokenCountToWin = 6;
-				break;
-			case 3:
-				tokenCountToWin = 5;
-				break;
-			case 4:
-				tokenCountToWin = 4;
-				break;
-			case 5:
-				tokenCountToWin = 3;
-				break;
-			case 6:
-				tokenCountToWin = 3;
-				break;
-			}
-			for (int i = 1; i < activeSuitorCount + 1; i++)
-			{
-				suitors.push_back(i);
-			}
-			for (int i = 1; i < activeSuitorCount + 1; i++)
-			{
-				vector<int> hand;
-				activeSuitorHands.push_back(hand);
-			}
-			srand((int)time(NULL));
-			int target = rand() % activeSuitorHands.size() + 1;
-			unsigned int guess = 0;
-			cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << endl;
-		LOOPA:
-			for (unsigned int i = 0; i < activeSuitorHands.size() + 1; i++)
-			{
-			LOOPB:
-				cout << suitorNames.at(i) << " guess: " << endl;
-				cin >> guess;
-				if (guess <= activeSuitorHands.size() && guess >= 1)
-				{
-					for (unsigned int i = 0; i < tempVector.size(); i++)
-					{
-						if (guess == tempVector.at(i))
-						{
-							cout << guess << " has already been guessed. Try again." << endl;
-							ClearInput();
-							goto LOOPB;
-						}
-					}
-					if (guess == target)
-					{
-						ClearScreen();
-						cout << suitorNames.at(i) << " got it!" << endl;
-						PrintSeperator();
-						currentSuitor = i;
-						break;
-					}
-					tempVector.push_back(guess);
-				}
-				else
-				{
-					cout << "Invalid input, please input a guess between 1 and " << activeSuitorCount << '.' << endl;
-					ClearInput();
-					goto LOOPA;
-				}
-			}
-			tempVector.clear();
-		}
+		cout << "Invalid input, please input a number of Suitors between 2 and 6." << endl;
+		ClearInput();
+		goto LOOP;
 	}
 	else
 	{
-		ResetDeck();
-		cout << "-- ROUND " << roundCount << " --" << endl;
-		activeSuitorCount = originalSuitorCount;
+		originalSuitorCount = activeSuitorCount;
+		SetWinningTokenCount();
 		for (int i = 1; i < activeSuitorCount + 1; i++)
 		{
 			suitors.push_back(i);
@@ -687,30 +676,45 @@ void InitialSetup()
 			vector<int> hand;
 			activeSuitorHands.push_back(hand);
 		}
-		cout << suitorNames.at(winner) << " won the last round. " << suitorNames.at(winner) << " goes first." << endl;
-		currentSuitor = winner;
-		winner = 0;
-	}
-	ShuffleDeck();
-	if (activeSuitorCount == 2)
-	{
-		downPile.push_back(playingDeck[0]);
-		playingDeck.erase(playingDeck.begin());
-		for (unsigned int i = 0; i < 3; i++)
+		srand((int)time(NULL));
+		int target = rand() % activeSuitorHands.size() + 1;
+		unsigned int guess = 0;
+		cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << endl;
+	LOOPA:
+		for (unsigned int i = 0; i < activeSuitorHands.size() + 1; i++)
 		{
-			upPile.push_back(playingDeck[i]);
-			playingDeck.erase(playingDeck.begin());
+		LOOPB:
+			cout << suitorNames.at(i) << " guess: " << endl;
+			cin >> guess;
+			if (guess <= activeSuitorHands.size() && guess >= 1)
+			{
+				for (unsigned int i = 0; i < tempVector.size(); i++)
+				{
+					if (guess == tempVector.at(i))
+					{
+						cout << guess << " has already been guessed. Try again." << endl;
+						ClearInput();
+						goto LOOPB;
+					}
+				}
+				if (guess == target)
+				{
+					ClearScreen();
+					cout << suitorNames.at(i) << " got it!" << endl;
+					PrintSeperator();
+					currentSuitor = i;
+					break;
+				}
+				tempVector.push_back(guess);
+			}
+			else
+			{
+				cout << "Invalid input, please input a guess between 1 and " << activeSuitorCount << '.' << endl;
+				ClearInput();
+				goto LOOPA;
+			}
 		}
-	}
-	else
-	{
-		downPile.push_back(playingDeck[0]);
-		playingDeck.erase(playingDeck.begin());
-	}
-	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
-	{
-		activeSuitorHands.at(i).push_back(playingDeck[0]);
-		playingDeck.erase(playingDeck.begin());
+		tempVector.clear();
 	}
 }
 void SuitorTurn()
@@ -915,6 +919,7 @@ void PlayGame()
 		{
 			InitialSetup();
 		}
+		BeginRound();
 		SuitorTurn();
 		EndRound();
 	}
