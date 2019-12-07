@@ -75,7 +75,10 @@ prince = 5,
 chancellor = 6,
 king = 7,
 countess = 8,
-princess = 9;
+princess = 9,
+startingRound = 1,
+minSuitorsPlaying = 2,
+maxSuitorsPlaying = 6;
 
 std::vector<int>
 tempVector,

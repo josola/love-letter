@@ -110,6 +110,11 @@ bool ProperSuitorInput()
 		return false;
 	}
 }
+bool ProperSuitorCount()
+{
+	if (activeSuitorCount >= minSuitorsPlaying && activeSuitorCount <= maxSuitorsPlaying && cin) { return true; }
+	else { return false; }
+}
 void SwitchSuitor()
 {
 	cout << "Moving on to next active Suitor..." << endl;
@@ -584,14 +589,14 @@ void PlayCard()
 //Main gameplay functions.
 void InitialSetup()
 {
-	if (roundCount == 1)
+	if (roundCount == startingRound)
 	{
 		cout << "-- WELCOME TO LOVE LETTER --" << endl;
 	LOOP:
 		cout << "How many suitors will be playing: " << endl;
 		cin >> activeSuitorCount;
 		PrintSeperator();
-		if (activeSuitorCount < 2 || activeSuitorCount > 6 || !cin)
+		if (!ProperSuitorCount())
 		{
 			cout << "Invalid input, please input a number of Suitors between 2 and 6." << endl;
 			ClearInput();
