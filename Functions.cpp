@@ -23,12 +23,11 @@ void PrintFaceUpPile()
 	{
 		cout << cardNames.at(upPile[i]) << " ";
 	}
-	cout << "\n--\n";
+	cout << "\n--" << endl;
 }
 void PrintDeckSize()
 {
-	cout << "Number of cards in the deck: " << deck.size() << endl;
-	cout << "--\n";
+	cout << "Number of cards in the deck: " << deck.size() << "\n--" << endl;
 }
 void PrintSuitorsWithSpy()
 {
@@ -37,10 +36,10 @@ void PrintSuitorsWithSpy()
 	{
 		if (!activeSuitorHands[i].empty())
 		{
-			if (suitorObjects[i].SpyStatus()) { cout << suitorNames[i] << endl; }
+			if (suitorObjects[i].SpyStatus()) { cout << suitorNames[i] << " "; }
 		}
 	}
-	cout << "--\n";
+	cout << "\n--" << endl;
 }
 void ClearInput()
 {
@@ -60,10 +59,13 @@ bool ProperCardInput()
 }
 bool CardInHand(int suitor, int card)
 {
-	switch (find(activeSuitorHands[suitor].begin(), activeSuitorHands[suitor].end(), card) != activeSuitorHands[suitor].end())
+	if (find(activeSuitorHands[suitor].begin(), activeSuitorHands[suitor].end(), card) != activeSuitorHands[suitor].end())
 	{
-	case 0: { cout << "You don't have " << cardNames[card] << " in your hand." << endl; return false; }
-	default: { return true; }
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 int HandPosition(int suitor, int pos)
@@ -110,7 +112,7 @@ void SwitchSuitor()
 {
 	if (currentSuitor == suitors[0] - 1)
 	{
-		for (unsigned int i = 1; i < activeSuitorHands.size(); i++)
+		for (i = 1, iLength = activeSuitorHands.size(); i < iLength; ++i)
 		{
 			currentSuitor++;
 		}
@@ -126,7 +128,7 @@ void SwitchSuitor()
 		{
 			if (currentSuitor == suitors[0] - 1)
 			{
-				for (unsigned int i = 1; i < activeSuitorHands.size(); i++)
+				for (i = 1, iLength = activeSuitorHands.size(); i < iLength; ++i)
 				{
 					currentSuitor++;
 				}
@@ -150,7 +152,7 @@ void SwitchSuitor()
 void DiscardPlayedCard()
 {
 	auto it = find(activeSuitorHands[currentSuitor].begin(), activeSuitorHands[currentSuitor].end(), cardNum);
-	cout << CurrentSuitor() << " played " << cardNames[cardNum] << "\n--\n";
+	cout << CurrentSuitor() << " played " << cardNames[cardNum] << "\n--" << endl;
 	upPile.push_back(cardNum);
 	if (it != activeSuitorHands[currentSuitor].end())
 	{
@@ -161,7 +163,7 @@ void PrintActiveSuitors()
 {
 	cout << "Rival Suitors: " << endl;
 	currentSuitor++;
-	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+	for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 	{
 		if (!activeSuitorHands[i].empty() && suitors[i] != currentSuitor)
 		{
@@ -169,23 +171,23 @@ void PrintActiveSuitors()
 		}
 	}
 	currentSuitor--;
-	cout << "\n--\n";
+	cout << "\n--" << endl;
 }
 void PrintCurrentSuitorHand()
 {
 	cout << CurrentSuitor() << " hand: " << endl;
-	for (unsigned int i = 0; i < activeSuitorHands[currentSuitor].size(); i++)
+	for (i = 0, iLength = activeSuitorHands[currentSuitor].size(); i < iLength; ++i)
 	{
-		cout << cardNames.at(activeSuitorHands[currentSuitor][i]) << " ";
+		cout << cardNames[HandPosition(currentSuitor, i)] << " ";
 	}
 	cout << endl;
 }
 void PrintTargetSuitorHand()
 {
 	cout << TargetSuitor() << " hand: " << endl;
-	for (unsigned int i = 0; i < activeSuitorHands[playerNum].size(); i++)
+	for (i = 0, iLength = activeSuitorHands[playerNum].size(); i < iLength; ++i)
 	{
-		cout << cardNames.at(activeSuitorHands[playerNum][i]) << endl;
+		cout << cardNames[HandPosition(playerNum, i)] << endl;
 	}
 }
 void ChooseTargetSuitor()
@@ -194,15 +196,15 @@ LOOP:
 	PrintActiveSuitors();
 	cout << CurrentSuitor() << " choose target suitor: " << endl;
 	cin >> playerNum;
-	cout << "--\n";
+	cout << "--" << endl;
 	playerNum--;
 	if (!tempInput.empty())
 	{
-		for (unsigned int i = 0; i < tempInput.size(); i++)
+		for (i = 0, iLength = tempInput.size(); i < iLength; ++i)
 		{
-			if (tempInput.at(i) == playerNum)
+			if (tempInput[i] == playerNum)
 			{
-				cout << "You already chose " << suitorNames.at(tempInput[i]) << " please choose a different Suitor." << endl;
+				cout << "You already chose " << suitorNames[tempInput[i]] << " please choose a different Suitor." << endl;
 				goto LOOP;
 			}
 		}
@@ -240,34 +242,18 @@ LOOP:
 		}
 	}
 }
-void RemoveSuitor(bool effectedSuitor)
+void RemoveSuitor(int suitor)
 {
-	if (effectedSuitor)
+	for (i = 0, iLength = activeSuitorHands[suitor].size(); i < iLength; i++)
 	{
-		for (unsigned int i = 0; i < activeSuitorHands[currentSuitor].size(); i++)
-		{
-			upPile.push_back(activeSuitorHands[currentSuitor][i]);
-		}
-		activeSuitorHands[currentSuitor].clear();
-		if (suitorObjects[currentSuitor].SpyStatus())
-		{
-			suitorObjects[currentSuitor].RemoveSpy();
-		}
-		activeSuitorCount--;
+		upPile.push_back(activeSuitorHands[suitor][i]);
 	}
-	if (!effectedSuitor)
+	activeSuitorHands[suitor].clear();
+	if (suitorObjects[suitor].SpyStatus())
 	{
-		for (unsigned int i = 0; i < activeSuitorHands[playerNum].size(); i++)
-		{
-			upPile.push_back(activeSuitorHands[playerNum][i]);
-		}
-		activeSuitorHands[playerNum].clear();
-		if (suitorObjects[playerNum].SpyStatus())
-		{
-			suitorObjects[playerNum].RemoveSpy();
-		}
-		activeSuitorCount--;
+		suitorObjects[suitor].RemoveSpy();
 	}
+	activeSuitorCount--;
 }
 void InitialSetup()
 {
@@ -396,14 +382,14 @@ void EndRound()
 	if (deck.empty())
 	{
 		cout << "The deck is empty, suitors compare hands" << endl;
-		for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 		{
 			if (!activeSuitorHands[i].empty())
 			{
 				cout << suitorNames[i] << " hand: " << activeSuitorHands[i][0] << endl;
 			}
 		}
-		for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 		{
 			if (!activeSuitorHands[i].empty())
 			{
@@ -413,7 +399,7 @@ void EndRound()
 				}
 			}
 		}
-		for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 		{
 			if (!activeSuitorHands[i].empty() && activeSuitorHands[i][0] == winner)
 			{
@@ -423,7 +409,7 @@ void EndRound()
 		}
 		if (activeSuitorCount > 1)
 		{
-			for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+			for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 			{
 				if (suitorObjects[i].SpyStatus())
 				{
@@ -448,7 +434,7 @@ void EndRound()
 	}
 	else
 	{
-		for (unsigned int i = 0; i < suitors.size(); i++)
+		for (i = 0, iLength = suitors.size(); i < iLength; ++i)
 		{
 			if (!activeSuitorHands[i].empty())
 			{
@@ -467,7 +453,7 @@ void EndRound()
 	suitorObjects[winner].GainToken();
 	cout << suitorNames[winner] << " gains one[1] favor token <3" << endl;
 	cout << suitorNames[winner] << " total tokens: " << suitorObjects[winner].GetTokenCount() << endl;
-	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+	for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 	{
 		suitorObjects[i].RemoveHandmaid();
 	}
@@ -528,7 +514,7 @@ LOOP:
 	if (activeSuitorHands[playerNum][0] == cardNum)
 	{
 		cout << "Match! " << suitorNames[playerNum] << " is out." << endl;
-		RemoveSuitor(0);
+		RemoveSuitor(playerNum);
 	}
 	else
 	{
@@ -551,11 +537,11 @@ void Baron()
 		if (activeSuitorHands[currentSuitor][0] == tempVictor)
 		{
 			cout << CurrentSuitor() << " is victorious! " << TargetSuitor() << " is out!" << endl;
-			RemoveSuitor(0);
+			RemoveSuitor(playerNum);
 		}
 		else {
 			cout << TargetSuitor() << " is victorious! " << CurrentSuitor() << " is out!" << endl;
-			RemoveSuitor(1);
+			RemoveSuitor(currentSuitor);
 		}
 	}
 }
@@ -577,7 +563,7 @@ LOOPB:
 			if (find(activeSuitorHands[currentSuitor].begin(), activeSuitorHands[currentSuitor].end(), 9) != activeSuitorHands[currentSuitor].end())
 			{
 				cout << "You had the Princess! You're out!" << endl;
-				RemoveSuitor(1);
+				RemoveSuitor(currentSuitor);
 				return;
 			}
 			for (unsigned int i = 0; i < activeSuitorHands[currentSuitor].size(); i++)
@@ -595,8 +581,8 @@ LOOPB:
 	}
 	if (find(activeSuitorHands[playerNum].begin(), activeSuitorHands[playerNum].end(), 9) != activeSuitorHands[playerNum].end())
 	{
-		cout << suitorNames[playerNum] << " had the Princess! " << suitorNames[playerNum] << " is out!" << endl;
-		RemoveSuitor(0);
+		cout << TargetSuitor() << " had the Princess! " << TargetSuitor() << " is out!" << endl;
+		RemoveSuitor(playerNum);
 		return;
 	}
 	if (deck.empty())
@@ -668,7 +654,7 @@ void Chancellor()
 			if (cardNum == 9)
 			{
 				cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
-				RemoveSuitor(1);
+				RemoveSuitor(currentSuitor);
 				return;
 			}
 			else
@@ -700,7 +686,7 @@ void Chancellor()
 			if (cardNum == 9)
 			{
 				cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
-				RemoveSuitor(1);
+				RemoveSuitor(currentSuitor);
 				return;
 			}
 			else
@@ -742,7 +728,7 @@ void Chancellor()
 			if (cardNum == 9)
 			{
 				cout << "You discarded the " << cardNames[cardNum] << " you are out!" << endl;
-				RemoveSuitor(1);
+				RemoveSuitor(currentSuitor);
 				return;
 			}
 			else
@@ -819,10 +805,7 @@ LOOP:
 			PrintSuitorsWithSpy();
 			PrintCurrentSuitorHand();
 		}
-		else
-		{
-			return;
-		}
+		else { return; }
 		cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
 		cin >> input;
 		cout << "--\n";
@@ -841,9 +824,14 @@ LOOP:
 		PrintCurrentSuitorHand();
 		cout << CurrentSuitor() << " play a card: " << endl;
 		cin >> cardNum;
-		if (!ProperCardInput() || !CardInHand(currentSuitor, cardNum))
+		if (!ProperCardInput())
 		{
 			ClearInput();
+			goto LOOPA;
+		}
+		if (!CardInHand(currentSuitor, cardNum))
+		{
+			cout << "You do not have " << cardNames[cardNum] << " in your hand." << endl;
 			goto LOOPA;
 		}
 		if (CountessRestriction())
@@ -851,7 +839,7 @@ LOOP:
 			ClearInput();
 			goto LOOPA;
 		}
-		DiscardPlayedCard();
+		else { DiscardPlayedCard(); }
 		if (cardNum == guard || cardNum == priest || cardNum == baron || cardNum == king)
 		{
 			ChooseTargetSuitor();
