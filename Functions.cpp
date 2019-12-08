@@ -10,6 +10,7 @@ using namespace std;
 //Card position functions.
 bool CardInHand(int suitor, int card)
 {
+	//Checks for card selection in Suitor's hand.
 	if (find(activeSuitorHands[suitor].begin(), activeSuitorHands[suitor].end(), card) != activeSuitorHands[suitor].end())
 	{
 		return true;
@@ -21,12 +22,15 @@ bool CardInHand(int suitor, int card)
 }
 int HandPosition(int suitor, int pos)
 {
+	//Return's position of card in Suitor's hand.
 	cardPosition = activeSuitorHands[suitor][pos];
 	return cardPosition;
 }
 
 //Output functions.
+//Prints current Suitor as "SUITOR #"
 auto CurrentSuitor() { return suitorNames[currentSuitor]; }
+//Prints target Suitor as "SUITOR #"
 auto TargetSuitor() { return suitorNames[targetNum]; }
 void ClearScreen() { cout << "\033[2J\033[1;1H"; }
 void PrintSeperator()
@@ -105,6 +109,7 @@ void ClearInput()
 }
 bool ProperCardInput()
 {
+	//Input numbers cannot be lower than zero or higher than nine.
 	if (cardNum >= spy && cardNum <= princess && cin) { return true; }
 	else
 	{
@@ -114,6 +119,7 @@ bool ProperCardInput()
 }
 bool ProperSuitorInput()
 {
+	//Cannot input a number lower than one or a number larger than the number of active Suitors.
 	if (targetNum >= 0 && targetNum <= activeSuitorHands.size() && cin) { return true; }
 	else
 	{
@@ -123,6 +129,7 @@ bool ProperSuitorInput()
 }
 bool ProperSuitorCount()
 {
+	//Min number of Suitors is two and max number of suitors is six.
 	if (activeSuitorCount >= minSuitorsPlaying && activeSuitorCount <= maxSuitorsPlaying && cin) { return true; }
 	else { return false; }
 }
@@ -130,6 +137,7 @@ bool ProperSuitorCount()
 //Suitor status checks.
 bool CountessRestriction()
 {
+	//When Prince or King and Countess are in hand, the Countess must be played.
 	if (CardInHand(currentSuitor, countess) && cardNum != countess)
 	{
 		if (CardInHand(currentSuitor, prince) || CardInHand(currentSuitor, king))
@@ -145,22 +153,26 @@ bool CountessRestriction()
 }
 bool IsSuitorPlaying()
 {
+	//Active Suitor check.
 	if (!activeSuitorHands[targetNum].empty()) { return true; }
 	else { return false; }
 }
 bool TargetHandmaidProtected()
 {
+	//Handmaid protection check.
 	if (suitorObjects[targetNum].HandmaidStatus()) { return true; }
 	else { return false; }
 }
 void ChooseTargetSuitor()
 {
+	//Guard, Priest, Baron, Prince, and King are cards that target other/current Suitors.
 LOOP:
 	PrintActiveSuitors();
 	cout << CurrentSuitor() << " choose target suitor: " << endl;
 	cin >> targetNum;
 	PrintSeperator();
 	targetNum--;
+	//Prompt duplicate Suitor selection.
 	if (!tempInput.empty())
 	{
 		for (i = 0, iLength = tempInput.size(); i < iLength; ++i)
@@ -184,6 +196,7 @@ LOOP:
 	}
 	if (TargetHandmaidProtected())
 	{
+		//When there are two active Suitors and the other Suitor is protected the card either applies to the current Suitor or play moves on.
 		if (activeSuitorCount == 2)
 		{
 			return;
@@ -198,6 +211,7 @@ LOOP:
 	}
 	if (targetNum == currentSuitor)
 	{
+		//Prince can apply to current Suitor.
 		if (cardNum == prince)
 		{
 			return;
@@ -214,9 +228,11 @@ LOOP:
 //Suitor modifiers.
 void SwitchSuitor()
 {
+	//Move to next active Suitor after current Suitor's turn ends.
 	cout << "Moving on to next active Suitor..." << endl;
 	this_thread::sleep_for(chrono::seconds(3));
 	ClearScreen();
+	//Move to end of Suitor line if at beginning.
 	if (currentSuitor == suitors[0] - 1)
 	{
 		for (i = 1, iLength = activeSuitorHands.size(); i < iLength; ++i)
@@ -228,6 +244,7 @@ void SwitchSuitor()
 			return;
 		}
 	}
+	//Skip Suitors that are out.
 	if (activeSuitorHands[currentSuitor].empty())
 	{
 	LOOP:
@@ -258,6 +275,7 @@ void SwitchSuitor()
 }
 void DiscardPlayedCard()
 {
+	//Discard played card from Suitor hand to up pile.
 	cout << CurrentSuitor() << " played " << cardNames[cardNum] << endl;
 	PrintSeperator();
 	upPile.push_back(cardNum);
@@ -266,6 +284,7 @@ void DiscardPlayedCard()
 }
 void RemoveSuitor(int suitor)
 {
+	//Removing a Suitor from the game.
 	for (i = 0, iLength = activeSuitorHands[suitor].size(); i < iLength; i++)
 	{
 		upPile.push_back(activeSuitorHands[suitor][i]);
@@ -279,6 +298,7 @@ void RemoveSuitor(int suitor)
 }
 void SetWinningTokenCount()
 {
+	//Token counts change by the number of Suitors that start the game.
 	switch (activeSuitorCount)
 	{
 	case 2:
@@ -306,6 +326,7 @@ void ShuffleDeck()
 }
 void ResetDeck()
 {
+	//Sets played deck cards to starting cards.
 	playingDeck.assign(baseDeck.begin(), baseDeck.end());
 }
 

@@ -15,7 +15,6 @@ DiscardPlayedCard(),
 PrintActiveSuitors(),
 PrintCurrentSuitorHand(),
 ChooseTargetSuitor(),
-RemoveSuitor(bool effectedSuitor),
 PlayCard(),
 InitialSetup(),
 SuitorTurn(),
@@ -27,7 +26,6 @@ PlayGame();
 bool
 TargetHandmaidProtected(),
 ProperCardInput(),
-CardInHand(),
 CountessRestriction(),
 IsSuitorPlaying(),
 ProperSuitorInput();
