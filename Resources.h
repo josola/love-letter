@@ -62,8 +62,7 @@ roundCount = 1,
 tempVictor,
 i,
 iLength,
-cardPosition,
-guess = 0;
+cardPosition;
 
 static const int
 spy = 0,
@@ -91,7 +90,7 @@ suitorsWithHandmaid;
 std::vector<std::vector<int> > activeSuitorHands;
 
 auto winner = 0;
-unsigned int playerNum = 0;
+unsigned int targetNum = 0, guess = 0;
 bool gameOver = false;
 char input;
 
