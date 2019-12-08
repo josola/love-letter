@@ -7,7 +7,8 @@ Functions used in Main.cpp
 
 using namespace std;
 
-//Card position functions.
+//Card position functions.//
+
 bool CardInHand(int suitor, int card)
 {
 	//Checks for card selection in Suitor's hand.
@@ -27,7 +28,8 @@ int HandPosition(int suitor, int pos)
 	return cardPosition;
 }
 
-//Output functions.
+//Output functions.//
+
 //Prints current Suitor as "SUITOR #"
 auto CurrentSuitor() { return suitorNames[currentSuitor]; }
 //Prints target Suitor as "SUITOR #"
@@ -101,7 +103,8 @@ void PrintTargetSuitorHand()
 	PrintSeperator();
 }
 
-//Input checks.
+//Input checks.//
+
 void ClearInput()
 {
 	cin.clear();
@@ -134,7 +137,8 @@ bool ProperSuitorCount()
 	else { return false; }
 }
 
-//Suitor status checks.
+//Suitor status checks.//
+
 bool CountessRestriction()
 {
 	//When Prince or King and Countess are in hand, the Countess must be played.
@@ -225,7 +229,8 @@ LOOP:
 	}
 }
 
-//Suitor modifiers.
+//Suitor modifiers.//
+
 void SwitchSuitor()
 {
 	//Move to next active Suitor after current Suitor's turn ends.
@@ -319,7 +324,8 @@ void SetWinningTokenCount()
 	}
 }
 
-//Deck modifiers
+//Deck modifiers//
+
 void ShuffleDeck()
 {
 	random_shuffle(playingDeck.begin(), playingDeck.end());
@@ -330,7 +336,8 @@ void ResetDeck()
 	playingDeck.assign(baseDeck.begin(), baseDeck.end());
 }
 
-//Card actions functions.
+//Card actions functions.//
+
 void Spy() { suitorObjects[currentSuitor].GainSpy(); }
 void Guard()
 {
@@ -645,7 +652,8 @@ void PlayCard()
 	}
 }
 
-//Game state functions.
+//Game state functions.//
+
 void InitialSetup()
 {
 	//Tasks that are performed at the start of every GAME.
@@ -976,7 +984,8 @@ void EndRound()
 	}
 }
 
-//Game state.
+//Game state.//
+
 void PlayGame()
 {
 	InitialSetup();

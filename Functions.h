@@ -21,14 +21,26 @@ SuitorTurn(),
 EndRound(),
 PlayCard(),
 ClearScreen(),
-PlayGame();
+PlayGame(),
+PrintSeperator(),
+PrintTargetSuitorHand(),
+ClearInput(),
+RemoveSuitor(int suitor),
+SetWinningTokenCount(),
+ShuffleDeck(),
+ResetDeck(),
+BeginRound();
 
 bool
 TargetHandmaidProtected(),
 ProperCardInput(),
 CountessRestriction(),
 IsSuitorPlaying(),
-ProperSuitorInput();
+ProperSuitorInput(),
+CardInHand(int suitor, int card),
+ProperCardInput(),
+ProperSuitorInput(),
+ProperSuitorCount();
 
 auto
 CurrentSuitor(),
@@ -45,3 +57,5 @@ Prince(),
 Chancellor(),
 King(),
 Princess();
+
+int HandPosition(int suitor, int pos);
