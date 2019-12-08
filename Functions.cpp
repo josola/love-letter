@@ -114,10 +114,7 @@ bool ProperCardInput()
 }
 bool ProperSuitorInput()
 {
-	if (playerNum >= 0 && playerNum <= activeSuitorHands.size() && cin)
-	{
-		return true;
-	}
+	if (playerNum >= 0 && playerNum <= activeSuitorHands.size() && cin) { return true; }
 	else
 	{
 		cout << "Invalid input, please choose an active player by their number eg. SUITOR 1 would be 1." << endl;
@@ -618,6 +615,7 @@ void PlayCard()
 //Game state functions.
 void InitialSetup()
 {
+	//Tasks that are performed at the start of every GAME.
 	cout << "-- WELCOME TO LOVE LETTER --" << endl;
 LOOP:
 	cout << "How many suitors will be playing: " << endl;
@@ -633,6 +631,7 @@ LOOP:
 	{
 		originalSuitorCount = activeSuitorCount;
 		SetWinningTokenCount();
+		//Add hand vectors to a vector container.
 		for (int i = 1; i < activeSuitorCount + 1; i++)
 		{
 			suitors.push_back(i);
@@ -642,9 +641,11 @@ LOOP:
 			vector<int> hand;
 			activeSuitorHands.push_back(hand);
 		}
+		//Set up the target number Suitors will need to guess correctly to go first.
 		srand((int)time(NULL));
 		int target = rand() % activeSuitorHands.size() + 1;
 		unsigned int guess = 0;
+		//Prompt and record all Suitor guesses, check if they are correct and if they are duplicates of previous guesses.
 		cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << endl;
 	LOOPA:
 		for (unsigned int i = 0; i < activeSuitorHands.size() + 1; i++)
@@ -654,6 +655,7 @@ LOOP:
 			cin >> guess;
 			if (guess <= activeSuitorHands.size() && guess >= 1)
 			{
+				//Duplicate guess.
 				for (unsigned int i = 0; i < tempVector.size(); i++)
 				{
 					if (guess == tempVector.at(i))
@@ -663,6 +665,7 @@ LOOP:
 						goto LOOPB;
 					}
 				}
+				//Correct guess.
 				if (guess == target)
 				{
 					ClearScreen();
@@ -670,6 +673,7 @@ LOOP:
 					currentSuitor = i;
 					break;
 				}
+				//Add previous guesses to be checked as duplicates.
 				tempVector.push_back(guess);
 			}
 			else
