@@ -823,16 +823,19 @@ LOOP:
 }
 void EndRound()
 {
+	//When the deck runs out.
 	if (playingDeck.empty())
 	{
 		cout << "The deck is empty, suitors compare hands" << endl;
 		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 		{
+			//Print remaining Suitors.
 			if (!activeSuitorHands[i].empty())
 			{
 				cout << suitorNames[i] << " hand: " << activeSuitorHands[i][0] << endl;
 			}
 		}
+		//Assign Suitor with highest hand to winner.
 		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 		{
 			if (!activeSuitorHands[i].empty())
@@ -843,6 +846,7 @@ void EndRound()
 				}
 			}
 		}
+		//Assign winner as a Suitor integer.
 		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 		{
 			if (!activeSuitorHands[i].empty() && activeSuitorHands[i][0] == winner)
@@ -851,6 +855,7 @@ void EndRound()
 				break;
 			}
 		}
+		//Check for Spy bonus, give Spy bonus token, no Spies, or duplicate Spies.
 		if (activeSuitorCount > 1)
 		{
 			for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
@@ -876,16 +881,19 @@ void EndRound()
 			}
 		}
 	}
+	//When there is one Suitor remaining.
 	else
 	{
-		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)//
+		//Assign winner as a Suitor integer.
+		for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 		{
 			if (!activeSuitorHands[i].empty())
 			{
-				winner = i;//
+				winner = i;
 			}
 		}
 		cout << "Round over. " << suitorNames[winner] << " is the last suitor standing." << endl;
+		//Check for Spy bonus and give bonus token.
 		if (suitorObjects[winner].SpyStatus())
 		{
 			cout << suitorNames[winner] << " has the Spy, they gain an extra favor token <3" << endl;
@@ -894,9 +902,11 @@ void EndRound()
 			cout << suitorNames[winner] << " token count: " << suitorObjects[winner].GetTokenCount() << endl;
 		}
 	}
+	//Give winner a favor token.
 	suitorObjects[winner].GainToken();
 	cout << suitorNames[winner] << " gains one[1] favor token <3" << endl;
 	cout << suitorNames[winner] << " total tokens: " << suitorObjects[winner].GetTokenCount() << endl;
+	//Prepare for next round.
 	for (i = 0, iLength = activeSuitorHands.size(); i < iLength; ++i)
 	{
 		suitorObjects[i].RemoveHandmaid();
