@@ -735,14 +735,17 @@ void BeginRound()
 void SuitorTurn()
 {
 LOOP:
+	//More than one Suitor must be playing and the deck must not be empty.
 	while (activeSuitorCount > 1 && !playingDeck.empty())
 	{
+		//Remove Handmaid protection from previous turn.
 		if (suitorObjects[currentSuitor].HandmaidStatus())
 		{
 			suitorObjects[currentSuitor].RemoveHandmaid();
 			auto itD = find(suitorsWithHandmaid.begin(), suitorsWithHandmaid.end(), currentSuitor);
 			suitorsWithHandmaid.erase(itD);
 		}
+		//Check for empty deck so these functions don't duplicate.
 		if (!playingDeck.empty())
 		{
 			PrintDeckSize();
@@ -752,6 +755,7 @@ LOOP:
 			PrintCurrentSuitorHand();
 		}
 		else { return; }
+		//Current Suitor draws a card to their hand.
 		cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
 		cin >> input;
 		PrintSeperator();
@@ -768,6 +772,7 @@ LOOP:
 		}
 	LOOPA:
 		PrintCurrentSuitorHand();
+		//Current Suitor plays a card from their hand.
 		cout << CurrentSuitor() << " play a card: " << endl;
 		cin >> cardNum;
 		PrintSeperator();
@@ -787,6 +792,7 @@ LOOP:
 			goto LOOPA;
 		}
 		else { DiscardPlayedCard(); }
+		//Card resolves.
 		if (cardNum == guard || cardNum == priest || cardNum == baron || cardNum == king)
 		{
 			ChooseTargetSuitor();
@@ -814,6 +820,7 @@ LOOP:
 		{
 			PlayCard();
 		}
+		//Current Suitor's turn is done. Move to next active Suitor.
 		if (activeSuitorCount > 1)
 		{
 			SwitchSuitor();
