@@ -122,11 +122,17 @@ bool ProperCardInput()
 }
 bool ProperSuitorInput()
 {
+	targetNum++;
 	//Cannot input a number lower than one or a number larger than the number of active Suitors.
-	if (targetNum >= 0 && targetNum <= activeSuitorHands.size() && cin) { return true; }
+	if (targetNum >= 1 && targetNum <= activeSuitorHands.size() && cin)
+	{
+		targetNum--;
+		return true;
+	}
 	else
 	{
 		cout << "Invalid input, please choose an active player by their number eg. SUITOR 1 would be 1." << endl;
+		targetNum--;
 		return false;
 	}
 }
