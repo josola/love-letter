@@ -420,7 +420,10 @@ void Prince()
 {
 	//Current Suitor can discard their hand, or Target Suitor's hand, and draw a new hand.
 LOOPB:
-	ChooseTargetSuitor();
+	if (currentSuitor == humanSuitor)
+	{
+		ChooseTargetSuitor();
+	}
 	if (TargetHandmaidProtected())
 	{
 		//When there are two active Suitors the Prince must resolve on one of the Suitors.
@@ -442,7 +445,10 @@ LOOPB:
 			activeSuitorHands[currentSuitor].clear();
 			activeSuitorHands[currentSuitor].push_back(playingDeck[0]);
 			playingDeck.erase(playingDeck.begin());
-			PrintCurrentSuitorHand();
+			if (currentSuitor == humanSuitor)
+			{
+				PrintCurrentSuitorHand();
+			}
 			return;
 		}
 		cout << suitorNames[targetNum] << " is untargetable." << endl;
@@ -463,7 +469,7 @@ LOOPB:
 		}
 		activeSuitorHands[targetNum].push_back(downPile[0]);
 		downPile.erase(downPile.begin(), downPile.end());
-		if (targetNum == currentSuitor)
+		if (targetNum == currentSuitor && targetNum == humanSuitor)
 		{
 			PrintCurrentSuitorHand();
 		}
@@ -478,7 +484,7 @@ LOOPB:
 		activeSuitorHands[targetNum].erase(activeSuitorHands[targetNum].begin(), activeSuitorHands[targetNum].end());
 		activeSuitorHands[targetNum].push_back(playingDeck[0]);
 		playingDeck.erase(playingDeck.begin());
-		if (targetNum == currentSuitor)
+		if (targetNum == currentSuitor && targetNum == humanSuitor)
 		{
 			PrintCurrentSuitorHand();
 		}
@@ -687,10 +693,17 @@ void NPCTurn()
 				targetNum = i;
 			}
 		}
+		if (suitorObjects[targetNum].HandmaidStatus() && activeSuitorCount == 2)
+		{
+			cout << TargetSuitor() << " has Handmaid protection." << endl;
+			cout << "All target Suitors have Handmaid protection." << endl;
+			PrintSeperator();
+			SwitchSuitor();
+			return;
+		}
 	}
 	PlayCard();
 }
-
 void InitialSetup()
 {
 	//Tasks that are performed at the start of every GAME.
@@ -827,25 +840,26 @@ LOOP:
 			auto itD = find(suitorsWithHandmaid.begin(), suitorsWithHandmaid.end(), currentSuitor);
 			suitorsWithHandmaid.erase(itD);
 		}
-		//Check for empty deck so these functions don't duplicate.
-		if (!playingDeck.empty())
-		{
-			PrintDeckSize();
-			PrintActiveSuitors();
-			PrintFaceUpPile();
-			PrintSuitorsWithSpy();
-			PrintCurrentSuitorHand();
-		}
-		else
-		{
-			return;
-		}
+		
 		if (currentSuitor != humanSuitor)
 		{
 			NPCTurn();
 		}
 		else
 		{
+			//Check for empty deck so these functions don't duplicate.
+			if (!playingDeck.empty())
+			{
+				PrintDeckSize();
+				PrintActiveSuitors();
+				PrintFaceUpPile();
+				PrintSuitorsWithSpy();
+				PrintCurrentSuitorHand();
+			}
+			else
+			{
+				return;
+			}
 			//Current Suitor draws a card to their hand.
 			cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
 			cin >> input;
