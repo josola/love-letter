@@ -62,7 +62,8 @@ roundCount = 1,
 tempVictor,
 i,
 iLength,
-cardPosition;
+cardPosition,
+humanSuitor;
 
 static const int
 spy = 0,

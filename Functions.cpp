@@ -662,6 +662,35 @@ void PlayCard()
 
 //Game state functions.//
 
+void NPCTurn()
+{
+	//Draw card.
+	activeSuitorHands.at(currentSuitor).push_back(playingDeck[0]);
+	playingDeck.erase(playingDeck.begin());
+	//Play card with highest value.
+	if (activeSuitorHands[currentSuitor][0] >= activeSuitorHands[currentSuitor][1])
+	{
+		cardNum = activeSuitorHands[currentSuitor][0];
+	}
+	else
+	{
+		cardNum = activeSuitorHands[currentSuitor][1];
+	}
+	DiscardPlayedCard();
+	//Target Suitor.
+	if (cardNum == guard || cardNum == priest || cardNum == baron || cardNum == king)
+	{
+		for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+		{
+			if (i != currentSuitor && !suitorObjects[i].HandmaidStatus() && !activeSuitorHands[i].empty())
+			{
+				targetNum = i;
+			}
+		}
+	}
+	PlayCard();
+}
+
 void InitialSetup()
 {
 	//Tasks that are performed at the start of every GAME.
@@ -690,49 +719,53 @@ LOOP:
 			vector<int> hand;
 			activeSuitorHands.push_back(hand);
 		}
-		//Set up the target number Suitors will need to guess correctly to go first.
-		srand((int)time(NULL));
-		int target = rand() % activeSuitorHands.size() + 1;
-		//Prompt and record all Suitor guesses, check if they are correct and if they are duplicates of previous guesses.
-		cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << endl;
-	LOOPA:
-		for (unsigned int i = 0; i < activeSuitorHands.size() + 1; ++i)
-		{
-		LOOPB:
-			cout << suitorNames.at(i) << " guess: " << endl;
-			cin >> guess;
-			if (guess <= activeSuitorHands.size() && guess >= 1)
-			{
-				//Duplicate guess.
-				for (unsigned int i = 0; i < tempVector.size(); ++i)
-				{
-					if (guess == tempVector.at(i))
-					{
-						cout << guess << " has already been guessed. Try again." << endl;
-						ClearInput();
-						goto LOOPB;
-					}
-				}
-				//Correct guess.
-				if (guess == target)
-				{
-					ClearScreen();
-					cout << suitorNames.at(i) << " got it!" << endl;
-					currentSuitor = i;
-					break;
-				}
-				//Add previous guesses to be checked as duplicates.
-				tempVector.push_back(guess);
-			}
-			else
-			{
-				cout << "Invalid input, please input a guess between 1 and " << activeSuitorCount << '.' << endl;
-				ClearInput();
-				goto LOOPA;
-			}
-		}
-		tempVector.clear();
+		currentSuitor = 0;
+		humanSuitor = 0;
 	}
+		//Removed setup for individual games.
+	//	//Set up the target number Suitors will need to guess correctly to go first.
+	//	srand((int)time(NULL));
+	//	int target = rand() % activeSuitorHands.size() + 1;
+	//	//Prompt and record all Suitor guesses, check if they are correct and if they are duplicates of previous guesses.
+	//	cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << endl;
+	//LOOPA:
+	//	for (unsigned int i = 0; i < activeSuitorHands.size() + 1; ++i)
+	//	{
+	//	LOOPB:
+	//		cout << suitorNames.at(i) << " guess: " << endl;
+	//		cin >> guess;
+	//		if (guess <= activeSuitorHands.size() && guess >= 1)
+	//		{
+	//			//Duplicate guess.
+	//			for (unsigned int i = 0; i < tempVector.size(); ++i)
+	//			{
+	//				if (guess == tempVector.at(i))
+	//				{
+	//					cout << guess << " has already been guessed. Try again." << endl;
+	//					ClearInput();
+	//					goto LOOPB;
+	//				}
+	//			}
+	//			//Correct guess.
+	//			if (guess == target)
+	//			{
+	//				ClearScreen();
+	//				cout << suitorNames.at(i) << " got it!" << endl;
+	//				currentSuitor = i;
+	//				break;
+	//			}
+	//			//Add previous guesses to be checked as duplicates.
+	//			tempVector.push_back(guess);
+	//		}
+	//		else
+	//		{
+	//			cout << "Invalid input, please input a guess between 1 and " << activeSuitorCount << '.' << endl;
+	//			ClearInput();
+	//			goto LOOPA;
+	//		}
+	//	}
+	//	tempVector.clear();
+	//}
 }
 void BeginRound()
 {
@@ -803,71 +836,81 @@ LOOP:
 			PrintSuitorsWithSpy();
 			PrintCurrentSuitorHand();
 		}
-		else { return; }
-		//Current Suitor draws a card to their hand.
-		cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
-		cin >> input;
-		PrintSeperator();
-		if (input == 'd')
+		else
 		{
-			activeSuitorHands.at(currentSuitor).push_back(playingDeck[0]);
-			playingDeck.erase(playingDeck.begin());
+			return;
+		}
+		if (currentSuitor != humanSuitor)
+		{
+			NPCTurn();
 		}
 		else
 		{
-			cout << "Invalid input, please input 'd' to draw a card." << endl;
-			ClearInput();
-			goto LOOP;
-		}
-	LOOPA:
-		PrintCurrentSuitorHand();
-		//Current Suitor plays a card from their hand.
-		cout << CurrentSuitor() << " play a card: " << endl;
-		cin >> cardNum;
-		PrintSeperator();
-		if (!ProperCardInput())
-		{
-			ClearInput();
-			goto LOOPA;
-		}
-		if (!CardInHand(currentSuitor, cardNum))
-		{
-			cout << "You do not have " << cardNames[cardNum] << " in your hand." << endl;
-			goto LOOPA;
-		}
-		if (CountessRestriction())
-		{
-			ClearInput();
-			goto LOOPA;
-		}
-		else { DiscardPlayedCard(); }
-		//Card resolves.
-		if (cardNum == guard || cardNum == priest || cardNum == baron || cardNum == king)
-		{
-			ChooseTargetSuitor();
-			if (TargetHandmaidProtected() && activeSuitorCount == 2)
+			//Current Suitor draws a card to their hand.
+			cout << suitorNames.at(currentSuitor) << " draw a card (d): " << endl;
+			cin >> input;
+			PrintSeperator();
+			if (input == 'd')
 			{
-				cout << TargetSuitor() << " has Handmaid protection." << endl;
-				PrintSeperator();
-				SwitchSuitor();
+				activeSuitorHands.at(currentSuitor).push_back(playingDeck[0]);
+				playingDeck.erase(playingDeck.begin());
+			}
+			else
+			{
+				cout << "Invalid input, please input 'd' to draw a card." << endl;
+				ClearInput();
 				goto LOOP;
 			}
-			if (suitorsWithHandmaid.size() == activeSuitorCount - 1)
+		LOOPA:
+			PrintCurrentSuitorHand();
+			//Current Suitor plays a card from their hand.
+			cout << CurrentSuitor() << " play a card: " << endl;
+			cin >> cardNum;
+			PrintSeperator();
+			if (!ProperCardInput())
 			{
-				cout << TargetSuitor() << " has Handmaid protection." << endl;
-				cout << "All target Suitors have Handmaid protection." << endl;
-				PrintSeperator();
-				SwitchSuitor();
-				goto LOOP;
+				ClearInput();
+				goto LOOPA;
+			}
+			if (!CardInHand(currentSuitor, cardNum))
+			{
+				cout << "You do not have " << cardNames[cardNum] << " in your hand." << endl;
+				goto LOOPA;
+			}
+			if (CountessRestriction())
+			{
+				ClearInput();
+				goto LOOPA;
+			}
+			else { DiscardPlayedCard(); }
+			//Card resolves.
+			if (cardNum == guard || cardNum == priest || cardNum == baron || cardNum == king)
+			{
+				ChooseTargetSuitor();
+				if (TargetHandmaidProtected() && activeSuitorCount == 2)
+				{
+					cout << TargetSuitor() << " has Handmaid protection." << endl;
+					PrintSeperator();
+					SwitchSuitor();
+					goto LOOP;
+				}
+				if (suitorsWithHandmaid.size() == activeSuitorCount - 1)
+				{
+					cout << TargetSuitor() << " has Handmaid protection." << endl;
+					cout << "All target Suitors have Handmaid protection." << endl;
+					PrintSeperator();
+					SwitchSuitor();
+					goto LOOP;
+				}
+				else
+				{
+					PlayCard();
+				}
 			}
 			else
 			{
 				PlayCard();
 			}
-		}
-		else
-		{
-			PlayCard();
 		}
 		//Current Suitor's turn is done. Move to next active Suitor.
 		if (activeSuitorCount > 1)
