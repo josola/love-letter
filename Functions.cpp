@@ -342,7 +342,7 @@ void ResetDeck()
 	playingDeck.assign(baseDeck.begin(), baseDeck.end());
 }
 
-//Card actions functions.//
+//Card functions.//
 
 void Spy() { suitorObjects[currentSuitor].GainSpy(); }
 void Guard()
@@ -521,12 +521,13 @@ void Chancellor()
 			{
 				activeSuitorHands[currentSuitor].erase(itA);
 			}
-			if (cardNum == 9)
+			//I don't think you actually lose if you put back the Princess, you're not discarding it.
+			/*if (cardNum == 9)
 			{
 				cout << "You discarded the " << cardNames[princess] << " you are out!" << endl;
 				RemoveSuitor(currentSuitor);
 				return;
-			}
+			}*/
 			else
 			{
 				PrintCurrentSuitorHand();
@@ -553,12 +554,13 @@ void Chancellor()
 			{
 				activeSuitorHands[currentSuitor].erase(itB);
 			}
-			if (cardNum == 9)
+			//I don't think you actually lose if you put back the Princess, you're not discarding it.
+			/*if (cardNum == 9)
 			{
 				cout << "You discarded the " << cardNames[princess] << " you are out!" << endl;
 				RemoveSuitor(currentSuitor);
 				return;
-			}
+			}*/
 			else
 			{
 				PrintCurrentSuitorHand();
