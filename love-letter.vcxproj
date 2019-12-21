@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="Functions.h" />
     <ClInclude Include="Resources.h" />
+    <ClInclude Include="SuitorClass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

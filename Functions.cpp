@@ -4,6 +4,7 @@ Functions used in Main.cpp
 */
 
 #include "Resources.h"
+#include "SuitorClass.h"
 
 using namespace std;
 
