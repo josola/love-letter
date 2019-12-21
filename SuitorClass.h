@@ -10,15 +10,15 @@ private:
 	bool
 		hasSpy = false,
 		hasHandmaid = false,
-		isPlaying = true;
+		active = true;
 
 	int tokenCount = 0;
 
 	std::vector<int> hand;
 
-public:
+	std::string name;
 
-	Suitor(std::string name);
+public:
 
 	void GainSpy() { hasSpy = true; }
 	void RemoveSpy() { hasSpy = false; }
@@ -26,15 +26,26 @@ public:
 	void RemoveHandmaid() { hasHandmaid = false; }
 	void GainToken() { tokenCount++; }
 	//Needs to replace current dealing logic
-	int insertWithinHand(int itemNum)
+	void insertWithinHand(int itemNum)
 	{
 		hand.push_back(itemNum);
 	}
-
+	int returnHand()
+	{
+		for (int i : hand)
+		{
+			return i;
+		}
+	}
 	int GetTokenCount() { return tokenCount; }
 	
 	bool HandmaidStatus() { return hasHandmaid; }
 	bool SpyStatus() { return hasSpy; }
+	bool isActive()
+	{
+		bool result = active ? true : false;
+		return result;
+	}
 	//Integration waiting on dealing logic update
 	bool cardInHand(int cardNum) const
 	{
@@ -62,10 +73,10 @@ suitor6;
 
 std::vector<Suitor> suitorObjects
 {
-	suitor1,
-	suitor2,
-	suitor3,
-	suitor4,
-	suitor5,
-	suitor6
+suitor1,
+suitor2,
+suitor3,
+suitor4,
+suitor5,
+suitor6
 };
