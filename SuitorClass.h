@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 class Suitor
 {
@@ -16,6 +17,8 @@ private:
 	std::vector<int> hand;
 
 public:
+
+	Suitor(std::string name);
 
 	void GainSpy() { hasSpy = true; }
 	void RemoveSpy() { hasSpy = false; }

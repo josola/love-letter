@@ -711,13 +711,7 @@ LOOP:
 	std::cout << "How many suitors will be playing: " << std::endl;
 	std::cin >> activeSuitorCount;
 	PrintSeperator();
-	if (!ProperSuitorCount())
-	{
-		std::cout << "Invalid input, please input a number of Suitors between 2 and 6." << std::endl;
-		ClearInput();
-		goto LOOP;
-	}
-	else
+	if (ProperSuitorCount())
 	{
 		originalSuitorCount = activeSuitorCount;
 		SetWinningTokenCount();
@@ -733,6 +727,12 @@ LOOP:
 		}
 		currentSuitor = 0;
 		humanSuitor = 0;
+	}
+	else
+	{
+		std::cout << "Invalid input, please input a number of Suitors between 2 and 6." << std::endl;
+		ClearInput();
+		goto LOOP;
 	}
 		//Removed setup for individual games.
 	//	//Set up the target number Suitors will need to guess correctly to go first.
