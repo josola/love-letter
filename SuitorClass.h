@@ -7,7 +7,8 @@ class Suitor
 private:
 	bool
 		hasSpy = false,
-		hasHandmaid = false;
+		hasHandmaid = false,
+		isPlaying = true;
 	int tokenCount = 0;
 
 public:

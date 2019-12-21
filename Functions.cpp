@@ -50,8 +50,7 @@ void PrintUpPile()
 }
 void PrintDeckSize()
 {
-	int deckSize = playingDeck.size();
-	std::cout << "Number of cards in the deck: " << deckSize << std::endl;
+	std::cout << "Number of cards in the deck: " << playingDeck.size() << std::endl;
 	PrintSeperator();
 }
 void PrintSuitorsWithSpy()
