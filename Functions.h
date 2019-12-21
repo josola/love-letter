@@ -7,7 +7,7 @@ Function delcarations that are used in Functions.cpp
 
 //Game functions.
 void
-PrintFaceUpPile(),
+PrintUpPile(),
 PrintDeckSize(),
 PrintSuitorsWithSpy(),
 SwitchSuitor(),

@@ -40,12 +40,12 @@ void PrintSeperator()
 {
 	cout << "--" << endl;
 }
-void PrintFaceUpPile()
+void PrintUpPile()
 {
-	cout << "Cards in face up pile: " << endl;
-	for (i = 0, iLength = upPile.size(); i < iLength; ++i)
+	cout << "cards in up pile: " << endl;
+	for (int it : upPile)
 	{
-		cout << cardNames.at(upPile[i]) << " ";
+		cout << cardNames[it] + ' ';
 	}
 	cout << endl;
 	PrintSeperator();
@@ -853,7 +853,7 @@ LOOP:
 			{
 				PrintDeckSize();
 				PrintActiveSuitors();
-				PrintFaceUpPile();
+				PrintUpPile();
 				PrintSuitorsWithSpy();
 				PrintCurrentSuitorHand();
 			}
