@@ -1,7 +1,6 @@
 #pragma once
 
-#include <vector>
-#include <string>
+#include "Resources.h"
 
 class Suitor
 {
@@ -9,14 +8,9 @@ private:
 
 	bool
 		hasSpy = false,
-		hasHandmaid = false,
-		active = true;
+		hasHandmaid = false;
 
 	int tokenCount = 0;
-
-	std::vector<int> hand;
-
-	std::string name;
 
 public:
 
@@ -25,42 +19,11 @@ public:
 	void GainHandmaid() { hasHandmaid = true; }
 	void RemoveHandmaid() { hasHandmaid = false; }
 	void GainToken() { tokenCount++; }
-	//Needs to replace current dealing logic
-	void insertWithinHand(int itemNum)
-	{
-		hand.push_back(itemNum);
-	}
-	int returnHand()
-	{
-		for (int i : hand)
-		{
-			return i;
-		}
-	}
+
 	int GetTokenCount() { return tokenCount; }
 	
 	bool HandmaidStatus() { return hasHandmaid; }
 	bool SpyStatus() { return hasSpy; }
-	bool isActive()
-	{
-		bool result = active ? true : false;
-		return result;
-	}
-	//Integration waiting on dealing logic update
-	bool cardInHand(int cardNum) const
-	{
-		for (int i : hand)
-		{
-			if (i == cardNum)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-	}
 };
 
 Suitor

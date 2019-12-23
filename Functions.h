@@ -13,8 +13,7 @@ PrintSuitorsWithSpy(),
 SwitchSuitor(),
 DiscardPlayedCard(),
 PrintActiveSuitors(),
-PrintCurrentSuitorHand(),
-ChooseTargetSuitor(),
+ChooseTargetSuitor(int target),
 PlayCard(),
 InitialSetup(),
 SuitorTurn(),
@@ -23,13 +22,21 @@ PlayCard(),
 ClearScreen(),
 PlayGame(),
 PrintSeperator(),
-PrintTargetSuitorHand(),
 ClearInput(),
 RemoveSuitor(int suitor),
 SetWinningTokenCount(),
 ShuffleDeck(),
 ResetDeck(),
 BeginRound();
+
+void returnSuitor(int suitor);
+void ClearScreen();
+void PrintSeperator();
+void PrintUpPile();
+void PrintDeckSize();
+void PrintSuitorsWithSpy();
+void PrintActiveSuitors();
+void printHand(int suitor);
 
 bool
 TargetHandmaidProtected(),
@@ -41,10 +48,6 @@ CardInHand(int suitor, int card),
 ProperCardInput(),
 ProperSuitorInput(),
 ProperSuitorCount();
-
-auto
-CurrentSuitor(),
-TargetSuitor();
 
 //Card functions.
 void
