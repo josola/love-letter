@@ -1,8 +1,8 @@
-
-#include "Functions.h"
+#include "Player.h"
+#include "Deck.h"
+#include "Log.h"
 
 int main()
 {
-	PlayGame();
-	return 0;
+    return 0;
 }
