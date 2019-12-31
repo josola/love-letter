@@ -18,18 +18,7 @@ public:
     Deck();
     ~Deck();
     
-    std::vector<int> GetDeck() const
-    {
-        return numDeck;
-    }
-    int AcquireCard(int pos)
-    {
-        int card = 0;
-        card += numDeck[pos];
-        return card;
-    }
-    bool RemoveCard(int cardPosition)
-    {
-        return true;
-    }
+    std::vector<int> GetDeck() const;
+    int AcquireCard(int pos);
+    bool RemoveCard(int cardPosition);
 };
