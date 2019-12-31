@@ -1,8 +1,8 @@
-#include "Player.h"
-#include "Deck.h"
-#include "Log.h"
+#include "Glue.h"
+#include <iostream>
 
 int main()
 {
+    Glue glu;
     return 0;
 }

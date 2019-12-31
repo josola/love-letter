@@ -20,12 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Deck.cpp" />
+    <ClCompile Include="Glue.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Deck.h" />
+    <ClInclude Include="Glue.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>

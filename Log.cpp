@@ -1,4 +1,5 @@
 #include "Log.h"
+#include <iostream>
 
 //Constructor/Destructor
 Log::Log() {};
@@ -54,3 +55,12 @@ void Log::PrintVectSize(std::vector<int> vect) const
     unsigned long int size = vect.size();
     std::cout << '[' << size << ']';
 }
+void Log::PrintStartupDialogue() const
+{
+    std::cout << "Welcome to Love Letter.\n";
+    std::cout << "How many players will be playing?\n";
+}
+void Log::PrintIntInput(int input) const { std::cout << input; }
+void Log::PrintStrInput(std::string input) const { std::cout << input; }
+void Log::PrintCharInput(char input) const { std::cout << input; }
+void Log::PrintInvalidInput() const { std::cout << "invalid input"; }
