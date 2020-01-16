@@ -63,4 +63,4 @@ void Log::PrintStartupDialogue() const
 void Log::PrintIntInput(int input) const { std::cout << input; }
 void Log::PrintStrInput(std::string input) const { std::cout << input; }
 void Log::PrintCharInput(char input) const { std::cout << input; }
-void Log::PrintInvalidInput() const { std::cout << "invalid input"; }
+void Log::PrintInvalidInput() const { std::cout << "invalid input\n"; }

@@ -4,5 +4,6 @@
 int main()
 {
     Glue glu;
+    glu.GetPlayerCount();
     return 0;
 }

@@ -3,6 +3,7 @@
 #include "Deck.h"
 #include "Log.h"
 #include "Input.h"
+#include "Check.h"
 #include <vector>
 
 struct Glue
@@ -10,8 +11,6 @@ struct Glue
 public:
 	Glue();
 	~Glue();
-
-	std::vector<Player> playerObjects;
 
 	int GetPlayerCount();
 };

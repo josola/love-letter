@@ -11,9 +11,7 @@ public:
 	std::string strInput = " ";
 	char charInput = ' ';
 	
-	void ReceiveIntInput();
-	void ReceiveStrInput();
-	void ReceiveCharInput();
-
-	//Needs error Checking
+	int ReceiveIntInput();
+	std::string ReceiveStrInput();
+	char ReceiveCharInput();
 };

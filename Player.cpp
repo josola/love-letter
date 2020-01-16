@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <iostream>
 
 //Constructor/Destructor
 Player::Player(std::string name) : name(name) {};

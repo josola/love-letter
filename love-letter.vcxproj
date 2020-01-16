@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Check.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="Glue.cpp" />
     <ClCompile Include="Input.cpp" />
@@ -27,6 +28,7 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Check.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="Glue.h" />
     <ClInclude Include="Input.h" />

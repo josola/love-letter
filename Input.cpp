@@ -4,8 +4,18 @@
 Input::Input() {};
 Input::~Input() {};
 
-void Input::ReceiveIntInput() { std::cin >> intInput; }
-void Input::ReceiveStrInput() { std::cin >> strInput; }
-void Input::ReceiveCharInput() { std::cin >> charInput; }
-
-//Needs error Checking
+int Input::ReceiveIntInput()
+{
+	std::cin >> intInput;
+	return intInput;
+}
+std::string Input::ReceiveStrInput()
+{
+	std::cin >> strInput;
+	return strInput;
+}
+char Input::ReceiveCharInput()
+{
+	std::cin >> charInput;
+	return charInput;
+}
