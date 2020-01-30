@@ -890,7 +890,7 @@ LOOP:
 				switch_player_turn();
 				goto LOOP;
 			}
-			if (suitorsWithHandmaid.size() == activeSuitorCount - 1)
+			if (suitorsWithHandmaid.size() == activeSuitorCount--)
 			{
 				print_player_name(targetNum);
 				std::cout << " has Handmaid protection." << std::endl;
