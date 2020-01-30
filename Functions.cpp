@@ -4,6 +4,8 @@ Functions used in Main.cpp
 
 TODO:
 Continue cleaning up logic. 1/29/20 10:35PM CST
+Test i++ L781, L785 instead of current ++i 1/30/20 8:13AM CST
+Update vector member functions from vect.func() to func(vec) 1/30/20 8:16AM CST
 */
 
 #include "Functions.h"
@@ -772,16 +774,16 @@ void begin_game_round()
 	reset_deck();
 	shuffle_deck();
 	std::cout << "-- ROUND " << roundCount << " --" << std::endl;
-	//Check for starting round.
+	//check for starting round
 	if (roundCount != startingRound)
 	{
-		//Round is second round or above.
+		//round is > first round
 		activeSuitorCount = originalSuitorCount;
-		for (i = 1; i < activeSuitorCount + 1; ++i)
+		for (i = 1; i < activeSuitorCount + 1; ++i) //test i++ instead
 		{
 			suitors.push_back(i);
 		}
-		for (i = 1; i < activeSuitorCount + 1; ++i)
+		for (i = 1; i < activeSuitorCount + 1; ++i) //test i++ instead
 		{
 			std::vector<int> hand;
 			activeSuitorHands.push_back(hand);
@@ -794,7 +796,7 @@ void begin_game_round()
 	if (activeSuitorCount == minSuitorsPlaying)
 	{
 		downPile.push_back(playingDeck[0]);
-		playingDeck.erase(playingDeck.begin());
+		playingDeck.erase(begin(playingDeck));
 		for (i = 0; i < 3; ++i)
 		{
 			upPile.push_back(playingDeck[i]);
