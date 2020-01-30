@@ -1,9 +1,8 @@
-#include "Glue.h"
-#include <iostream>
+
+#include "Functions.h"
 
 int main()
 {
-    Glue glu;
-    glu.GetPlayerCount();
-    return 0;
+	PlayGame();
+	return 0;
 }
