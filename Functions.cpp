@@ -12,6 +12,7 @@ Update vector member functions from vect.func() to func(vec) 1/30/20 8:16AM CST
 #include "SuitorClass.h"
 #include "Resources.h"
 #include <iostream>
+#include <algorithm>
 
 //output functions
 
@@ -795,13 +796,12 @@ void begin_game_round()
 	//Check for two Suitor game.
 	if (activeSuitorCount == minSuitorsPlaying)
 	{
-		downPile.push_back(playingDeck[0]);
+		//one card into face down pile
+		std::move(begin(playingDeck), begin(playingDeck) + 1, std::back_inserter(downPile));
 		playingDeck.erase(begin(playingDeck));
-		for (i = 0; i < 3; ++i)
-		{
-			upPile.push_back(playingDeck[i]);
-			playingDeck.erase(playingDeck.begin());
-		}
+		//three cards into face up pile
+		std::move(begin(playingDeck), begin(playingDeck) + 3, std::back_inserter(upPile));
+		playingDeck.erase(begin(playingDeck), begin(playingDeck) + 3);
 	}
 	//Discard top card of deck to face down pile, no matter the activeSuitorCount.
 	else
