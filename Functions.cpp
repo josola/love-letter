@@ -4,8 +4,8 @@ Functions used in Main.cpp
 
 TODO:
 Continue cleaning up logic. 1/29/20 10:35PM CST
-Test i++ L781, L785 instead of current ++i 1/30/20 8:13AM CST
 Update vector member functions from vect.func() to func(vec) 1/30/20 8:16AM CST
+Update activesuitorhands to use the hand member function of a suitor object. 1/31/20 10:15PM CST
 */
 
 #include "Functions.h"
@@ -708,16 +708,9 @@ LOOP:
 	{
 		originalSuitorCount = activeSuitorCount;
 		set_winning_token_count();
-		//Add hand vectors to a vector container.
-		for (i = 1; i < activeSuitorCount + 1; ++i)
-		{
-			suitors.push_back(i);
-		}
-		for (i = 1; i < activeSuitorCount + 1; ++i)
-		{
-			std::vector<int> hand;
-			activeSuitorHands.push_back(hand);
-		}
+		//remove unused player objects from suitor class
+		suitorObjects.erase(begin(suitorObjects) + activeSuitorCount, end(suitorObjects));
+		std::copy(begin(suitorObjects), end(suitorObjects), std::back_inserter(originalSuitors));
 		currentSuitor = 0;
 		humanSuitor = 0;
 	}
@@ -729,16 +722,16 @@ LOOP:
 	}
 	//Set up the target number Suitors will need to guess correctly to go first.
 	srand((int)time(NULL));
-	int target = rand() % activeSuitorHands.size() + 1;
+	int target = rand() % size(suitorObjects) + 1;
 	//Prompt and record all Suitor guesses, check if they are correct and if they are duplicates of previous guesses.
-	std::cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << std::endl;
+	std::cout << "I have a suitor number (1 - " << suitorObjects.size() << ") in my head. Guess it!" << std::endl;
 LOOPA:
-	for (unsigned int i = 0; i < activeSuitorHands.size() + 1; ++i)
+	for (int i = 0; i < size(suitorObjects); i++)
 	{
 	LOOPB:
 		std::cout << suitorNames.at(i) << " guess: " << std::endl;
 		std::cin >> guess;
-		if (guess <= activeSuitorHands.size() && guess >= 1)
+		if (guess <= suitorObjects.size() && guess >= 1)
 		{
 			//Duplicate guess.
 			for (unsigned int i = 0; i < tempVector.size(); ++i)
@@ -780,42 +773,34 @@ void begin_game_round()
 	{
 		//round is > first round
 		activeSuitorCount = originalSuitorCount;
-		for (i = 1; i < activeSuitorCount + 1; ++i) //test i++ instead
+		for (auto i : suitorObjects)
 		{
-			suitors.push_back(i);
-		}
-		for (i = 1; i < activeSuitorCount + 1; ++i) //test i++ instead
-		{
-			std::vector<int> hand;
-			activeSuitorHands.push_back(hand);
+			i.PlayerIn();
+			i.hand.clear();
 		}
 		std::cout << suitorNames.at(winner) << " won the last round. " << suitorNames.at(winner) << " goes first." << std::endl;
 		currentSuitor = winner;
 		winner = 0;
 	}
-	//Check for two Suitor game.
-	if (activeSuitorCount == minSuitorsPlaying)
+	if (activeSuitorCount == 2)
 	{
-		//one card into face down pile
 		std::move(begin(playingDeck), begin(playingDeck) + 1, std::back_inserter(downPile));
 		playingDeck.erase(begin(playingDeck));
-		//three cards into face up pile
 		std::move(begin(playingDeck), begin(playingDeck) + 3, std::back_inserter(upPile));
 		playingDeck.erase(begin(playingDeck), begin(playingDeck) + 3);
 	}
-	//Discard top card of deck to face down pile, no matter the activeSuitorCount.
-	else
+	else if (activeSuitorCount > 2)
 	{
-		downPile.push_back(playingDeck[0]);
-		playingDeck.erase(playingDeck.begin());
+		std::move(begin(playingDeck), begin(playingDeck) + 1, std::back_inserter(downPile));
+		playingDeck.erase(begin(playingDeck));
 	}
-	//Deal starting hand.
-	for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
+	//deal starting hand
+	for (auto &i : suitorObjects)
 	{
-		activeSuitorHands.at(i).push_back(playingDeck[0]);
-		playingDeck.erase(playingDeck.begin());
+		std::move(begin(playingDeck), begin(playingDeck) + 1, std::back_inserter(i.hand));
+		playingDeck.erase(begin(playingDeck));
 	}
-}
+} //should be good to go
 void player_turn()
 {
 LOOP:

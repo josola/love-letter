@@ -8,22 +8,27 @@ private:
 
 	bool
 		hasSpy = false,
-		hasHandmaid = false;
+		hasHandmaid = false,
+		isPlaying = true;
 
 	int tokenCount = 0;
 
 public:
+
+	std::vector<int> hand;
 
 	void GainSpy() { hasSpy = true; }
 	void RemoveSpy() { hasSpy = false; }
 	void GainHandmaid() { hasHandmaid = true; }
 	void RemoveHandmaid() { hasHandmaid = false; }
 	void GainToken() { tokenCount++; }
+	void PlayerOut() { isPlaying = false;  }
+	void PlayerIn() { isPlaying = true; }
 
-	int GetTokenCount() { return tokenCount; }
-	
-	bool HandmaidStatus() { return hasHandmaid; }
-	bool SpyStatus() { return hasSpy; }
+	int GetTokenCount() const { return tokenCount; }
+
+	bool HandmaidStatus() const { return hasHandmaid; }
+	bool SpyStatus() const { return hasSpy; }
 };
 
 Suitor
@@ -43,3 +48,5 @@ suitor4,
 suitor5,
 suitor6
 };
+
+std::vector<Suitor> originalSuitors;
