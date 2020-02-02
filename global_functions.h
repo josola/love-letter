@@ -28,19 +28,19 @@ SOFTWARE.
 
 void ClearInput();
 bool ProperCardInput();
-bool ProperSuitorInput();
-bool ProperSuitorCount();
+bool ProperPlayerInput();
+bool ProperPlayerCount();
 
 //output
 
-void ReturnSuitor(int suitor);
+void ReturnPlayer(int suitor);
 void ClearScreen();
 void PrintSeperator();
 void PrintUpPile();
 void PrintDeckSize();
-void PrintSuitorsWithSpy();
-void PrintActiveSuitors();
-void printHand(int suitor);
+void PrintPlayersWithSpy();
+void PrintActivePlayers();
+void PrintHand(int suitor);
 
 //card position
 
@@ -50,15 +50,15 @@ int HandPosition(int suitor, int pos);
 //suitor status
 
 bool CountessRestriction();
-bool IsSuitorPlaying();
+bool IsPlayerPlaying();
 bool TargetHandmaidProtected();
-void ChooseTargetSuitor(int target);
+void ChooseTargetPlayer(int target);
 
 //suitor modifiers
 
-void SwitchSuitor();
+void SwitchPlayer();
 void DiscardPlayedCard();
-void RemoveSuitor(int suitor);
+void RemovePlayer(int suitor);
 void SetWinningTokenCount();
 
 //deck modifiers
@@ -83,6 +83,6 @@ void PlayCard();
 
 void InitialSetup();
 void BeginRound();
-void SuitorTurn();
+void PlayerTurn();
 void EndRound();
 void PlayGame();

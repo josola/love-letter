@@ -30,9 +30,9 @@ SOFTWARE.
 using std::vector;
 using std::string;
 
-int active_suitor_count;
-int original_suitor_count;
-int current_suitor;
+int active_player_count;
+int original_player_count;
+int current_player;
 int token_count_to_win;
 int card_num;
 int round_count = 1;
@@ -40,7 +40,7 @@ int temp_victor;
 int i;
 int iLength;
 int car_position;
-int human_suitor;
+int human_player;
 
 const int spy = 0;
 const int guard = 1;
@@ -53,17 +53,17 @@ const int king = 7;
 const int countess = 8;
 const int princess = 9;
 const int starting_round = 1;
-const int minSuitorsPlaying = 2;
-const int maxSuitorsPlaying = 6;
+const int min_players = 2;
+const int max_players = 6;
 
 vector<int> temp_vector;
-vector<int> suitors;
+vector<int> players;
 vector<int> up_pile;
 vector<int> down_pile;
 vector<int> temp_input;
-vector<int> suitors_with_handmaid;
+vector<int> players_with_handmaid;
 
-vector<vector<int> > active_suitor_hands;
+vector<vector<int> > active_player_hands;
 
 auto winner = 0;
 unsigned int target_hum = 0;
@@ -71,7 +71,7 @@ unsigned int guess = 0;
 bool game_over = false;
 char input;
 
-const vector<string> suitor_names
+const vector<string> player_names
 	{ "SUITOR 1", "SUITOR 2", "SUITOR 3", "SUITOR 4", "SUITOR 5", "SUITOR 6" };
 
 const vector<string> card_names
