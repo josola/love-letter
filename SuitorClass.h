@@ -34,9 +34,9 @@ public:
 	void GainHandmaid() { has_handmaid = true; }
 	void RemoveHandmaid() { has_handmaid = false; }
 	void GainToken() { token_count++; }
-	int GetTokenCount() { return token_count; }
-	bool HandmaidStatus() { return has_handmaid; }
-	bool SpyStatus() { return has_spy; }
+	int GetTokenCount() const { return token_count; }
+	bool HandmaidStatus() const { return has_handmaid; }
+	bool SpyStatus() const { return has_spy; }
 private:
 	bool has_spy = false;
 	bool has_handmaid = false;
