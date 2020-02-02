@@ -64,7 +64,7 @@ void PrintSuitorsWithSpy()
 	{
 		if (!active_suitor_hands[i].empty())
 		{
-			if (suitorObjects[i].SpyStatus())
+			if (suitor_objects[i].SpyStatus())
 			{
 				returnSuitor(i);
 			}
@@ -194,7 +194,7 @@ bool IsSuitorPlaying()
 bool TargetHandmaidProtected()
 {
 	//Handmaid protection check.
-	if (suitorObjects[target_hum].HandmaidStatus()) { return true; }
+	if (suitor_objects[target_hum].HandmaidStatus()) { return true; }
 	else { return false; }
 }
 void ChooseTargetSuitor(int target)
@@ -330,9 +330,9 @@ void RemoveSuitor(int suitor)
 		up_pile.push_back(active_suitor_hands[suitor][i]);
 	}
 	active_suitor_hands[suitor].clear();
-	if (suitorObjects[suitor].SpyStatus())
+	if (suitor_objects[suitor].SpyStatus())
 	{
-		suitorObjects[suitor].RemoveSpy();
+		suitor_objects[suitor].RemoveSpy();
 	}
 	active_suitor_count--;
 }
@@ -375,7 +375,7 @@ void ResetDeck()
 
 void Spy()
 {
-	suitorObjects[current_suitor].GainSpy();
+	suitor_objects[current_suitor].GainSpy();
 }
 void Guard()
 {
@@ -455,7 +455,7 @@ void Baron()
 void Handmaid()
 {
 	//Suitors with Handmaid protection are untargetable until the beginning of their next turn.
-	suitorObjects[current_suitor].GainHandmaid();
+	suitor_objects[current_suitor].GainHandmaid();
 	suitors_with_handmaid.push_back(current_suitor);
 }
 void Prince()
@@ -837,9 +837,9 @@ LOOP:
 	while (active_suitor_count > 1 && !playing_deck.empty())
 	{
 		//Remove Handmaid protection from previous turn.
-		if (suitorObjects[current_suitor].HandmaidStatus())
+		if (suitor_objects[current_suitor].HandmaidStatus())
 		{
-			suitorObjects[current_suitor].RemoveHandmaid();
+			suitor_objects[current_suitor].RemoveHandmaid();
 			auto itD = find(suitors_with_handmaid.begin(), suitors_with_handmaid.end(), current_suitor);
 			suitors_with_handmaid.erase(itD);
 		}
@@ -971,7 +971,7 @@ void EndRound()
 		{
 			for (unsigned int i = 0; i < active_suitor_hands.size(); i++)
 			{
-				if (suitorObjects[i].SpyStatus())
+				if (suitor_objects[i].SpyStatus())
 				{
 					temp_vector.push_back(i);
 				}
@@ -983,8 +983,8 @@ void EndRound()
 			if (temp_vector.size() == 1)
 			{
 				std::cout << suitor_names.at(temp_vector[0]) << " Has the Spy, they gain an extra favor token <3" << std::endl;
-				suitorObjects.at(temp_vector[0]).GainToken();
-				std::cout << suitor_names.at(temp_vector[0]) << " token count: " << suitorObjects.at(temp_vector[0]).GetTokenCount() << std::endl;
+				suitor_objects.at(temp_vector[0]).GainToken();
+				std::cout << suitor_names.at(temp_vector[0]) << " token count: " << suitor_objects.at(temp_vector[0]).GetTokenCount() << std::endl;
 			}
 			if (temp_vector.empty())
 			{
@@ -1005,24 +1005,24 @@ void EndRound()
 		}
 		std::cout << "Round over. " << suitor_names[winner] << " is the last suitor standing." << std::endl;
 		//Check for Spy bonus and give bonus token.
-		if (suitorObjects[winner].SpyStatus())
+		if (suitor_objects[winner].SpyStatus())
 		{
 			std::cout << suitor_names[winner] << " has the Spy, they gain an extra favor token <3" << std::endl;
-			suitorObjects[winner].GainToken();
-			suitorObjects[winner].RemoveSpy();
-			std::cout << suitor_names[winner] << " token count: " << suitorObjects[winner].GetTokenCount() << std::endl;
+			suitor_objects[winner].GainToken();
+			suitor_objects[winner].RemoveSpy();
+			std::cout << suitor_names[winner] << " token count: " << suitor_objects[winner].GetTokenCount() << std::endl;
 		}
 	}
 	//Give winner a favor token.
-	suitorObjects[winner].GainToken();
+	suitor_objects[winner].GainToken();
 	std::cout << suitor_names[winner] << " gains one[1] favor token <3" << std::endl;
-	std::cout << suitor_names[winner] << " total tokens: " << suitorObjects[winner].GetTokenCount() << std::endl;
+	std::cout << suitor_names[winner] << " total tokens: " << suitor_objects[winner].GetTokenCount() << std::endl;
 	//Prepare for next round.
 	for (unsigned int i = 0; i < active_suitor_hands.size(); i++)
 	{
-		suitorObjects[i].RemoveHandmaid();
+		suitor_objects[i].RemoveHandmaid();
 	}
-	if (suitorObjects[winner].GetTokenCount() < token_count_to_win)
+	if (suitor_objects[winner].GetTokenCount() < token_count_to_win)
 	{
 		++round_count;
 		active_suitor_hands.clear();
@@ -1034,7 +1034,7 @@ void EndRound()
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 		ClearScreen();
 	}
-	if (suitorObjects[winner].GetTokenCount() == token_count_to_win)
+	if (suitor_objects[winner].GetTokenCount() == token_count_to_win)
 	{
 		std::cout << suitor_names[winner] << " has won the heart of the princess." << std::endl;
 		std::cout << "-- GAME OVER --" << std::endl;

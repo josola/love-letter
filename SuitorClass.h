@@ -29,21 +29,21 @@ SOFTWARE.
 class Suitor
 {
 public:
-	void GainSpy() { hasSpy = true; }
-	void RemoveSpy() { hasSpy = false; }
-	void GainHandmaid() { hasHandmaid = true; }
-	void RemoveHandmaid() { hasHandmaid = false; }
-	void GainToken() { tokenCount++; }
-	int GetTokenCount() { return tokenCount; }
-	bool HandmaidStatus() { return hasHandmaid; }
-	bool SpyStatus() { return hasSpy; }
+	void GainSpy() { has_spy = true; }
+	void RemoveSpy() { has_spy = false; }
+	void GainHandmaid() { has_handmaid = true; }
+	void RemoveHandmaid() { has_handmaid = false; }
+	void GainToken() { token_count++; }
+	int GetTokenCount() { return token_count; }
+	bool HandmaidStatus() { return has_handmaid; }
+	bool SpyStatus() { return has_spy; }
 private:
-	bool hasSpy = false;
-	bool hasHandmaid = false;
-	int tokenCount = 0;
+	bool has_spy = false;
+	bool has_handmaid = false;
+	int token_count = 0;
 };
 
 Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
 
-std::vector<Suitor> suitorObjects
+std::vector<Suitor> suitor_objects
 	{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
