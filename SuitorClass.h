@@ -26,6 +26,8 @@ SOFTWARE.
 
 #include "Resources.h"
 
+using std::vector;
+
 class Suitor
 {
 public:
@@ -45,5 +47,5 @@ private:
 
 Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
 
-std::vector<Suitor> suitor_objects
+vector<Suitor> suitor_objects
 	{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
