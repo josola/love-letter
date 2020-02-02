@@ -34,6 +34,9 @@ SOFTWARE.
 #include <thread>
 #include <chrono>
 
+using std::vector;
+using std::string;
+
 int active_suitor_count;
 int original_suitor_count;
 int current_suitor;
@@ -60,33 +63,33 @@ const int starting_round = 1;
 const int minSuitorsPlaying = 2;
 const int maxSuitorsPlaying = 6;
 
-std::vector<int> temp_vector;
-std::vector<int> suitors;
-std::vector<int> up_pile;
-std::vector<int> down_pile;
-std::vector<int> temp_input;
-std::vector<int> suitors_with_handmaid;
+vector<int> temp_vector;
+vector<int> suitors;
+vector<int> up_pile;
+vector<int> down_pile;
+vector<int> temp_input;
+vector<int> suitors_with_handmaid;
 
-std::vector<std::vector<int> > activeSuitorHands;
+vector<vector<int> > active_suitor_hands;
 
 auto winner = 0;
 unsigned int target_hum = 0, guess = 0;
 bool game_over = false;
 char input;
 
-std::vector<std::string> suitor_names
+vector<string> suitor_names
 	{ "SUITOR 1", "SUITOR 2", "SUITOR 3", "SUITOR 4", "SUITOR 5", "SUITOR 6" };
 
-std::vector<std::string> card_names
+vector<string> card_names
 	{ "SPY[0]","GUARD[1]","PRIEST[2]","BARON[3]","HANDMAID[4]","PRINCE[5]"
 	"CHANCELLOR[6]","KING[7]","COUNTESS[8]","PRINCESS[9]" };
 
-std::vector<int> base_deck
+vector<int> base_deck
 	{ spy, spy, guard, guard, guard, guard, guard, guard, priest, priest,
 	baron, baron, handmaid, handmaid, prince, prince, chancellor,
 	chancellor, king, countess, princess };
 
-std::vector<int> playing_deck
+vector<int> playing_deck
 	{ spy, spy, guard, guard, guard, guard, guard, guard, priest, priest,
 	baron, baron, handmaid, handmaid, prince, prince, chancellor,
 	chancellor, king, countess, princess };
