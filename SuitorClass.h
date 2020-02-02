@@ -24,7 +24,7 @@ SOFTWARE.
 
 #pragma once
 
-#include "Resources.h"
+#include <vector>
 
 using std::vector;
 
@@ -44,12 +44,3 @@ private:
 	bool has_handmaid = false;
 	int token_count = 0;
 };
-
-Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
-
-vector<Suitor> suitor_objects
-	{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
-
-/*TODO: update included libraries to reflect what is only needed per file and
-not included in one file then that file is included in another file wile the
-other file uses the libraries in the included file, seems sloppy.*/

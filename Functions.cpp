@@ -22,10 +22,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#include "Functions.h"
-#include "SuitorClass.h"
-#include "Resources.h"
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <thread>
+#include "Resources.h"
+#include "SuitorClass.h"
+
+Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
+
+vector<Suitor> suitor_objects
+{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
 
 //input
 
@@ -65,6 +72,27 @@ bool ProperSuitorCount()
 	//Min number of Suitors is two and max number of suitors is six.
 	if (active_suitor_count >= minSuitorsPlaying && active_suitor_count <= maxSuitorsPlaying && std::cin) { return true; }
 	else { return false; }
+}
+
+//card position
+
+bool CardInHand(int suitor, int card)
+{
+	//Checks for card selection in Suitor's hand.
+	if (find(active_suitor_hands[suitor].begin(), active_suitor_hands[suitor].end(), card) != active_suitor_hands[suitor].end())
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+int HandPosition(int suitor, int pos)
+{
+	//Return's position of card in Suitor's hand.
+	car_position = active_suitor_hands[suitor][pos];
+	return car_position;
 }
 
 //output
@@ -144,27 +172,6 @@ void printHand(int suitor)
 	}
 	std::cout << std::endl;
 	PrintSeperator();
-}
-
-//card position
-
-bool CardInHand(int suitor, int card)
-{
-	//Checks for card selection in Suitor's hand.
-	if (find(active_suitor_hands[suitor].begin(), active_suitor_hands[suitor].end(), card) != active_suitor_hands[suitor].end())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-int HandPosition(int suitor, int pos)
-{
-	//Return's position of card in Suitor's hand.
-	car_position = active_suitor_hands[suitor][pos];
-	return car_position;
 }
 
 //suitor status

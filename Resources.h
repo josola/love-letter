@@ -24,15 +24,8 @@ SOFTWARE.
 
 #pragma once
 
-#include <iostream>
 #include <vector>
-#include <cmath>
-#include <random>
-#include <ctime>
 #include <string>
-#include <algorithm>
-#include <thread>
-#include <chrono>
 
 using std::vector;
 using std::string;
@@ -94,7 +87,3 @@ vector<int> playing_deck
 	{ spy, spy, guard, guard, guard, guard, guard, guard, priest, priest,
 	baron, baron, handmaid, handmaid, prince, prince, chancellor,
 	chancellor, king, countess, princess };
-
-/*TODO: update included libraries to reflect what is only needed per file and
-not included in one file then that file is included in another file wile the
-other file uses the libraries in the included file, seems sloppy.*/
