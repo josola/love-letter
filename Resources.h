@@ -74,10 +74,19 @@ unsigned int target_hum = 0, guess = 0;
 bool game_over = false;
 char input;
 
-std::vector<std::string> suitor_names { "SUITOR 1", "SUITOR 2", "SUITOR 3", "SUITOR 4", "SUITOR 5", "SUITOR 6" };
+std::vector<std::string> suitor_names
+	{ "SUITOR 1", "SUITOR 2", "SUITOR 3", "SUITOR 4", "SUITOR 5", "SUITOR 6" };
 
-std::vector<std::string> card_names { "SPY[0]","GUARD[1]","PRIEST[2]","BARON[3]","HANDMAID[4]","PRINCE[5]","CHANCELLOR[6]","KING[7]","COUNTESS[8]","PRINCESS[9]" };
+std::vector<std::string> card_names
+	{ "SPY[0]","GUARD[1]","PRIEST[2]","BARON[3]","HANDMAID[4]","PRINCE[5]"
+	"CHANCELLOR[6]","KING[7]","COUNTESS[8]","PRINCESS[9]" };
 
-std::vector<int> base_deck { spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess };
+std::vector<int> base_deck
+	{ spy, spy, guard, guard, guard, guard, guard, guard, priest, priest,
+	baron, baron, handmaid, handmaid, prince, prince, chancellor,
+	chancellor, king, countess, princess };
 
-std::vector<int> playing_deck { spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess };
+std::vector<int> playing_deck
+	{ spy, spy, guard, guard, guard, guard, guard, guard, priest, priest,
+	baron, baron, handmaid, handmaid, prince, prince, chancellor,
+	chancellor, king, countess, princess };
