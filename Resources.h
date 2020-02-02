@@ -34,41 +34,38 @@ SOFTWARE.
 #include <thread>
 #include <chrono>
 
-int
-active_suitor_count,
-original_suitor_count,
-current_suitor,
-token_count_to_win,
-card_num,
-round_count = 1,
-temp_victor,
-i,
-iLength,
-car_position,
-human_suitor;
+int active_suitor_count;
+int original_suitor_count;
+int current_suitor;
+int token_count_to_win;
+int card_num;
+int round_count = 1;
+int temp_victor;
+int i;
+int iLength;
+int car_position;
+int human_suitor;
 
-static const int
-spy = 0,
-guard = 1,
-priest = 2,
-baron = 3,
-handmaid = 4,
-prince = 5,
-chancellor = 6,
-king = 7,
-countess = 8,
-princess = 9,
-starting_round = 1,
-minSuitorsPlaying = 2,
-maxSuitorsPlaying = 6;
+const int spy = 0;
+const int guard = 1;
+const int priest = 2;
+const int baron = 3;
+const int handmaid = 4;
+const int prince = 5;
+const int chancellor = 6;
+const int king = 7;
+const int countess = 8;
+const int princess = 9;
+const int starting_round = 1;
+const int minSuitorsPlaying = 2;
+const int maxSuitorsPlaying = 6;
 
-std::vector<int>
-temp_vector,
-suitors,
-up_pile,
-down_pile,
-temp_input,
-suitors_with_handmaid;
+std::vector<int> temp_vector;
+std::vector<int> suitors;
+std::vector<int> up_pile;
+std::vector<int> down_pile;
+std::vector<int> temp_input;
+std::vector<int> suitors_with_handmaid;
 
 std::vector<std::vector<int> > activeSuitorHands;
 
@@ -77,76 +74,10 @@ unsigned int target_hum = 0, guess = 0;
 bool game_over = false;
 char input;
 
-std::vector<std::string> suitor_names
-{
-	"SUITOR 1",
-	"SUITOR 2",
-	"SUITOR 3",
-	"SUITOR 4",
-	"SUITOR 5",
-	"SUITOR 6"
-};
+std::vector<std::string> suitor_names { "SUITOR 1", "SUITOR 2", "SUITOR 3", "SUITOR 4", "SUITOR 5", "SUITOR 6" };
 
-std::vector<std::string> card_names
-{
-	"SPY[0]",
-	"GUARD[1]",
-	"PRIEST[2]",
-	"BARON[3]",
-	"HANDMAID[4]",
-	"PRINCE[5]",
-	"CHANCELLOR[6]",
-	"KING[7]",
-	"COUNTESS[8]",
-	"PRINCESS[9]"
-};
+std::vector<std::string> card_names { "SPY[0]","GUARD[1]","PRIEST[2]","BARON[3]","HANDMAID[4]","PRINCE[5]","CHANCELLOR[6]","KING[7]","COUNTESS[8]","PRINCESS[9]" };
 
-std::vector<int> base_deck
-{
-	spy,
-	spy,
-	guard,
-	guard,
-	guard,
-	guard,
-	guard,
-	guard,
-	priest,
-	priest,
-	baron,
-	baron,
-	handmaid,
-	handmaid,
-	prince,
-	prince,
-	chancellor,
-	chancellor,
-	king,
-	countess,
-	princess
-};
+std::vector<int> base_deck { spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess };
 
-std::vector<int> playing_deck
-{
-	spy,
-	spy,
-	guard,
-	guard,
-	guard,
-	guard,
-	guard,
-	guard,
-	priest,
-	priest,
-	baron,
-	baron,
-	handmaid,
-	handmaid,
-	prince,
-	prince,
-	chancellor,
-	chancellor,
-	king,
-	countess,
-	princess
-};
+std::vector<int> playing_deck { spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess };
