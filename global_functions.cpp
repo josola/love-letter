@@ -97,7 +97,7 @@ int HandPosition(int suitor, int pos)
 
 //output
 
-void returnSuitor(int suitor)
+void ReturnSuitor(int suitor)
 {
 	std::cout << "SUITOR[" << suitor << ']';
 }
@@ -134,7 +134,7 @@ void PrintSuitorsWithSpy()
 		{
 			if (suitor_objects[i].SpyStatus())
 			{
-				returnSuitor(i);
+				ReturnSuitor(i);
 			}
 		}
 	}
@@ -149,7 +149,7 @@ void PrintActiveSuitors()
 	{
 		if (!active_suitor_hands[i].empty() && suitors[i] != current_suitor)
 		{
-			returnSuitor(i);
+			ReturnSuitor(i);
 		}
 	}
 	std::cout << std::endl;
@@ -163,7 +163,7 @@ void printHand(int suitor)
 		"SPY[0]", "GUARD[1]", "PRIEST[2]", "BARON[3]", "HANDMAID[4]", "PRINCE[5]", "CHANCELLOR[6]", "KING[7]", "COUNTESS[8]", "PRINCESS[9]"
 	};
 
-	returnSuitor(suitor);
+	ReturnSuitor(suitor);
 	std::cout << " hand: " << std::endl;
 
 	for (unsigned int i = 0; i < active_suitor_hands[suitor].size(); i++)
@@ -209,7 +209,7 @@ void ChooseTargetSuitor(int target)
 	//Guard, Priest, Baron, Prince, and King are cards that target other/current Suitors.
 LOOP:
 	PrintActiveSuitors();
-	returnSuitor(current_suitor);
+	ReturnSuitor(current_suitor);
 	std::cout << " choose target suitor: " << std::endl;
 	std::cin >> target;
 	PrintSeperator();
@@ -221,7 +221,7 @@ LOOP:
 			if (temp_input[i] == target)
 			{
 				std::cout << "You already chose ";
-				returnSuitor(temp_input[i]);
+				ReturnSuitor(temp_input[i]);
 				std::cout << "] please choose a different Suitor." << std::endl;
 				goto LOOP;
 			}
@@ -234,7 +234,7 @@ LOOP:
 	}
 	if (!IsSuitorPlaying())
 	{
-		returnSuitor(target_hum);
+		ReturnSuitor(target_hum);
 		std::cout << " is out." << std::endl;
 		goto LOOP;
 	}
@@ -247,7 +247,7 @@ LOOP:
 		}
 		else
 		{
-			returnSuitor(target_hum);
+			ReturnSuitor(target_hum);
 			std::cout << " has Handmaid protection." << std::endl;
 			temp_input.push_back(target);
 			ClearInput();
@@ -322,7 +322,7 @@ void SwitchSuitor()
 void DiscardPlayedCard()
 {
 	//Discard played card from Suitor hand to up pile.
-	returnSuitor(current_suitor);
+	ReturnSuitor(current_suitor);
 	std::cout << " played " << card_names[card_num] << std::endl;
 	PrintSeperator();
 	up_pile.push_back(card_num);
@@ -388,7 +388,7 @@ void Guard()
 {
 	//Current Suitor guesses what card a target Suitor has in hand. Correct guesses knock out the target Suitor.
 LOOP:
-	returnSuitor(current_suitor);
+	ReturnSuitor(current_suitor);
 	std::cout << " guess a card: " << std::endl;
 	std::cin >> card_num;
 	if (!ProperCardInput())
@@ -444,16 +444,16 @@ void Baron()
 		temp_victor = std::max(active_suitor_hands[current_suitor][0], active_suitor_hands[target_hum][0]);
 		if (active_suitor_hands[current_suitor][0] == temp_victor)
 		{
-			returnSuitor(current_suitor);
+			ReturnSuitor(current_suitor);
 			std::cout << " is victorious! ";
-			returnSuitor(target_hum);
+			ReturnSuitor(target_hum);
 			std::cout << " is out!" << std::endl;
 			RemoveSuitor(target_hum);
 		}
 		else {
-			returnSuitor(current_suitor);
+			ReturnSuitor(current_suitor);
 			std::cout << " is victorious! ";
-			returnSuitor(current_suitor);
+			ReturnSuitor(current_suitor);
 			std::cout << " is out!" << std::endl;
 			RemoveSuitor(current_suitor);
 		}
@@ -479,7 +479,7 @@ LOOPB:
 		if (active_suitor_count == 2)
 		{
 			//When target Suitor is Handmaid protected the Prince applies to the current Suitor.
-			returnSuitor(target_hum);
+			ReturnSuitor(target_hum);
 			std::cout << " has Handmaid protection." << std::endl;
 			std::cout << "The Prince applies to you." << std::endl;
 			if (find(active_suitor_hands[current_suitor].begin(), active_suitor_hands[current_suitor].end(), princess) != active_suitor_hands[current_suitor].end())
@@ -506,9 +506,9 @@ LOOPB:
 	}
 	if (find(active_suitor_hands[target_hum].begin(), active_suitor_hands[target_hum].end(), princess) != active_suitor_hands[target_hum].end())
 	{
-		returnSuitor(target_hum);
+		ReturnSuitor(target_hum);
 		std::cout << " had the Princess! ";
-		returnSuitor(target_hum);
+		ReturnSuitor(target_hum);
 		std::cout << " is out!" << std::endl;
 		RemoveSuitor(target_hum);
 		return;
@@ -666,10 +666,10 @@ void King(int agressor, int victim)
 {
 	//Swaps current Suitor's hand with Target Suitor's hand.
 	active_suitor_hands[agressor].swap(active_suitor_hands[victim]);
-	returnSuitor(agressor);
+	ReturnSuitor(agressor);
 	std::cout << " 's hand is now..." << std::endl;
 	printHand(agressor);
-	returnSuitor(victim);
+	ReturnSuitor(victim);
 	std::cout << " 's hand is now..." << std::endl;
 	printHand(victim);
 }
@@ -881,7 +881,7 @@ LOOP:
 	LOOPA:
 		printHand(current_suitor);
 		//Current Suitor plays a card from their hand.
-		returnSuitor(current_suitor);
+		ReturnSuitor(current_suitor);
 		std::cout << " play a card: " << std::endl;
 		std::cin >> card_num;
 		PrintSeperator();
@@ -907,7 +907,7 @@ LOOP:
 			ChooseTargetSuitor(target_hum);
 			if (TargetHandmaidProtected() && active_suitor_count == 2)
 			{
-				returnSuitor(target_hum);
+				ReturnSuitor(target_hum);
 				std::cout << " has Handmaid protection." << std::endl;
 				PrintSeperator();
 				SwitchSuitor();
@@ -915,7 +915,7 @@ LOOP:
 			}
 			if (suitors_with_handmaid.size() == active_suitor_count - 1)
 			{
-				returnSuitor(target_hum);
+				ReturnSuitor(target_hum);
 				std::cout << " has Handmaid protection." << std::endl;
 				std::cout << "All target Suitors have Handmaid protection." << std::endl;
 				PrintSeperator();

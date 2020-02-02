@@ -33,7 +33,7 @@ bool ProperSuitorCount();
 
 //output
 
-void returnSuitor(int suitor);
+void ReturnSuitor(int suitor);
 void ClearScreen();
 void PrintSeperator();
 void PrintUpPile();

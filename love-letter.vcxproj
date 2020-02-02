@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="global_functions.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Functions.h" />
-    <ClInclude Include="Resources.h" />
-    <ClInclude Include="SuitorClass.h" />
+    <ClInclude Include="global_functions.h" />
+    <ClInclude Include="global_resources.h" />
+    <ClInclude Include="player_class.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
