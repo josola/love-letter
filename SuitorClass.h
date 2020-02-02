@@ -30,9 +30,8 @@ class Suitor
 {
 private:
 
-	bool
-		hasSpy = false,
-		hasHandmaid = false;
+	bool hasSpy = false;
+	bool hasHandmaid = false;
 
 	int tokenCount = 0;
 
@@ -50,20 +49,6 @@ public:
 	bool SpyStatus() { return hasSpy; }
 };
 
-Suitor
-suitor1,
-suitor2,
-suitor3,
-suitor4,
-suitor5,
-suitor6;
+Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
 
-std::vector<Suitor> suitorObjects
-{
-suitor1,
-suitor2,
-suitor3,
-suitor4,
-suitor5,
-suitor6
-};
+std::vector<Suitor> suitorObjects { suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
