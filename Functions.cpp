@@ -27,7 +27,47 @@ SOFTWARE.
 #include "Resources.h"
 #include <iostream>
 
-//Output functions.//
+//input
+
+void ClearInput()
+{
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+bool ProperCardInput()
+{
+	//Input numbers cannot be lower than zero or higher than nine.
+	if (card_num >= spy && card_num <= princess && std::cin) { return true; }
+	else
+	{
+		std::cout << "Invalid input, please input a card value between 0 and 9." << std::endl;
+		return false;
+	}
+}
+bool ProperSuitorInput()
+{
+	target_hum++;
+	//Cannot input a number lower than one or a number larger than the number of active Suitors.
+	if (target_hum >= 1 && target_hum <= active_suitor_hands.size() && std::cin)
+	{
+		target_hum--;
+		return true;
+	}
+	else
+	{
+		std::cout << "Invalid input, please choose an active player by their number eg. SUITOR 1 would be 1." << std::endl;
+		target_hum--;
+		return false;
+	}
+}
+bool ProperSuitorCount()
+{
+	//Min number of Suitors is two and max number of suitors is six.
+	if (active_suitor_count >= minSuitorsPlaying && active_suitor_count <= maxSuitorsPlaying && std::cin) { return true; }
+	else { return false; }
+}
+
+//output
 
 void returnSuitor(int suitor)
 {
@@ -106,7 +146,7 @@ void printHand(int suitor)
 	PrintSeperator();
 }
 
-//Card position functions.//
+//card position
 
 bool CardInHand(int suitor, int card)
 {
@@ -127,47 +167,7 @@ int HandPosition(int suitor, int pos)
 	return car_position;
 }
 
-//Input checks.//
-
-void ClearInput()
-{
-	std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-}
-bool ProperCardInput()
-{
-	//Input numbers cannot be lower than zero or higher than nine.
-	if (card_num >= spy && card_num <= princess && std::cin) { return true; }
-	else
-	{
-		std::cout << "Invalid input, please input a card value between 0 and 9." << std::endl;
-		return false;
-	}
-}
-bool ProperSuitorInput()
-{
-	target_hum++;
-	//Cannot input a number lower than one or a number larger than the number of active Suitors.
-	if (target_hum >= 1 && target_hum <= active_suitor_hands.size() && std::cin)
-	{
-		target_hum--;
-		return true;
-	}
-	else
-	{
-		std::cout << "Invalid input, please choose an active player by their number eg. SUITOR 1 would be 1." << std::endl;
-		target_hum--;
-		return false;
-	}
-}
-bool ProperSuitorCount()
-{
-	//Min number of Suitors is two and max number of suitors is six.
-	if (active_suitor_count >= minSuitorsPlaying && active_suitor_count <= maxSuitorsPlaying && std::cin) { return true; }
-	else { return false; }
-}
-
-//Suitor status checks.//
+//suitor status
 
 bool CountessRestriction()
 {
@@ -263,7 +263,7 @@ LOOP:
 	}
 }
 
-//Suitor modifiers.//
+//suitor modifiers
 
 void SwitchSuitor()
 {
@@ -359,7 +359,7 @@ void SetWinningTokenCount()
 	}
 }
 
-//Deck modifiers//
+//deck modifiers
 
 void ShuffleDeck()
 {
@@ -371,7 +371,7 @@ void ResetDeck()
 	playing_deck.assign(base_deck.begin(), base_deck.end());
 }
 
-//Card functions.//
+//card actions
 
 void Spy()
 {
@@ -707,7 +707,7 @@ void PlayCard()
 	}
 }
 
-//Game state functions.//
+//game states
 
 void InitialSetup()
 {
@@ -1046,9 +1046,6 @@ void EndRound()
 		game_over = true;
 	}
 }
-
-//Game state.//
-
 void PlayGame()
 {
 	InitialSetup();

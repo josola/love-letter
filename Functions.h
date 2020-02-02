@@ -24,27 +24,14 @@ SOFTWARE.
 
 #pragma once
 
-void PrintUpPile();
-void PrintDeckSize();
-void PrintSuitorsWithSpy();
-void SwitchSuitor();
-void DiscardPlayedCard();
-void PrintActiveSuitors();
-void ChooseTargetSuitor(int target);
-void PlayCard();
-void InitialSetup();
-void SuitorTurn();
-void EndRound();
-void PlayCard();
-void ClearScreen();
-void PlayGame();
-void PrintSeperator();
+//input
+
 void ClearInput();
-void RemoveSuitor(int suitor);
-void SetWinningTokenCount();
-void ShuffleDeck();
-void ResetDeck();
-void BeginRound();
+bool ProperCardInput();
+bool ProperSuitorInput();
+bool ProperSuitorCount();
+
+//output
 
 void returnSuitor(int suitor);
 void ClearScreen();
@@ -55,15 +42,31 @@ void PrintSuitorsWithSpy();
 void PrintActiveSuitors();
 void printHand(int suitor);
 
-bool TargetHandmaidProtected();
-bool ProperCardInput();
+//card position
+
+bool CardInHand(int suitor, int card);
+int HandPosition(int suitor, int pos);
+
+//suitor status
+
 bool CountessRestriction();
 bool IsSuitorPlaying();
-bool ProperSuitorInput();
-bool CardInHand(int suitor, int card);
-bool ProperCardInput();
-bool ProperSuitorInput();
-bool ProperSuitorCount();
+bool TargetHandmaidProtected();
+void ChooseTargetSuitor(int target);
+
+//suitor modifiers
+
+void SwitchSuitor();
+void DiscardPlayedCard();
+void RemoveSuitor(int suitor);
+void SetWinningTokenCount();
+
+//deck modifiers
+
+void ShuffleDeck();
+void ResetDeck();
+
+//card actions
 
 void Spy();
 void Guard();
@@ -74,5 +77,12 @@ void Prince();
 void Chancellor();
 void King(int aggresor, int victim);
 void Princess();
+void PlayCard();
 
-int HandPosition(int suitor, int pos);
+//game states
+
+void InitialSetup();
+void BeginRound();
+void SuitorTurn();
+void EndRound();
+void PlayGame();
