@@ -35,17 +35,17 @@ SOFTWARE.
 #include <chrono>
 
 int
-activeSuitorCount,
-originalSuitorCount,
-currentSuitor,
-tokenCountToWin,
-cardNum,
-roundCount = 1,
-tempVictor,
+active_suitor_count,
+original_suitor_count,
+current_suitor,
+token_count_to_win,
+card_num,
+round_count = 1,
+temp_victor,
 i,
 iLength,
-cardPosition,
-humanSuitor;
+car_position,
+human_suitor;
 
 static const int
 spy = 0,
@@ -58,26 +58,26 @@ chancellor = 6,
 king = 7,
 countess = 8,
 princess = 9,
-startingRound = 1,
+starting_round = 1,
 minSuitorsPlaying = 2,
 maxSuitorsPlaying = 6;
 
 std::vector<int>
-tempVector,
+temp_vector,
 suitors,
-upPile,
-downPile,
-tempInput,
-suitorsWithHandmaid;
+up_pile,
+down_pile,
+temp_input,
+suitors_with_handmaid;
 
 std::vector<std::vector<int> > activeSuitorHands;
 
 auto winner = 0;
-unsigned int targetNum = 0, guess = 0;
-bool gameOver = false;
+unsigned int target_hum = 0, guess = 0;
+bool game_over = false;
 char input;
 
-std::vector<std::string> suitorNames
+std::vector<std::string> suitor_names
 {
 	"SUITOR 1",
 	"SUITOR 2",
@@ -87,7 +87,7 @@ std::vector<std::string> suitorNames
 	"SUITOR 6"
 };
 
-std::vector<std::string> cardNames
+std::vector<std::string> card_names
 {
 	"SPY[0]",
 	"GUARD[1]",
@@ -101,7 +101,7 @@ std::vector<std::string> cardNames
 	"PRINCESS[9]"
 };
 
-std::vector<int> baseDeck
+std::vector<int> base_deck
 {
 	spy,
 	spy,
@@ -126,7 +126,7 @@ std::vector<int> baseDeck
 	princess
 };
 
-std::vector<int> playingDeck
+std::vector<int> playing_deck
 {
 	spy,
 	spy,
