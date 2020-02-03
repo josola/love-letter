@@ -39,7 +39,7 @@ using std::string;
 Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
 
 vector<Suitor> suitor_objects
-{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
+	{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
 
 //input
 
@@ -79,6 +79,41 @@ bool ProperPlayerCount()
 	//Min number of Suitors is two and max number of suitors is six.
 	if (active_player_count >= min_players && active_player_count <= max_players && cin) { return true; }
 	else { return false; }
+}
+int TakePlayerCount()
+{
+	int count;
+	cout << "How many suitors will be playing: " << endl;
+	cin >> count;
+	while (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "invalid input..." << endl;
+		cout << "please enter an integer" << endl;
+		cout << "How many suitors will be playing: " << endl;
+		cin >> count;
+	}
+	return count;
+	//Does not account for float input.
+}
+int CheckPlayerCount(int input)
+{
+	while (input < 2 || input > 6)
+	{
+		cout << "invalid input..." << endl;
+		cout << "minimum # of players: 2 - maximum # of players: 6 - your input: " << input << endl;
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		input = TakePlayerCount();
+	}
+	return input;
+}
+int GivePlayerCount()
+{
+	int raw_count = TakePlayerCount();
+	int processed_count = CheckPlayerCount(raw_count);
+	return processed_count;
 }
 
 //card position
@@ -726,34 +761,25 @@ void PlayCard()
 void InitialSetup()
 {
 	//Tasks that are performed at the start of every GAME.
-	cout << "-- WELCOME TO LOVE LETTER --" << endl;
-LOOP:
-	cout << "How many suitors will be playing: " << endl;
-	cin >> active_player_count;
+	active_player_count = GivePlayerCount();
+
+	original_player_count = active_player_count;
+	SetWinningTokenCount();
+	//Add hand vectors to a vector container.
+	for (i = 1; i < active_player_count + 1; ++i)
+	{
+		players.push_back(i);
+	}
+	for (i = 1; i < active_player_count + 1; ++i)
+	{
+		vector<int> hand;
+		active_player_hands.push_back(hand);
+	}
+	current_player = 0;
+	human_player = 0;
+
 	PrintSeperator();
-	if (ProperPlayerCount())
-	{
-		original_player_count = active_player_count;
-		SetWinningTokenCount();
-		//Add hand vectors to a vector container.
-		for (i = 1; i < active_player_count + 1; ++i)
-		{
-			players.push_back(i);
-		}
-		for (i = 1; i < active_player_count + 1; ++i)
-		{
-			vector<int> hand;
-			active_player_hands.push_back(hand);
-		}
-		current_player = 0;
-		human_player = 0;
-	}
-	else
-	{
-		cout << "Invalid input, please input a number of Suitors between 2 and 6." << endl;
-		ClearInput();
-		goto LOOP;
-	}
+	
 	//Set up the target number Suitors will need to guess correctly to go first.
 	srand((int)time(NULL));
 	int target = rand() % active_player_hands.size() + 1;
@@ -1071,4 +1097,3 @@ void PlayGame()
 	}
 }
 
-/*TODO: Add indivudal using namespaces.*/
