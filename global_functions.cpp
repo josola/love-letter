@@ -80,21 +80,25 @@ bool ProperPlayerCount()
 	if (active_player_count >= min_players && active_player_count <= max_players && cin) { return true; }
 	else { return false; }
 }
-int TakePlayerCount()
+int CheckInputType(int input)
 {
-	int count;
-	cout << "How many suitors will be playing: " << endl;
-	cin >> count;
 	while (cin.fail())
 	{
 		cin.clear();
 		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		cout << "invalid input..." << endl;
 		cout << "please enter an integer" << endl;
-		cout << "How many suitors will be playing: " << endl;
-		cin >> count;
+		cin >> input;
 	}
-	return count;
+	return input;
+}
+int TakePlayerCount()
+{
+	int raw_count;
+	cout << "How many suitors will be playing: " << endl;
+	cin >> raw_count;
+	int clean_count = CheckInputType(raw_count);
+	return clean_count;
 	//Does not account for float input.
 }
 int CheckPlayerCount(int input)
@@ -112,8 +116,8 @@ int CheckPlayerCount(int input)
 int GivePlayerCount()
 {
 	int raw_count = TakePlayerCount();
-	int processed_count = CheckPlayerCount(raw_count);
-	return processed_count;
+	int clean_count = CheckPlayerCount(raw_count);
+	return clean_count;
 }
 
 //card position
@@ -762,9 +766,10 @@ void InitialSetup()
 {
 	//Tasks that are performed at the start of every GAME.
 	active_player_count = GivePlayerCount();
-
 	original_player_count = active_player_count;
+
 	SetWinningTokenCount();
+
 	//Add hand vectors to a vector container.
 	for (i = 1; i < active_player_count + 1; ++i)
 	{
@@ -775,6 +780,7 @@ void InitialSetup()
 		vector<int> hand;
 		active_player_hands.push_back(hand);
 	}
+
 	current_player = 0;
 	human_player = 0;
 
@@ -791,6 +797,8 @@ LOOPA:
 	LOOPB:
 		cout << player_names.at(i) << " guess: " << endl;
 		cin >> guess;
+		//GiveStartingGuess();
+
 		if (guess <= active_player_hands.size() && guess >= 1)
 		{
 			//Duplicate guess.
@@ -1096,4 +1104,3 @@ void PlayGame()
 		EndRound();
 	}
 }
-
