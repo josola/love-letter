@@ -37,12 +37,9 @@ using std::vector;
 using std::string;
 using std::move;
 
-Player
-	suitor1 ("SUITOR[1]"), suitor2("SUITOR[2]"), suitor3("SUITOR[3]"),
-	suitor4("SUITOR[4]"), suitor5("SUITOR[5]"), suitor6("SUITOR[6]");
-
 vector<Player> suitor_objects
-	{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
+	{ {"SUITOR[1]"}, {"SUITOR[2]"}, {"SUITOR[3]"},
+	{"SUITOR[4]"}, {"SUITOR[5]"}, {"SUITOR[6]"}, };
 
 //input
 
