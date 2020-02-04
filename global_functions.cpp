@@ -807,9 +807,7 @@ void InitialSetup()
 	//Tasks that are performed at the start of every GAME.
 	active_player_count = GivePlayerCount();
 	original_player_count = active_player_count;
-
 	SetWinningTokenCount();
-
 	//Add hand vectors to a vector container.
 	for (int i = 1; i < active_player_count + 1; ++i)
 	{
@@ -820,36 +818,26 @@ void InitialSetup()
 		vector<int> hand;
 		active_player_hands.push_back(hand);
 	}
-
 	current_player = 0;
 	human_player = 0;
-
 	PrintSeperator();
-
 	suitor_objects.erase(begin(suitor_objects) + active_player_count, end(suitor_objects));
-	
 	//Set up the target number Suitors will need to guess correctly to go first.
 	srand((int)time(NULL));
-	int target = rand() % active_player_hands.size() + 1;
-
+	int target = rand() % size(suitor_objects) + 1;
 	//Prompt and record all Suitor guesses, check if they are correct and if they are duplicates of previous guesses.
-	cout << "I have a suitor number (1 - " << active_player_hands.size() << ") in my head. Guess it!" << endl;
-
+	cout << "I have a suitor number (1 - " << size(suitor_objects) << ") in my head. Guess it!" << endl;
 	int player_num = 0;
 	vector<int> duplicate_guess;
-
 	for (auto i : suitor_objects)
 	{
 		string player_name = i.GetName();
 		cout << player_name << " guess: " << endl;
-
 		int guess = GiveStartingGuess();
-
 		while (!CheckDuplicateGuess(guess, duplicate_guess))
 		{
 			guess = GiveStartingGuess();
 		}
-
 		//Correct guess.
 		if (guess == target)
 		{
@@ -858,9 +846,7 @@ void InitialSetup()
 			current_player = player_num;
 			break;
 		}
-
 		duplicate_guess.push_back(guess);
-
 		player_num++;
 	}
 }
