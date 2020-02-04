@@ -35,6 +35,7 @@ using std::endl;
 using std::max;
 using std::vector;
 using std::string;
+using std::move;
 
 Player
 	suitor1 ("SUITOR[1]"), suitor2("SUITOR[2]"), suitor3("SUITOR[3]"),
@@ -874,27 +875,21 @@ void BeginRound()
 		current_player = winner;
 		winner = 0;
 	}
-	//Check for two Suitor game.
 	if (active_player_count == min_players)
 	{
-		down_pile.push_back(playing_deck[0]);
+		move(begin(playing_deck), begin(playing_deck) + 1, back_inserter(down_pile));
 		playing_deck.erase(playing_deck.begin());
-		for (int i = 0; i < 3; ++i)
-		{
-			up_pile.push_back(playing_deck[i]);
-			playing_deck.erase(playing_deck.begin());
-		}
+		move(begin(playing_deck), begin(playing_deck) + 3, back_inserter(up_pile));
+		playing_deck.erase(begin(playing_deck), begin(playing_deck) + 3);
 	}
-	//Discard top card of deck to face down pile, no matter the activeSuitorCount.
 	else
 	{
-		down_pile.push_back(playing_deck[0]);
+		move(begin(playing_deck), begin(playing_deck) + 1, back_inserter(down_pile));
 		playing_deck.erase(playing_deck.begin());
 	}
-	//Deal starting hand.
-	for (unsigned int i = 0; i < active_player_hands.size(); i++)
+	for (auto i : active_player_hands)
 	{
-		active_player_hands.at(i).push_back(playing_deck[0]);
+		move(begin(playing_deck), begin(playing_deck) + 1, back_inserter(i));
 		playing_deck.erase(playing_deck.begin());
 	}
 }
