@@ -36,10 +36,12 @@ using std::max;
 using std::vector;
 using std::string;
 
-Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
+Player
+	suitor1 ("SUITOR[1]"), suitor2("SUITOR[2]"), suitor3("SUITOR[3]"),
+	suitor4("SUITOR[4]"), suitor5("SUITOR[5]"), suitor6("SUITOR[6]");
 
-vector<Suitor> suitor_objects
-{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
+vector<Player> suitor_objects
+	{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
 
 //input
 
@@ -79,6 +81,83 @@ bool ProperPlayerCount()
 	//Min number of Suitors is two and max number of suitors is six.
 	if (active_player_count >= min_players && active_player_count <= max_players && cin) { return true; }
 	else { return false; }
+}
+int CheckInputType(int input)
+{
+	while (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cout << "invalid input..." << endl;
+		cout << "please enter an integer" << endl;
+		cin >> input;
+	}
+	return input;
+}
+int TakePlayerCount()
+{
+	int raw_count;
+	cout << "How many suitors will be playing: " << endl;
+	cin >> raw_count;
+	int clean_count = CheckInputType(raw_count);
+	return clean_count;
+	//Does not account for float input.
+}
+int CheckPlayerCount(int input)
+{
+	while (input < 2 || input > 6)
+	{
+		cout << "invalid input..." << endl;
+		cout << "minimum # of players: 2 - maximum # of players: 6 - your input: " << input << endl;
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		input = TakePlayerCount();
+	}
+	return input;
+}
+int GivePlayerCount()
+{
+	int raw_count = TakePlayerCount();
+	int clean_count = CheckPlayerCount(raw_count);
+	return clean_count;
+}
+int TakeStartingGuess()
+{
+	int raw_input;
+	cin >> raw_input;
+	int clean_input = CheckInputType(raw_input);
+	return clean_input;
+}
+int CheckStartingGuess(int input)
+{
+	int vector_size = size(active_player_hands);
+	while (input < 1 || input > vector_size)
+	{
+		cout << "invalid input..." << endl;
+		cout << "please guess between 1 and " << vector_size << " your input: " << input << endl;
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		input = TakeStartingGuess();
+	}
+	return input;
+}
+int GiveStartingGuess()
+{
+	int raw_guess = TakeStartingGuess();
+	int clean_guess = CheckStartingGuess(raw_guess);
+	return clean_guess;
+}
+bool CheckDuplicateGuess(int guess_input, vector<int> container)
+{
+	for (auto i : container)
+	{
+		if (guess_input == i)
+		{
+			cout << guess_input << " has already been guessed..." << endl;
+			return false;
+		}
+	}
+	return true;
 }
 
 //card position
@@ -726,76 +805,64 @@ void PlayCard()
 void InitialSetup()
 {
 	//Tasks that are performed at the start of every GAME.
-	cout << "-- WELCOME TO LOVE LETTER --" << endl;
-LOOP:
-	cout << "How many suitors will be playing: " << endl;
-	cin >> active_player_count;
+	active_player_count = GivePlayerCount();
+	original_player_count = active_player_count;
+
+	SetWinningTokenCount();
+
+	//Add hand vectors to a vector container.
+	for (int i = 1; i < active_player_count + 1; ++i)
+	{
+		players.push_back(i);
+	}
+	for (int i = 1; i < active_player_count + 1; ++i)
+	{
+		vector<int> hand;
+		active_player_hands.push_back(hand);
+	}
+
+	current_player = 0;
+	human_player = 0;
+
 	PrintSeperator();
-	if (ProperPlayerCount())
-	{
-		original_player_count = active_player_count;
-		SetWinningTokenCount();
-		//Add hand vectors to a vector container.
-		for (i = 1; i < active_player_count + 1; ++i)
-		{
-			players.push_back(i);
-		}
-		for (i = 1; i < active_player_count + 1; ++i)
-		{
-			vector<int> hand;
-			active_player_hands.push_back(hand);
-		}
-		current_player = 0;
-		human_player = 0;
-	}
-	else
-	{
-		cout << "Invalid input, please input a number of Suitors between 2 and 6." << endl;
-		ClearInput();
-		goto LOOP;
-	}
+
+	suitor_objects.erase(begin(suitor_objects) + active_player_count, end(suitor_objects));
+	
 	//Set up the target number Suitors will need to guess correctly to go first.
 	srand((int)time(NULL));
 	int target = rand() % active_player_hands.size() + 1;
+
 	//Prompt and record all Suitor guesses, check if they are correct and if they are duplicates of previous guesses.
 	cout << "I have a suitor number (1 - " << active_player_hands.size() << ") in my head. Guess it!" << endl;
-LOOPA:
-	for (unsigned int i = 0; i < active_player_hands.size() + 1; ++i)
+
+	int player_num = 0;
+	vector<int> duplicate_guess;
+
+	for (auto i : suitor_objects)
 	{
-	LOOPB:
-		cout << player_names.at(i) << " guess: " << endl;
-		cin >> guess;
-		if (guess <= active_player_hands.size() && guess >= 1)
+		string player_name = i.GetName();
+		cout << player_name << " guess: " << endl;
+
+		int guess = GiveStartingGuess();
+
+		while (!CheckDuplicateGuess(guess, duplicate_guess))
 		{
-			//Duplicate guess.
-			for (unsigned int i = 0; i < temp_vector.size(); ++i)
-			{
-				if (guess == temp_vector.at(i))
-				{
-					cout << guess << " has already been guessed. Try again." << endl;
-					ClearInput();
-					goto LOOPB;
-				}
-			}
-			//Correct guess.
-			if (guess == target)
-			{
-				ClearScreen();
-				cout << player_names.at(i) << " got it!" << endl;
-				current_player = i;
-				break;
-			}
-			//Add previous guesses to be checked as duplicates.
-			temp_vector.push_back(guess);
+			guess = GiveStartingGuess();
 		}
-		else
+
+		//Correct guess.
+		if (guess == target)
 		{
-			cout << "Invalid input, please input a guess between 1 and " << active_player_count << '.' << endl;
-			ClearInput();
-			goto LOOPA;
+			ClearScreen();
+			cout << player_name << " got it!" << endl;
+			current_player = player_num;
+			break;
 		}
+
+		duplicate_guess.push_back(guess);
+
+		player_num++;
 	}
-	temp_vector.clear();
 }
 void BeginRound()
 {
@@ -807,11 +874,11 @@ void BeginRound()
 	{
 		//Round is second round or above.
 		active_player_count = original_player_count;
-		for (i = 1; i < active_player_count + 1; ++i)
+		for (int i = 1; i < active_player_count + 1; ++i)
 		{
 			players.push_back(i);
 		}
-		for (i = 1; i < active_player_count + 1; ++i)
+		for (int i = 1; i < active_player_count + 1; ++i)
 		{
 			vector<int> hand;
 			active_player_hands.push_back(hand);
@@ -825,7 +892,7 @@ void BeginRound()
 	{
 		down_pile.push_back(playing_deck[0]);
 		playing_deck.erase(playing_deck.begin());
-		for (i = 0; i < 3; ++i)
+		for (int i = 0; i < 3; ++i)
 		{
 			up_pile.push_back(playing_deck[i]);
 			playing_deck.erase(playing_deck.begin());
@@ -1070,5 +1137,3 @@ void PlayGame()
 		EndRound();
 	}
 }
-
-/*TODO: Add indivudal using namespaces.*/
