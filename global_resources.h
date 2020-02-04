@@ -67,7 +67,6 @@ vector<vector<int> > active_player_hands;
 
 auto winner = 0;
 unsigned int target_hum = 0;
-unsigned int guess = 0;
 bool game_over = false;
 char input;
 

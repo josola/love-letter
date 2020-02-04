@@ -119,6 +119,32 @@ int GivePlayerCount()
 	int clean_count = CheckPlayerCount(raw_count);
 	return clean_count;
 }
+int TakeStartingGuess()
+{
+	int raw_input;
+	cin >> raw_input;
+	int clean_input = CheckInputType(raw_input);
+	return clean_input;
+}
+int CheckStartingGuess(int input)
+{
+	int vector_size = size(active_player_hands);
+	while (input < 1 || input > vector_size)
+	{
+		cout << "invalid input..." << endl;
+		cout << "please guess between 1 and " << vector_size << " your input: " << input << endl;
+		cin.clear();
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		input = TakeStartingGuess();
+	}
+	return input;
+}
+int GiveStartingGuess()
+{
+	int raw_guess = TakeStartingGuess();
+	int clean_guess = CheckStartingGuess(raw_guess);
+	return clean_guess;
+}
 
 //card position
 
@@ -796,38 +822,29 @@ LOOPA:
 	{
 	LOOPB:
 		cout << player_names.at(i) << " guess: " << endl;
-		cin >> guess;
-		//GiveStartingGuess();
+		
+		int guess = GiveStartingGuess();
 
-		if (guess <= active_player_hands.size() && guess >= 1)
+		//Duplicate guess.
+		for (unsigned int i = 0; i < temp_vector.size(); ++i)
 		{
-			//Duplicate guess.
-			for (unsigned int i = 0; i < temp_vector.size(); ++i)
+			if (guess == temp_vector.at(i))
 			{
-				if (guess == temp_vector.at(i))
-				{
 					cout << guess << " has already been guessed. Try again." << endl;
 					ClearInput();
 					goto LOOPB;
-				}
 			}
-			//Correct guess.
-			if (guess == target)
-			{
-				ClearScreen();
-				cout << player_names.at(i) << " got it!" << endl;
-				current_player = i;
-				break;
-			}
-			//Add previous guesses to be checked as duplicates.
-			temp_vector.push_back(guess);
 		}
-		else
+		//Correct guess.
+		if (guess == target)
 		{
-			cout << "Invalid input, please input a guess between 1 and " << active_player_count << '.' << endl;
-			ClearInput();
-			goto LOOPA;
+			ClearScreen();
+			cout << player_names.at(i) << " got it!" << endl;
+			current_player = i;
+			break;
 		}
+		//Add previous guesses to be checked as duplicates.
+		temp_vector.push_back(guess);
 	}
 	temp_vector.clear();
 }
@@ -1104,3 +1121,4 @@ void PlayGame()
 		EndRound();
 	}
 }
+

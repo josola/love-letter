@@ -30,9 +30,13 @@ void ClearInput();
 bool ProperCardInput();
 bool ProperPlayerInput();
 bool ProperPlayerCount();
+int CheckInputType(int input);
 int TakePlayerCount();
 int CheckPlayerCount(int input);
 int GivePlayerCount();
+int TakeStartingGuess();
+int CheckStartingGuess(int input);
+int GiveStartingGuess();
 
 //output
 
