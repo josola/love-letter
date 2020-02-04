@@ -25,12 +25,16 @@ SOFTWARE.
 #pragma once
 
 #include <vector>
+#include <string>
 
 using std::vector;
+using std::string;
 
-class Suitor
+class Player
 {
 public:
+	Player(string player_name);
+	~Player();
 	void GainSpy() { has_spy = true; }
 	void RemoveSpy() { has_spy = false; }
 	void GainHandmaid() { has_handmaid = true; }
@@ -39,8 +43,10 @@ public:
 	int GetTokenCount() const { return token_count; }
 	bool HandmaidStatus() const { return has_handmaid; }
 	bool SpyStatus() const { return has_spy; }
+	string GetName() const { return player_name;  }
 private:
 	bool has_spy = false;
 	bool has_handmaid = false;
 	int token_count = 0;
+	string player_name;
 };

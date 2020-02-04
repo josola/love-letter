@@ -24,12 +24,24 @@ SOFTWARE.
 
 #pragma once
 
+#include <vector>
+
+using std::vector;
+
 //input
 
 void ClearInput();
 bool ProperCardInput();
 bool ProperPlayerInput();
 bool ProperPlayerCount();
+int CheckInputType(int input);
+int TakePlayerCount();
+int CheckPlayerCount(int input);
+int GivePlayerCount();
+int TakeStartingGuess();
+int CheckStartingGuess(int input);
+int GiveStartingGuess();
+void CheckDuplicateGuess(int guess_input, vector<int> container);
 
 //output
 
