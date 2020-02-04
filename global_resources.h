@@ -37,7 +37,6 @@ int token_count_to_win;
 int card_num;
 int round_count = 1;
 int temp_victor;
-int i;
 int iLength;
 int car_position;
 int human_player;
@@ -67,7 +66,6 @@ vector<vector<int> > active_player_hands;
 
 auto winner = 0;
 unsigned int target_hum = 0;
-unsigned int guess = 0;
 bool game_over = false;
 char input;
 

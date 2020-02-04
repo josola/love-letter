@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="global_functions.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="player_class.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global_functions.h" />
