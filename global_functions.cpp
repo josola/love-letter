@@ -36,9 +36,11 @@ using std::max;
 using std::vector;
 using std::string;
 
-Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
+Player
+	suitor1 ("SUITOR[1]"), suitor2("SUITOR[2]"), suitor3("SUITOR[3]"),
+	suitor4("SUITOR[4]"), suitor5("SUITOR[5]"), suitor6("SUITOR[6]");
 
-vector<Suitor> suitor_objects
+vector<Player> suitor_objects
 	{ suitor1, suitor2, suitor3, suitor4, suitor5, suitor6 };
 
 //input
@@ -144,6 +146,18 @@ int GiveStartingGuess()
 	int raw_guess = TakeStartingGuess();
 	int clean_guess = CheckStartingGuess(raw_guess);
 	return clean_guess;
+}
+bool CheckDuplicateGuess(int guess_input, vector<int> container)
+{
+	for (auto i : container)
+	{
+		if (guess_input == i)
+		{
+			cout << guess_input << " has already been guessed..." << endl;
+			return false;
+		}
+	}
+	return true;
 }
 
 //card position
@@ -797,11 +811,11 @@ void InitialSetup()
 	SetWinningTokenCount();
 
 	//Add hand vectors to a vector container.
-	for (i = 1; i < active_player_count + 1; ++i)
+	for (int i = 1; i < active_player_count + 1; ++i)
 	{
 		players.push_back(i);
 	}
-	for (i = 1; i < active_player_count + 1; ++i)
+	for (int i = 1; i < active_player_count + 1; ++i)
 	{
 		vector<int> hand;
 		active_player_hands.push_back(hand);
@@ -811,42 +825,44 @@ void InitialSetup()
 	human_player = 0;
 
 	PrintSeperator();
+
+	suitor_objects.erase(begin(suitor_objects) + active_player_count, end(suitor_objects));
 	
 	//Set up the target number Suitors will need to guess correctly to go first.
 	srand((int)time(NULL));
 	int target = rand() % active_player_hands.size() + 1;
+
 	//Prompt and record all Suitor guesses, check if they are correct and if they are duplicates of previous guesses.
 	cout << "I have a suitor number (1 - " << active_player_hands.size() << ") in my head. Guess it!" << endl;
-LOOPA:
-	for (unsigned int i = 0; i < active_player_hands.size() + 1; ++i)
+
+	int player_num = 1;
+	vector<int> duplicate_guess;
+
+	for (auto i : suitor_objects)
 	{
-	LOOPB:
-		cout << player_names.at(i) << " guess: " << endl;
-		
+		string player_name = i.GetName();
+		cout << player_name << " guess: " << endl;
+
 		int guess = GiveStartingGuess();
 
-		//Duplicate guess.
-		for (unsigned int i = 0; i < temp_vector.size(); ++i)
+		while (!CheckDuplicateGuess(guess, duplicate_guess))
 		{
-			if (guess == temp_vector.at(i))
-			{
-					cout << guess << " has already been guessed. Try again." << endl;
-					ClearInput();
-					goto LOOPB;
-			}
+			guess = GiveStartingGuess();
 		}
+
 		//Correct guess.
 		if (guess == target)
 		{
 			ClearScreen();
-			cout << player_names.at(i) << " got it!" << endl;
-			current_player = i;
+			cout << player_name << " got it!" << endl;
+			current_player = player_num;
 			break;
 		}
-		//Add previous guesses to be checked as duplicates.
-		temp_vector.push_back(guess);
+
+		duplicate_guess.push_back(guess);
+
+		player_num++;
 	}
-	temp_vector.clear();
 }
 void BeginRound()
 {
@@ -858,11 +874,11 @@ void BeginRound()
 	{
 		//Round is second round or above.
 		active_player_count = original_player_count;
-		for (i = 1; i < active_player_count + 1; ++i)
+		for (int i = 1; i < active_player_count + 1; ++i)
 		{
 			players.push_back(i);
 		}
-		for (i = 1; i < active_player_count + 1; ++i)
+		for (int i = 1; i < active_player_count + 1; ++i)
 		{
 			vector<int> hand;
 			active_player_hands.push_back(hand);
@@ -876,7 +892,7 @@ void BeginRound()
 	{
 		down_pile.push_back(playing_deck[0]);
 		playing_deck.erase(playing_deck.begin());
-		for (i = 0; i < 3; ++i)
+		for (int i = 0; i < 3; ++i)
 		{
 			up_pile.push_back(playing_deck[i]);
 			playing_deck.erase(playing_deck.begin());
@@ -1121,4 +1137,3 @@ void PlayGame()
 		EndRound();
 	}
 }
-

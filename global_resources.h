@@ -37,7 +37,6 @@ int token_count_to_win;
 int card_num;
 int round_count = 1;
 int temp_victor;
-int i;
 int iLength;
 int car_position;
 int human_player;
