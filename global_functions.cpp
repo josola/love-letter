@@ -808,6 +808,7 @@ void InitialSetup()
 	active_player_count = GivePlayerCount();
 	original_player_count = active_player_count;
 	SetWinningTokenCount();
+	suitor_objects.erase(begin(suitor_objects) + active_player_count, end(suitor_objects));
 	//Add hand vectors to a vector container.
 	for (int i = 1; i < active_player_count + 1; ++i)
 	{
@@ -821,7 +822,6 @@ void InitialSetup()
 	current_player = 0;
 	human_player = 0;
 	PrintSeperator();
-	suitor_objects.erase(begin(suitor_objects) + active_player_count, end(suitor_objects));
 	//Set up the target number Suitors will need to guess correctly to go first.
 	srand((int)time(NULL));
 	int target = rand() % size(suitor_objects) + 1;
@@ -869,7 +869,8 @@ void BeginRound()
 			vector<int> hand;
 			active_player_hands.push_back(hand);
 		}
-		cout << player_names.at(winner) << " won the last round. " << player_names.at(winner) << " goes first." << endl;
+		string winner_name = suitor_objects.at(winner).GetName();
+		cout << winner_name << " won the last round. " << winner_name << " goes first." << endl;
 		current_player = winner;
 		winner = 0;
 	}
