@@ -835,7 +835,7 @@ void InitialSetup()
 	//Prompt and record all Suitor guesses, check if they are correct and if they are duplicates of previous guesses.
 	cout << "I have a suitor number (1 - " << active_player_hands.size() << ") in my head. Guess it!" << endl;
 
-	int player_num = 1;
+	int player_num = 0;
 	vector<int> duplicate_guess;
 
 	for (auto i : suitor_objects)
