@@ -33,20 +33,23 @@ using std::string;
 class Player
 {
 public:
-	Player(string player_name = "") : player_name(player_name) {};
+	Player(string name = "") : player_name(name) {};
 	~Player() {};
 	void GainSpy() { has_spy = true; }
 	void RemoveSpy() { has_spy = false; }
 	void GainHandmaid() { has_handmaid = true; }
 	void RemoveHandmaid() { has_handmaid = false; }
 	void GainToken() { token_count++; }
+	void SetCurrentPlayer() { is_current_player = true; }
 	int GetTokenCount() const { return token_count; }
 	bool HandmaidStatus() const { return has_handmaid; }
 	bool SpyStatus() const { return has_spy; }
+	bool GetCurrentStatus() const { return is_current_player; }
 	string GetName() const { return player_name;  }
 private:
 	bool has_spy = false;
 	bool has_handmaid = false;
+	bool is_current_player = false;
 	int token_count = 0;
 	string player_name;
 };

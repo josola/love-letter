@@ -27,7 +27,7 @@ SOFTWARE.
 #include <algorithm>
 #include <thread>
 #include "global_resources.h"
-#include "player_class.h"
+#include "player.h"
 
 using std::cout;
 using std::cin;
@@ -228,17 +228,17 @@ void PrintPlayersWithSpy()
 void PrintActivePlayers()
 {
 	cout << "Rival Suitors: " << endl;
-	current_player++;
-	for (unsigned int i = 0; i < active_player_hands.size(); i++)
+
+	for (const auto& i : suitor_objects)
 	{
-		if (!active_player_hands[i].empty() && players[i] != current_player)
+		if (!i.GetCurrentStatus())
 		{
-			ReturnPlayer(i);
+			cout << i.GetName() << ' ';
 		}
 	}
 	cout << endl;
+
 	PrintSeperator();
-	current_player--;
 }
 void PrintHand(int suitor)
 {
@@ -805,47 +805,70 @@ void InitialSetup()
 	//Tasks that are performed at the start of every GAME.
 	active_player_count = GivePlayerCount();
 	original_player_count = active_player_count;
+
 	SetWinningTokenCount();
+
 	suitor_objects.erase(begin(suitor_objects) + active_player_count, end(suitor_objects));
+
 	//Add hand vectors to a vector container.
 	for (int i = 1; i < active_player_count + 1; ++i)
 	{
 		players.push_back(i);
 	}
+
 	for (int i = 1; i < active_player_count + 1; ++i)
 	{
 		vector<int> hand;
 		active_player_hands.push_back(hand);
 	}
+
+	//to be taken away
 	current_player = 0;
 	human_player = 0;
+	//to be taken away
+
 	PrintSeperator();
+
 	//Set up the target number Suitors will need to guess correctly to go first.
 	srand((int)time(NULL));
 	int target = rand() % size(suitor_objects) + 1;
+
 	//Prompt and record all Suitor guesses, check if they are correct and if they are duplicates of previous guesses.
 	cout << "I have a suitor number (1 - " << size(suitor_objects) << ") in my head. Guess it!" << endl;
+
 	int player_num = 0;
+
 	vector<int> duplicate_guess;
-	for (auto i : suitor_objects)
+	for (auto& i : suitor_objects)
 	{
 		string player_name = i.GetName();
 		cout << player_name << " guess: " << endl;
 		int guess = GiveStartingGuess();
+
 		while (!CheckDuplicateGuess(guess, duplicate_guess))
 		{
 			guess = GiveStartingGuess();
 		}
+
 		//Correct guess.
 		if (guess == target)
 		{
 			ClearScreen();
 			cout << player_name << " got it!" << endl;
+
+			//to be taken away
 			current_player = player_num;
+			//to be taken away
+
+			i.SetCurrentPlayer();
+
 			break;
 		}
 		duplicate_guess.push_back(guess);
+
+		//to be taken away
 		player_num++;
+		//to be taken away
 	}
 }
 void BeginRound()
