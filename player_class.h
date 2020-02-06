@@ -33,8 +33,8 @@ using std::string;
 class Player
 {
 public:
-	Player(string player_name);
-	~Player();
+	Player(string player_name = "") : player_name(player_name) {};
+	~Player() {};
 	void GainSpy() { has_spy = true; }
 	void RemoveSpy() { has_spy = false; }
 	void GainHandmaid() { has_handmaid = true; }
