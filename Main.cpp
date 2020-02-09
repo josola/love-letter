@@ -77,25 +77,29 @@ bool game_over = false;
 char input;
 
 const vector<string> player_names
-{ "SUITOR 1", "SUITOR 2", "SUITOR 3", "SUITOR 4", "SUITOR 5", "SUITOR 6" };
+{
+	"SUITOR 1", "SUITOR 2", "SUITOR 3", "SUITOR 4", "SUITOR 5", "SUITOR 6"
+};
 
 const vector<string> card_names
-{ "SPY[0]","GUARD[1]","PRIEST[2]","BARON[3]","HANDMAID[4]","PRINCE[5]"
-"CHANCELLOR[6]","KING[7]","COUNTESS[8]","PRINCESS[9]" };
+{
+	"SPY[0]","GUARD[1]","PRIEST[2]","BARON[3]","HANDMAID[4]","PRINCE[5]" "CHANCELLOR[6]","KING[7]","COUNTESS[8]","PRINCESS[9]"
+};
 
 vector<int> base_deck
-{ spy, spy, guard, guard, guard, guard, guard, guard, priest, priest,
-baron, baron, handmaid, handmaid, prince, prince, chancellor,
-chancellor, king, countess, princess };
+{
+	spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess
+};
 
 vector<int> playing_deck
-{ spy, spy, guard, guard, guard, guard, guard, guard, priest, priest,
-baron, baron, handmaid, handmaid, prince, prince, chancellor,
-chancellor, king, countess, princess };
+{
+	spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess
+};
 
 vector<Player> suitor_objects
-{ {"SUITOR[1]"}, {"SUITOR[2]"}, {"SUITOR[3]"},
-{"SUITOR[4]"}, {"SUITOR[5]"}, {"SUITOR[6]"}, };
+{
+	{"SUITOR[1]"}, {"SUITOR[2]"}, {"SUITOR[3]"}, {"SUITOR[4]"}, {"SUITOR[5]"}, {"SUITOR[6]"}
+};
 
 //input
 
@@ -1185,7 +1189,8 @@ void EndRound()
 		game_over = true;
 	}
 }
-void PlayGame()
+
+int main()
 {
 	InitialSetup();
 	while (!game_over)
@@ -1194,10 +1199,5 @@ void PlayGame()
 		PlayerTurn();
 		EndRound();
 	}
-}
-
-int main()
-{
-	PlayGame();
 	return 0;
 }
