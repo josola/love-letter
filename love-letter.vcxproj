@@ -20,11 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="global_functions.cpp" />
+    <ClCompile Include="include\global_functions.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global_functions.h" />
     <ClInclude Include="global_resources.h" />
+    <ClInclude Include="include\global_functions.h" />
+    <ClInclude Include="include\global_resources.h" />
+    <ClInclude Include="include\player.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
