@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/love-letter.vcxproj.user
+/love-letter.vcxproj
+/love-letter.sln
+/.vs/love-letter/v16
