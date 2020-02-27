@@ -44,14 +44,14 @@ const int starting_round = 1;
 const int min_players = 2;
 const int max_players = 6;
 
-vector<int> temp_vector;
-vector<int> players;
-vector<int> up_pile;
-vector<int> down_pile;
-vector<int> temp_input;
-vector<int> players_with_handmaid;
+vector<int> temp_container;
+vector<int> player_container;
+vector<int> up_pile_container;
+vector<int> down_pile_container;
+vector<int> temp_input_container;
+vector<int> plyr_handmaid_container;
 
-vector<vector<int> > active_player_hands;
+vector<vector<int> > active_player_hand_container;
 
 auto winner = 0;
 unsigned int target_num = 0;
@@ -104,7 +104,7 @@ bool ProperPlayerInput()
 {
 	target_num++;
 	//Cannot input a number lower than one or a number larger than the number of active Suitors.
-	if (target_num >= 1 && target_num <= active_player_hands.size() && cin)
+	if (target_num >= 1 && target_num <= active_player_hand_container.size() && cin)
 	{
 		target_num--;
 		return true;
@@ -170,7 +170,7 @@ int TakeStartingGuess()
 }
 int CheckStartingGuess(int input)
 {
-	int vector_size = size(active_player_hands);
+	int vector_size = size(active_player_hand_container);
 	while (input < 1 || input > vector_size)
 	{
 		cout << "invalid input..." << endl;
@@ -205,7 +205,7 @@ bool CheckDuplicateGuess(int guess_input, vector<int> container)
 bool CardInHand(int suitor, int card)
 {
 	//Checks for card selection in Suitor's hand.
-	if (find(active_player_hands[suitor].begin(), active_player_hands[suitor].end(), card) != active_player_hands[suitor].end())
+	if (find(active_player_hand_container[suitor].begin(), active_player_hand_container[suitor].end(), card) != active_player_hand_container[suitor].end())
 	{
 		return true;
 	}
@@ -217,7 +217,7 @@ bool CardInHand(int suitor, int card)
 int HandPosition(int suitor, int pos)
 {
 	//Return's position of card in Suitor's hand.
-	car_position = active_player_hands[suitor][pos];
+	car_position = active_player_hand_container[suitor][pos];
 	return car_position;
 }
 
@@ -239,7 +239,7 @@ void PrintSeperator()
 void PrintUpPile()
 {
 	cout << "cards in up pile: " << endl;
-	for (int i : up_pile)
+	for (int i : up_pile_container)
 	{
 		cout << card_names[i] + ' ';
 	}
@@ -254,9 +254,9 @@ void PrintDeckSize()
 void PrintPlayersWithSpy()
 {
 	cout << "Spy bonus: " << endl;
-	for (unsigned int i = 0; i < active_player_hands.size(); i++)
+	for (unsigned int i = 0; i < active_player_hand_container.size(); i++)
 	{
-		if (!active_player_hands[i].empty())
+		if (!active_player_hand_container[i].empty())
 		{
 			if (suitor_objects[i].SpyStatus())
 			{
@@ -292,7 +292,7 @@ void PrintHand(int suitor)
 	ReturnPlayer(suitor);
 	cout << " hand: " << endl;
 
-	for (unsigned int i = 0; i < active_player_hands[suitor].size(); i++)
+	for (unsigned int i = 0; i < active_player_hand_container[suitor].size(); i++)
 	{
 		cout << cardNames[HandPosition(suitor, i)] << " ";
 	}
@@ -321,7 +321,7 @@ bool CountessRestriction()
 bool IsPlayerPlaying()
 {
 	//Active Suitor check.
-	if (!active_player_hands[target_num].empty()) { return true; }
+	if (!active_player_hand_container[target_num].empty()) { return true; }
 	else { return false; }
 }
 bool TargetHandmaidProtected()
@@ -340,14 +340,14 @@ LOOP:
 	cin >> target;
 	PrintSeperator();
 	//Prompt duplicate Suitor selection.
-	if (!temp_input.empty())
+	if (!temp_input_container.empty())
 	{
-		for (unsigned int i = 0; i < temp_input.size(); i++)
+		for (unsigned int i = 0; i < temp_input_container.size(); i++)
 		{
-			if (temp_input[i] == target)
+			if (temp_input_container[i] == target)
 			{
 				cout << "You already chose ";
-				ReturnPlayer(temp_input[i]);
+				ReturnPlayer(temp_input_container[i]);
 				cout << "] please choose a different Suitor." << endl;
 				goto LOOP;
 			}
@@ -375,7 +375,7 @@ LOOP:
 		{
 			ReturnPlayer(target_num);
 			cout << " has Handmaid protection." << endl;
-			temp_input.push_back(target);
+			temp_input_container.push_back(target);
 			ClearInput();
 			goto LOOP;
 		}
@@ -405,31 +405,31 @@ void SwitchPlayer()
 	std::this_thread::sleep_for(std::chrono::seconds(3));
 	ClearScreen();
 	//Move to end of Suitor line if at beginning.
-	if (current_player == players[0] - 1)
+	if (current_player == player_container[0] - 1)
 	{
-		for (unsigned int i = 1; i < active_player_hands.size(); i++)
+		for (unsigned int i = 1; i < active_player_hand_container.size(); i++)
 		{
 			current_player++;
 		}
-		if (!active_player_hands[current_player].empty())
+		if (!active_player_hand_container[current_player].empty())
 		{
 			return;
 		}
 	}
 	//Skip Suitors that are out.
-	if (active_player_hands[current_player].empty())
+	if (active_player_hand_container[current_player].empty())
 	{
 	LOOP:
-		while (active_player_hands[current_player].empty())
+		while (active_player_hand_container[current_player].empty())
 		{
-			if (current_player == players[0] - 1)
+			if (current_player == player_container[0] - 1)
 			{
-				for (unsigned int i = 0; i < active_player_hands.size(); i++)
+				for (unsigned int i = 0; i < active_player_hand_container.size(); i++)
 				{
 					current_player++;
 				}
 			}
-			if (active_player_hands[current_player].empty())
+			if (active_player_hand_container[current_player].empty())
 			{
 				current_player--;
 			}
@@ -439,7 +439,7 @@ void SwitchPlayer()
 	else
 	{
 		current_player--;
-		if (active_player_hands[current_player].empty())
+		if (active_player_hand_container[current_player].empty())
 		{
 			goto LOOP;
 		}
@@ -451,18 +451,18 @@ void DiscardPlayedCard()
 	ReturnPlayer(current_player);
 	cout << " played " << card_names[card_num] << endl;
 	PrintSeperator();
-	up_pile.push_back(card_num);
-	auto it = find(active_player_hands[current_player].begin(), active_player_hands[current_player].end(), card_num);
-	active_player_hands[current_player].erase(it);
+	up_pile_container.push_back(card_num);
+	auto it = find(active_player_hand_container[current_player].begin(), active_player_hand_container[current_player].end(), card_num);
+	active_player_hand_container[current_player].erase(it);
 }
 void RemovePlayer(int suitor)
 {
 	//Removing a Suitor from the game.
-	for (unsigned int i = 0; i < active_player_hands[suitor].size(); i++)
+	for (unsigned int i = 0; i < active_player_hand_container[suitor].size(); i++)
 	{
-		up_pile.push_back(active_player_hands[suitor][i]);
+		up_pile_container.push_back(active_player_hand_container[suitor][i]);
 	}
-	active_player_hands[suitor].clear();
+	active_player_hand_container[suitor].clear();
 	if (suitor_objects[suitor].SpyStatus())
 	{
 		suitor_objects[suitor].RemoveSpy();
@@ -540,7 +540,7 @@ LOOP:
 		ClearInput();
 		goto LOOP;
 	}
-	if (active_player_hands[target_num][0] == card_num)
+	if (active_player_hand_container[target_num][0] == card_num)
 	{
 		cout << "Match! " << player_names[target_num] << " is out." << endl;
 		RemovePlayer(target_num);
@@ -560,15 +560,15 @@ void Baron()
 	PrintHand(current_player);
 	PrintHand(target_num);
 	//If both hands are equal both Suitors remain and play moves on.
-	if (active_player_hands[current_player][0] == active_player_hands[target_num][0])
+	if (active_player_hand_container[current_player][0] == active_player_hand_container[target_num][0])
 	{
 		cout << "Tie! Both suitors remain in the game." << endl;
 		return;
 	}
 	else
 	{
-		temp_victor = max(active_player_hands[current_player][0], active_player_hands[target_num][0]);
-		if (active_player_hands[current_player][0] == temp_victor)
+		temp_victor = max(active_player_hand_container[current_player][0], active_player_hand_container[target_num][0]);
+		if (active_player_hand_container[current_player][0] == temp_victor)
 		{
 			ReturnPlayer(current_player);
 			cout << " is victorious! ";
@@ -589,7 +589,7 @@ void Handmaid()
 {
 	//Suitors with Handmaid protection are untargetable until the beginning of their next turn.
 	suitor_objects[current_player].GainHandmaid();
-	players_with_handmaid.push_back(current_player);
+	plyr_handmaid_container.push_back(current_player);
 }
 void Prince()
 {
@@ -608,18 +608,18 @@ LOOPB:
 			ReturnPlayer(target_num);
 			cout << " has Handmaid protection." << endl;
 			cout << "The Prince applies to you." << endl;
-			if (find(active_player_hands[current_player].begin(), active_player_hands[current_player].end(), princess_value) != active_player_hands[current_player].end())
+			if (find(active_player_hand_container[current_player].begin(), active_player_hand_container[current_player].end(), princess_value) != active_player_hand_container[current_player].end())
 			{
 				cout << "You had the Princess! You're out!" << endl;
 				RemovePlayer(current_player);
 				return;
 			}
-			for (unsigned int i = 0; i < active_player_hands[current_player].size(); i++)
+			for (unsigned int i = 0; i < active_player_hand_container[current_player].size(); i++)
 			{
-				up_pile.push_back(active_player_hands[target_num][i]);
+				up_pile_container.push_back(active_player_hand_container[target_num][i]);
 			}
-			active_player_hands[current_player].clear();
-			active_player_hands[current_player].push_back(playing_deck[0]);
+			active_player_hand_container[current_player].clear();
+			active_player_hand_container[current_player].push_back(playing_deck[0]);
 			playing_deck.erase(playing_deck.begin());
 			if (current_player == human_player)
 			{
@@ -630,7 +630,7 @@ LOOPB:
 		cout << player_names[target_num] << " is untargetable." << endl;
 		goto LOOPB;
 	}
-	if (find(active_player_hands[target_num].begin(), active_player_hands[target_num].end(), princess_value) != active_player_hands[target_num].end())
+	if (find(active_player_hand_container[target_num].begin(), active_player_hand_container[target_num].end(), princess_value) != active_player_hand_container[target_num].end())
 	{
 		ReturnPlayer(target_num);
 		cout << " had the Princess! ";
@@ -642,12 +642,12 @@ LOOPB:
 	if (playing_deck.empty())
 	{
 		cout << player_names[target_num] << " discards their hand, then redraws." << endl;
-		for (unsigned int i = 0; i < active_player_hands[target_num].size(); i++)
+		for (unsigned int i = 0; i < active_player_hand_container[target_num].size(); i++)
 		{
-			up_pile.push_back(active_player_hands[target_num][i]);
+			up_pile_container.push_back(active_player_hand_container[target_num][i]);
 		}
-		active_player_hands[target_num].push_back(down_pile[0]);
-		down_pile.erase(down_pile.begin(), down_pile.end());
+		active_player_hand_container[target_num].push_back(down_pile_container[0]);
+		down_pile_container.erase(down_pile_container.begin(), down_pile_container.end());
 		if (target_num == current_player && target_num == human_player)
 		{
 			PrintHand(current_player);
@@ -656,12 +656,12 @@ LOOPB:
 	else
 	{
 		cout << player_names[target_num] << " discards their hand, then redraws." << endl;
-		for (unsigned int i = 0; i < active_player_hands[target_num].size(); i++)
+		for (unsigned int i = 0; i < active_player_hand_container[target_num].size(); i++)
 		{
-			up_pile.push_back(active_player_hands[target_num][i]);
+			up_pile_container.push_back(active_player_hand_container[target_num][i]);
 		}
-		active_player_hands[target_num].erase(active_player_hands[target_num].begin(), active_player_hands[target_num].end());
-		active_player_hands[target_num].push_back(playing_deck[0]);
+		active_player_hand_container[target_num].erase(active_player_hand_container[target_num].begin(), active_player_hand_container[target_num].end());
+		active_player_hand_container[target_num].push_back(playing_deck[0]);
 		playing_deck.erase(playing_deck.begin());
 		if (target_num == current_player && target_num == human_player)
 		{
@@ -681,14 +681,14 @@ void Chancellor()
 	{
 		for (int i = 0; i < 2; i++)
 		{
-			active_player_hands[current_player].push_back(playing_deck[0]);
+			active_player_hand_container[current_player].push_back(playing_deck[0]);
 			playing_deck.erase(playing_deck.begin());
 		}
 		PrintHand(current_player);
 	LOOP:
 		cout << "First card to put back: " << endl;
 		cin >> card_num;
-		auto itA = find(active_player_hands[current_player].begin(), active_player_hands[current_player].end(), card_num);
+		auto itA = find(active_player_hand_container[current_player].begin(), active_player_hand_container[current_player].end(), card_num);
 		if (!ProperCardInput())
 		{
 			ClearInput();
@@ -702,9 +702,9 @@ void Chancellor()
 		else
 		{
 			playing_deck.push_back(card_num);
-			if (itA != active_player_hands[current_player].end())
+			if (itA != active_player_hand_container[current_player].end())
 			{
-				active_player_hands[current_player].erase(itA);
+				active_player_hand_container[current_player].erase(itA);
 			}
 			//I don't think you actually lose if you put back the Princess, you're not discarding it.
 			/*if (cardNum == 9)
@@ -721,7 +721,7 @@ void Chancellor()
 	LOOPA:
 		cout << "Second card to put back: " << endl;
 		cin >> card_num;
-		auto itB = find(active_player_hands[current_player].begin(), active_player_hands[current_player].end(), card_num);
+		auto itB = find(active_player_hand_container[current_player].begin(), active_player_hand_container[current_player].end(), card_num);
 		if (!ProperCardInput())
 		{
 			ClearInput();
@@ -735,9 +735,9 @@ void Chancellor()
 		else
 		{
 			playing_deck.push_back(card_num);
-			if (itB != active_player_hands[current_player].end())
+			if (itB != active_player_hand_container[current_player].end())
 			{
-				active_player_hands[current_player].erase(itB);
+				active_player_hand_container[current_player].erase(itB);
 			}
 			else
 			{
@@ -750,14 +750,14 @@ void Chancellor()
 		cout << "There is only one card in the deck." << endl;
 		for (int i = 0; i < 1; i++)
 		{
-			active_player_hands[current_player].push_back(playing_deck[0]);
+			active_player_hand_container[current_player].push_back(playing_deck[0]);
 			playing_deck.erase(playing_deck.begin());
 		}
 		PrintHand(current_player);
 	LOOPB:
 		cout << "Card to put back: " << endl;
 		cin >> card_num;
-		auto itC = find(active_player_hands[current_player].begin(), active_player_hands[current_player].end(), card_num);
+		auto itC = find(active_player_hand_container[current_player].begin(), active_player_hand_container[current_player].end(), card_num);
 		if (!ProperCardInput())
 		{
 			ClearInput();
@@ -771,9 +771,9 @@ void Chancellor()
 		else
 		{
 			playing_deck.push_back(card_num);
-			if (itC != active_player_hands[current_player].end())
+			if (itC != active_player_hand_container[current_player].end())
 			{
-				active_player_hands[current_player].erase(itC);
+				active_player_hand_container[current_player].erase(itC);
 			}
 			if (card_num == 9)
 			{
@@ -791,7 +791,7 @@ void Chancellor()
 void King(int agressor, int victim)
 {
 	//Swaps current Suitor's hand with Target Suitor's hand.
-	active_player_hands[agressor].swap(active_player_hands[victim]);
+	active_player_hand_container[agressor].swap(active_player_hand_container[victim]);
 	ReturnPlayer(agressor);
 	cout << " 's hand is now..." << endl;
 	PrintHand(agressor);
@@ -855,13 +855,13 @@ void InitialSetup()
 	//Add hand vectors to a vector container.
 	for (int i = 1; i < active_player_count + 1; ++i)
 	{
-		players.push_back(i);
+		player_container.push_back(i);
 	}
 
 	for (int i = 1; i < active_player_count + 1; ++i)
 	{
 		vector<int> hand;
-		active_player_hands.push_back(hand);
+		active_player_hand_container.push_back(hand);
 	}
 
 	//to be taken away
@@ -925,12 +925,12 @@ void BeginRound()
 		active_player_count = original_player_count;
 		for (int i = 1; i < active_player_count + 1; ++i)
 		{
-			players.push_back(i);
+			player_container.push_back(i);
 		}
 		for (int i = 1; i < active_player_count + 1; ++i)
 		{
 			vector<int> hand;
-			active_player_hands.push_back(hand);
+			active_player_hand_container.push_back(hand);
 		}
 		string winner_name = suitor_objects.at(winner).GetName();
 		cout << winner_name << " won the last round. " << winner_name << " goes first." << endl;
@@ -939,17 +939,17 @@ void BeginRound()
 	}
 	if (active_player_count == min_players)
 	{
-		move(begin(playing_deck), begin(playing_deck) + 1, back_inserter(down_pile));
+		move(begin(playing_deck), begin(playing_deck) + 1, back_inserter(down_pile_container));
 		playing_deck.erase(playing_deck.begin());
-		move(begin(playing_deck), begin(playing_deck) + 3, back_inserter(up_pile));
+		move(begin(playing_deck), begin(playing_deck) + 3, back_inserter(up_pile_container));
 		playing_deck.erase(begin(playing_deck), begin(playing_deck) + 3);
 	}
 	else
 	{
-		move(begin(playing_deck), begin(playing_deck) + 1, back_inserter(down_pile));
+		move(begin(playing_deck), begin(playing_deck) + 1, back_inserter(down_pile_container));
 		playing_deck.erase(playing_deck.begin());
 	}
-	for (auto i : active_player_hands)
+	for (auto i : active_player_hand_container)
 	{
 		move(begin(playing_deck), begin(playing_deck) + 1, back_inserter(i));
 		playing_deck.erase(playing_deck.begin());
@@ -965,8 +965,8 @@ LOOP:
 		if (suitor_objects[current_player].HandmaidStatus())
 		{
 			suitor_objects[current_player].RemoveHandmaid();
-			auto itD = find(players_with_handmaid.begin(), players_with_handmaid.end(), current_player);
-			players_with_handmaid.erase(itD);
+			auto itD = find(plyr_handmaid_container.begin(), plyr_handmaid_container.end(), current_player);
+			plyr_handmaid_container.erase(itD);
 		}
 		//Check for empty deck so these functions don't duplicate.
 		if (!playing_deck.empty())
@@ -987,7 +987,7 @@ LOOP:
 		PrintSeperator();
 		if (input == 'd')
 		{
-			active_player_hands.at(current_player).push_back(playing_deck[0]);
+			active_player_hand_container.at(current_player).push_back(playing_deck[0]);
 			playing_deck.erase(playing_deck.begin());
 		}
 		else
@@ -1031,7 +1031,7 @@ LOOP:
 				SwitchPlayer();
 				goto LOOP;
 			}
-			if (players_with_handmaid.size() == active_player_count - 1)
+			if (plyr_handmaid_container.size() == active_player_count - 1)
 			{
 				ReturnPlayer(target_num);
 				cout << " has Handmaid protection." << endl;
@@ -1054,7 +1054,7 @@ LOOP:
 		{
 			SwitchPlayer();
 		}
-		temp_input.clear();
+		temp_input_container.clear();
 	}
 }
 void EndRound()
@@ -1063,29 +1063,29 @@ void EndRound()
 	if (playing_deck.empty())
 	{
 		cout << "The deck is empty, suitors compare hands" << endl;
-		for (unsigned int i = 0; i < active_player_hands.size(); i++)
+		for (unsigned int i = 0; i < active_player_hand_container.size(); i++)
 		{
 			//Print remaining Suitors.
-			if (!active_player_hands[i].empty())
+			if (!active_player_hand_container[i].empty())
 			{
-				cout << player_names[i] << " hand: " << active_player_hands[i][0] << endl;
+				cout << player_names[i] << " hand: " << active_player_hand_container[i][0] << endl;
 			}
 		}
 		//Assign Suitor with highest hand to winner.
-		for (unsigned int i = 0; i < active_player_hands.size(); i++)
+		for (unsigned int i = 0; i < active_player_hand_container.size(); i++)
 		{
-			if (!active_player_hands[i].empty())
+			if (!active_player_hand_container[i].empty())
 			{
-				if (winner < active_player_hands[i][0])
+				if (winner < active_player_hand_container[i][0])
 				{
-					winner = active_player_hands[i][0];
+					winner = active_player_hand_container[i][0];
 				}
 			}
 		}
 		//Assign winner as a Suitor integer.
-		for (unsigned int i = 0; i < active_player_hands.size(); i++)
+		for (unsigned int i = 0; i < active_player_hand_container.size(); i++)
 		{
-			if (!active_player_hands[i].empty() && active_player_hands[i][0] == winner)
+			if (!active_player_hand_container[i].empty() && active_player_hand_container[i][0] == winner)
 			{
 				winner = i;
 				break;
@@ -1094,24 +1094,24 @@ void EndRound()
 		//Check for Spy bonus, give Spy bonus token, no Spies, or duplicate Spies.
 		if (active_player_count > 1)
 		{
-			for (unsigned int i = 0; i < active_player_hands.size(); i++)
+			for (unsigned int i = 0; i < active_player_hand_container.size(); i++)
 			{
 				if (suitor_objects[i].SpyStatus())
 				{
-					temp_vector.push_back(i);
+					temp_container.push_back(i);
 				}
 			}
-			if (temp_vector.size() > 1)
+			if (temp_container.size() > 1)
 			{
 				cout << "Multiple suitors had the Spy. No one gets a bonus." << endl;
 			}
-			if (temp_vector.size() == 1)
+			if (temp_container.size() == 1)
 			{
-				cout << player_names.at(temp_vector[0]) << " Has the Spy, they gain an extra favor token <3" << endl;
-				suitor_objects.at(temp_vector[0]).GainToken();
-				cout << player_names.at(temp_vector[0]) << " token count: " << suitor_objects.at(temp_vector[0]).GetTokenCount() << endl;
+				cout << player_names.at(temp_container[0]) << " Has the Spy, they gain an extra favor token <3" << endl;
+				suitor_objects.at(temp_container[0]).GainToken();
+				cout << player_names.at(temp_container[0]) << " token count: " << suitor_objects.at(temp_container[0]).GetTokenCount() << endl;
 			}
-			if (temp_vector.empty())
+			if (temp_container.empty())
 			{
 				cout << "No one had the Spy this round." << endl;
 			}
@@ -1121,9 +1121,9 @@ void EndRound()
 	else
 	{
 		//Assign winner as a Suitor integer.
-		for (unsigned int i = 0; i < active_player_hands.size(); i++)
+		for (unsigned int i = 0; i < active_player_hand_container.size(); i++)
 		{
-			if (!active_player_hands[i].empty())
+			if (!active_player_hand_container[i].empty())
 			{
 				winner = i;
 			}
@@ -1143,17 +1143,17 @@ void EndRound()
 	cout << player_names[winner] << " gains one[1] favor token <3" << endl;
 	cout << player_names[winner] << " total tokens: " << suitor_objects[winner].GetTokenCount() << endl;
 	//Prepare for next round.
-	for (unsigned int i = 0; i < active_player_hands.size(); i++)
+	for (unsigned int i = 0; i < active_player_hand_container.size(); i++)
 	{
 		suitor_objects[i].RemoveHandmaid();
 	}
 	if (suitor_objects[winner].GetTokenCount() < token_count_to_win)
 	{
 		++round_count;
-		active_player_hands.clear();
-		players.clear();
-		down_pile.clear();
-		up_pile.clear();
+		active_player_hand_container.clear();
+		player_container.clear();
+		down_pile_container.clear();
+		up_pile_container.clear();
 		active_player_count = 0;
 		cout << "Moving on to the next round..." << endl;
 		std::this_thread::sleep_for(std::chrono::seconds(3));
@@ -1163,10 +1163,10 @@ void EndRound()
 	{
 		cout << player_names[winner] << " has won the heart of the princess." << endl;
 		cout << "-- GAME OVER --" << endl;
-		active_player_hands.clear();
-		players.clear();
-		down_pile.clear();
-		up_pile.clear();
+		active_player_hand_container.clear();
+		player_container.clear();
+		down_pile_container.clear();
+		up_pile_container.clear();
 		active_player_count = 0;
 		game_over = true;
 	}
