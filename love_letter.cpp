@@ -1,5 +1,6 @@
 /*
-This software is protected under the MIT license.
+This program is protected under the MIT license.
+License information can be found in license.txt
 */
 
 #include <iostream>
