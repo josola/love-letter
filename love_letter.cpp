@@ -1,7 +1,8 @@
 /*
-This program is protected under the MIT license.
-License information can be found in license.txt
-*/
+ * program that allows you to play the card game Love Letter
+ * this program is licensed under the MIT license
+ * 
+ */
 
 #include <iostream>
 #include <vector>
@@ -29,16 +30,16 @@ int iLength;
 int car_position;
 int human_player;
 
-const int spy = 0;
-const int guard = 1;
-const int priest = 2;
-const int baron = 3;
-const int handmaid = 4;
-const int prince = 5;
-const int chancellor = 6;
-const int king = 7;
-const int countess = 8;
-const int princess = 9;
+const int spy_value = 0;
+const int guard_value = 1;
+const int priest_value = 2;
+const int baron_value = 3;
+const int handmaid_value = 4;
+const int prince_value = 5;
+const int chancellor_value = 6;
+const int king_value = 7;
+const int countess_value = 8;
+const int princess_value = 9;
 const int starting_round = 1;
 const int min_players = 2;
 const int max_players = 6;
@@ -53,7 +54,7 @@ vector<int> players_with_handmaid;
 vector<vector<int> > active_player_hands;
 
 auto winner = 0;
-unsigned int target_hum = 0;
+unsigned int target_num = 0;
 bool game_over = false;
 char input;
 
@@ -69,12 +70,12 @@ const vector<string> card_names
 
 vector<int> base_deck
 {
-	spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess
+	spy_value, spy_value, guard_value, guard_value, guard_value, guard_value, guard_value, guard_value, priest_value, priest_value, baron_value, baron_value, handmaid_value, handmaid_value, prince_value, prince_value, chancellor_value, chancellor_value, king_value, countess_value, princess_value
 };
 
 vector<int> playing_deck
 {
-	spy, spy, guard, guard, guard, guard, guard, guard, priest, priest, baron, baron, handmaid, handmaid, prince, prince, chancellor, chancellor, king, countess, princess
+	spy_value, spy_value, guard_value, guard_value, guard_value, guard_value, guard_value, guard_value, priest_value, priest_value, baron_value, baron_value, handmaid_value, handmaid_value, prince_value, prince_value, chancellor_value, chancellor_value, king_value, countess_value, princess_value
 };
 
 vector<Player> suitor_objects
@@ -92,7 +93,7 @@ void ClearInput()
 bool ProperCardInput()
 {
 	//Input numbers cannot be lower than zero or higher than nine.
-	if (card_num >= spy && card_num <= princess && cin) { return true; }
+	if (card_num >= spy_value && card_num <= princess_value && cin) { return true; }
 	else
 	{
 		cout << "Invalid input, please input a card value between 0 and 9." << endl;
@@ -101,17 +102,17 @@ bool ProperCardInput()
 }
 bool ProperPlayerInput()
 {
-	target_hum++;
+	target_num++;
 	//Cannot input a number lower than one or a number larger than the number of active Suitors.
-	if (target_hum >= 1 && target_hum <= active_player_hands.size() && cin)
+	if (target_num >= 1 && target_num <= active_player_hands.size() && cin)
 	{
-		target_hum--;
+		target_num--;
 		return true;
 	}
 	else
 	{
 		cout << "Invalid input, please choose an active player by their number eg. SUITOR 1 would be 1." << endl;
-		target_hum--;
+		target_num--;
 		return false;
 	}
 }
@@ -304,13 +305,13 @@ void PrintHand(int suitor)
 bool CountessRestriction()
 {
 	//When Prince or King and Countess are in hand, the Countess must be played.
-	if (CardInHand(current_player, countess) && card_num != countess)
+	if (CardInHand(current_player, countess_value) && card_num != countess_value)
 	{
-		if (CardInHand(current_player, prince) || CardInHand(current_player, king))
+		if (CardInHand(current_player, prince_value) || CardInHand(current_player, king_value))
 		{
 			cout << "You have the " << card_names[HandPosition(current_player, 0)]
 				<< " and the " << card_names[HandPosition(current_player, 1)]
-				<< ". You MUST play the " << card_names[countess] << " this turn." << endl;
+				<< ". You MUST play the " << card_names[countess_value] << " this turn." << endl;
 			return true;
 		}
 		else { return false; }
@@ -320,13 +321,13 @@ bool CountessRestriction()
 bool IsPlayerPlaying()
 {
 	//Active Suitor check.
-	if (!active_player_hands[target_hum].empty()) { return true; }
+	if (!active_player_hands[target_num].empty()) { return true; }
 	else { return false; }
 }
 bool TargetHandmaidProtected()
 {
 	//Handmaid protection check.
-	if (suitor_objects[target_hum].HandmaidStatus()) { return true; }
+	if (suitor_objects[target_num].HandmaidStatus()) { return true; }
 	else { return false; }
 }
 void ChooseTargetPlayer(int target)
@@ -359,7 +360,7 @@ LOOP:
 	}
 	if (!IsPlayerPlaying())
 	{
-		ReturnPlayer(target_hum);
+		ReturnPlayer(target_num);
 		cout << " is out." << endl;
 		goto LOOP;
 	}
@@ -372,7 +373,7 @@ LOOP:
 		}
 		else
 		{
-			ReturnPlayer(target_hum);
+			ReturnPlayer(target_num);
 			cout << " has Handmaid protection." << endl;
 			temp_input.push_back(target);
 			ClearInput();
@@ -382,7 +383,7 @@ LOOP:
 	if (target == current_player)
 	{
 		//Prince can apply to current Suitor.
-		if (card_num == prince)
+		if (card_num == prince_value)
 		{
 			return;
 		}
@@ -533,16 +534,16 @@ LOOP:
 		}
 	}
 	//Guards cannot guess other Guards.
-	if (card_num == guard)
+	if (card_num == guard_value)
 	{
 		cout << "You can guess any card OTHER than a Guard." << endl;
 		ClearInput();
 		goto LOOP;
 	}
-	if (active_player_hands[target_hum][0] == card_num)
+	if (active_player_hands[target_num][0] == card_num)
 	{
-		cout << "Match! " << player_names[target_hum] << " is out." << endl;
-		RemovePlayer(target_hum);
+		cout << "Match! " << player_names[target_num] << " is out." << endl;
+		RemovePlayer(target_num);
 	}
 	else
 	{
@@ -551,29 +552,29 @@ LOOP:
 }
 void Priest()
 {
-	PrintHand(target_hum);
+	PrintHand(target_num);
 }
 void Baron()
 {
 	//Current Suitor compares hand with a target Suitor, highest hand stays in the game.
 	PrintHand(current_player);
-	PrintHand(target_hum);
+	PrintHand(target_num);
 	//If both hands are equal both Suitors remain and play moves on.
-	if (active_player_hands[current_player][0] == active_player_hands[target_hum][0])
+	if (active_player_hands[current_player][0] == active_player_hands[target_num][0])
 	{
 		cout << "Tie! Both suitors remain in the game." << endl;
 		return;
 	}
 	else
 	{
-		temp_victor = max(active_player_hands[current_player][0], active_player_hands[target_hum][0]);
+		temp_victor = max(active_player_hands[current_player][0], active_player_hands[target_num][0]);
 		if (active_player_hands[current_player][0] == temp_victor)
 		{
 			ReturnPlayer(current_player);
 			cout << " is victorious! ";
-			ReturnPlayer(target_hum);
+			ReturnPlayer(target_num);
 			cout << " is out!" << endl;
-			RemovePlayer(target_hum);
+			RemovePlayer(target_num);
 		}
 		else {
 			ReturnPlayer(current_player);
@@ -596,7 +597,7 @@ void Prince()
 LOOPB:
 	if (current_player == human_player)
 	{
-		ChooseTargetPlayer(target_hum);
+		ChooseTargetPlayer(target_num);
 	}
 	if (TargetHandmaidProtected())
 	{
@@ -604,10 +605,10 @@ LOOPB:
 		if (active_player_count == 2)
 		{
 			//When target Suitor is Handmaid protected the Prince applies to the current Suitor.
-			ReturnPlayer(target_hum);
+			ReturnPlayer(target_num);
 			cout << " has Handmaid protection." << endl;
 			cout << "The Prince applies to you." << endl;
-			if (find(active_player_hands[current_player].begin(), active_player_hands[current_player].end(), princess) != active_player_hands[current_player].end())
+			if (find(active_player_hands[current_player].begin(), active_player_hands[current_player].end(), princess_value) != active_player_hands[current_player].end())
 			{
 				cout << "You had the Princess! You're out!" << endl;
 				RemovePlayer(current_player);
@@ -615,7 +616,7 @@ LOOPB:
 			}
 			for (unsigned int i = 0; i < active_player_hands[current_player].size(); i++)
 			{
-				up_pile.push_back(active_player_hands[target_hum][i]);
+				up_pile.push_back(active_player_hands[target_num][i]);
 			}
 			active_player_hands[current_player].clear();
 			active_player_hands[current_player].push_back(playing_deck[0]);
@@ -626,43 +627,43 @@ LOOPB:
 			}
 			return;
 		}
-		cout << player_names[target_hum] << " is untargetable." << endl;
+		cout << player_names[target_num] << " is untargetable." << endl;
 		goto LOOPB;
 	}
-	if (find(active_player_hands[target_hum].begin(), active_player_hands[target_hum].end(), princess) != active_player_hands[target_hum].end())
+	if (find(active_player_hands[target_num].begin(), active_player_hands[target_num].end(), princess_value) != active_player_hands[target_num].end())
 	{
-		ReturnPlayer(target_hum);
+		ReturnPlayer(target_num);
 		cout << " had the Princess! ";
-		ReturnPlayer(target_hum);
+		ReturnPlayer(target_num);
 		cout << " is out!" << endl;
-		RemovePlayer(target_hum);
+		RemovePlayer(target_num);
 		return;
 	}
 	if (playing_deck.empty())
 	{
-		cout << player_names[target_hum] << " discards their hand, then redraws." << endl;
-		for (unsigned int i = 0; i < active_player_hands[target_hum].size(); i++)
+		cout << player_names[target_num] << " discards their hand, then redraws." << endl;
+		for (unsigned int i = 0; i < active_player_hands[target_num].size(); i++)
 		{
-			up_pile.push_back(active_player_hands[target_hum][i]);
+			up_pile.push_back(active_player_hands[target_num][i]);
 		}
-		active_player_hands[target_hum].push_back(down_pile[0]);
+		active_player_hands[target_num].push_back(down_pile[0]);
 		down_pile.erase(down_pile.begin(), down_pile.end());
-		if (target_hum == current_player && target_hum == human_player)
+		if (target_num == current_player && target_num == human_player)
 		{
 			PrintHand(current_player);
 		}
 	}
 	else
 	{
-		cout << player_names[target_hum] << " discards their hand, then redraws." << endl;
-		for (unsigned int i = 0; i < active_player_hands[target_hum].size(); i++)
+		cout << player_names[target_num] << " discards their hand, then redraws." << endl;
+		for (unsigned int i = 0; i < active_player_hands[target_num].size(); i++)
 		{
-			up_pile.push_back(active_player_hands[target_hum][i]);
+			up_pile.push_back(active_player_hands[target_num][i]);
 		}
-		active_player_hands[target_hum].erase(active_player_hands[target_hum].begin(), active_player_hands[target_hum].end());
-		active_player_hands[target_hum].push_back(playing_deck[0]);
+		active_player_hands[target_num].erase(active_player_hands[target_num].begin(), active_player_hands[target_num].end());
+		active_player_hands[target_num].push_back(playing_deck[0]);
 		playing_deck.erase(playing_deck.begin());
-		if (target_hum == current_player && target_hum == human_player)
+		if (target_num == current_player && target_num == human_player)
 		{
 			PrintHand(current_player);
 		}
@@ -831,7 +832,7 @@ void PlayCard()
 		Chancellor();
 		break;
 	case 7:
-		King(current_player, target_hum);
+		King(current_player, target_num);
 		break;
 	case 9:
 		Princess();
@@ -1019,12 +1020,12 @@ LOOP:
 		}
 		else { DiscardPlayedCard(); }
 		//Card resolves.
-		if (card_num == guard || card_num == priest || card_num == baron || card_num == king)
+		if (card_num == guard_value || card_num == priest_value || card_num == baron_value || card_num == king_value)
 		{
-			ChooseTargetPlayer(target_hum);
+			ChooseTargetPlayer(target_num);
 			if (TargetHandmaidProtected() && active_player_count == 2)
 			{
-				ReturnPlayer(target_hum);
+				ReturnPlayer(target_num);
 				cout << " has Handmaid protection." << endl;
 				PrintSeperator();
 				SwitchPlayer();
@@ -1032,7 +1033,7 @@ LOOP:
 			}
 			if (players_with_handmaid.size() == active_player_count - 1)
 			{
-				ReturnPlayer(target_hum);
+				ReturnPlayer(target_num);
 				cout << " has Handmaid protection." << endl;
 				cout << "All target Suitors have Handmaid protection." << endl;
 				PrintSeperator();
