@@ -7,3 +7,6 @@
 /love-letter.sln
 /.vs/love-letter/v16
 /x64/Debug
+.DS_Store
+reference/love_letter.cpp
+reference/player.h
