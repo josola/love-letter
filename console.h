@@ -9,6 +9,7 @@
 
 struct Console
 {
+    int ReceiveNumInput();
     void PrintStartup();
     void PrintInvalidInput(int type);
 };

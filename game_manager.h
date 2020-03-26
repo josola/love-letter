@@ -31,11 +31,11 @@ private:
     int player_count = 0;
 };
 
-class Manager
+class GameController
 {
 public:
-    Manager(GameState &state, Console &console);
-    void InitialSetup();
+    GameController(GameState &state, Console &console);
+    void ReceivePlayerCount(int output);
 
 private:
     GameState &state;

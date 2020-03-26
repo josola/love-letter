@@ -10,7 +10,7 @@
 
 using std::cin;
 
-Manager::Manager(GameState &state, Console &console) : state(state), console(console){};
+GameController::GameController(GameState &state, Console &console) : state(state), console(console){};
 
 int GameState::GetRoundCount() { return round_count; }
 int GameState::GetPlayerCount() { return player_count; }
@@ -69,45 +69,24 @@ void GameState::SetPlayerContainer(int count)
     }
 }
 
-//startup tasks for new games
-void Manager::InitialSetup()
+void GameController::ReceivePlayerCount(int output)
 {
-    if (state.GetRoundCount() == 1)
+    bool correct_input = false;
+    //check that input is within bounds
+    while (!correct_input)
     {
-        //prints startup prompt
-        console.PrintStartup();
-
-        //correct input setup
-        int player_count_input = 0;
-        bool correct_input = false;
-
-        //check that input is between 2 and 6 and is an integer
-        while (!correct_input)
+        if (output >= 2 && output <= 6 && cin)
         {
-            cin >> player_count_input;
-            if (player_count_input >= 2 && player_count_input <= 6 && cin)
-            {
-                correct_input = true;
-            }
-            else
-            {
-                //reset cin fail, clear input buffer
-                cin.clear();
-                cin.ignore();
-
-                console.PrintInvalidInput(0);
-                correct_input = false;
-            }
+            correct_input = true;
         }
-
-        //upon successful input
-        state.SetPlayerCount(player_count_input);
-
-        //add player objects to container
-        state.SetPlayerContainer(player_count_input);
+        else
+        {
+            //reset cin fail, clear input buffer
+            cin.clear();
+            cin.ignore();
+            console.PrintInvalidInput(1);
+            output = console.ReceiveNumInput();
+        }
     }
-    else
-    {
-        return;
-    }
+    state.SetPlayerCount(output);
 }

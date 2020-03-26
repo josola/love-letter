@@ -11,7 +11,17 @@ int main()
 {
     Console console;
     GameState state;
-    Manager manager(state, console);
-    manager.InitialSetup();
+    GameController gameController(state, console);
+    if (state.GetRoundCount() == 1)
+    {
+        console.PrintStartup();
+        gameController.ReceivePlayerCount(console.ReceiveNumInput());
+        state.SetPlayerContainer(state.GetPlayerCount());
+    }
+    else
+    {
+        /* code */
+    }
+    
     return 0;
 }
