@@ -10,7 +10,7 @@
 
 using std::cin;
 
-Manager::Manager(GameState& state, Console& console) : state(state), console(console) {};
+Manager::Manager(GameState &state, Console &console) : state(state), console(console){};
 
 int GameState::GetRoundCount() { return round_count; }
 
@@ -26,53 +26,48 @@ void GameState::SetPlayerCount(int value)
 
 void GameState::SetPlayerContainer(int count)
 {
-    switch(count)
+    switch (count)
     {
-        case 2:
-        {
-        Player::Player p1("PLAYER[1]", 1), p2("PLAYER[2]", 2);
-        player_container.push_back(p1);
-        player_container.push_back(p2);
+    case 2:
+    {
+        player_container.push_back(Player("PLAYER[1]", 1));
+        player_container.push_back(Player("PLAYER[2]", 2));
         break;
-        }
-        case 3:
-        {
-        Player::Player p1("PLAYER[1]", 1), p2("PLAYER[2]", 2), p3("PLAYER[3]", 3);
-        player_container.push_back(p1);
-        player_container.push_back(p2);
-        player_container.push_back(p3);
+    }
+    case 3:
+    {
+        player_container.push_back(Player("PLAYER[1]", 1));
+        player_container.push_back(Player("PLAYER[2]", 2));
+        player_container.push_back(Player("PLAYER[3]", 3));
         break;
-        }
-        case 4:
-        {
-        Player::Player p1("PLAYER[1]", 1), p2("PLAYER[2]", 2), p3("PLAYER[3]", 3), p4("PLAYER[4]", 4);
-        player_container.push_back(p1);
-        player_container.push_back(p2);
-        player_container.push_back(p3);
-        player_container.push_back(p4);
+    }
+    case 4:
+    {
+        player_container.push_back(Player("PLAYER[1]", 1));
+        player_container.push_back(Player("PLAYER[2]", 2));
+        player_container.push_back(Player("PLAYER[3]", 3));
+        player_container.push_back(Player("PLAYER[4]", 4));
         break;
-        }
-        case 5:
-        {
-        Player::Player p1("PLAYER[1]", 1), p2("PLAYER[2]", 2), p3("PLAYER[3]", 3), p4("PLAYER[4]", 4), p5("PLAYER[5]", 5);
-        player_container.push_back(p1);
-        player_container.push_back(p2);
-        player_container.push_back(p3);
-        player_container.push_back(p4);
-        player_container.push_back(p5);
+    }
+    case 5:
+    {
+        player_container.push_back(Player("PLAYER[1]", 1));
+        player_container.push_back(Player("PLAYER[2]", 2));
+        player_container.push_back(Player("PLAYER[3]", 3));
+        player_container.push_back(Player("PLAYER[4]", 4));
+        player_container.push_back(Player("PLAYER[5]", 5));
         break;
-        }
-        case 6:
-        {
-        Player::Player p1("PLAYER[1]", 1), p2("PLAYER[2]", 2), p3("PLAYER[3]", 3), p4("PLAYER[4]", 4), p5("PLAYER[5]", 5), p6("PLAYER[6]", 6);
-        player_container.push_back(p1);
-        player_container.push_back(p2);
-        player_container.push_back(p3);
-        player_container.push_back(p4);
-        player_container.push_back(p5);
-        player_container.push_back(p6);
+    }
+    case 6:
+    {
+        player_container.push_back(Player("PLAYER[1]", 1));
+        player_container.push_back(Player("PLAYER[2]", 2));
+        player_container.push_back(Player("PLAYER[3]", 3));
+        player_container.push_back(Player("PLAYER[4]", 4));
+        player_container.push_back(Player("PLAYER[5]", 5));
+        player_container.push_back(Player("PLAYER[6]", 6));
         break;
-        }
+    }
     }
 }
 
@@ -117,5 +112,4 @@ void Manager::InitialSetup()
     {
         return;
     }
-    
 }

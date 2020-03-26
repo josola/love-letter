@@ -11,3 +11,5 @@
 reference/love_letter.cpp
 reference/player.h
 documentation.odt
+.vscode/settings.json
+a.out
