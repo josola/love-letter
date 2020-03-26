@@ -20,9 +20,10 @@ class GameState
 public:
     int GetRoundCount();
     int GetPlayerCount();
-    vector<Player> GetPlayerContainer();    //container full of player objects
+    vector<Player> GetPlayerContainer(); //container full of player objects
     void SetPlayerCount(int value);
     void SetPlayerContainer(int count);
+
 private:
     vector<string> initial_log;
     vector<Player> player_container;
@@ -33,11 +34,12 @@ private:
 class Manager
 {
 public:
-    Manager(GameState& state, Console& console);
+    Manager(GameState &state, Console &console);
     void InitialSetup();
+
 private:
-    GameState& state;
-    Console& console;
+    GameState &state;
+    Console &console;
 };
 
 #endif

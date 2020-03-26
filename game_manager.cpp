@@ -13,9 +13,7 @@ using std::cin;
 Manager::Manager(GameState &state, Console &console) : state(state), console(console){};
 
 int GameState::GetRoundCount() { return round_count; }
-
 int GameState::GetPlayerCount() { return player_count; }
-
 vector<Player> GameState::GetPlayerContainer() { return player_container; }
 
 void GameState::SetPlayerCount(int value)

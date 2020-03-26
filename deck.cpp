@@ -10,6 +10,6 @@
 
 using std::vector;
 
-DeckController::DeckController(Deck& deck) : deck(deck) {};
+DeckController::DeckController(Deck &deck) : deck(deck){};
 
 vector<Card> Deck::GetDeck() { return deck; }

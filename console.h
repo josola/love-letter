@@ -10,7 +10,6 @@
 struct Console
 {
     void PrintStartup();
-
     void PrintInvalidInput(int type);
 };
 

@@ -9,16 +9,8 @@
 
 using std::string;
 
-Card::Card(string name, int value) : name(name), value(value) {};
+Card::Card(string name, int value) : name(name), value(value){};
+CardController::CardController(Card card) : card(card){};
 
-CardController::CardController(Card card) : card(card) {};
-
-string Card::GetName()
-{
-    return name;
-}
-
-int Card::GetValue()
-{
-    return value;
-}
+string Card::GetName() { return name; }
+int Card::GetValue() { return value; }

@@ -19,7 +19,7 @@ void Console::PrintInvalidInput(int type)
 {
     switch (type)
     {
-        case 0:
+    case 0:
         cout << "Invalid input. Please input a number between 2 and 6: " << '\n';
         break;
     }

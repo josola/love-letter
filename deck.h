@@ -16,6 +16,7 @@ class Deck
 {
 public:
     vector<Card> GetDeck();
+
 private:
     vector<Card> deck;
 };
@@ -23,9 +24,10 @@ private:
 class DeckController
 {
 public:
-    DeckController(Deck& deck);
+    DeckController(Deck &deck);
+
 private:
-    Deck& deck;
+    Deck &deck;
 };
 
 #endif

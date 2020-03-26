@@ -21,6 +21,7 @@ public:
     string GetName();
     int GetValue();
     vector<Card> GetHand();
+
 private:
     string name;
     int value;
@@ -30,9 +31,10 @@ private:
 class PlayerController
 {
 public:
-    PlayerController(Player& player);
+    PlayerController(Player &player);
+
 private:
-    Player& player;
+    Player &player;
 };
 
 #endif

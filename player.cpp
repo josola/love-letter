@@ -11,21 +11,9 @@
 using std::string;
 using std::vector;
 
-Player::Player(string name, int value) : name(name), value(value) {};
+Player::Player(string name, int value) : name(name), value(value){};
+PlayerController::PlayerController(Player &player) : player(player){};
 
-PlayerController::PlayerController(Player& player) : player(player) {};
-
-string Player::GetName()
-{
-    return name;
-}
-
-int Player::GetValue()
-{
-    return value;
-}
-
-vector<Card> Player::GetHand()
-{
-    return hand;
-}
+string Player::GetName() { return name; }
+int Player::GetValue() { return value; }
+vector<Card> Player::GetHand() { return hand; }

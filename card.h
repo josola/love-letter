@@ -17,6 +17,7 @@ public:
     Card(string nam, int value);
     string GetName();
     int GetValue();
+
 private:
     string name;
     int value;
@@ -26,6 +27,7 @@ class CardController
 {
 public:
     CardController(Card card);
+
 private:
     Card card;
 };
