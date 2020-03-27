@@ -14,6 +14,7 @@ GameController::GameController(GameState &state, Console &console) : state(state
 
 int GameState::GetRoundCount() { return round_count; }
 int GameState::GetPlayerCount() { return player_count; }
+int GameState::GetStartingPlayerCount() { return starting_player_count; }
 int GameState::GetWinningTokenCount() { return winning_token_count; }
 vector<Player> GameState::GetPlayerContainer() { return player_container; }
 
@@ -21,6 +22,12 @@ void GameState::SetPlayerCount(int value)
 {
     initial_log.push_back("player_count before setter: " + player_count);
     player_count = value;
+}
+
+void GameState::SetStartingPlayerCount(int value)
+{
+    initial_log.push_back("starting_player_count before setter: " + starting_player_count);
+    starting_player_count = value;
 }
 
 void GameState::SetPlayerContainer(int count)
