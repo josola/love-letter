@@ -10,7 +10,8 @@
 struct Console
 {
     int ReceiveNumInput();
-    void PrintStartup();
+    void PrintWelcomeMessage();
+    void PrintBeginningPlayerPrompt(int player_count);
     void PrintInvalidInput(int type);
 };
 

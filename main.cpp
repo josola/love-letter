@@ -14,11 +14,12 @@ int main()
     GameController gameController(state, console);
     if (state.GetRoundCount() == 1)
     {
-        console.PrintStartup();
+        console.PrintWelcomeMessage();
         gameController.ReceivePlayerCount(console.ReceiveNumInput());
         state.SetStartingPlayerCount(state.GetPlayerCount());
         state.SetPlayerContainer(state.GetPlayerCount());
         state.SetWinningTokenCount(gameController.GenerateWinningTokenCount(state.GetPlayerCount()));
+        console.PrintBeginningPlayerPrompt(state.GetPlayerCount());
     }
     else
     {

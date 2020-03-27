@@ -33,10 +33,15 @@ int Console::ReceiveNumInput()
     return output;
 }
 
-void Console::PrintStartup()
+void Console::PrintWelcomeMessage()
 {
     cout << "-- WELCOME TO LOVE LETTER --" << '\n';
     cout << "How many players will be playing?" << '\n';
+}
+
+void Console::PrintBeginningPlayerPrompt(int player_count)
+{
+    cout << "I have a suitor number (1 - " << player_count << ") in my head. Guess it!" << '\n';
 }
 
 void Console::PrintInvalidInput(int type)
