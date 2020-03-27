@@ -20,15 +20,18 @@ class GameState
 public:
     int GetRoundCount();
     int GetPlayerCount();
+    int GetWinningTokenCount();
     vector<Player> GetPlayerContainer(); //container full of player objects
     void SetPlayerCount(int value);
     void SetPlayerContainer(int count);
+    void SetWinningTokenCount(int value);
 
 private:
     vector<string> initial_log;
     vector<Player> player_container;
     int round_count = 1;
     int player_count = 0;
+    int winning_token_count = 0;
 };
 
 class GameController
@@ -36,6 +39,7 @@ class GameController
 public:
     GameController(GameState &state, Console &console);
     void ReceivePlayerCount(int output);
+    int GenerateWinningTokenCount(int count);
 
 private:
     GameState &state;

@@ -14,6 +14,7 @@ GameController::GameController(GameState &state, Console &console) : state(state
 
 int GameState::GetRoundCount() { return round_count; }
 int GameState::GetPlayerCount() { return player_count; }
+int GameState::GetWinningTokenCount() { return winning_token_count; }
 vector<Player> GameState::GetPlayerContainer() { return player_container; }
 
 void GameState::SetPlayerCount(int value)
@@ -69,6 +70,12 @@ void GameState::SetPlayerContainer(int count)
     }
 }
 
+void GameState::SetWinningTokenCount(int value)
+{
+    initial_log.push_back("winning_token_count before setter: " + winning_token_count);
+    winning_token_count = value;
+}
+
 void GameController::ReceivePlayerCount(int output)
 {
     bool correct_input = false;
@@ -89,4 +96,28 @@ void GameController::ReceivePlayerCount(int output)
         }
     }
     state.SetPlayerCount(output);
+}
+
+int GameController::GenerateWinningTokenCount(int count)
+{
+    int output = 0;
+    switch (count)
+    {
+    case 2:
+        output = 6;
+        break;
+    case 3:
+        output = 5;
+        break;
+    case 4:
+        output = 4;
+        break;
+    case 5:
+        output = 3;
+        break;
+    case 6:
+        output = 3;
+        break;
+    }
+    return output;
 }
