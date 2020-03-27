@@ -20,11 +20,15 @@ public:
     Player(string name, int value);
     string GetName();
     int GetValue();
+    bool GetCurrentStatus();
     vector<Card> GetHand();
+    void SetCurrent();
 
 private:
+    vector<string> initial_log;
     string name;
     int value;
+    bool current_player;
     vector<Card> hand;
 };
 

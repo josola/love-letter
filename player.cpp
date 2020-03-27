@@ -16,4 +16,17 @@ PlayerController::PlayerController(Player &player) : player(player){};
 
 string Player::GetName() { return name; }
 int Player::GetValue() { return value; }
+bool Player::GetCurrentStatus() { return current_player; }
 vector<Card> Player::GetHand() { return hand; }
+void Player::SetCurrent()
+{
+    initial_log.push_back("current_player before setter: " + current_player);
+    if (current_player)
+    {
+        current_player = false;
+    }
+    else
+    {
+        current_player = true;
+    }
+}
