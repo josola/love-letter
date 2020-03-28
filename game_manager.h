@@ -25,7 +25,7 @@ public:
     vector<Player> GetPlayerContainer(); //container full of player objects
     void SetPlayerCount(int value);
     void SetStartingPlayerCount(int value);
-    void SetPlayerContainer(int count);
+    void SetPlayerContainer(Player player);
     void SetWinningTokenCount(int value);
 
 private:
@@ -41,8 +41,11 @@ class GameController
 {
 public:
     GameController(GameState &state, Console &console);
+    void SetPlayerCount(int value);
+    void SetPlayerContainer(int count);
     void ReceivePlayerCount(int output);
-    int GenerateWinningTokenCount(int count);
+    void SetWinningTokenCount(int count);
+    void SetStartingPlayer();
 
 private:
     GameState &state;

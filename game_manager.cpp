@@ -30,51 +30,9 @@ void GameState::SetStartingPlayerCount(int value)
     starting_player_count = value;
 }
 
-void GameState::SetPlayerContainer(int count)
+void GameState::SetPlayerContainer(Player player)
 {
-    switch (count)
-    {
-    case 2:
-    {
-        player_container.push_back(Player("PLAYER[1]", 1));
-        player_container.push_back(Player("PLAYER[2]", 2));
-        break;
-    }
-    case 3:
-    {
-        player_container.push_back(Player("PLAYER[1]", 1));
-        player_container.push_back(Player("PLAYER[2]", 2));
-        player_container.push_back(Player("PLAYER[3]", 3));
-        break;
-    }
-    case 4:
-    {
-        player_container.push_back(Player("PLAYER[1]", 1));
-        player_container.push_back(Player("PLAYER[2]", 2));
-        player_container.push_back(Player("PLAYER[3]", 3));
-        player_container.push_back(Player("PLAYER[4]", 4));
-        break;
-    }
-    case 5:
-    {
-        player_container.push_back(Player("PLAYER[1]", 1));
-        player_container.push_back(Player("PLAYER[2]", 2));
-        player_container.push_back(Player("PLAYER[3]", 3));
-        player_container.push_back(Player("PLAYER[4]", 4));
-        player_container.push_back(Player("PLAYER[5]", 5));
-        break;
-    }
-    case 6:
-    {
-        player_container.push_back(Player("PLAYER[1]", 1));
-        player_container.push_back(Player("PLAYER[2]", 2));
-        player_container.push_back(Player("PLAYER[3]", 3));
-        player_container.push_back(Player("PLAYER[4]", 4));
-        player_container.push_back(Player("PLAYER[5]", 5));
-        player_container.push_back(Player("PLAYER[6]", 6));
-        break;
-    }
-    }
+    player_container.push_back(player);
 }
 
 void GameState::SetWinningTokenCount(int value)
@@ -83,7 +41,7 @@ void GameState::SetWinningTokenCount(int value)
     winning_token_count = value;
 }
 
-void GameController::ReceivePlayerCount(int output)
+void GameController::SetPlayerCount(int output)
 {
     bool correct_input = false;
     //check that input is within bounds
@@ -103,9 +61,57 @@ void GameController::ReceivePlayerCount(int output)
         }
     }
     state.SetPlayerCount(output);
+    state.SetStartingPlayerCount(output);
 }
 
-int GameController::GenerateWinningTokenCount(int count)
+void GameController::SetPlayerContainer(int count)
+{
+    switch (count)
+    {
+    case 2:
+    {
+        state.SetPlayerContainer(Player("PLAYER[1]", 1));
+        state.SetPlayerContainer(Player("PLAYER[2]", 2));
+        break;
+    }
+    case 3:
+    {
+        state.SetPlayerContainer(Player("PLAYER[1]", 1));
+        state.SetPlayerContainer(Player("PLAYER[2]", 2));
+        state.SetPlayerContainer(Player("PLAYER[3]", 3));
+        break;
+    }
+    case 4:
+    {
+        state.SetPlayerContainer(Player("PLAYER[1]", 1));
+        state.SetPlayerContainer(Player("PLAYER[2]", 2));
+        state.SetPlayerContainer(Player("PLAYER[3]", 3));
+        state.SetPlayerContainer(Player("PLAYER[4]", 4));
+        break;
+    }
+    case 5:
+    {
+        state.SetPlayerContainer(Player("PLAYER[1]", 1));
+        state.SetPlayerContainer(Player("PLAYER[2]", 2));
+        state.SetPlayerContainer(Player("PLAYER[3]", 3));
+        state.SetPlayerContainer(Player("PLAYER[4]", 4));
+        state.SetPlayerContainer(Player("PLAYER[5]", 5));
+        break;
+    }
+    case 6:
+    {
+        state.SetPlayerContainer(Player("PLAYER[1]", 1));
+        state.SetPlayerContainer(Player("PLAYER[2]", 2));
+        state.SetPlayerContainer(Player("PLAYER[3]", 3));
+        state.SetPlayerContainer(Player("PLAYER[4]", 4));
+        state.SetPlayerContainer(Player("PLAYER[5]", 5));
+        state.SetPlayerContainer(Player("PLAYER[6]", 6));
+        break;
+    }
+    }
+}
+
+void GameController::SetWinningTokenCount(int count)
 {
     int output = 0;
     switch (count)
@@ -126,5 +132,15 @@ int GameController::GenerateWinningTokenCount(int count)
         output = 3;
         break;
     }
-    return output;
+    state.SetWinningTokenCount(output);
+}
+
+void GameController::SetStartingPlayer()
+{
+    int player_count = state.GetPlayerCount();
+    console.PrintBeginningPlayerPrompt(player_count);
+    for (int i = 0; i < state.GetPlayerContainer().size(); i++)
+    {
+
+    }
 }
