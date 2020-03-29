@@ -30,9 +30,9 @@ void GameState::SetStartingPlayerCount(int value)
     starting_player_count = value;
 }
 
-void GameState::SetPlayerContainer(Player player)
+void GameState::SetPlayerContainer(vector<Player> input)
 {
-    player_container.push_back(player);
+    player_container = input;
 }
 
 void GameState::SetWinningTokenCount(int value)
@@ -41,7 +41,7 @@ void GameState::SetWinningTokenCount(int value)
     winning_token_count = value;
 }
 
-void GameController::SetPlayerCount(int output)
+int GameController::SetPlayerCount(int output)
 {
     bool correct_input = false;
     //check that input is within bounds
@@ -60,58 +60,45 @@ void GameController::SetPlayerCount(int output)
             output = console.ReceiveNumInput();
         }
     }
-    state.SetPlayerCount(output);
-    state.SetStartingPlayerCount(output);
+    return output;
 }
 
-void GameController::SetPlayerContainer(int count)
+vector<Player> GameController::SetPlayerContainer(int count)
 {
-    switch (count)
+    if (count == 2)
     {
-    case 2:
+        vector<Player> output{Player("PLAYER[1]", 1), Player("PLAYER[2]", 2)};
+        return output;
+    }
+    else if (count == 3)
     {
-        state.SetPlayerContainer(Player("PLAYER[1]", 1));
-        state.SetPlayerContainer(Player("PLAYER[2]", 2));
-        break;
+        vector<Player> output{Player("PLAYER[1]", 1), Player("PLAYER[2]", 2), Player("PLAYER[3]", 3)};
+        return output;
     }
-    case 3:
+    else if (count == 4)
     {
-        state.SetPlayerContainer(Player("PLAYER[1]", 1));
-        state.SetPlayerContainer(Player("PLAYER[2]", 2));
-        state.SetPlayerContainer(Player("PLAYER[3]", 3));
-        break;
+        vector<Player> output{Player("PLAYER[1]", 1), Player("PLAYER[2]", 2), Player("PLAYER[3]", 3), Player("PLAYER[4]", 4)};
+        return output;
     }
-    case 4:
+    else if (count == 5)
     {
-        state.SetPlayerContainer(Player("PLAYER[1]", 1));
-        state.SetPlayerContainer(Player("PLAYER[2]", 2));
-        state.SetPlayerContainer(Player("PLAYER[3]", 3));
-        state.SetPlayerContainer(Player("PLAYER[4]", 4));
-        break;
+        vector<Player> output{Player("PLAYER[1]", 1), Player("PLAYER[2]", 2), Player("PLAYER[3]", 3), Player("PLAYER[4]", 4), Player("PLAYER[5]", 5)};
+        return output;
     }
-    case 5:
+    else if (count == 6)
     {
-        state.SetPlayerContainer(Player("PLAYER[1]", 1));
-        state.SetPlayerContainer(Player("PLAYER[2]", 2));
-        state.SetPlayerContainer(Player("PLAYER[3]", 3));
-        state.SetPlayerContainer(Player("PLAYER[4]", 4));
-        state.SetPlayerContainer(Player("PLAYER[5]", 5));
-        break;
+        vector<Player> output{Player("PLAYER[1]", 1), Player("PLAYER[2]", 2), Player("PLAYER[3]", 3), Player("PLAYER[4]", 4), Player("PLAYER[5]", 5), Player("PLAYER[6]", 6)};
+        return output;
     }
-    case 6:
+    else
     {
-        state.SetPlayerContainer(Player("PLAYER[1]", 1));
-        state.SetPlayerContainer(Player("PLAYER[2]", 2));
-        state.SetPlayerContainer(Player("PLAYER[3]", 3));
-        state.SetPlayerContainer(Player("PLAYER[4]", 4));
-        state.SetPlayerContainer(Player("PLAYER[5]", 5));
-        state.SetPlayerContainer(Player("PLAYER[6]", 6));
-        break;
+        vector<Player> output;
+        return output;
     }
-    }
+    
 }
 
-void GameController::SetWinningTokenCount(int count)
+int GameController::SetWinningTokenCount(int count)
 {
     int output = 0;
     switch (count)
@@ -132,15 +119,5 @@ void GameController::SetWinningTokenCount(int count)
         output = 3;
         break;
     }
-    state.SetWinningTokenCount(output);
-}
-
-void GameController::SetStartingPlayer()
-{
-    int player_count = state.GetPlayerCount();
-    console.PrintBeginningPlayerPrompt(player_count);
-    for (int i = 0; i < state.GetPlayerContainer().size(); i++)
-    {
-
-    }
+    return output;
 }
