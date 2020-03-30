@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include "card.h"
+#include "console.h"
 
 using std::string;
 using std::vector;
@@ -17,7 +18,7 @@ using std::vector;
 class Player
 {
 public:
-    Player(string name, int value);
+    Player(string name = "", int value = 0);
     string GetName();
     int GetValue();
     bool GetCurrentStatus();
@@ -35,10 +36,13 @@ private:
 class PlayerController
 {
 public:
-    PlayerController(Player &player);
+    PlayerController(Player player, Console &console);
+    Player GetPlayer();
+    Player SetPlayer(int output);
 
 private:
-    Player &player;
+    Player player;
+    Console &console;
 };
 
 #endif
