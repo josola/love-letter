@@ -14,7 +14,7 @@ using std::vector;
 
 Player::Player(string name, int value) : name(name), value(value){};
 
-PlayerController::PlayerController(Player player, Console &console) : player(player), console(console){};
+PlayerController::PlayerController(Player &player, Console &console) : player(player), console(console){};
 
 string Player::GetName() { return name; }
 int Player::GetValue() { return value; }
@@ -35,18 +35,3 @@ void Player::SetCurrent()
 }
 
 Player PlayerController::GetPlayer() { return player; }
-
-Player PlayerController::SetPlayer(int output)
-{
-    if (output == 1)
-    {
-        Player p1("PLAYER[1]", 1);
-        return p1;
-    }
-    else
-    {
-        Player p0("PLAYER[2]", 2);
-        return p0;
-    }
-    
-}

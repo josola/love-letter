@@ -27,21 +27,20 @@ public:
 
 private:
     vector<string> initial_log;
-    string name;
-    int value;
-    bool current_player;
+    string name = "";
+    int value = 0;
+    bool current_player = false;
     vector<Card> hand;
 };
 
 class PlayerController
 {
 public:
-    PlayerController(Player player, Console &console);
+    PlayerController(Player &player, Console &console);
     Player GetPlayer();
-    Player SetPlayer(int output);
 
 private:
-    Player player;
+    Player &player;
     Console &console;
 };
 

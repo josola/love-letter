@@ -17,7 +17,6 @@ int GameState::GetRoundCount() { return round_count; }
 int GameState::GetPlayerCount() { return player_count; }
 int GameState::GetStartingPlayerCount() { return starting_player_count; }
 int GameState::GetWinningTokenCount() { return winning_token_count; }
-vector<PlayerController> GameState::GetPlayerControllerContainer() { return player_controller_container; }
 
 void GameState::SetPlayerCount(int value)
 {
@@ -29,11 +28,6 @@ void GameState::SetStartingPlayerCount(int value)
 {
     initial_log.push_back("starting_player_count before setter: " + starting_player_count);
     starting_player_count = value;
-}
-
-void GameState::SetPlayerControllerContainer(vector<PlayerController> input)
-{
-    player_controller_container = input;
 }
 
 void GameState::SetWinningTokenCount(int value)
@@ -62,69 +56,6 @@ int GameController::SetPlayerCount(int output)
         }
     }
     return output;
-}
-
-vector<PlayerController> GameController::SetPlayerControllerContainer(int count)
-{
-    if (count == 2)
-    {
-        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
-        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
-        vector<PlayerController> output{
-            p1Controller, p2Controller};
-        return output;
-    }
-    else if (count == 3)
-    {
-        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
-        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
-        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
-        vector<PlayerController> output{
-            p1Controller, p2Controller, p3Controller
-        };
-        return output;
-    }
-    else if (count == 4)
-    {
-        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
-        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
-        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
-        PlayerController p4Controller(Player("PLAYER[4]", 4), console);
-        vector<PlayerController> output{
-            p1Controller, p2Controller, p3Controller, p4Controller
-        };
-        return output;
-    }
-    else if (count == 5)
-    {
-        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
-        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
-        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
-        PlayerController p4Controller(Player("PLAYER[4]", 4), console);
-        PlayerController p5Controller(Player("PLAYER[5]", 5), console);
-        vector<PlayerController> output{
-            p1Controller, p2Controller, p3Controller, p4Controller, p5Controller
-        };
-        return output;
-    }
-    else if (count == 6)
-    {
-        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
-        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
-        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
-        PlayerController p4Controller(Player("PLAYER[4]", 4), console);
-        PlayerController p5Controller(Player("PLAYER[5]", 5), console);
-        PlayerController p6Controller(Player("PLAYER[6]", 6), console);
-        vector<PlayerController> output{
-            p1Controller, p2Controller, p3Controller, p4Controller, p5Controller, p6Controller
-        };
-        return output;
-    }
-    else
-    {
-        vector<PlayerController> output{};
-        return output;
-    }
 }
 
 int GameController::SetWinningTokenCount(int count)
