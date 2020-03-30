@@ -19,8 +19,8 @@ class Player
 {
 public:
     Player(string name = "", int value = 0);
-    string GetName();
-    int GetValue();
+    string GetName() const;
+    int GetValue() const;
     bool GetCurrentStatus();
     vector<Card> GetHand();
     void SetCurrent();

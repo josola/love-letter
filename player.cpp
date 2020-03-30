@@ -16,8 +16,8 @@ Player::Player(string name, int value) : name(name), value(value){};
 
 PlayerController::PlayerController(Player &player, Console &console) : player(player), console(console){};
 
-string Player::GetName() { return name; }
-int Player::GetValue() { return value; }
+string Player::GetName() const { return name; }
+int Player::GetValue() const { return value; }
 bool Player::GetCurrentStatus() { return current_player; }
 vector<Card> Player::GetHand() { return hand; }
 
