@@ -16,7 +16,7 @@ int main()
     {
         console.PrintWelcomeMessage();
         state.SetPlayerCount(gameController.SetPlayerCount(console.ReceiveNumInput()));
-        state.SetPlayerContainer(gameController.SetPlayerContainer(state.GetPlayerCount()));
+        state.SetPlayerControllerContainer(gameController.SetPlayerControllerContainer(state.GetPlayerCount()));
         state.SetWinningTokenCount(gameController.SetWinningTokenCount(state.GetPlayerCount()));
     }
     else
