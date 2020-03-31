@@ -16,13 +16,13 @@ int main()
     {
         console.PrintWelcomeMessage();
         state.SetPlayerCount(gameController.SetPlayerCount(console.ReceiveNumInput()));
-
+        state.SetPlayerControllerContainer(gameController.SetPlayerControllerContainer(state.GetPlayerCount()));
         state.SetWinningTokenCount(gameController.SetWinningTokenCount(state.GetPlayerCount()));
     }
     else
     {
         /* code */
     }
-    
+
     return 0;
 }

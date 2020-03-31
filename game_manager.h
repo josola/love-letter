@@ -22,13 +22,14 @@ public:
     int GetPlayerCount();
     int GetStartingPlayerCount();
     int GetWinningTokenCount();
-    
+    void SetPlayerControllerContainer(vector<PlayerController> container);
     void SetPlayerCount(int value);
     void SetStartingPlayerCount(int value);
     void SetWinningTokenCount(int value);
 
 private:
     vector<string> initial_log;
+    vector<PlayerController> player_controller_container;
     int round_count = 1;
     int player_count = 0;
     int starting_player_count = 0;
@@ -38,13 +39,14 @@ private:
 class GameController
 {
 public:
-    GameController(GameState &state, Console &console);
+    GameController(GameState &state, Console console);
     int SetPlayerCount(int value);
     int SetWinningTokenCount(int count);
+    vector<PlayerController> SetPlayerControllerContainer(int output);
 
 private:
     GameState &state;
-    Console &console;
+    Console console;
 };
 
 #endif

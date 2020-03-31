@@ -19,8 +19,8 @@ class Player
 {
 public:
     Player(string name = "", int value = 0);
-    string GetName() const;
-    int GetValue() const;
+    string GetName();
+    int GetValue();
     bool GetCurrentStatus();
     vector<Card> GetHand();
     void SetCurrent();
@@ -36,12 +36,12 @@ private:
 class PlayerController
 {
 public:
-    PlayerController(Player &player, Console &console);
+    PlayerController(Player player, Console console);
     Player GetPlayer();
 
 private:
-    Player &player;
-    Console &console;
+    Player player;
+    Console console;
 };
 
 #endif

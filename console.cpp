@@ -10,6 +10,8 @@
 using std::cin;
 using std::cout;
 
+Console::Console(){};
+
 int Console::ReceiveNumInput()
 {
     int output;

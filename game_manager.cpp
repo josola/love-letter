@@ -11,12 +11,17 @@
 
 using std::cin;
 
-GameController::GameController(GameState &state, Console &console) : state(state), console(console){};
+GameController::GameController(GameState &state, Console console) : state(state), console(console){};
 
 int GameState::GetRoundCount() { return round_count; }
 int GameState::GetPlayerCount() { return player_count; }
 int GameState::GetStartingPlayerCount() { return starting_player_count; }
 int GameState::GetWinningTokenCount() { return winning_token_count; }
+
+void GameState::SetPlayerControllerContainer(vector<PlayerController> container)
+{
+    player_controller_container = container;
+}
 
 void GameState::SetPlayerCount(int value)
 {
@@ -80,4 +85,80 @@ int GameController::SetWinningTokenCount(int count)
         break;
     }
     return output;
+}
+
+vector<PlayerController> GameController::SetPlayerControllerContainer(int output)
+{
+    vector<PlayerController> container;
+    switch (output)
+    {
+    case 2:
+    {
+        
+        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
+        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
+        container.push_back(p1Controller);
+        container.push_back(p2Controller);
+        break;
+    }
+    case 3:
+    {
+        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
+        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
+        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
+        container.push_back(p1Controller);
+        container.push_back(p2Controller);
+        container.push_back(p3Controller);
+        break;
+    }
+    case 4:
+    {
+        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
+        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
+        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
+        PlayerController p4Controller(Player("PLAYER[4]", 4), console);
+        container.push_back(p1Controller);
+        container.push_back(p2Controller);
+        container.push_back(p3Controller);
+        container.push_back(p4Controller);
+        break;
+    }
+    case 5:
+    {
+        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
+        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
+        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
+        PlayerController p4Controller(Player("PLAYER[4]", 4), console);
+        PlayerController p5Controller(Player("PLAYER[5]", 5), console);
+        container.push_back(p1Controller);
+        container.push_back(p2Controller);
+        container.push_back(p3Controller);
+        container.push_back(p4Controller);
+        container.push_back(p5Controller);
+        break;
+    }
+    case 6:
+    {
+        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
+        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
+        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
+        PlayerController p4Controller(Player("PLAYER[4]", 4), console);
+        PlayerController p5Controller(Player("PLAYER[5]", 5), console);
+        PlayerController p6Controller(Player("PLAYER[6]", 6), console);
+        container.push_back(p1Controller);
+        container.push_back(p2Controller);
+        container.push_back(p3Controller);
+        container.push_back(p4Controller);
+        container.push_back(p5Controller);
+        container.push_back(p6Controller);
+        break;
+    }
+    default:
+    {
+        PlayerController p0Controller(Player(), console);
+        container.push_back(p0Controller);
+        break;
+    }
+    }
+    return container;
 }
