@@ -1,7 +1,7 @@
 /*
  * Determines deck information.
  * This software uses the MIT license.
- * Written by Jordan Sola 2020
+ * Written by Jordan Sola 2019-2020
  */
 
 #ifndef DECK_H
