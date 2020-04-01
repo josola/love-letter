@@ -12,19 +12,15 @@
 
 using std::vector;
 
-class Deck
+struct Deck
 {
-public:
-    vector<Card> GetDeck();
 
-private:
-    vector<Card> deck;
 };
 
-class DeckController
+class DeckUtil
 {
 public:
-    DeckController(Deck &deck);
+    DeckUtil(Deck &deck);
 
 private:
     Deck &deck;

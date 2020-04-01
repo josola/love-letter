@@ -7,29 +7,18 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <string>
-
-using std::string;
-
-class Card
+struct Card
 {
-public:
-    Card(string nam, int value);
-    string GetName();
-    int GetValue();
 
-private:
-    string name;
-    int value;
 };
 
-class CardController
+class CardUtil
 {
 public:
-    CardController(Card card);
+    CardUtil(Card &card);
 
 private:
-    Card card;
+    Card &card;
 };
 
 #endif

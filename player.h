@@ -15,32 +15,18 @@
 using std::string;
 using std::vector;
 
-class Player
+struct Player
 {
-public:
-    Player(string name = "", int value = 0);
-    string GetName();
-    int GetValue();
-    bool GetCurrentStatus();
-    vector<Card> GetHand();
-    void SetCurrent();
 
-private:
-    vector<string> initial_log;
-    string name = "";
-    int value = 0;
-    bool current_player = false;
-    vector<Card> hand;
 };
 
-class PlayerController
+class PlayerUtil
 {
 public:
-    PlayerController(Player player);
-    Player GetPlayer();
+    PlayerUtil(Player &player);
 
 private:
-    Player player;
+    Player &player;
 };
 
 #endif
