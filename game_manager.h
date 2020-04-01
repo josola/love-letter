@@ -39,14 +39,13 @@ private:
 class GameController
 {
 public:
-    GameController(GameState &state, Console console);
+    GameController(GameState &state);
     int SetPlayerCount(int value);
     int SetWinningTokenCount(int count);
     vector<PlayerController> SetPlayerControllerContainer(int output);
 
 private:
     GameState &state;
-    Console console;
 };
 
 #endif

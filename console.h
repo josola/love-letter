@@ -10,10 +10,10 @@
 struct Console
 {
     Console();
-    int ReceiveNumInput();
-    void PrintWelcomeMessage();
-    void PrintBeginningPlayerPrompt(int player_count);
-    void PrintInvalidInput(int type);
+    static int ReceiveNumInput();
+    static void PrintWelcomeMessage();
+    static void PrintBeginningPlayerPrompt(int player_count);
+    static void PrintInvalidInput(int type);
 };
 
 #endif

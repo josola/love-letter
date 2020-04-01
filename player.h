@@ -36,12 +36,11 @@ private:
 class PlayerController
 {
 public:
-    PlayerController(Player player, Console console);
+    PlayerController(Player player);
     Player GetPlayer();
 
 private:
     Player player;
-    Console console;
 };
 
 #endif

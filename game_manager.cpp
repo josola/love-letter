@@ -11,7 +11,7 @@
 
 using std::cin;
 
-GameController::GameController(GameState &state, Console console) : state(state), console(console){};
+GameController::GameController(GameState &state) : state(state){};
 
 int GameState::GetRoundCount() { return round_count; }
 int GameState::GetPlayerCount() { return player_count; }
@@ -56,8 +56,8 @@ int GameController::SetPlayerCount(int output)
             //reset cin fail, clear input buffer
             cin.clear();
             cin.ignore();
-            console.PrintInvalidInput(1);
-            output = console.ReceiveNumInput();
+            Console::PrintInvalidInput(1);
+            output = Console::ReceiveNumInput();
         }
     }
     return output;
@@ -95,17 +95,17 @@ vector<PlayerController> GameController::SetPlayerControllerContainer(int output
     case 2:
     {
         
-        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
-        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
+        PlayerController p1Controller(Player("PLAYER[1]", 1));
+        PlayerController p2Controller(Player("PLAYER[2]", 2));
         container.push_back(p1Controller);
         container.push_back(p2Controller);
         break;
     }
     case 3:
     {
-        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
-        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
-        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
+        PlayerController p1Controller(Player("PLAYER[1]", 1));
+        PlayerController p2Controller(Player("PLAYER[2]", 2));
+        PlayerController p3Controller(Player("PLAYER[3]", 3));
         container.push_back(p1Controller);
         container.push_back(p2Controller);
         container.push_back(p3Controller);
@@ -113,10 +113,10 @@ vector<PlayerController> GameController::SetPlayerControllerContainer(int output
     }
     case 4:
     {
-        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
-        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
-        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
-        PlayerController p4Controller(Player("PLAYER[4]", 4), console);
+        PlayerController p1Controller(Player("PLAYER[1]", 1));
+        PlayerController p2Controller(Player("PLAYER[2]", 2));
+        PlayerController p3Controller(Player("PLAYER[3]", 3));
+        PlayerController p4Controller(Player("PLAYER[4]", 4));
         container.push_back(p1Controller);
         container.push_back(p2Controller);
         container.push_back(p3Controller);
@@ -125,11 +125,11 @@ vector<PlayerController> GameController::SetPlayerControllerContainer(int output
     }
     case 5:
     {
-        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
-        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
-        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
-        PlayerController p4Controller(Player("PLAYER[4]", 4), console);
-        PlayerController p5Controller(Player("PLAYER[5]", 5), console);
+        PlayerController p1Controller(Player("PLAYER[1]", 1));
+        PlayerController p2Controller(Player("PLAYER[2]", 2));
+        PlayerController p3Controller(Player("PLAYER[3]", 3));
+        PlayerController p4Controller(Player("PLAYER[4]", 4));
+        PlayerController p5Controller(Player("PLAYER[5]", 5));
         container.push_back(p1Controller);
         container.push_back(p2Controller);
         container.push_back(p3Controller);
@@ -139,12 +139,12 @@ vector<PlayerController> GameController::SetPlayerControllerContainer(int output
     }
     case 6:
     {
-        PlayerController p1Controller(Player("PLAYER[1]", 1), console);
-        PlayerController p2Controller(Player("PLAYER[2]", 2), console);
-        PlayerController p3Controller(Player("PLAYER[3]", 3), console);
-        PlayerController p4Controller(Player("PLAYER[4]", 4), console);
-        PlayerController p5Controller(Player("PLAYER[5]", 5), console);
-        PlayerController p6Controller(Player("PLAYER[6]", 6), console);
+        PlayerController p1Controller(Player("PLAYER[1]", 1));
+        PlayerController p2Controller(Player("PLAYER[2]", 2));
+        PlayerController p3Controller(Player("PLAYER[3]", 3));
+        PlayerController p4Controller(Player("PLAYER[4]", 4));
+        PlayerController p5Controller(Player("PLAYER[5]", 5));
+        PlayerController p6Controller(Player("PLAYER[6]", 6));
         container.push_back(p1Controller);
         container.push_back(p2Controller);
         container.push_back(p3Controller);
@@ -155,7 +155,7 @@ vector<PlayerController> GameController::SetPlayerControllerContainer(int output
     }
     default:
     {
-        PlayerController p0Controller(Player(), console);
+        PlayerController p0Controller(Player("", 0));
         container.push_back(p0Controller);
         break;
     }

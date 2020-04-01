@@ -13,7 +13,7 @@ using std::string;
 using std::vector;
 
 Player::Player(string name, int value) : name(name), value(value){};
-PlayerController::PlayerController(Player player, Console console) : player(player), console(console){};
+PlayerController::PlayerController(Player player) : player(player){};
 
 string Player::GetName() { return name; }
 int Player::GetValue() { return value; }

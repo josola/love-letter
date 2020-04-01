@@ -11,11 +11,11 @@ int main()
 {
     Console console;
     GameState state;
-    GameController gameController(state, console);
+    GameController gameController(state);
     if (state.GetRoundCount() == 1)
     {
-        console.PrintWelcomeMessage();
-        state.SetPlayerCount(gameController.SetPlayerCount(console.ReceiveNumInput()));
+        Console::PrintWelcomeMessage();
+        state.SetPlayerCount(gameController.SetPlayerCount(Console::ReceiveNumInput()));
         state.SetPlayerControllerContainer(gameController.SetPlayerControllerContainer(state.GetPlayerCount()));
         state.SetWinningTokenCount(gameController.SetWinningTokenCount(state.GetPlayerCount()));
     }
