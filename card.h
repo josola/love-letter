@@ -19,6 +19,7 @@ public:
 
 private:
     Card &card;
+    
 };
 
 #endif

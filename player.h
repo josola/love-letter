@@ -7,14 +7,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <string>
-#include <vector>
-#include "card.h"
-#include "console.h"
-
-using std::string;
-using std::vector;
-
 struct Player
 {
 
@@ -27,6 +19,7 @@ public:
 
 private:
     Player &player;
+
 };
 
 #endif

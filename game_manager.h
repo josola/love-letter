@@ -19,6 +19,7 @@ public:
 
 private:
     GameState &game_state;
+    
 };
 
 #endif
