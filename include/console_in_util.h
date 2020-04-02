@@ -12,10 +12,11 @@
 class ConsoleInUtil
 {
 public:
-    ConsoleInUtil(ConsoleIn console_in);
+    static int GetIntInput();
+
+    static void ClearInput();
 
 private:
-    ConsoleIn console_in;
 
 };
 

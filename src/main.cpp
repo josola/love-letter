@@ -4,8 +4,18 @@
  * Written by Jordan Sola 2019-2020
  */
 
+#include <iostream>
+#include "console_out_util.h"
+#include "game_util.h"
+
 int main()
 {
+    ConsoleOutUtil::PrintWelcome();
+    ConsoleOutUtil::PrintStartingPlayerPrompt();
+    Game game;
+    GameUtil gameUtil(game);
+    gameUtil.GetPlayerCount();
+
     /*
     BEGINNING OF ROUNDS --
 

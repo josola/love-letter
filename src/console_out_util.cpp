@@ -4,6 +4,30 @@
  * Written by Jordan Sola 2019-2020
  */
 
+#include <iostream>
 #include "console_out_util.h"
 
-ConsoleOutUtil::ConsoleOutUtil(ConsoleOut console_out) :  console_out(console_out) {};
+using std::cout;
+
+void ConsoleOutUtil::PrintWelcome()
+{
+    cout << "-- Welcome to Love Letter --\n";
+}
+
+void ConsoleOutUtil::PrintStartingPlayerPrompt()
+{
+    cout << "How many players will be playing?\n";
+}
+
+void ConsoleOutUtil::PrintInvalidInput(int output)
+{
+    switch (output)
+    {
+    case 0:
+        cout << "Invalid input. Please enter a number between 1 and 6.\n";
+        break;
+    default:
+        cout << "Invalid input.\n";
+        break;
+    }
+}

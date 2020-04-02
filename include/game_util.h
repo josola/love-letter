@@ -14,9 +14,15 @@ class GameUtil
 public:
     GameUtil(Game game);
 
+    void GetPlayerCount();
+    bool CheckPlayerCount(int input);
+    int CorrectInput(int input);
+    int SetPlayerCount(int input);
+    int SetOriginalPlayerCount(int input);
+
 private:
     Game game;
-    
+
 };
 
 #endif

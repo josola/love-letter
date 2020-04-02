@@ -4,7 +4,7 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef CONSOL_OUT_UTIL_H
+#ifndef CONSOLE_OUT_UTIL_H
 #define CONSOLE_OUT_UTIL_H
 
 #include "console_out.h"
@@ -12,10 +12,11 @@
 class ConsoleOutUtil
 {
 public:
-    ConsoleOutUtil(ConsoleOut console_out);
+    static void PrintWelcome();
+    static void PrintStartingPlayerPrompt();
+    static void PrintInvalidInput(int output);
 
 private:
-    ConsoleOut console_out;
     
 };
 

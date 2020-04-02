@@ -4,6 +4,21 @@
  * Written by Jordan Sola 2019-2020
  */
 
+#include <iostream>
 #include "console_in_util.h"
 
-ConsoleInUtil::ConsoleInUtil(ConsoleIn console_in) : console_in(console_in) {};
+using std::cin;
+
+int ConsoleInUtil::GetIntInput()
+{
+    int input = 0;
+    cin >> input;
+    return input;
+
+}
+
+void ConsoleInUtil::ClearInput()
+{
+    cin.clear();
+    cin.ignore();
+}
