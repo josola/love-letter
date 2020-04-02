@@ -10,6 +10,12 @@
 
 GameUtil::GameUtil(Game game) : game(game){};
 
+int GameUtil::RoundCount()
+{
+    return game.round_count;
+
+}
+
 void GameUtil::GetPlayerCount()
 {
     int count = ConsoleInUtil::GetIntInput();

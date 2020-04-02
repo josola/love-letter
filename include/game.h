@@ -12,6 +12,7 @@ struct Game
     Game game() {};
     int player_count = 0;
     int original_player_count = 0;
+    int round_count = 1;
 
 };
 

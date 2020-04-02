@@ -13,9 +13,13 @@ int main()
     Game game;
     GameUtil gameUtil(game);
 
-    ConsoleOutUtil::PrintWelcome();
-    ConsoleOutUtil::PrintStartingPlayerPrompt();
-    gameUtil.GetPlayerCount();
+    if (gameUtil.RoundCount() == 1)
+    {
+        ConsoleOutUtil::PrintWelcome();
+        ConsoleOutUtil::PrintStartingPlayerPrompt();
+        gameUtil.GetPlayerCount();
+
+    }
 
     /*
     BEGINNING OF ROUNDS --

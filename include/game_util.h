@@ -14,6 +14,7 @@ class GameUtil
 public:
     GameUtil(Game game);
 
+    int RoundCount();
     void GetPlayerCount();
     bool CorrectPlayerCount(int input);
     void FixPlayerCount();
