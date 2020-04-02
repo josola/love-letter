@@ -10,10 +10,11 @@
 
 int main()
 {
-    ConsoleOutUtil::PrintWelcome();
-    ConsoleOutUtil::PrintStartingPlayerPrompt();
     Game game;
     GameUtil gameUtil(game);
+
+    ConsoleOutUtil::PrintWelcome();
+    ConsoleOutUtil::PrintStartingPlayerPrompt();
     gameUtil.GetPlayerCount();
 
     /*
