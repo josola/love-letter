@@ -12,24 +12,22 @@ GameUtil::GameUtil(Game game) : game(game){};
 
 void GameUtil::GetPlayerCount()
 {
-    ConsoleOutUtil::PrintStartingPlayerPrompt();
     int count = ConsoleInUtil::GetIntInput();
     if (!CorrectPlayerCount(count))
     {
-        count = FixPlayerCount(count);
+        FixPlayerCount();
     }
     else
     {
-        game.PlayerCount = SetPlayerCount(count);
-        game.OriginalPlayerCount = SetOriginalPlayerCount(count);
+        game.player_count = SetPlayerCount(count);
+        game.original_player_count = SetOriginalPlayerCount(count);
     }
     
 }
 
 bool GameUtil::CorrectPlayerCount(int input)
 {
-    int count = input;
-    if (count >= 2 && count <= 6)
+    if (input >= 2 && input <= 6)
     {
         return true;
     }
@@ -41,24 +39,10 @@ bool GameUtil::CorrectPlayerCount(int input)
 
 }
 
-int GameUtil::FixPlayerCount(int input)
+void GameUtil::FixPlayerCount()
 {
-    int count = input;
-    bool correct = false;
-    while (!correct)
-    {
-        count = ConsoleInUtil::GetIntInput();
-        if (CorrectPlayerCount(count))
-        {
-            correct = true;
-        }
-        else
-        {
-            ConsoleInUtil::ClearInput();
-        }
-        
-    }
-    return count;
+    ConsoleInUtil::ClearInput();
+    GetPlayerCount();
 
 }
 

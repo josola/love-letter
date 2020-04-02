@@ -16,7 +16,7 @@ public:
 
     void GetPlayerCount();
     bool CorrectPlayerCount(int input);
-    int FixPlayerCount(int input);
+    void FixPlayerCount();
     int SetPlayerCount(int input);
     int SetOriginalPlayerCount(int input);
 
