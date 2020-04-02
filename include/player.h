@@ -1,5 +1,5 @@
 /*
- * Determines player information.
+ * Determines information for player.
  * This software uses the MIT license.
  * Written by Jordan Sola 2019-2020
  */
@@ -9,16 +9,6 @@
 
 struct Player
 {
-
-};
-
-class PlayerUtil
-{
-public:
-    PlayerUtil(Player &player);
-
-private:
-    Player &player;
 
 };
 

@@ -12,13 +12,4 @@ struct Deck
 
 };
 
-class DeckUtil
-{
-public:
-    DeckUtil(Deck &deck);
-
-private:
-    Deck &deck;
-};
-
 #endif

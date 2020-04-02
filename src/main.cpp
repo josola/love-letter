@@ -17,7 +17,8 @@ int main()
             Set active player objects.
             Store number of original active players seperately so a new round can start with original count.
             Set winning token count.
-            Acquire player guess to determine who goes first.
+            Prompt for player guess.
+            Acquire player guess.
         
         FIRST ROUND AND ANY OTHER ROUND --
 

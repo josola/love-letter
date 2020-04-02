@@ -4,6 +4,12 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#include "card.h"
+#ifndef CARD_H
+#define CARD_H
 
-CardUtil::CardUtil(Card &card) : card(card) {};
+struct Card
+{
+
+};
+
+#endif

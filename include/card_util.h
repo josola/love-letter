@@ -1,25 +1,22 @@
 /*
- * Determines card information.
+ * Helper utility for card.
  * This software uses the MIT license.
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef CARD_H
-#define CARD_H
+#ifndef CARD_UTIL_H
+#define CARD_UTIL_H
 
-struct Card
-{
-
-};
+#include "card.h"
 
 class CardUtil
 {
 public:
-    CardUtil(Card &card);
+    CardUtil(Card card);
 
 private:
-    Card &card;
-    
+    Card card;
+
 };
 
 #endif
