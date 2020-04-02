@@ -7,14 +7,13 @@
 #ifndef CONSOLE_OUT_UTIL_H
 #define CONSOLE_OUT_UTIL_H
 
-#include "console_out.h"
-
 class ConsoleOutUtil
 {
 public:
     static void PrintWelcome();
     static void PrintStartingPlayerPrompt();
     static void PrintInvalidInput(int output);
+    static void PrintExitPrompt();
 
 private:
     

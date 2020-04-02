@@ -8,52 +8,52 @@
 #include "console_in_util.h"
 #include "console_out_util.h"
 
-GameUtil::GameUtil(Game game) : game(game) {};
+GameUtil::GameUtil(Game game) : game(game){};
 
 void GameUtil::GetPlayerCount()
 {
     int count = ConsoleInUtil::GetIntInput();
-    if (CheckPlayerCount(count))
+    if (!CorrectPlayerCount(count))
     {
-        SetPlayerCount(count);
-        SetOriginalPlayerCount(count);
+        count = FixPlayerCount(count);
     }
     else
     {
-        count = CorrectInput(count);
+        game.PlayerCount = SetPlayerCount(count);
+        game.OriginalPlayerCount = SetOriginalPlayerCount(count);
     }
     
 }
 
-bool GameUtil::CheckPlayerCount(int input)
+bool GameUtil::CorrectPlayerCount(int input)
 {
     int count = input;
-    if (count >= 2 || count <= 6)
+    if (count >= 2 && count <= 6)
     {
         return true;
     }
     else
     {
+        ConsoleOutUtil::PrintInvalidInput(1);
         return false;
     }
-    
+
 }
 
-int GameUtil::CorrectInput(int input)
+int GameUtil::FixPlayerCount(int input)
 {
     int count = input;
     bool correct = false;
     while (!correct)
     {
-        if (!CheckPlayerCount(count))
+        count = ConsoleInUtil::GetIntInput();
+        if (CorrectPlayerCount(count))
         {
-            ConsoleOutUtil::PrintInvalidInput(0);
-            ConsoleInUtil::ClearInput();
-            count = ConsoleInUtil::GetIntInput();
+            correct = true;
         }
         else
         {
-            correct = true;
+            ConsoleInUtil::ClearInput();
         }
         
     }

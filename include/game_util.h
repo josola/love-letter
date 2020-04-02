@@ -15,8 +15,8 @@ public:
     GameUtil(Game game);
 
     void GetPlayerCount();
-    bool CheckPlayerCount(int input);
-    int CorrectInput(int input);
+    bool CorrectPlayerCount(int input);
+    int FixPlayerCount(int input);
     int SetPlayerCount(int input);
     int SetOriginalPlayerCount(int input);
 

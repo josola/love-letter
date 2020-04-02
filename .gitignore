@@ -26,3 +26,8 @@ love_letter.exe
 /Debug
 bin/love_letter.dSYM/Contents/Info.plist
 .vscode/c_cpp_properties.json
+/.vs
+/love+letter.vcxproj.user
+/love+letter.vcxproj.filters
+/love+letter.vcxproj
+/love+letter.sln

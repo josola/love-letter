@@ -7,13 +7,12 @@
 #ifndef CONSOLE_IN_UTIL_H
 #define CONSOLE_IN_UTIL_H
 
-#include "console_in.h"
-
 class ConsoleInUtil
 {
 public:
     static int GetIntInput();
-
+    static bool CorrectInput(int input);
+    static void FixIntInput();
     static void ClearInput();
 
 private:

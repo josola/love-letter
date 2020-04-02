@@ -9,6 +9,7 @@
 
 struct Game
 {
+    Game game() {};
     int PlayerCount = 0;
     int OriginalPlayerCount = 0;
 };

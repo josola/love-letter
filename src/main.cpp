@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include "console_out_util.h"
+#include "console_in_util.h"
 #include "game_util.h"
 
 int main()
@@ -131,4 +132,5 @@ int main()
         Get key input to exit.
     */
     return 0;
+
 }
