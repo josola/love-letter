@@ -12,7 +12,6 @@
 int main()
 {
     ConsoleOutUtil::PrintWelcome();
-    ConsoleOutUtil::PrintStartingPlayerPrompt();
     Game game;
     GameUtil gameUtil(game);
     gameUtil.GetPlayerCount();
@@ -22,9 +21,9 @@ int main()
 
         FIRST ROUND ONLY --
 
-            Print welcome message.
-            Prompt for number of active players.
-            Acquire number of active players.
+            Print welcome message. X
+            Prompt for number of active players. X
+            Acquire number of active players. X
             Set active player objects.
             Store number of original active players seperately so a new round can start with original count.
             Set winning token count.

@@ -12,6 +12,7 @@ GameUtil::GameUtil(Game game) : game(game){};
 
 void GameUtil::GetPlayerCount()
 {
+    ConsoleOutUtil::PrintStartingPlayerPrompt();
     int count = ConsoleInUtil::GetIntInput();
     if (!CorrectPlayerCount(count))
     {
