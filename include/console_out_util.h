@@ -20,6 +20,7 @@ public:
     static void PrintExitPrompt();
     static void PrintPlayerGuessPrompt(int output);
     static void PrintNameGuess(string name);
+    static void PrintCorrectGuessPrompt(string name);
 
 private:
 

@@ -217,7 +217,8 @@ bool GameUtil::SetStartingPlayer(PlayerUtil pUtil)
 int GameUtil::GenerateNumberWithinRange(int range)
 {
     srand(time(NULL));
-    return rand() % range + 1;
+    int output = rand() % range + 1;
+    return output;
 
 }
 

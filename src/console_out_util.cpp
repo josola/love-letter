@@ -55,4 +55,11 @@ void ConsoleOutUtil::PrintPlayerGuessPrompt(int output)
 void ConsoleOutUtil::PrintNameGuess(string name)
 {
     cout << name << " guess: \n";
+
+}
+
+void ConsoleOutUtil::PrintCorrectGuessPrompt(string name)
+{
+    cout << name << " got it! " << name << " goes first!\n";
+
 }

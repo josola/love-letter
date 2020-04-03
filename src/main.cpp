@@ -21,11 +21,12 @@ int main()
         gameUtil.SetPlayers();
         gameUtil.SetWinningTokenCount();
         ConsoleOutUtil::PrintPlayerGuessPrompt(gameUtil.PlayerCount());
-        for (PlayerUtil iPUtil : gameUtil.Players())
+        for (PlayerUtil iPUtil : gameUtil.Players())//random number genrator regenerates each time
         {
             ConsoleOutUtil::PrintNameGuess(iPUtil.Name());
             if (gameUtil.SetStartingPlayer(iPUtil))
             {
+                ConsoleOutUtil::PrintCorrectGuessPrompt(iPUtil.Name());
                 break;
             }
         }
