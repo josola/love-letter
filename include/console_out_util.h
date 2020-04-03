@@ -14,6 +14,7 @@ public:
     static void PrintStartingPlayerPrompt();
     static void PrintInvalidInput(int output);
     static void PrintExitPrompt();
+    static void PrintPlayerGuessPrompt(int output);
 
 private:
 

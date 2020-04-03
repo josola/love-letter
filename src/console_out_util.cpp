@@ -43,3 +43,9 @@ void ConsoleOutUtil::PrintExitPrompt()
     cout << "Type 'E' to exit:\n";
 
 }
+
+void ConsoleOutUtil::PrintPlayerGuessPrompt(int output)
+{
+    cout << "Guess any number between 1 and " << output << ".\n";
+
+}

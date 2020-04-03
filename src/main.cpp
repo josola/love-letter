@@ -20,6 +20,7 @@ int main()
         gameUtil.GetPlayerCount();
         gameUtil.SetPlayers();
         gameUtil.SetWinningTokenCount();
+        ConsoleOutUtil::PrintPlayerGuessPrompt(gameUtil.PlayerCount());
 
     }
 
@@ -137,6 +138,7 @@ int main()
         Prompt to press any key to exit.
         Get key input to exit.
     */
+system("pause");
     return 0;
 
 }

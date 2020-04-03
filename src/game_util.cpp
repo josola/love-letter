@@ -191,3 +191,9 @@ void GameUtil::SetWinningTokenCount()
     }
 
 }
+
+int GameUtil::PlayerCount()
+{
+    return game.player_count;
+
+}

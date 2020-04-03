@@ -24,6 +24,7 @@ public:
     void SetPlayers();
     vector<PlayerUtil> PlayerBuilder(int output);
     void SetWinningTokenCount();
+    int PlayerCount();
 
 private:
     Game game;
