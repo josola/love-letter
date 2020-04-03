@@ -19,6 +19,7 @@ int main()
         ConsoleOutUtil::PrintStartingPlayerPrompt();
         gameUtil.GetPlayerCount();
         gameUtil.SetPlayers();
+        gameUtil.SetWinningTokenCount();
 
     }
 
@@ -30,9 +31,9 @@ int main()
             Print welcome message. X
             Prompt for number of active players. X
             Acquire number of active players. X
-            Set active player objects.
-            Store number of original active players seperately so a new round can start with original count.
-            Set winning token count.
+            Store number of original active players seperately so a new round can start with original count. X
+            Set active player objects. X
+            Set winning token count. X
             Prompt for player guess.
             Acquire player guess.
 

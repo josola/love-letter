@@ -168,3 +168,26 @@ vector<PlayerUtil> GameUtil::PlayerBuilder(int output)
     }
 
 }
+
+void GameUtil::SetWinningTokenCount()
+{
+    switch (game.player_count)
+    {
+    case 2:
+        game.winning_token_count = 6;
+        break;
+    case 3:
+        game.winning_token_count = 5;
+        break;
+    case 4:
+        game.winning_token_count = 4;
+        break;
+    case 5:
+        game.winning_token_count = 3;
+        break;
+    case 6:
+        game.winning_token_count = 3;
+        break;
+    }
+
+}

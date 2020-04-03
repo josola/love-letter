@@ -19,6 +19,7 @@ struct Game
     int original_player_count = 0;
     int round_count = 1;
     vector<PlayerUtil> players;
+    int winning_token_count = 0;
 
 };
 
