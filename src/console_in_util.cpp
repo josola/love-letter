@@ -5,20 +5,30 @@
  */
 
 #include <iostream>
+#include <numeric>
 #include "console_in_util.h"
 #include "console_out_util.h"
 
 using std::cin;
+using std::numeric_limits;
+using std::streamsize;
 
 int ConsoleInUtil::GetIntInput()
 {
-    int input = 0;
+    int input;
     cin >> input;
-    if (!CorrectInput(input))
+    switch (CorrectInput(input))
     {
+    case 0:
         FixIntInput();
+        break;
+    case 1:
+        return input;
+        break;
+    default:
+        return 0;
+        break;
     }
-    return input;
 
 }
 
@@ -46,6 +56,6 @@ void ConsoleInUtil::FixIntInput()
 void ConsoleInUtil::ClearInput()
 {
     cin.clear();
-    cin.ignore();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 }

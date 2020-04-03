@@ -28,7 +28,7 @@ public:
     vector<PlayerUtil> PlayerBuilder(int output);
     void SetWinningTokenCount();
     int PlayerCount();
-    bool SetStartingPlayer(PlayerUtil pUtil);
+    void BuildStartingPlayer();
     int GenerateNumberWithinRange(int range);
     int GetPlayerGuess();
     bool CorrectGuessInput(int output);

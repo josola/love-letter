@@ -29,8 +29,11 @@ void GameUtil::GetPlayerCount()
     {
         FixPlayerCount();
     }
-    SetPlayerCount(count);
-    SetOriginalPlayerCount(count);
+    else
+    {
+        SetPlayerCount(count);
+        SetOriginalPlayerCount(count);
+    }
 
 }
 
@@ -200,17 +203,20 @@ int GameUtil::PlayerCount()
 
 }
 
-bool GameUtil::SetStartingPlayer(PlayerUtil pUtil)
+void GameUtil::BuildStartingPlayer()
 {
     int target = GenerateNumberWithinRange(game.player_count);
-    int guess = GetPlayerGuess();
-    bool starting_player = false;
-    if (target == guess)
+    for (PlayerUtil iPUtil : game.players)
     {
-        pUtil.SetCurrent();
-        starting_player = true;
+        ConsoleOutUtil::PrintNameGuess(iPUtil.Name());
+        int guess = GetPlayerGuess();
+        if (guess == target)
+        {
+            ConsoleOutUtil::PrintCorrectGuessPrompt(iPUtil.Name());
+            iPUtil.SetCurrent();
+            break;
+        }
     }
-    return starting_player;
 
 }
 
@@ -241,6 +247,7 @@ bool GameUtil::CorrectGuessInput(int output)
     }
     else
     {
+        ConsoleOutUtil::PrintInvalidInput(2);
         return false;
     }
 
