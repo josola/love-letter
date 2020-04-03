@@ -17,6 +17,7 @@ struct Player
 
     string name = "";
     int value = 0;
+    bool current = false;
 };
 
 #endif

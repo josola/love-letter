@@ -21,6 +21,14 @@ int main()
         gameUtil.SetPlayers();
         gameUtil.SetWinningTokenCount();
         ConsoleOutUtil::PrintPlayerGuessPrompt(gameUtil.PlayerCount());
+        for (PlayerUtil iPUtil : gameUtil.Players())
+        {
+            ConsoleOutUtil::PrintNameGuess(iPUtil.Name());
+            if (gameUtil.SetStartingPlayer(iPUtil))
+            {
+                break;
+            }
+        }
 
     }
 

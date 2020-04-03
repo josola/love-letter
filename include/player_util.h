@@ -14,6 +14,9 @@ class PlayerUtil
 public:
     PlayerUtil(Player player);
 
+    void SetCurrent();
+    string Name();
+
 private:
     Player player;
 

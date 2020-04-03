@@ -5,9 +5,11 @@
  */
 
 #include <iostream>
+#include <string>
 #include "console_out_util.h"
 
 using std::cout;
+using std::string;
 
 void ConsoleOutUtil::PrintWelcome()
 {
@@ -48,4 +50,9 @@ void ConsoleOutUtil::PrintPlayerGuessPrompt(int output)
 {
     cout << "Guess any number between 1 and " << output << ".\n";
 
+}
+
+void ConsoleOutUtil::PrintNameGuess(string name)
+{
+    cout << name << " guess: \n";
 }

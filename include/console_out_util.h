@@ -7,6 +7,10 @@
 #ifndef CONSOLE_OUT_UTIL_H
 #define CONSOLE_OUT_UTIL_H
 
+#include <string>
+
+using std::string;
+
 class ConsoleOutUtil
 {
 public:
@@ -15,6 +19,7 @@ public:
     static void PrintInvalidInput(int output);
     static void PrintExitPrompt();
     static void PrintPlayerGuessPrompt(int output);
+    static void PrintNameGuess(string name);
 
 private:
 

@@ -4,10 +4,15 @@
  * Written by Jordan Sola 2019-2020
  */
 
+#include <random>
+#include <ctime>
 #include "game_util.h"
 #include "console_in_util.h"
 #include "console_out_util.h"
 #include "player_util.h"
+
+using std::pair;
+using std::make_pair;
 
 GameUtil::GameUtil(Game game) : game(game) {};
 
@@ -24,11 +29,8 @@ void GameUtil::GetPlayerCount()
     {
         FixPlayerCount();
     }
-    else
-    {
-        SetPlayerCount(count);
-        SetOriginalPlayerCount(count);
-    }
+    SetPlayerCount(count);
+    SetOriginalPlayerCount(count);
 
 }
 
@@ -195,5 +197,63 @@ void GameUtil::SetWinningTokenCount()
 int GameUtil::PlayerCount()
 {
     return game.player_count;
+
+}
+
+bool GameUtil::SetStartingPlayer(PlayerUtil pUtil)
+{
+    int target = GenerateNumberWithinRange(game.player_count);
+    int guess = GetPlayerGuess();
+    bool starting_player = false;
+    if (target == guess)
+    {
+        pUtil.SetCurrent();
+        starting_player = true;
+    }
+    return starting_player;
+
+}
+
+int GameUtil::GenerateNumberWithinRange(int range)
+{
+    srand(time(NULL));
+    return rand() % range + 1;
+
+}
+
+int GameUtil::GetPlayerGuess()
+{
+    int output = ConsoleInUtil::GetIntInput();
+    if (!CorrectGuessInput(output))
+    {
+        FixGuessInput();
+    }
+    return output;
+
+}
+
+bool GameUtil::CorrectGuessInput(int output)
+{
+    if (output >= 1 && output <= game.player_count)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
+}
+
+void GameUtil::FixGuessInput()
+{
+    ConsoleInUtil::ClearInput();
+    GetPlayerGuess();
+
+}
+
+vector<PlayerUtil> GameUtil::Players()
+{
+    return game.players;
 
 }

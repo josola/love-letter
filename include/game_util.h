@@ -7,8 +7,11 @@
 #ifndef GAME_UTIL_H
 #define GAME_UTIL_H
 
+#include <utility>
 #include "game.h"
 #include "player.h"
+
+using std::pair;
 
 class GameUtil
 {
@@ -25,6 +28,12 @@ public:
     vector<PlayerUtil> PlayerBuilder(int output);
     void SetWinningTokenCount();
     int PlayerCount();
+    bool SetStartingPlayer(PlayerUtil pUtil);
+    int GenerateNumberWithinRange(int range);
+    int GetPlayerGuess();
+    bool CorrectGuessInput(int output);
+    void FixGuessInput();
+    vector<PlayerUtil> Players();
 
 private:
     Game game;
