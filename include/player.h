@@ -13,10 +13,10 @@ using std::string;
 
 struct Player
 {
-	Player(string name = "", int value = 0) : name(name), value(value) {};
+    Player(string name = "", int value = 0) : name(name), value(value) {};
 
-	string name = "";
-	int value = 0;
+    string name = "";
+    int value = 0;
 };
 
 #endif

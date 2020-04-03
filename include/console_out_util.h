@@ -16,7 +16,7 @@ public:
     static void PrintExitPrompt();
 
 private:
-    
+
 };
 
 #endif

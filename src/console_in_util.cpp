@@ -18,10 +18,7 @@ int ConsoleInUtil::GetIntInput()
     {
         FixIntInput();
     }
-    else
-    {
-        return input;
-    }
+    return input;
 
 }
 

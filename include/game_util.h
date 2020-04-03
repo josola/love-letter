@@ -13,19 +13,19 @@
 class GameUtil
 {
 public:
-	GameUtil(Game game);
+    GameUtil(Game game);
 
-	int RoundCount();
-	void GetPlayerCount();
-	bool CorrectPlayerCount(int input);
-	void FixPlayerCount();
-	void SetPlayerCount(int output);
-	void SetOriginalPlayerCount(int output);
-	void SetPlayers();
-	vector<PlayerUtil> PlayerBuilder(int output);
+    int RoundCount();
+    void GetPlayerCount();
+    bool CorrectPlayerCount(int input);
+    void FixPlayerCount();
+    void SetPlayerCount(int output);
+    void SetOriginalPlayerCount(int output);
+    void SetPlayers();
+    vector<PlayerUtil> PlayerBuilder(int output);
 
 private:
-	Game game;
+    Game game;
 
 };
 
