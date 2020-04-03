@@ -8,21 +8,24 @@
 #define GAME_UTIL_H
 
 #include "game.h"
+#include "player.h"
 
 class GameUtil
 {
 public:
-    GameUtil(Game game);
+	GameUtil(Game game);
 
-    int RoundCount();
-    void GetPlayerCount();
-    bool CorrectPlayerCount(int input);
-    void FixPlayerCount();
-    int SetPlayerCount(int input);
-    int SetOriginalPlayerCount(int input);
+	int RoundCount();
+	void GetPlayerCount();
+	bool CorrectPlayerCount(int input);
+	void FixPlayerCount();
+	void SetPlayerCount(int output);
+	void SetOriginalPlayerCount(int output);
+	void SetPlayers();
+	vector<PlayerUtil> PlayerBuilder(int output);
 
 private:
-    Game game;
+	Game game;
 
 };
 

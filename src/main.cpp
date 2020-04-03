@@ -10,131 +10,132 @@
 
 int main()
 {
-    Game game;
-    GameUtil gameUtil(game);
+	Game game;
+	GameUtil gameUtil(game);
 
-    if (gameUtil.RoundCount() == 1)
-    {
-        ConsoleOutUtil::PrintWelcome();
-        ConsoleOutUtil::PrintStartingPlayerPrompt();
-        gameUtil.GetPlayerCount();
+	if (gameUtil.RoundCount() == 1)
+	{
+		ConsoleOutUtil::PrintWelcome();
+		ConsoleOutUtil::PrintStartingPlayerPrompt();
+		gameUtil.GetPlayerCount();
+		gameUtil.SetPlayers();
 
-    }
+	}
 
-    /*
-    BEGINNING OF ROUNDS --
+	/*
+	BEGINNING OF ROUNDS --
 
-        FIRST ROUND ONLY --
+		FIRST ROUND ONLY --
 
-            Print welcome message. X
-            Prompt for number of active players. X
-            Acquire number of active players. X
-            Set active player objects.
-            Store number of original active players seperately so a new round can start with original count.
-            Set winning token count.
-            Prompt for player guess.
-            Acquire player guess.
-        
-        FIRST ROUND AND ANY OTHER ROUND --
+			Print welcome message. X
+			Prompt for number of active players. X
+			Acquire number of active players. X
+			Set active player objects.
+			Store number of original active players seperately so a new round can start with original count.
+			Set winning token count.
+			Prompt for player guess.
+			Acquire player guess.
 
-            Print round count.
-            Prompt dealing starting hand.
-            Set deck.
-            Shuffle deck.
-            Set up pile.
+		FIRST ROUND AND ANY OTHER ROUND --
 
-            DURING TWO PLAYER GAME --
+			Print round count.
+			Prompt dealing starting hand.
+			Set deck.
+			Shuffle deck.
+			Set up pile.
 
-                Move two cards from deck to face up pile.
-                Print up pile.
+			DURING TWO PLAYER GAME --
 
-            Set down pile.
-            Move one card from the deck to the down pile.
-            Print down pile.
+				Move two cards from deck to face up pile.
+				Print up pile.
 
-        AFTER FIRST ROUND --
+			Set down pile.
+			Move one card from the deck to the down pile.
+			Print down pile.
 
-            Winner of first is set to current player.
-            Reset winner status.
-            Set players who were out last round to active.
-            Prompt previous round winner goes first.
+		AFTER FIRST ROUND --
 
-    BEGINNING OF PLAYER TURN --
+			Winner of first is set to current player.
+			Reset winner status.
+			Set players who were out last round to active.
+			Prompt previous round winner goes first.
 
-        DECK IS EMPTY --
+	BEGINNING OF PLAYER TURN --
 
-            PLAY CARD REQUIRES DRAWING FROM DECK --
-                Draw card from face down pile.
-                Resolve card effect.
+		DECK IS EMPTY --
 
-        HANDMAID PROTECTION FROM PREVIOUS TURN --
+			PLAY CARD REQUIRES DRAWING FROM DECK --
+				Draw card from face down pile.
+				Resolve card effect.
 
-            Remove handmaid protection.
+		HANDMAID PROTECTION FROM PREVIOUS TURN --
 
-        Print number of cards in deck.
-        Print number of rival players. Does not include current player.
+			Remove handmaid protection.
 
-        UP PILE IS NOT EMPTY --
+		Print number of cards in deck.
+		Print number of rival players. Does not include current player.
 
-            Print up pile.
+		UP PILE IS NOT EMPTY --
 
-        Print rival players with Spy bonus.
-        Print current player hand.
-        Prompt current player to draw a card from deck.
-        Get current player's draw input.
-        Draw card from deck into current player hand.
-        Print current player hand.
-        Prompt current player to play card from their hand.
-        Get current player's play card input.
-        Play card.
-        Discard play card into face up pile.
+			Print up pile.
 
-        DECK IS EMPTY --
-        
-            End round.
-    
-    ROUND END --
+		Print rival players with Spy bonus.
+		Print current player hand.
+		Prompt current player to draw a card from deck.
+		Get current player's draw input.
+		Draw card from deck into current player hand.
+		Print current player hand.
+		Prompt current player to play card from their hand.
+		Get current player's play card input.
+		Play card.
+		Discard play card into face up pile.
 
-        Active players compare hand value.
-        Player with highest hand value is assined as winner.
-        Winner adds one token to their cache.
-        
-        ONE PLAYER HAS SPY BONUS --
+		DECK IS EMPTY --
 
-            Player receives one bonus token. On top of any winnings.
+			End round.
 
-        TWO PLAYERS HAVE SPY BONUS --
+	ROUND END --
 
-            Players do not receive spy bonus on top of winnings.
+		Active players compare hand value.
+		Player with highest hand value is assined as winner.
+		Winner adds one token to their cache.
 
-        Check winner has winning number of tokens.
-        Check player with spy bonus has winning number of tokens.
+		ONE PLAYER HAS SPY BONUS --
 
-        WINNER HAS WINNING NUMBER OF TOKENS --
+			Player receives one bonus token. On top of any winnings.
 
-            Game ends.
+		TWO PLAYERS HAVE SPY BONUS --
 
-        PLAYER WITH SPY BONUS HAS WINNING NUMBER OF TOKENS --
+			Players do not receive spy bonus on top of winnings.
 
-            Game ends.
+		Check winner has winning number of tokens.
+		Check player with spy bonus has winning number of tokens.
 
-        Remove handmaid protection.
-        Remove spy bonus.
-        Empty player hands.
+		WINNER HAS WINNING NUMBER OF TOKENS --
 
-    GAME END --
+			Game ends.
 
-        ONE PLAYER HAS WINNING NUMBER OF TOKENS --
+		PLAYER WITH SPY BONUS HAS WINNING NUMBER OF TOKENS --
 
-            Print winning player prompt.
+			Game ends.
 
-        TWO PLAYERS HAVE WINNINE NUMBER OF TOKENS --
+		Remove handmaid protection.
+		Remove spy bonus.
+		Empty player hands.
 
-            Print multiple winning player prompt.
+	GAME END --
 
-        Prompt to press any key to exit.
-        Get key input to exit.
-    */
-    return 0;
+		ONE PLAYER HAS WINNING NUMBER OF TOKENS --
+
+			Print winning player prompt.
+
+		TWO PLAYERS HAVE WINNINE NUMBER OF TOKENS --
+
+			Print multiple winning player prompt.
+
+		Prompt to press any key to exit.
+		Get key input to exit.
+	*/
+	return 0;
 
 }

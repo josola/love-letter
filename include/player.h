@@ -7,9 +7,16 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <string>
+
+using std::string;
+
 struct Player
 {
+	Player(string name = "", int value = 0) : name(name), value(value) {};
 
+	string name = "";
+	int value = 0;
 };
 
 #endif

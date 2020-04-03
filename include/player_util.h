@@ -12,10 +12,10 @@
 class PlayerUtil
 {
 public:
-    PlayerUtil(Player player);
+	PlayerUtil(Player player);
 
 private:
-    Player player;
+	Player player;
 
 };
 
