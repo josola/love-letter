@@ -9,6 +9,6 @@
 
 #include "deck_util.h"
 
-DeckUtil::DeckUtil(Deck deck) : deck(deck) {};
+DeckUtil::DeckUtil(Deck deck) : deck(deck){};
 
 #endif

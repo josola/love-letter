@@ -16,7 +16,6 @@ public:
 
 private:
     UpPile up_pile;
-
 };
 
 #endif

@@ -6,4 +6,4 @@
 
 #include "card_util.h"
 
-CardUtil::CardUtil(Card card) : card(card) {};
+CardUtil::CardUtil(Card card) : card(card){};

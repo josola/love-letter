@@ -16,7 +16,6 @@ public:
     static void ClearInput();
 
 private:
-
 };
 
 #endif

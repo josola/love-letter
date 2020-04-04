@@ -6,4 +6,4 @@
 
 #include "up_pile_util.h"
 
-UpPileUtil::UpPileUtil(UpPile up_pile) : up_pile(up_pile) {};
+UpPileUtil::UpPileUtil(UpPile up_pile) : up_pile(up_pile){};

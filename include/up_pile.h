@@ -9,7 +9,6 @@
 
 struct UpPile
 {
-
 };
 
 #endif

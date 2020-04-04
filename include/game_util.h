@@ -38,7 +38,6 @@ public:
 
 private:
     Game game;
-
 };
 
 #endif

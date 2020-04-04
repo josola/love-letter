@@ -9,7 +9,6 @@
 
 struct Deck
 {
-
 };
 
 #endif

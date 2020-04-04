@@ -25,7 +25,6 @@ public:
     static void PrintDealingHand();
 
 private:
-
 };
 
 #endif

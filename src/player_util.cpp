@@ -6,7 +6,7 @@
 
 #include "player_util.h"
 
-PlayerUtil::PlayerUtil(Player player) : player(player) {};
+PlayerUtil::PlayerUtil(Player player) : player(player){};
 
 void PlayerUtil::SetCurrent()
 {

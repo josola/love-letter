@@ -9,7 +9,6 @@
 
 struct Card
 {
-
 };
 
 #endif

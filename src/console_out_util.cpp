@@ -14,13 +14,11 @@ using std::string;
 void ConsoleOutUtil::PrintWelcome()
 {
     cout << "-- Welcome to Love Letter --\n";
-
 }
 
 void ConsoleOutUtil::PrintStartingPlayerPrompt()
 {
     cout << "How many players will be playing?\n";
-
 }
 
 void ConsoleOutUtil::PrintInvalidInput(int output)
@@ -43,31 +41,26 @@ void ConsoleOutUtil::PrintInvalidInput(int output)
         cout << "Invalid input.\n";
         break;
     }
-
 }
 
 void ConsoleOutUtil::PrintExitPrompt()
 {
     cout << "Type 'E' to exit:\n";
-
 }
 
 void ConsoleOutUtil::PrintPlayerGuessPrompt(int output)
 {
     cout << "Guess any number between 1 and " << output << ".\n";
-
 }
 
 void ConsoleOutUtil::PrintNameGuess(string name)
 {
     cout << name << " guess: \n";
-
 }
 
 void ConsoleOutUtil::PrintCorrectGuessPrompt(string name)
 {
     cout << name << " got it! " << name << " goes first!\n";
-
 }
 
 void ConsoleOutUtil::PrintRound(int output)

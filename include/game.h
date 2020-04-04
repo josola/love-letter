@@ -14,13 +14,11 @@ using std::vector;
 
 struct Game
 {
-    Game game() {};
     int player_count = 0;
     int original_player_count = 0;
     int round_count = 1;
     vector<PlayerUtil> players;
     int winning_token_count = 0;
-
 };
 
 #endif

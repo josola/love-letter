@@ -6,4 +6,4 @@
 
 #include "down_pile_util.h"
 
-DownPileUtil::DownPileUtil(DownPile down_pile) : down_pile(down_pile) {};
+DownPileUtil::DownPileUtil(DownPile down_pile) : down_pile(down_pile){};
