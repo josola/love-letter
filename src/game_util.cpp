@@ -12,16 +12,15 @@
 #include "console_out_util.h"
 #include "player_util.h"
 
-using std::pair;
-using std::make_pair;
 using std::any_of;
+using std::make_pair;
+using std::pair;
 
-GameUtil::GameUtil(Game game) : game(game) {};
+GameUtil::GameUtil(Game game) : game(game){};
 
 int GameUtil::RoundCount()
 {
     return game.round_count;
-
 }
 
 void GameUtil::GetPlayerCount()
@@ -36,7 +35,6 @@ void GameUtil::GetPlayerCount()
         SetPlayerCount(count);
         SetOriginalPlayerCount(count);
     }
-
 }
 
 bool GameUtil::CorrectPlayerCount(int input)
@@ -50,26 +48,22 @@ bool GameUtil::CorrectPlayerCount(int input)
         ConsoleOutUtil::PrintInvalidInput(1);
         return false;
     }
-
 }
 
 void GameUtil::FixPlayerCount()
 {
     ConsoleInUtil::ClearInput();
     GetPlayerCount();
-
 }
 
 void GameUtil::SetPlayerCount(int output)
 {
     game.player_count = output;
-
 }
 
 void GameUtil::SetOriginalPlayerCount(int output)
 {
     game.original_player_count = output;
-
 }
 
 void GameUtil::SetPlayers()
@@ -92,7 +86,6 @@ void GameUtil::SetPlayers()
         game.players = PlayerBuilder(6);
         break;
     }
-
 }
 
 vector<PlayerUtil> GameUtil::PlayerBuilder(int output)
@@ -173,7 +166,6 @@ vector<PlayerUtil> GameUtil::PlayerBuilder(int output)
         break;
     }
     }
-
 }
 
 void GameUtil::SetWinningTokenCount()
@@ -196,13 +188,11 @@ void GameUtil::SetWinningTokenCount()
         game.winning_token_count = 3;
         break;
     }
-
 }
 
 int GameUtil::PlayerCount()
 {
     return game.player_count;
-
 }
 
 void GameUtil::BuildStartingPlayer()
@@ -224,9 +214,11 @@ void GameUtil::BuildStartingPlayer()
             duplicate_guess.erase(duplicate_guess.begin(), duplicate_guess.end());
             break;
         }
-        duplicate_guess.push_back(guess);
+        else
+        {
+            duplicate_guess.push_back(guess);
+        }
     }
-
 }
 
 int GameUtil::GenerateNumberWithinRange(int range)
@@ -234,7 +226,6 @@ int GameUtil::GenerateNumberWithinRange(int range)
     srand(time(NULL));
     int output = rand() % range + 1;
     return output;
-
 }
 
 int GameUtil::GetPlayerGuess()
@@ -245,7 +236,6 @@ int GameUtil::GetPlayerGuess()
         FixGuessInput(output);
     }
     return output;
-
 }
 
 bool GameUtil::CorrectGuessInput(int output)
@@ -259,14 +249,12 @@ bool GameUtil::CorrectGuessInput(int output)
         ConsoleOutUtil::PrintInvalidInput(2);
         return false;
     }
-
 }
 
 void GameUtil::FixGuessInput(int input)
 {
     ConsoleInUtil::ClearInput();
     input = GetPlayerGuess();
-
 }
 
 bool GameUtil::DuplicateGuess(vector<int> guess_container, int guess)
@@ -285,5 +273,4 @@ bool GameUtil::DuplicateGuess(vector<int> guess_container, int guess)
 vector<PlayerUtil> GameUtil::Players()
 {
     return game.players;
-
 }
