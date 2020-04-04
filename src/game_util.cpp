@@ -6,6 +6,7 @@
 
 #include <random>
 #include <ctime>
+#include <algorithm>
 #include "game_util.h"
 #include "console_in_util.h"
 #include "console_out_util.h"
@@ -13,6 +14,7 @@
 
 using std::pair;
 using std::make_pair;
+using std::any_of;
 
 GameUtil::GameUtil(Game game) : game(game) {};
 
@@ -206,16 +208,23 @@ int GameUtil::PlayerCount()
 void GameUtil::BuildStartingPlayer()
 {
     int target = GenerateNumberWithinRange(game.player_count);
+    vector<int> duplicate_guess;
     for (PlayerUtil iPUtil : game.players)
     {
         ConsoleOutUtil::PrintNameGuess(iPUtil.Name());
         int guess = GetPlayerGuess();
+        while (DuplicateGuess(duplicate_guess, guess))
+        {
+            guess = GetPlayerGuess();
+        }
         if (guess == target)
         {
             ConsoleOutUtil::PrintCorrectGuessPrompt(iPUtil.Name());
             iPUtil.SetCurrent();
+            duplicate_guess.erase(duplicate_guess.begin(), duplicate_guess.end());
             break;
         }
+        duplicate_guess.push_back(guess);
     }
 
 }
@@ -233,7 +242,7 @@ int GameUtil::GetPlayerGuess()
     int output = ConsoleInUtil::GetIntInput();
     if (!CorrectGuessInput(output))
     {
-        FixGuessInput();
+        FixGuessInput(output);
     }
     return output;
 
@@ -253,11 +262,24 @@ bool GameUtil::CorrectGuessInput(int output)
 
 }
 
-void GameUtil::FixGuessInput()
+void GameUtil::FixGuessInput(int input)
 {
     ConsoleInUtil::ClearInput();
-    GetPlayerGuess();
+    input = GetPlayerGuess();
 
+}
+
+bool GameUtil::DuplicateGuess(vector<int> guess_container, int guess)
+{
+    for (int iInt : guess_container)
+    {
+        if (iInt == guess)
+        {
+            ConsoleOutUtil::PrintInvalidInput(3);
+            return true;
+        }
+    }
+    return false;
 }
 
 vector<PlayerUtil> GameUtil::Players()

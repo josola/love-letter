@@ -36,6 +36,9 @@ void ConsoleOutUtil::PrintInvalidInput(int output)
     case 2:
         cout << "Invalid input. Please enter a number between 1 and the max number of players: \n";
         break;
+    case 3:
+        cout << "Invalid input. Number already guessed.\n";
+        break;
     default:
         cout << "Invalid input.\n";
         break;

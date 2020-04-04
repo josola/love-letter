@@ -32,7 +32,8 @@ public:
     int GenerateNumberWithinRange(int range);
     int GetPlayerGuess();
     bool CorrectGuessInput(int output);
-    void FixGuessInput();
+    void FixGuessInput(int input);
+    bool DuplicateGuess(vector<int> guess_container, int guess);
     vector<PlayerUtil> Players();
 
 private:
