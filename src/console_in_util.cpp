@@ -5,7 +5,7 @@
  */
 
 #include <iostream>
-#include <numeric>
+#include <limits>
 #include "console_in_util.h"
 #include "console_out_util.h"
 
