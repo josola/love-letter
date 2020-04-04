@@ -21,6 +21,7 @@ public:
     static void PrintPlayerGuessPrompt(int output);
     static void PrintNameGuess(string name);
     static void PrintCorrectGuessPrompt(string name);
+    static void PrintRound(int output);
 
 private:
 

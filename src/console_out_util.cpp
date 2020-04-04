@@ -69,3 +69,8 @@ void ConsoleOutUtil::PrintCorrectGuessPrompt(string name)
     cout << name << " got it! " << name << " goes first!\n";
 
 }
+
+void ConsoleOutUtil::PrintRound(int output)
+{
+    cout << "-- ROUND " << output << " --\n";
+}

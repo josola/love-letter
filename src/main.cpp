@@ -25,6 +25,8 @@ int main()
 
     }
 
+    ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
+
     /*
     BEGINNING OF ROUNDS --
 
@@ -36,12 +38,12 @@ int main()
             Store number of original active players seperately so a new round can start with original count. X
             Set active player objects. X
             Set winning token count. X
-            Prompt for player guess.
-            Acquire player guess.
+            Prompt for player guess. X
+            Acquire player guess. X
 
         FIRST ROUND AND ANY OTHER ROUND --
 
-            Print round count.
+            Print round count. 
             Prompt dealing starting hand.
             Set deck.
             Shuffle deck.
