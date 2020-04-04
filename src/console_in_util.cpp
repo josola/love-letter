@@ -17,18 +17,18 @@ int ConsoleInUtil::GetIntInput()
 {
     int input;
     cin >> input;
-    switch (CorrectInput(input))
+    
+    if (!CorrectInput(input))
     {
-    case 0:
-        FixIntInput();
-        break;
-    case 1:
-        return input;
-        break;
-    default:
-        return 0;
-        break;
+        int fixed = 0;
+        fixed = FixIntInput(input);
+        return fixed;
     }
+    else
+    {
+        return input;
+    }
+    
 
 }
 
@@ -46,10 +46,20 @@ bool ConsoleInUtil::CorrectInput(int input)
 
 }
 
-void ConsoleInUtil::FixIntInput()
+int ConsoleInUtil::FixIntInput(int input)
 {
-    ClearInput();
-    GetIntInput();
+    bool correct = false;
+    int fixed = 0;
+    while (!correct)
+    {
+        ClearInput();
+        cin >> fixed;
+        if (cin)
+        {
+            correct = true;
+        }
+    }
+    return fixed;
 
 }
 

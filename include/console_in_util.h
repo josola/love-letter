@@ -12,7 +12,7 @@ class ConsoleInUtil
 public:
     static int GetIntInput();
     static bool CorrectInput(int input);
-    static void FixIntInput();
+    static int FixIntInput(int input);
     static void ClearInput();
 
 private:
