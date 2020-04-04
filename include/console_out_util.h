@@ -22,6 +22,7 @@ public:
     static void PrintNameGuess(string name);
     static void PrintCorrectGuessPrompt(string name);
     static void PrintRound(int output);
+    static void PrintDealingHand();
 
 private:
 

@@ -26,6 +26,7 @@ int main()
     }
 
     ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
+    ConsoleOutUtil::PrintDealingHand();
 
     /*
     BEGINNING OF ROUNDS --
@@ -43,7 +44,7 @@ int main()
 
         FIRST ROUND AND ANY OTHER ROUND --
 
-            Print round count. 
+            Print round count. X
             Prompt dealing starting hand.
             Set deck.
             Shuffle deck.
