@@ -8,10 +8,16 @@
 #define DECK_UTIL_H
 
 #include <vector>
+#include <random>
+#include <ctime>
+#include <algorithm>
 #include "card_util.h"
 #include "deck_util.h"
 
 using std::vector;
+using std::srand;
+using std::time;
+using std::random_shuffle;
 
 DeckUtil::DeckUtil(Deck deck) : deck(deck){};
 
@@ -61,6 +67,12 @@ void DeckUtil::SetDeck()
 vector<CardUtil> DeckUtil::GetDeck()
 {
     return deck.deck;
+}
+
+void DeckUtil::ShuffleDeck()
+{
+    srand(time(NULL));
+    random_shuffle(deck.deck.begin(), deck.deck.end());
 }
 
 #endif

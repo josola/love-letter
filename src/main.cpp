@@ -32,6 +32,7 @@ int main()
     DeckUtil deckUtil(deck);
 
     deckUtil.SetDeck();
+    deckUtil.ShuffleDeck();
 
     /*
     BEGINNING OF ROUNDS --

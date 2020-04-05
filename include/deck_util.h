@@ -18,6 +18,7 @@ public:
     vector<CardUtil> DeckBuilder();
     void SetDeck();
     vector<CardUtil> GetDeck();
+    void ShuffleDeck();
 
 private:
     Deck deck;
