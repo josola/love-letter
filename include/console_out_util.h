@@ -23,6 +23,7 @@ public:
     static void PrintCorrectGuessPrompt(string name);
     static void PrintRound(int output);
     static void PrintDealingHand();
+    static void PrintString(string output);
 
 private:
 };

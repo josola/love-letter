@@ -14,6 +14,10 @@ class CardUtil
 public:
     CardUtil(Card card);
 
+    string GetName();
+    int GetValue();
+    CardUtil CardUtilBuilder(int input);
+
 private:
     Card card;
 };

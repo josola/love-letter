@@ -7,6 +7,7 @@
 #include "console_out_util.h"
 #include "console_in_util.h"
 #include "game_util.h"
+#include "deck_util.h"
 
 int main()
 {
@@ -27,6 +28,11 @@ int main()
     ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
     ConsoleOutUtil::PrintDealingHand();
 
+    Deck deck;
+    DeckUtil deckUtil(deck);
+
+    deckUtil.SetDeck();
+
     /*
     BEGINNING OF ROUNDS --
 
@@ -44,8 +50,8 @@ int main()
         FIRST ROUND AND ANY OTHER ROUND --
 
             Print round count. X
-            Prompt dealing starting hand.
-            Set deck.
+            Prompt dealing starting hand. X
+            Set deck. X
             Shuffle deck.
             Set up pile.
 
