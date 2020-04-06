@@ -7,8 +7,14 @@
 #ifndef UP_PILE_H
 #define UP_PILE_H
 
+#include <vector>
+#include "card_util.h"
+
+using std::vector;
+
 struct UpPile
 {
+    vector<CardUtil> up_pile;
 };
 
 #endif

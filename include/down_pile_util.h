@@ -7,15 +7,21 @@
 #ifndef DOWN_PILE_H
 #define DOWN_PILE_H
 
+#include <vector>
 #include "down_pile.h"
+#include "deck_util.h"
+
+using std::vector;
 
 class DownPileUtil
 {
 public:
-    DownPileUtil(DownPile down_pile);
+    DownPileUtil(DownPile downPile);
+
+    void SetDownPile(DeckUtil deckUtil);
 
 private:
-    DownPile down_pile;
+    DownPile downPile;
 };
 
 #endif

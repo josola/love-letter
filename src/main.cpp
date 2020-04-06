@@ -8,6 +8,8 @@
 #include "console_in_util.h"
 #include "game_util.h"
 #include "deck_util.h"
+#include "down_pile_util.h"
+#include "up_pile_util.h"
 
 int main()
 {
@@ -24,15 +26,25 @@ int main()
         ConsoleOutUtil::PrintPlayerGuessPrompt(gameUtil.PlayerCount());
         gameUtil.BuildStartingPlayer();
     }
+    else
+    {
+        ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
+        ConsoleOutUtil::PrintDealingHand();
 
-    ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
-    ConsoleOutUtil::PrintDealingHand();
+        Deck deck;
+        DeckUtil deckUtil(deck);
 
-    Deck deck;
-    DeckUtil deckUtil(deck);
+        deckUtil.SetDeck();
+        deckUtil.ShuffleDeck();
+        
+        DownPile downPile;
+        DownPileUtil downPileUtil(downPile);
+        
+        downPileUtil.SetDownPile(deckUtil);
 
-    deckUtil.SetDeck();
-    deckUtil.ShuffleDeck();
+        UpPile upPile;
+        UpPileUtil upPileUtil(upPile);
+    }
 
     /*
     BEGINNING OF ROUNDS --
@@ -53,7 +65,7 @@ int main()
             Print round count. X
             Prompt dealing starting hand. X
             Set deck. X
-            Shuffle deck.
+            Shuffle deck. X
             Set up pile.
 
             DURING TWO PLAYER GAME --

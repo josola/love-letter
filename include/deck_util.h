@@ -4,6 +4,9 @@
  * Written by Jordan Sola 2019-2020
  */
 
+#ifndef DECK_UTIL_H
+#define DECK_UTIL_H
+
 #include <vector>
 #include "deck.h"
 #include "card_util.h"
@@ -19,7 +22,11 @@ public:
     void SetDeck();
     vector<CardUtil> GetDeck();
     void ShuffleDeck();
+    CardUtil GetCardFromDeck(int pos);
+    void RemoveCardFromDeck(int pos);
 
 private:
     Deck deck;
 };
+
+#endif

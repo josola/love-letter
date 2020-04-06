@@ -4,20 +4,17 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef DECK_UTIL_H
-#define DECK_UTIL_H
-
 #include <vector>
 #include <random>
 #include <ctime>
 #include <algorithm>
-#include "card_util.h"
 #include "deck_util.h"
+#include "card_util.h"
 
-using std::vector;
+using std::random_shuffle;
 using std::srand;
 using std::time;
-using std::random_shuffle;
+using std::vector;
 
 DeckUtil::DeckUtil(Deck deck) : deck(deck){};
 
@@ -75,4 +72,13 @@ void DeckUtil::ShuffleDeck()
     random_shuffle(deck.deck.begin(), deck.deck.end());
 }
 
-#endif
+CardUtil DeckUtil::GetCardFromDeck(int pos)
+{
+    CardUtil top_card = deck.deck.at(pos);
+    return top_card;
+}
+
+void DeckUtil::RemoveCardFromDeck(int pos)
+{
+    deck.deck.erase(deck.deck.begin() + pos);
+}
