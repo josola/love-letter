@@ -4,8 +4,8 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef GAME_UTIL_H
-#define GAME_UTIL_H
+#ifndef GAME_UTIL_h
+#define GAME_UTIL_h
 
 #include <utility>
 #include "game.h"

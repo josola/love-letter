@@ -4,8 +4,8 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef UP_PILE_H
-#define UP_PILE_H
+#ifndef UP_PILE_h
+#define UP_PILE_h
 
 #include <vector>
 #include "card_util.h"

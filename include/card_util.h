@@ -4,8 +4,8 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef CARD_UTIL_H
-#define CARD_UTIL_H
+#ifndef CARD_UTIL_h
+#define CARD_UTIL_h
 
 #include "card.h"
 

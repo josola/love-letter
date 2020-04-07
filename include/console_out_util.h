@@ -4,12 +4,15 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef CONSOLE_OUT_UTIL_H
-#define CONSOLE_OUT_UTIL_H
+#ifndef CONSOLE_OUT_UTIL_h
+#define CONSOLE_OUT_UTIL_h
 
 #include <string>
+#include <vector>
+#include "card_util.h"
 
 using std::string;
+using std::vector;
 
 class ConsoleOutUtil
 {
@@ -24,6 +27,8 @@ public:
     static void PrintRound(int output);
     static void PrintDealingHand();
     static void PrintString(string output);
+    static void PrintUpPile();
+    static void PrintDownPile(vector<CardUtil> down_pile);
 
 private:
 };

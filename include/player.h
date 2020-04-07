@@ -4,8 +4,8 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef PLAYER_h
+#define PLAYER_h
 
 #include <string>
 

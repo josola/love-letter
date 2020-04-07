@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include "console_out_util.h"
+#include "card_util.h"
 
 using std::cout;
 using std::string;
@@ -76,4 +77,20 @@ void ConsoleOutUtil::PrintDealingHand()
 void ConsoleOutUtil::PrintString(string output)
 {
     cout << output << '\n';
+}
+
+void ConsoleOutUtil::PrintUpPile()
+{
+    cout << "Up pile:\n";
+    cout << '\n';
+}
+
+void ConsoleOutUtil::PrintDownPile(vector<CardUtil> down_pile)
+{
+    cout << "Down pile:\n";
+    for (CardUtil iCUtil : down_pile)
+    {
+        cout << ' ' << iCUtil.GetName();
+    }
+    cout << '\n';
 }

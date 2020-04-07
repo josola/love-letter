@@ -4,8 +4,8 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef DECK_UTIL_H
-#define DECK_UTIL_H
+#ifndef DECK_UTIL_h
+#define DECK_UTIL_h
 
 #include <vector>
 #include "deck.h"

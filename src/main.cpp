@@ -9,7 +9,6 @@
 #include "game_util.h"
 #include "deck_util.h"
 #include "down_pile_util.h"
-#include "up_pile_util.h"
 
 int main()
 {
@@ -26,56 +25,28 @@ int main()
         ConsoleOutUtil::PrintPlayerGuessPrompt(gameUtil.PlayerCount());
         gameUtil.BuildStartingPlayer();
     }
-    else
-    {
-        ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
-        ConsoleOutUtil::PrintDealingHand();
 
-        Deck deck;
-        DeckUtil deckUtil(deck);
+    ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
+    ConsoleOutUtil::PrintDealingHand();
 
-        deckUtil.SetDeck();
-        deckUtil.ShuffleDeck();
-        
-        DownPile downPile;
-        DownPileUtil downPileUtil(downPile);
-        
-        downPileUtil.SetDownPile(deckUtil);
+    Deck deck;
+    DeckUtil deckUtil(deck);
 
-        UpPile upPile;
-        UpPileUtil upPileUtil(upPile);
-    }
+    deckUtil.SetDeck();
+    deckUtil.ShuffleDeck();
+
+    DownPile downPile;
+    DownPileUtil downPileUtil(downPile);
+
+    downPileUtil.SetDownPile(deckUtil);
+
+    //up pile action
+
+    ConsoleOutUtil::PrintUpPile();
+    ConsoleOutUtil::PrintDownPile(downPileUtil.GetDownPile());
 
     /*
     BEGINNING OF ROUNDS --
-
-        FIRST ROUND ONLY --
-
-            Print welcome message. X
-            Prompt for number of active players. X
-            Acquire number of active players. X
-            Store number of original active players seperately so a new round can start with original count. X
-            Set active player objects. X
-            Set winning token count. X
-            Prompt for player guess. X
-            Acquire player guess. X
-
-        FIRST ROUND AND ANY OTHER ROUND --
-
-            Print round count. X
-            Prompt dealing starting hand. X
-            Set deck. X
-            Shuffle deck. X
-            Set up pile.
-
-            DURING TWO PLAYER GAME --
-
-                Move two cards from deck to face up pile.
-                Print up pile.
-
-            Set down pile.
-            Move one card from the deck to the down pile.
-            Print down pile.
 
         AFTER FIRST ROUND --
 

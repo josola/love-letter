@@ -7,6 +7,7 @@
 #include <vector>
 #include "down_pile_util.h"
 #include "card_util.h"
+#include "card_util.h"
 
 using std::vector;
 
@@ -16,4 +17,9 @@ void DownPileUtil::SetDownPile(DeckUtil deckUtil)
 {
     downPile.down_pile.push_back(deckUtil.GetDeck()[0]);
     deckUtil.RemoveCardFromDeck(0);
+}
+
+vector<CardUtil> DownPileUtil::GetDownPile()
+{
+    return downPile.down_pile;
 }

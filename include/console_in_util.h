@@ -4,8 +4,8 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef CONSOLE_IN_UTIL_H
-#define CONSOLE_IN_UTIL_H
+#ifndef CONSOLE_IN_UTIL_h
+#define CONSOLE_IN_UTIL_h
 
 class ConsoleInUtil
 {

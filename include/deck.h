@@ -4,8 +4,8 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef DECK_H
-#define DECK_H
+#ifndef DECK_h
+#define DECK_h
 
 #include "card_util.h"
 #include <vector>
