@@ -47,7 +47,6 @@ int main()
     //up pile action
 
     ConsoleOutUtil::PrintUpPile();
-    ConsoleOutUtil::PrintDownPile(downPileUtil.GetDownPile());
 
     /*
     BEGINNING OF ROUNDS --
