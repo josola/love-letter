@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include "card_util.h"
+#include "player_util.h"
 
 using std::string;
 using std::vector;
@@ -29,6 +30,8 @@ public:
     static void PrintString(string output);
     static void PrintUpPile();
     static void PrintDownPile(vector<CardUtil> down_pile);
+    static void PrintMultipleWinners(vector<PlayerUtil> players, int range);
+    static void PrintClosestGuess(int target, PlayerUtil player);
 
 private:
 };

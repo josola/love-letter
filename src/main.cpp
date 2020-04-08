@@ -25,6 +25,10 @@ int main()
         ConsoleOutUtil::PrintPlayerGuessPrompt(gameUtil.PlayerCount());
         gameUtil.BuildStartingPlayer();
     }
+    else if (gameUtil.RoundCount() >= 2)
+    {
+
+    }
 
     ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
     ConsoleOutUtil::PrintDealingHand();

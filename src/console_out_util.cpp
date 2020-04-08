@@ -94,3 +94,18 @@ void ConsoleOutUtil::PrintDownPile(vector<CardUtil> down_pile)
     }
     cout << '\n';
 }
+
+void ConsoleOutUtil::PrintMultipleWinners(vector<PlayerUtil> players, int range)
+{
+    cout << "There were multiple winners last round.\n";
+    for (PlayerUtil iPUtil : players)
+    {
+        cout << ' ' << iPUtil.Name();
+    }
+    cout << " please guess a number between 1 and " << range << '\n';
+}
+
+void ConsoleOutUtil::PrintClosestGuess(int target, PlayerUtil player)
+{
+    cout << player.Name() << " has the closest guess to target[" << target << "]! They get to go first this round!\n";
+}

@@ -16,7 +16,7 @@ using std::any_of;
 using std::make_pair;
 using std::pair;
 
-GameUtil::GameUtil(Game game) : game(game){};
+GameUtil::GameUtil(Game game) : game(game) {};
 
 int GameUtil::RoundCount()
 {
@@ -25,7 +25,7 @@ int GameUtil::RoundCount()
 
 void GameUtil::GetPlayerCount()
 {
-    int count = ConsoleInUtil::GetIntInput();
+    int count(ConsoleInUtil::GetIntInput());
     if (!CorrectPlayerCount(count))
     {
         FixPlayerCount();
@@ -90,7 +90,7 @@ void GameUtil::SetPlayers()
 
 vector<PlayerUtil> GameUtil::PlayerBuilder(int output)
 {
-    vector<PlayerUtil> player_container;
+    vector<PlayerUtil> player_container{};
     switch (output)
     {
     case 2:
@@ -197,12 +197,12 @@ int GameUtil::PlayerCount()
 
 void GameUtil::BuildStartingPlayer()
 {
-    int target = GenerateNumberWithinRange(game.player_count);
-    vector<int> duplicate_guess;
+    int target(GenerateNumberWithinRange(game.player_count));
+    vector<int> duplicate_guess{};
     for (PlayerUtil iPUtil : game.players)
     {
         ConsoleOutUtil::PrintNameGuess(iPUtil.Name());
-        int guess = GetPlayerGuess();
+        int guess(GetPlayerGuess());
         while (DuplicateGuess(duplicate_guess, guess))
         {
             guess = GetPlayerGuess();
@@ -224,13 +224,13 @@ void GameUtil::BuildStartingPlayer()
 int GameUtil::GenerateNumberWithinRange(int range)
 {
     srand(time(NULL));
-    int output = rand() % range + 1;
+    int output(rand() % range + 1);
     return output;
 }
 
 int GameUtil::GetPlayerGuess()
 {
-    int output = ConsoleInUtil::GetIntInput();
+    int output(ConsoleInUtil::GetIntInput());
     if (!CorrectGuessInput(output))
     {
         FixGuessInput(output);

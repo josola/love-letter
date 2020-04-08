@@ -18,6 +18,8 @@ struct Player
     string name = "";
     int value = 0;
     bool current = false;
+    bool winner = false;
+    int guess = 0;
 };
 
 #endif

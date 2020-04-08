@@ -17,3 +17,31 @@ string PlayerUtil::Name()
 {
     return player.name;
 }
+
+void PlayerUtil::SetWinner(int output)
+{
+    switch (output)
+    {
+    case 0:
+        player.winner = false;
+        break;
+    case 1:
+        player.winner = true;
+        break;
+    }
+}
+
+bool PlayerUtil::Winner()
+{
+    return player.winner;
+}
+
+void PlayerUtil::SetGuess(int output)
+{
+    player.guess = output;
+}
+
+int PlayerUtil::Guess()
+{
+    return player.guess;
+}
