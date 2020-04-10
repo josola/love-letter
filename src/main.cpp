@@ -9,6 +9,7 @@
 #include "game_util.h"
 #include "deck_util.h"
 #include "down_pile_util.h"
+#include "discard_util.h"
 
 int main()
 {
