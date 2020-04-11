@@ -32,6 +32,7 @@ int main()
     }
 
     ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
+    ConsoleOutUtil::PrintPlayerTurn(gameUtil.GetCurrent());
 
     Deck deck;
     DeckUtil deckUtil(deck);

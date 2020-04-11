@@ -28,6 +28,7 @@ public:
     static void PrintNameGuess(string name);
     static void PrintCorrectGuessPrompt(string name);
     static void PrintRound(int output);
+    static void PrintPlayerTurn(int output);
     static void PrintString(string output);
     static void PrintUpPile(vector<CardUtil> up_pile);
     static void PrintDownPile(vector<CardUtil> down_pile);

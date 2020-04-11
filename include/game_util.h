@@ -33,6 +33,7 @@ public:
     void FixGuessInput(int input);
     bool DuplicateGuess(vector<int> guess_container, int guess);
     vector<PlayerUtil> Players();
+    int GetCurrent();
 
 private:
     Game& game;

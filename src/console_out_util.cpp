@@ -66,6 +66,31 @@ void ConsoleOutUtil::PrintRound(int output)
     cout << "-- ROUND " << output << " --\n";
 }
 
+void ConsoleOutUtil::PrintPlayerTurn(int output)
+{
+    switch (output)
+    {
+    case 1:
+        cout << "-- PLAYER[1] turn --\n";
+        break;
+    case 2:
+        cout << "-- PLAYER[2] turn --\n";
+        break;
+    case 3:
+        cout << "-- PLAYER[3] turn --\n";
+        break;
+    case 4:
+        cout << "-- PLAYER[4] turn --\n";
+        break;
+    case 5:
+        cout << "-- PLAYER[5] turn --\n";
+        break;
+    case 6:
+        cout << "-- PLAYER[6] turn --\n";
+        break;
+    }
+}
+
 void ConsoleOutUtil::PrintString(string output)
 {
     cout << output << '\n';

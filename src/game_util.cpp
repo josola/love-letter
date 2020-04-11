@@ -296,3 +296,16 @@ vector<PlayerUtil> GameUtil::Players()
 {
     return game.players;
 }
+
+int GameUtil::GetCurrent()
+{
+    int output(0);
+    for (PlayerUtil iPUtil : game.players)
+    {
+        if (iPUtil.Current())
+        {
+            output = iPUtil.Value();
+        }
+    }
+    return output;
+}
