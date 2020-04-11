@@ -4,15 +4,15 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef UP_PILE_h
-#define UP_PILE_h
+#ifndef DISCARD_DOWN_h
+#define DISCARD_DOWN_h
 
 #include <vector>
 #include "card_util.h"
 
 using std::vector;
 
-struct DownPile
+struct DiscardDown
 {
     vector<CardUtil> down_pile;
 };

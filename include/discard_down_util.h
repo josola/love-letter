@@ -4,26 +4,26 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef DOWN_PILE_h
-#define DOWN_PILE_h
+#ifndef DISCARD_DOWN_UTIL_h
+#define DISCARD_DOWN_UTIL_h
 
 #include <vector>
-#include "down_pile.h"
+#include "discard_down.h"
 #include "deck_util.h"
 #include "card_util.h"
 
 using std::vector;
 
-class DownPileUtil
+class DiscardDownUtil
 {
 public:
-    DownPileUtil(DownPile downPile);
+    DiscardDownUtil(DiscardDown& downPile);
 
-    void SetDownPile(DeckUtil deckUtil);
+    void SetDownPile(DeckUtil& deckUtil);
     vector<CardUtil> GetDownPile();
 
 private:
-    DownPile downPile;
+    DiscardDown& discardDown;
 };
 
 #endif

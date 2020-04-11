@@ -8,7 +8,7 @@
 #include "console_in_util.h"
 #include "game_util.h"
 #include "deck_util.h"
-#include "down_pile_util.h"
+#include "discard_down_util.h"
 #include "discard_up_util.h"
 
 int main()
@@ -40,8 +40,8 @@ int main()
     deckUtil.SetDeck();
     deckUtil.ShuffleDeck();
 
-    DownPile downPile;
-    DownPileUtil downPileUtil(downPile);
+    DiscardDown downPile;
+    DiscardDownUtil downPileUtil(downPile);
 
     downPileUtil.SetDownPile(deckUtil);
 
