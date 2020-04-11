@@ -76,9 +76,13 @@ void ConsoleOutUtil::PrintString(string output)
     cout << output << '\n';
 }
 
-void ConsoleOutUtil::PrintUpPile()
+void ConsoleOutUtil::PrintUpPile(vector<CardUtil> up_pile)
 {
     cout << "Up pile:\n";
+    for (CardUtil iCUtil : up_pile)
+    {
+        cout << ' ' << iCUtil.GetName();
+    }
     cout << '\n';
 }
 

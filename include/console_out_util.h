@@ -28,7 +28,7 @@ public:
     static void PrintRound(int output);
     static void PrintDealingHand();
     static void PrintString(string output);
-    static void PrintUpPile();
+    static void PrintUpPile(vector<CardUtil> up_pile);
     static void PrintDownPile(vector<CardUtil> down_pile);
     static void PrintMultipleWinners(vector<PlayerUtil> players, int range);
     static void PrintClosestGuess(int target, PlayerUtil player);

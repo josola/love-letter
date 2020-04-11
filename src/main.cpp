@@ -51,7 +51,7 @@ int main()
     if (gameUtil.PlayerCount() == 2)
     {
         discardUpUtil.SetTwoPlayerUpPile(deckUtil);
-        ConsoleOutUtil::PrintUpPile();
+        ConsoleOutUtil::PrintUpPile(discardUpUtil.UpPile());
     }
 
     /*
