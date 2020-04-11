@@ -8,17 +8,17 @@
 #define DISCARD_UTIL_h
 
 #include <vector>
-#include "discard.h"
+#include "discard_up.h"
 
 using std::vector;
 
-class UpPileUtil
+class DiscardUpUtil
 {
 public:
-    UpPileUtil(Discard discard);
+    DiscardUpUtil(DiscardUp& discardUp);
     vector<CardUtil> UpPile();
 private:
-    Discard discard;
+    DiscardUp& discardUp;
 };
 
 #endif

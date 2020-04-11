@@ -12,9 +12,9 @@
 
 using std::vector;
 
-struct Discard
+struct DiscardUp
 {
-    vector<CardUtil> discard_pile;
+    vector<CardUtil> up_pile;
 };
 
 #endif
