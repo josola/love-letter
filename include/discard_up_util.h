@@ -4,8 +4,8 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef DISCARD_UTIL_h
-#define DISCARD_UTIL_h
+#ifndef DISCARD_UP_UTIL_h
+#define DISCARD_UP_UTIL_h
 
 #include <vector>
 #include "discard_up.h"

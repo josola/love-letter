@@ -4,8 +4,8 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#ifndef DISCARD_h
-#define DISCARD_h
+#ifndef DISCARD_UP_h
+#define DISCARD_UP_h
 
 #include <vector>
 #include "card_util.h"
