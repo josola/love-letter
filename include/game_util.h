@@ -7,11 +7,8 @@
 #ifndef GAME_UTIL_h
 #define GAME_UTIL_h
 
-#include <utility>
 #include "game.h"
 #include "player.h"
-
-using std::pair;
 
 class GameUtil
 {

@@ -6,15 +6,9 @@
 
 #include <random>
 #include <ctime>
-#include <algorithm>
 #include "game_util.h"
 #include "console_in_util.h"
 #include "console_out_util.h"
-#include "player_util.h"
-
-using std::any_of;
-using std::make_pair;
-using std::pair;
 
 GameUtil::GameUtil(Game game) : game(game) {};
 
