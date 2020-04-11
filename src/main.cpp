@@ -32,7 +32,6 @@ int main()
     }
 
     ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
-    ConsoleOutUtil::PrintDealingHand();
 
     Deck deck;
     DeckUtil deckUtil(deck);
@@ -51,12 +50,14 @@ int main()
     if (gameUtil.PlayerCount() == 2)
     {
         discardUpUtil.SetTwoPlayerUpPile(deckUtil);
-        ConsoleOutUtil::PrintUpPile(discardUpUtil.UpPile());
     }
 
     ConsoleOutUtil::PrintDeckTotal(deckUtil);
+    if (!discardUpUtil.UpPile().empty())
+    {
+        ConsoleOutUtil::PrintUpPile(discardUpUtil.UpPile());
+    }
     ConsoleOutUtil::PrintRivalPlayers(gameUtil);
-
     /*
     BEGINNING OF ROUNDS --
 
@@ -80,7 +81,7 @@ int main()
             Remove handmaid protection.
 
         Print number of cards in deck. X
-        Print number of rival players. Does not include current player.
+        Print number of rival players. Does not include current player. X
 
         UP PILE IS NOT EMPTY --
 

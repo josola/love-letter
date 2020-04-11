@@ -66,11 +66,6 @@ void ConsoleOutUtil::PrintRound(int output)
     cout << "-- ROUND " << output << " --\n";
 }
 
-void ConsoleOutUtil::PrintDealingHand()
-{
-    cout << "Dealing out starting hand.\n";
-}
-
 void ConsoleOutUtil::PrintString(string output)
 {
     cout << output << '\n';
