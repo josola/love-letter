@@ -7,11 +7,7 @@
 #ifndef DECK_UTIL_h
 #define DECK_UTIL_h
 
-#include <vector>
 #include "deck.h"
-#include "card_util.h"
-
-using std::vector;
 
 class DeckUtil
 {

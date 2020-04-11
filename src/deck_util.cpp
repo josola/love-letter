@@ -4,17 +4,14 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#include <vector>
 #include <random>
 #include <ctime>
 #include <algorithm>
 #include "deck_util.h"
-#include "card_util.h"
 
 using std::random_shuffle;
 using std::srand;
 using std::time;
-using std::vector;
 
 DeckUtil::DeckUtil(Deck deck) : deck(deck){};
 
