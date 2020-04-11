@@ -5,12 +5,9 @@
  */
 
 #include <iostream>
-#include <string>
 #include "console_out_util.h"
-#include "card_util.h"
 
 using std::cout;
-using std::string;
 
 void ConsoleOutUtil::PrintWelcome()
 {
