@@ -54,6 +54,8 @@ int main()
         ConsoleOutUtil::PrintUpPile(discardUpUtil.UpPile());
     }
 
+    ConsoleOutUtil::PrintDeckTotal(deckUtil);
+
     /*
     BEGINNING OF ROUNDS --
 
