@@ -111,8 +111,36 @@ void ConsoleOutUtil::PrintClosestGuess(int target, PlayerUtil player)
     cout << player.Name() << " has the closest guess to target[" << target << "]! They get to go first this round!\n";
 }
 
-void ConsoleOutUtil::PrintDeckTotal(DeckUtil deck)
+void ConsoleOutUtil::PrintDeckTotal(DeckUtil deckUtil)
 {
-    int size = deck.GetDeck().size();
+    int size = deckUtil.GetDeck().size();
     cout << "Total cards in deck: " << size << '\n';
+}
+
+void ConsoleOutUtil::PrintRivalPlayers(GameUtil gameUtil)
+{
+    if (gameUtil.PlayerCount() == 2)
+    {
+        cout << "Rival player: \n";
+        for (PlayerUtil iPUtil : gameUtil.Players())
+        {
+            if (!iPUtil.Current())
+            {
+                cout << ' ' << iPUtil.Name();
+            }
+        }
+        cout << '\n';
+    }
+    else
+    {
+        cout << "Rival players: \n";
+        for (PlayerUtil iPUtil : gameUtil.Players())
+        {
+            if (!iPUtil.Current())
+            {
+                cout << ' ' << iPUtil.Name();
+            }
+        }
+        cout << '\n';
+    }
 }

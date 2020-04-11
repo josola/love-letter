@@ -24,7 +24,7 @@ int main()
         gameUtil.SetPlayers();
         gameUtil.SetWinningTokenCount();
         ConsoleOutUtil::PrintPlayerGuessPrompt(gameUtil.PlayerCount());
-        gameUtil.BuildStartingPlayer();
+        gameUtil.SetStartingPlayer(gameUtil.BuildStartingPlayer());
     }
     else if (gameUtil.RoundCount() >= 2)
     {
@@ -55,6 +55,7 @@ int main()
     }
 
     ConsoleOutUtil::PrintDeckTotal(deckUtil);
+    ConsoleOutUtil::PrintRivalPlayers(gameUtil);
 
     /*
     BEGINNING OF ROUNDS --
@@ -78,7 +79,7 @@ int main()
 
             Remove handmaid protection.
 
-        Print number of cards in deck.
+        Print number of cards in deck. X
         Print number of rival players. Does not include current player.
 
         UP PILE IS NOT EMPTY --

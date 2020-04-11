@@ -18,6 +18,11 @@ string PlayerUtil::Name()
     return player.name;
 }
 
+int PlayerUtil::Value()
+{
+    return player.value;
+}
+
 void PlayerUtil::SetWinner(int output)
 {
     switch (output)
@@ -44,4 +49,9 @@ void PlayerUtil::SetGuess(int output)
 int PlayerUtil::Guess()
 {
     return player.guess;
+}
+
+bool PlayerUtil::Current()
+{
+    return player.current;
 }

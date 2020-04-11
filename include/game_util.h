@@ -13,7 +13,7 @@
 class GameUtil
 {
 public:
-    GameUtil(Game game);
+    GameUtil(Game& game);
 
     int RoundCount();
     void GetPlayerCount();
@@ -25,7 +25,8 @@ public:
     vector<PlayerUtil> PlayerBuilder(int output);
     void SetWinningTokenCount();
     int PlayerCount();
-    void BuildStartingPlayer();
+    void SetStartingPlayer(int output);
+    int BuildStartingPlayer();
     int GenerateNumberWithinRange(int range);
     int GetPlayerGuess();
     bool CorrectGuessInput(int output);
@@ -34,7 +35,7 @@ public:
     vector<PlayerUtil> Players();
 
 private:
-    Game game;
+    Game& game;
 };
 
 #endif

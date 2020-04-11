@@ -10,7 +10,7 @@
 #include "console_in_util.h"
 #include "console_out_util.h"
 
-GameUtil::GameUtil(Game game) : game(game) {};
+GameUtil::GameUtil(Game& game) : game(game) {};
 
 int GameUtil::RoundCount()
 {
@@ -189,10 +189,37 @@ int GameUtil::PlayerCount()
     return game.player_count;
 }
 
-void GameUtil::BuildStartingPlayer()
+void GameUtil::SetStartingPlayer(int output)
+{
+    output--;
+    switch (output)
+    {
+    case 0:
+        game.players.at(0).SetCurrent();
+        break;
+    case 1:
+        game.players.at(1).SetCurrent();
+        break;
+    case 2:
+        game.players.at(2).SetCurrent();
+        break;
+    case 3:
+        game.players.at(3).SetCurrent();
+        break;
+    case 4:
+        game.players.at(4).SetCurrent();
+        break;
+    case 5:
+        game.players.at(5).SetCurrent();
+        break;
+    }
+}
+
+int GameUtil::BuildStartingPlayer()
 {
     int target(GenerateNumberWithinRange(game.player_count));
     vector<int> duplicate_guess{};
+    int player(0);
     for (PlayerUtil iPUtil : game.players)
     {
         ConsoleOutUtil::PrintNameGuess(iPUtil.Name());
@@ -204,8 +231,8 @@ void GameUtil::BuildStartingPlayer()
         if (guess == target)
         {
             ConsoleOutUtil::PrintCorrectGuessPrompt(iPUtil.Name());
-            iPUtil.SetCurrent();
             duplicate_guess.erase(duplicate_guess.begin(), duplicate_guess.end());
+            player = iPUtil.Value();
             break;
         }
         else
@@ -213,6 +240,7 @@ void GameUtil::BuildStartingPlayer()
             duplicate_guess.push_back(guess);
         }
     }
+    return player;
 }
 
 int GameUtil::GenerateNumberWithinRange(int range)

@@ -12,6 +12,7 @@
 #include "card_util.h"
 #include "player_util.h"
 #include "deck_util.h"
+#include "game_util.h"
 
 using std::string;
 using std::vector;
@@ -33,7 +34,8 @@ public:
     static void PrintDownPile(vector<CardUtil> down_pile);
     static void PrintMultipleWinners(vector<PlayerUtil> players, int range);
     static void PrintClosestGuess(int target, PlayerUtil player);
-    static void PrintDeckTotal(DeckUtil deck);
+    static void PrintDeckTotal(DeckUtil deckUtil);
+    static void PrintRivalPlayers(GameUtil gameUtil);
 
 private:
 };

@@ -16,10 +16,12 @@ public:
 
     void SetCurrent();
     string Name();
+    int Value();
     void SetWinner(int output);
     bool Winner();
     void SetGuess(int output);
     int Guess();
+    bool Current();
 
 private:
     Player player;
