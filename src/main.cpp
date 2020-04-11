@@ -40,14 +40,19 @@ int main()
     deckUtil.SetDeck();
     deckUtil.ShuffleDeck();
 
-    DiscardDown downPile;
-    DiscardDownUtil downPileUtil(downPile);
+    DiscardDown discardDown;
+    DiscardDownUtil discardDownUtil(discardDown);
 
-    downPileUtil.SetDownPile(deckUtil);
+    discardDownUtil.SetDownPile(deckUtil);
 
-    //up pile action
+    DiscardUp discardUp;
+    DiscardUpUtil discardUpUtil(discardUp);
 
-    ConsoleOutUtil::PrintUpPile();
+    if (gameUtil.PlayerCount() == 2)
+    {
+        discardUpUtil.SetTwoPlayerUpPile(deckUtil);
+        ConsoleOutUtil::PrintUpPile();
+    }
 
     /*
     BEGINNING OF ROUNDS --

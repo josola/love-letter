@@ -8,12 +8,15 @@
 #define DISCARD_UP_UTIL_h
 
 #include "discard_up.h"
+#include "deck_util.h"
 
 class DiscardUpUtil
 {
 public:
     DiscardUpUtil(DiscardUp& discardUp);
     vector<CardUtil> UpPile();
+    void SetTwoPlayerUpPile(DeckUtil& deckUtil);
+
 private:
     DiscardUp& discardUp;
 };

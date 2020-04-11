@@ -71,8 +71,8 @@ void DeckUtil::ShuffleDeck()
 
 CardUtil DeckUtil::GetCardFromDeck(int pos)
 {
-    CardUtil top_card = deck.deck.at(pos);
-    return top_card;
+    CardUtil card = deck.deck.at(pos);
+    return card;
 }
 
 void DeckUtil::RemoveCardFromDeck(int pos)
