@@ -7,10 +7,7 @@
 #ifndef DISCARD_UP_UTIL_h
 #define DISCARD_UP_UTIL_h
 
-#include <vector>
 #include "discard_up.h"
-
-using std::vector;
 
 class DiscardUpUtil
 {
