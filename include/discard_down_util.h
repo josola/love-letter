@@ -7,12 +7,8 @@
 #ifndef DISCARD_DOWN_UTIL_h
 #define DISCARD_DOWN_UTIL_h
 
-#include <vector>
 #include "discard_down.h"
 #include "deck_util.h"
-#include "card_util.h"
-
-using std::vector;
 
 class DiscardDownUtil
 {

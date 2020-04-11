@@ -4,12 +4,7 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#include <vector>
 #include "discard_down_util.h"
-#include "card_util.h"
-#include "card_util.h"
-
-using std::vector;
 
 DiscardDownUtil::DiscardDownUtil(DiscardDown& discardDown) : discardDown(discardDown){};
 
