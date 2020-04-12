@@ -12,25 +12,25 @@
 int main()
 {
     Game game;
-    GameUtil gameUtil(game);
+    GameUtl gameUtl(game);
 
-    if (gameUtil.RoundCount() == 1)
+    if (gameUtl.RoundCount() == 1)
     {
         ConsoleOutUtil::PrintWelcome();
         ConsoleOutUtil::PrintStartingPlayerPrompt();
-        gameUtil.GetPlayerCount();
-        gameUtil.SetPlayers();
-        gameUtil.SetWinningTokenCount();
-        ConsoleOutUtil::PrintPlayerGuessPrompt(gameUtil.PlayerCount());
-        gameUtil.SetStartingPlayer(gameUtil.BuildStartingPlayer());
+        gameUtl.GetPlayerCount();
+        gameUtl.SetPlayers();
+        gameUtl.SetWinningTokenCount();
+        ConsoleOutUtil::PrintPlayerGuessPrompt(gameUtl.PlayerCount());
+        gameUtl.SetStartingPlayer(gameUtl.BuildStartingPlayer());
     }
-    else if (gameUtil.RoundCount() >= 2)
+    else if (gameUtl.RoundCount() >= 2)
     {
 
     }
 
-    ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
-    ConsoleOutUtil::PrintPlayerTurn(gameUtil.GetCurrent());
+    ConsoleOutUtil::PrintRound(gameUtl.RoundCount());
+    ConsoleOutUtil::PrintPlayerTurn(gameUtl.GetCurrent());
 
     DeckUtl deckUtl;
 
@@ -44,12 +44,12 @@ int main()
 
     UpUtl upUtl;
 
-    if (gameUtil.PlayerCount() == 2)
+    if (gameUtl.PlayerCount() == 2)
     {
         upUtl.Builder(deckUtl);
     }
 
-    //deal starting hand
+    gameUtl.DealStartingHand(deckUtl);
 
     ConsoleOutUtil::PrintDeckTotal(deckUtl);
 
@@ -58,8 +58,8 @@ int main()
         ConsoleOutUtil::PrintUpPile(upUtl.Deck());
     }
 
-    ConsoleOutUtil::PrintRivalPlayers(gameUtil);
-    ConsoleOutUtil::PrintRivalsWithSpy(gameUtil);
+    ConsoleOutUtil::PrintRivalPlayers(gameUtl);
+    ConsoleOutUtil::PrintRivalsWithSpy(gameUtl);
 
     /*
     BEGINNING OF ROUNDS --

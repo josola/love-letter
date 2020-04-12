@@ -35,8 +35,8 @@ public:
     static void PrintMultipleWinners(vector<PlyrUtl> players, int range);
     static void PrintClosestGuess(int target, PlyrUtl player);
     static void PrintDeckTotal(DeckUtl deckUtil);
-    static void PrintRivalPlayers(GameUtil gameUtil);
-    static void PrintRivalsWithSpy(GameUtil gameUtil);
+    static void PrintRivalPlayers(GameUtl gameUtil);
+    static void PrintRivalsWithSpy(GameUtl gameUtil);
     static void PrintPlayerHand(PlyrUtl plyrUtl);
 
 private:

@@ -9,11 +9,12 @@
 
 #include "game.h"
 #include "player.h"
+#include "deck.h"
 
-class GameUtil
+class GameUtl
 {
 public:
-    GameUtil(Game& game);
+    GameUtl(Game& game);
 
     int RoundCount();
     void GetPlayerCount();
@@ -34,6 +35,7 @@ public:
     bool DuplicateGuess(vector<int> guess_container, int guess);
     vector<PlyrUtl> Players();
     int GetCurrent();
+    void DealStartingHand(DeckUtl &deck);
 
 private:
     Game& game;

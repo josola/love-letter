@@ -10,14 +10,14 @@
 #include "console_in_util.h"
 #include "console_out_util.h"
 
-GameUtil::GameUtil(Game& game) : game(game) {};
+GameUtl::GameUtl(Game& game) : game(game) {};
 
-int GameUtil::RoundCount()
+int GameUtl::RoundCount()
 {
     return game.round_count;
 }
 
-void GameUtil::GetPlayerCount()
+void GameUtl::GetPlayerCount()
 {
     int count(ConsoleInUtil::GetIntInput());
     if (!CorrectPlayerCount(count))
@@ -31,7 +31,7 @@ void GameUtil::GetPlayerCount()
     }
 }
 
-bool GameUtil::CorrectPlayerCount(int input)
+bool GameUtl::CorrectPlayerCount(int input)
 {
     if (input >= 2 && input <= 6)
     {
@@ -44,23 +44,23 @@ bool GameUtil::CorrectPlayerCount(int input)
     }
 }
 
-void GameUtil::FixPlayerCount()
+void GameUtl::FixPlayerCount()
 {
     ConsoleInUtil::ClearInput();
     GetPlayerCount();
 }
 
-void GameUtil::SetPlayerCount(int output)
+void GameUtl::SetPlayerCount(int output)
 {
     game.player_count = output;
 }
 
-void GameUtil::SetOriginalPlayerCount(int output)
+void GameUtl::SetOriginalPlayerCount(int output)
 {
     game.original_player_count = output;
 }
 
-void GameUtil::SetPlayers()
+void GameUtl::SetPlayers()
 {
     switch (game.original_player_count)
     {
@@ -82,7 +82,7 @@ void GameUtil::SetPlayers()
     }
 }
 
-vector<PlyrUtl> GameUtil::PlayerBuilder(int output)
+vector<PlyrUtl> GameUtl::PlayerBuilder(int output)
 {
     vector<PlyrUtl> player_container{};
     switch (output)
@@ -162,7 +162,7 @@ vector<PlyrUtl> GameUtil::PlayerBuilder(int output)
     }
 }
 
-void GameUtil::SetWinningTokenCount()
+void GameUtl::SetWinningTokenCount()
 {
     switch (game.player_count)
     {
@@ -184,12 +184,12 @@ void GameUtil::SetWinningTokenCount()
     }
 }
 
-int GameUtil::PlayerCount()
+int GameUtl::PlayerCount()
 {
     return game.player_count;
 }
 
-void GameUtil::SetStartingPlayer(int output)
+void GameUtl::SetStartingPlayer(int output)
 {
     output--;
     switch (output)
@@ -215,7 +215,7 @@ void GameUtil::SetStartingPlayer(int output)
     }
 }
 
-int GameUtil::BuildStartingPlayer()
+int GameUtl::BuildStartingPlayer()
 {
     int target(GenerateNumberWithinRange(game.player_count));
     vector<int> duplicate_guess{};
@@ -243,14 +243,14 @@ int GameUtil::BuildStartingPlayer()
     return player;
 }
 
-int GameUtil::GenerateNumberWithinRange(int range)
+int GameUtl::GenerateNumberWithinRange(int range)
 {
     srand(time(NULL));
     int output(rand() % range + 1);
     return output;
 }
 
-int GameUtil::GetPlayerGuess()
+int GameUtl::GetPlayerGuess()
 {
     int output(ConsoleInUtil::GetIntInput());
     if (!CorrectGuessInput(output))
@@ -260,7 +260,7 @@ int GameUtil::GetPlayerGuess()
     return output;
 }
 
-bool GameUtil::CorrectGuessInput(int output)
+bool GameUtl::CorrectGuessInput(int output)
 {
     if (output >= 1 && output <= game.player_count)
     {
@@ -273,13 +273,13 @@ bool GameUtil::CorrectGuessInput(int output)
     }
 }
 
-void GameUtil::FixGuessInput(int input)
+void GameUtl::FixGuessInput(int input)
 {
     ConsoleInUtil::ClearInput();
     input = GetPlayerGuess();
 }
 
-bool GameUtil::DuplicateGuess(vector<int> guess_container, int guess)
+bool GameUtl::DuplicateGuess(vector<int> guess_container, int guess)
 {
     for (int iInt : guess_container)
     {
@@ -292,12 +292,12 @@ bool GameUtil::DuplicateGuess(vector<int> guess_container, int guess)
     return false;
 }
 
-vector<PlyrUtl> GameUtil::Players()
+vector<PlyrUtl> GameUtl::Players()
 {
     return game.players;
 }
 
-int GameUtil::GetCurrent()
+int GameUtl::GetCurrent()
 {
     int output(0);
     for (PlyrUtl iPUtil : game.players)
@@ -308,4 +308,12 @@ int GameUtil::GetCurrent()
         }
     }
     return output;
+}
+
+void GameUtl::DealStartingHand(DeckUtl &deck)
+{
+    for (PlyrUtl &iPUtl : game.players)
+    {
+        iPUtl.InsertCardIntoHand(deck.Card(0));
+    }
 }

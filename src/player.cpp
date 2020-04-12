@@ -26,8 +26,7 @@ void PlyrUtl::SetGuess(int output) { guess = output; }
 template<typename Object>
 CardUtl PlyrUtl::DrawCard(Object &obj)
 {
-    CardUtl top_card = obj.Deck().at(0);
-    obj.RemoveCard(0);
+    CardUtl top_card = obj.Card(0);
     return top_card;
 }
 void PlyrUtl::InsertCardIntoHand(CardUtl card) { hand.push_back(card); }
