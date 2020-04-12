@@ -30,6 +30,7 @@ class PlyrUtl : public PlyrMdl
 public:
     PlyrUtl(string name, int value) : PlyrMdl{ name, value } {};
 
+    //getters
     string const Name();
     int const Value();
     bool const Winner();
@@ -37,8 +38,11 @@ public:
     bool const Spy();
     int const Guess();
 
-    void SetCurrent();
-    void SetWinner(int output);
+    //setters
+    void IsCurrent();
+    void NotCurrent();
+    void IsWinner();
+    void NotWinner();
     void SetGuess(int output);
 };
 

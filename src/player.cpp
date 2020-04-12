@@ -13,17 +13,8 @@ bool const PlyrUtl::Current() { return current; }
 bool const PlyrUtl::Spy() { return spy; }
 bool const PlyrUtl::Winner() { return winner; }
 
-void PlyrUtl::SetCurrent() { current = true; }
-void PlyrUtl::SetWinner(int output)
-{
-    switch (output)
-    {
-    case 0:
-        winner = false;
-        break;
-    case 1:
-        winner = true;
-        break;
-    }
-}
+void PlyrUtl::IsCurrent() { current = true; }
+void PlyrUtl::NotCurrent() { current = false; }
+void PlyrUtl::IsWinner() { winner = true;}
+void PlyrUtl::NotWinner() { winner = false; }
 void PlyrUtl::SetGuess(int output) { guess = output; }

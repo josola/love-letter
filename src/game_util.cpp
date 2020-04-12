@@ -195,22 +195,22 @@ void GameUtil::SetStartingPlayer(int output)
     switch (output)
     {
     case 0:
-        game.players.at(0).SetCurrent();
+        game.players.at(0).IsCurrent();
         break;
     case 1:
-        game.players.at(1).SetCurrent();
+        game.players.at(1).IsCurrent();
         break;
     case 2:
-        game.players.at(2).SetCurrent();
+        game.players.at(2).IsCurrent();
         break;
     case 3:
-        game.players.at(3).SetCurrent();
+        game.players.at(3).IsCurrent();
         break;
     case 4:
-        game.players.at(4).SetCurrent();
+        game.players.at(4).IsCurrent();
         break;
     case 5:
-        game.players.at(5).SetCurrent();
+        game.players.at(5).IsCurrent();
         break;
     }
 }
