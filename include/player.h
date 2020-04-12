@@ -8,8 +8,11 @@
 #define PLAYER_h
 
 #include <string>
+#include <vector>
+#include "card.h"
 
 using std::string;
+using std::vector;
 
 class PlyrMdl
 {
@@ -23,6 +26,7 @@ protected:
     bool winner = false;
     int guess = 0;
     bool spy = false;
+    vector<CardUtl> hand;
 };
 
 class PlyrUtl : public PlyrMdl
@@ -37,6 +41,7 @@ public:
     bool const Current();
     bool const Spy();
     int const Guess();
+    vector<CardUtl> const Hand();
 
     //setters
     void IsCurrent();
@@ -44,6 +49,11 @@ public:
     void IsWinner();
     void NotWinner();
     void SetGuess(int output);
+
+    //actions
+    template<typename Object>
+    CardUtl DrawCard(Object &obj);
+    void InsertCardIntoHand(CardUtl card);
 };
 
 #endif

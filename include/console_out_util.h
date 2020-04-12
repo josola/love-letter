@@ -9,9 +9,9 @@
 
 #include <string>
 #include <vector>
-#include "card_util.h"
+#include "card.h"
 #include "player.h"
-#include "deck_util.h"
+#include "deck.h"
 #include "game_util.h"
 
 using std::string;
@@ -30,13 +30,14 @@ public:
     static void PrintRound(int output);
     static void PrintPlayerTurn(int output);
     static void PrintString(string output);
-    static void PrintUpPile(vector<CardUtil> up_pile);
-    static void PrintDownPile(vector<CardUtil> down_pile);
+    static void PrintUpPile(vector<CardUtl> up_pile);
+    static void PrintDownPile(vector<CardUtl> down_pile);
     static void PrintMultipleWinners(vector<PlyrUtl> players, int range);
     static void PrintClosestGuess(int target, PlyrUtl player);
-    static void PrintDeckTotal(DeckUtil deckUtil);
+    static void PrintDeckTotal(DeckUtl deckUtil);
     static void PrintRivalPlayers(GameUtil gameUtil);
     static void PrintRivalsWithSpy(GameUtil gameUtil);
+    static void PrintPlayerHand(PlyrUtl plyrUtl);
 
 private:
 };

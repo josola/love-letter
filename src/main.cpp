@@ -7,9 +7,7 @@
 #include "console_out_util.h"
 #include "console_in_util.h"
 #include "game_util.h"
-#include "deck_util.h"
-#include "discard_down_util.h"
-#include "discard_up_util.h"
+#include "deck.h"
 
 int main()
 {
@@ -34,30 +32,30 @@ int main()
     ConsoleOutUtil::PrintRound(gameUtil.RoundCount());
     ConsoleOutUtil::PrintPlayerTurn(gameUtil.GetCurrent());
 
-    Deck deck;
-    DeckUtil deckUtil(deck);
+    DeckUtl deckUtl;
 
-    deckUtil.SetDeck();
-    deckUtil.ShuffleDeck();
+    deckUtl.Builder();
+    deckUtl.Shuffle();
 
-    DiscardDown discardDown;
-    DiscardDownUtil discardDownUtil(discardDown);
+    DwnUtl dwnUtl;
 
-    discardDownUtil.SetDownPile(deckUtil);
+    //discard one card face down
+    dwnUtl.InsertCard(deckUtl.Card(0));
 
-    DiscardUp discardUp;
-    DiscardUpUtil discardUpUtil(discardUp);
+    UpUtl upUtl;
 
     if (gameUtil.PlayerCount() == 2)
     {
-        discardUpUtil.SetTwoPlayerUpPile(deckUtil);
+        upUtl.Builder(deckUtl);
     }
 
-    ConsoleOutUtil::PrintDeckTotal(deckUtil);
+    //deal starting hand
 
-    if (!discardUpUtil.UpPile().empty())
+    ConsoleOutUtil::PrintDeckTotal(deckUtl);
+
+    if (!upUtl.Deck().empty())
     {
-        ConsoleOutUtil::PrintUpPile(discardUpUtil.UpPile());
+        ConsoleOutUtil::PrintUpPile(upUtl.Deck());
     }
 
     ConsoleOutUtil::PrintRivalPlayers(gameUtil);

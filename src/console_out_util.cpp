@@ -96,22 +96,22 @@ void ConsoleOutUtil::PrintString(string output)
     cout << output << '\n';
 }
 
-void ConsoleOutUtil::PrintUpPile(vector<CardUtil> up_pile)
+void ConsoleOutUtil::PrintUpPile(vector<CardUtl> up_pile)
 {
     cout << "Up pile:\n";
-    for (CardUtil iCUtil : up_pile)
+    for (CardUtl iCUtil : up_pile)
     {
-        cout << ' ' << iCUtil.GetName();
+        cout << ' ' << iCUtil.Name();
     }
     cout << '\n';
 }
 
-void ConsoleOutUtil::PrintDownPile(vector<CardUtil> down_pile)
+void ConsoleOutUtil::PrintDownPile(vector<CardUtl> down_pile)
 {
     cout << "Down pile:\n";
-    for (CardUtil iCUtil : down_pile)
+    for (CardUtl iCUtil : down_pile)
     {
-        cout << ' ' << iCUtil.GetName();
+        cout << ' ' << iCUtil.Name();
     }
     cout << '\n';
 }
@@ -131,9 +131,9 @@ void ConsoleOutUtil::PrintClosestGuess(int target, PlyrUtl player)
     cout << player.Name() << " has the closest guess to target[" << target << "]! They get to go first this round!\n";
 }
 
-void ConsoleOutUtil::PrintDeckTotal(DeckUtil deckUtil)
+void ConsoleOutUtil::PrintDeckTotal(DeckUtl deckUtil)
 {
-    int size = deckUtil.GetDeck().size();
+    int size = deckUtil.Deck().size();
     cout << "Total cards in deck: " << size << '\n';
 }
 
@@ -187,4 +187,14 @@ void ConsoleOutUtil::PrintRivalsWithSpy(GameUtil gameUtil)
         }
         cout << '\n';
     }
+}
+
+void ConsoleOutUtil::PrintPlayerHand(PlyrUtl plyrUtl)
+{
+    cout << "Player hand: \n";
+    for (CardUtl iCUtil : plyrUtl.Hand())
+    {
+        cout << ' ' << iCUtil.Name();
+    }
+    cout << '\n';
 }
