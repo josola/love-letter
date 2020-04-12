@@ -55,3 +55,8 @@ bool PlayerUtil::Current()
 {
     return player.current;
 }
+
+bool PlayerUtil::Spy()
+{
+    return player.spy;
+}

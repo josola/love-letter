@@ -164,3 +164,27 @@ void ConsoleOutUtil::PrintRivalPlayers(GameUtil gameUtil)
         cout << '\n';
     }
 }
+
+void ConsoleOutUtil::PrintRivalsWithSpy(GameUtil gameUtil)
+{
+    int spy_count(0);
+    for (PlayerUtil iPUtil : gameUtil.Players())
+    {
+        if (iPUtil.Spy())
+        {
+            spy_count++;
+        }
+    }
+    if (spy_count > 0)
+    {
+        cout << "Rivals with Spy: \n";
+        for (PlayerUtil iPUtil : gameUtil.Players())
+        {
+            if (iPUtil.Spy())
+            {
+                cout << ' ' << iPUtil.Name();
+            }
+        }
+        cout << '\n';
+    }
+}

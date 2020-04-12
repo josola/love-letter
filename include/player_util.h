@@ -22,6 +22,7 @@ public:
     void SetGuess(int output);
     int Guess();
     bool Current();
+    bool Spy();
 
 private:
     Player player;

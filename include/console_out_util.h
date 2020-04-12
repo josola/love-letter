@@ -36,6 +36,7 @@ public:
     static void PrintClosestGuess(int target, PlayerUtil player);
     static void PrintDeckTotal(DeckUtil deckUtil);
     static void PrintRivalPlayers(GameUtil gameUtil);
+    static void PrintRivalsWithSpy(GameUtil gameUtil);
 
 private:
 };

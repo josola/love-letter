@@ -54,11 +54,15 @@ int main()
     }
 
     ConsoleOutUtil::PrintDeckTotal(deckUtil);
+
     if (!discardUpUtil.UpPile().empty())
     {
         ConsoleOutUtil::PrintUpPile(discardUpUtil.UpPile());
     }
+
     ConsoleOutUtil::PrintRivalPlayers(gameUtil);
+    ConsoleOutUtil::PrintRivalsWithSpy(gameUtil);
+
     /*
     BEGINNING OF ROUNDS --
 

@@ -20,6 +20,7 @@ struct Player
     bool current = false;
     bool winner = false;
     int guess = 0;
+    bool spy = false;
 };
 
 #endif
