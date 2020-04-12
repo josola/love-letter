@@ -22,7 +22,7 @@ public:
     void SetPlayerCount(int output);
     void SetOriginalPlayerCount(int output);
     void SetPlayers();
-    vector<PlayerUtil> PlayerBuilder(int output);
+    vector<PlyrUtl> PlayerBuilder(int output);
     void SetWinningTokenCount();
     int PlayerCount();
     void SetStartingPlayer(int output);
@@ -32,7 +32,7 @@ public:
     bool CorrectGuessInput(int output);
     void FixGuessInput(int input);
     bool DuplicateGuess(vector<int> guess_container, int guess);
-    vector<PlayerUtil> Players();
+    vector<PlyrUtl> Players();
     int GetCurrent();
 
 private:

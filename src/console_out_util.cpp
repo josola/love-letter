@@ -116,17 +116,17 @@ void ConsoleOutUtil::PrintDownPile(vector<CardUtil> down_pile)
     cout << '\n';
 }
 
-void ConsoleOutUtil::PrintMultipleWinners(vector<PlayerUtil> players, int range)
+void ConsoleOutUtil::PrintMultipleWinners(vector<PlyrUtl> players, int range)
 {
     cout << "There were multiple winners last round.\n";
-    for (PlayerUtil iPUtil : players)
+    for (PlyrUtl iPUtil : players)
     {
         cout << ' ' << iPUtil.Name();
     }
     cout << " please guess a number between 1 and " << range << '\n';
 }
 
-void ConsoleOutUtil::PrintClosestGuess(int target, PlayerUtil player)
+void ConsoleOutUtil::PrintClosestGuess(int target, PlyrUtl player)
 {
     cout << player.Name() << " has the closest guess to target[" << target << "]! They get to go first this round!\n";
 }
@@ -142,7 +142,7 @@ void ConsoleOutUtil::PrintRivalPlayers(GameUtil gameUtil)
     if (gameUtil.PlayerCount() == 2)
     {
         cout << "Rival player: \n";
-        for (PlayerUtil iPUtil : gameUtil.Players())
+        for (PlyrUtl iPUtil : gameUtil.Players())
         {
             if (!iPUtil.Current())
             {
@@ -154,7 +154,7 @@ void ConsoleOutUtil::PrintRivalPlayers(GameUtil gameUtil)
     else
     {
         cout << "Rival players: \n";
-        for (PlayerUtil iPUtil : gameUtil.Players())
+        for (PlyrUtl iPUtil : gameUtil.Players())
         {
             if (!iPUtil.Current())
             {
@@ -168,7 +168,7 @@ void ConsoleOutUtil::PrintRivalPlayers(GameUtil gameUtil)
 void ConsoleOutUtil::PrintRivalsWithSpy(GameUtil gameUtil)
 {
     int spy_count(0);
-    for (PlayerUtil iPUtil : gameUtil.Players())
+    for (PlyrUtl iPUtil : gameUtil.Players())
     {
         if (iPUtil.Spy())
         {
@@ -178,7 +178,7 @@ void ConsoleOutUtil::PrintRivalsWithSpy(GameUtil gameUtil)
     if (spy_count > 0)
     {
         cout << "Rivals with Spy: \n";
-        for (PlayerUtil iPUtil : gameUtil.Players())
+        for (PlyrUtl iPUtil : gameUtil.Players())
         {
             if (iPUtil.Spy())
             {

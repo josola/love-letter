@@ -92,7 +92,7 @@ int main()
 
             Print up pile.
 
-        Print rival players with Spy bonus.
+        Print rival players with Spy bonus. X
         Print current player hand.
         Prompt current player to draw a card from deck.
         Get current player's draw input.

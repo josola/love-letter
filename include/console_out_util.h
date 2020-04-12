@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 #include "card_util.h"
-#include "player_util.h"
+#include "player.h"
 #include "deck_util.h"
 #include "game_util.h"
 
@@ -32,8 +32,8 @@ public:
     static void PrintString(string output);
     static void PrintUpPile(vector<CardUtil> up_pile);
     static void PrintDownPile(vector<CardUtil> down_pile);
-    static void PrintMultipleWinners(vector<PlayerUtil> players, int range);
-    static void PrintClosestGuess(int target, PlayerUtil player);
+    static void PrintMultipleWinners(vector<PlyrUtl> players, int range);
+    static void PrintClosestGuess(int target, PlyrUtl player);
     static void PrintDeckTotal(DeckUtil deckUtil);
     static void PrintRivalPlayers(GameUtil gameUtil);
     static void PrintRivalsWithSpy(GameUtil gameUtil);

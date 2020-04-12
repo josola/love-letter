@@ -82,15 +82,15 @@ void GameUtil::SetPlayers()
     }
 }
 
-vector<PlayerUtil> GameUtil::PlayerBuilder(int output)
+vector<PlyrUtl> GameUtil::PlayerBuilder(int output)
 {
-    vector<PlayerUtil> player_container{};
+    vector<PlyrUtl> player_container{};
     switch (output)
     {
     case 2:
     {
-        PlayerUtil p1Util(Player("PLAYER[1]", 1));
-        PlayerUtil p2Util(Player("PLAYER[2]", 2));
+        PlyrUtl p1Util("PLAYER[1]", 1);
+        PlyrUtl p2Util("PLAYER[2]", 2);
         player_container.push_back(p1Util);
         player_container.push_back(p2Util);
         return player_container;
@@ -98,9 +98,9 @@ vector<PlayerUtil> GameUtil::PlayerBuilder(int output)
     }
     case 3:
     {
-        PlayerUtil p1Util(Player("PLAYER[1]", 1));
-        PlayerUtil p2Util(Player("PLAYER[2]", 2));
-        PlayerUtil p3Util(Player("PLAYER[3]", 3));
+        PlyrUtl p1Util("PLAYER[1]", 1);
+        PlyrUtl p2Util("PLAYER[2]", 2);
+        PlyrUtl p3Util("PLAYER[3]", 3);
         player_container.push_back(p1Util);
         player_container.push_back(p2Util);
         player_container.push_back(p3Util);
@@ -109,10 +109,10 @@ vector<PlayerUtil> GameUtil::PlayerBuilder(int output)
     }
     case 4:
     {
-        PlayerUtil p1Util(Player("PLAYER[1]", 1));
-        PlayerUtil p2Util(Player("PLAYER[2]", 2));
-        PlayerUtil p3Util(Player("PLAYER[3]", 3));
-        PlayerUtil p4Util(Player("PLAYER[4]", 4));
+        PlyrUtl p1Util("PLAYER[1]", 1);
+        PlyrUtl p2Util("PLAYER[2]", 2);
+        PlyrUtl p3Util("PLAYER[3]", 3);
+        PlyrUtl p4Util("PLAYER[4]", 4);
         player_container.push_back(p1Util);
         player_container.push_back(p2Util);
         player_container.push_back(p3Util);
@@ -122,11 +122,11 @@ vector<PlayerUtil> GameUtil::PlayerBuilder(int output)
     }
     case 5:
     {
-        PlayerUtil p1Util(Player("PLAYER[1]", 1));
-        PlayerUtil p2Util(Player("PLAYER[2]", 2));
-        PlayerUtil p3Util(Player("PLAYER[3]", 3));
-        PlayerUtil p4Util(Player("PLAYER[4]", 4));
-        PlayerUtil p5Util(Player("PLAYER[5]", 5));
+        PlyrUtl p1Util("PLAYER[1]", 1);
+        PlyrUtl p2Util("PLAYER[2]", 2);
+        PlyrUtl p3Util("PLAYER[3]", 3);
+        PlyrUtl p4Util("PLAYER[4]", 4);
+        PlyrUtl p5Util("PLAYER[5]", 5);
         player_container.push_back(p1Util);
         player_container.push_back(p2Util);
         player_container.push_back(p3Util);
@@ -137,12 +137,12 @@ vector<PlayerUtil> GameUtil::PlayerBuilder(int output)
     }
     case 6:
     {
-        PlayerUtil p1Util(Player("PLAYER[1]", 1));
-        PlayerUtil p2Util(Player("PLAYER[2]", 2));
-        PlayerUtil p3Util(Player("PLAYER[3]", 3));
-        PlayerUtil p4Util(Player("PLAYER[4]", 4));
-        PlayerUtil p5Util(Player("PLAYER[5]", 5));
-        PlayerUtil p6Util(Player("PLAYER[6]", 6));
+        PlyrUtl p1Util("PLAYER[1]", 1);
+        PlyrUtl p2Util("PLAYER[2]", 2);
+        PlyrUtl p3Util("PLAYER[3]", 3);
+        PlyrUtl p4Util("PLAYER[4]", 4);
+        PlyrUtl p5Util("PLAYER[5]", 5);
+        PlyrUtl p6Util("PLAYER[6]", 6);
         player_container.push_back(p1Util);
         player_container.push_back(p2Util);
         player_container.push_back(p3Util);
@@ -154,7 +154,7 @@ vector<PlayerUtil> GameUtil::PlayerBuilder(int output)
     }
     default:
     {
-        PlayerUtil p0Util(Player("PLAYER[0]", 0));
+        PlyrUtl p0Util("PLAYER[0]", 0);
         player_container.push_back(p0Util);
         return player_container;
         break;
@@ -220,7 +220,7 @@ int GameUtil::BuildStartingPlayer()
     int target(GenerateNumberWithinRange(game.player_count));
     vector<int> duplicate_guess{};
     int player(0);
-    for (PlayerUtil iPUtil : game.players)
+    for (PlyrUtl iPUtil : game.players)
     {
         ConsoleOutUtil::PrintNameGuess(iPUtil.Name());
         int guess(GetPlayerGuess());
@@ -292,7 +292,7 @@ bool GameUtil::DuplicateGuess(vector<int> guess_container, int guess)
     return false;
 }
 
-vector<PlayerUtil> GameUtil::Players()
+vector<PlyrUtl> GameUtil::Players()
 {
     return game.players;
 }
@@ -300,7 +300,7 @@ vector<PlayerUtil> GameUtil::Players()
 int GameUtil::GetCurrent()
 {
     int output(0);
-    for (PlayerUtil iPUtil : game.players)
+    for (PlyrUtl iPUtil : game.players)
     {
         if (iPUtil.Current())
         {

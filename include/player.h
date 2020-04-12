@@ -1,5 +1,5 @@
 /*
- * Determines information for player.
+ * Helper utility for player.
  * This software uses the MIT license.
  * Written by Jordan Sola 2019-2020
  */
@@ -11,16 +11,35 @@
 
 using std::string;
 
-struct Player
+class PlyrMdl
 {
-    Player(string name = "", int value = 0) : name(name), value(value){};
+public:
+    PlyrMdl(string name = "", int value = 0) : name(name), value(value) {};
 
-    string name = "";
-    int value = 0;
+protected:
+    const string name = "";
+    const int value = 0;
     bool current = false;
     bool winner = false;
     int guess = 0;
     bool spy = false;
+};
+
+class PlyrUtl : public PlyrMdl
+{
+public:
+    PlyrUtl(string name, int value) : PlyrMdl{ name, value } {};
+
+    string const Name();
+    int const Value();
+    bool const Winner();
+    bool const Current();
+    bool const Spy();
+    int const Guess();
+
+    void SetCurrent();
+    void SetWinner(int output);
+    void SetGuess(int output);
 };
 
 #endif
