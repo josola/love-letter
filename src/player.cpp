@@ -1,5 +1,5 @@
 /*
- * Helper utility for player.
+ * Determines player information and utility.
  * This software uses the MIT license.
  * Written by Jordan Sola 2019-2020
  */
