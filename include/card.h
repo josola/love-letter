@@ -18,7 +18,7 @@ protected:
     int value = 0;
 };
 
-class CardInterface : virtual public CardMdl
+class CardInterface : public CardMdl
 {
 public:
     CardInterface(string name, int value) : CardMdl{} { SetName(name), SetValue(value); };
@@ -32,7 +32,7 @@ public:
     void SetValue(int input);
 };
 
-class CardUtl : virtual public CardInterface
+class CardUtl : public CardInterface
 {
 public:
     CardUtl(string name, int value) : CardInterface{ name, value } {};
