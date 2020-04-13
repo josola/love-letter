@@ -19,17 +19,17 @@ int main()
         ConsoleOutUtil::PrintStartingPlayerPrompt();
         gameCNTLR.BuildPCount();
         gameCNTLR.BuildPContainer();
-        gameCNTLR.SetWinningTokenCount();
+        gameCNTLR.BuildWinningTokenCount();
         ConsoleOutUtil::PrintPlayerGuessPrompt(gameCNTLR.PCount());
         gameCNTLR.BuildStartingPlyr();
     }
     else if (gameCNTLR.Round() >= 2)
     {
-        gameCTNLR.SetWinnerStarting();
+
     }
 
     ConsoleOutUtil::PrintRound(gameCNTLR.Round());
-    ConsoleOutUtil::PrintPlayerTurn(gameCNTLR.GetCurrent());
+    ConsoleOutUtil::PrintPlayerTurn(gameCNTLR.PCurrent());
 
     DeckUtl deckUtl;
 
