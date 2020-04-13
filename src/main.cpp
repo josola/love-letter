@@ -52,7 +52,7 @@ int main()
 
     ConsoleOutUtil::PrintDeckTotal(deckUtl);
 
-    if (!upUtl.Deck().empty())
+    if (!upUtl.Deck().empty()) 
     {
         ConsoleOutUtil::PrintUpPile(upUtl.Deck());
     }
