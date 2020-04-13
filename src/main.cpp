@@ -17,15 +17,15 @@ int main()
     {
         ConsoleOutUtil::PrintWelcome();
         ConsoleOutUtil::PrintStartingPlayerPrompt();
-        gameCNTLR.PCountIn();
-        gameCNTLR.PlayerBuilder();
+        gameCNTLR.BuildPCount();
+        gameCNTLR.BuildPContainer();
         gameCNTLR.SetWinningTokenCount();
         ConsoleOutUtil::PrintPlayerGuessPrompt(gameCNTLR.PCount());
-        gameCNTLR.BuildStartingPlayer();
+        gameCNTLR.BuildStartingPlyr();
     }
     else if (gameCNTLR.Round() >= 2)
     {
-
+        gameCTNLR.SetWinnerStarting();
     }
 
     ConsoleOutUtil::PrintRound(gameCNTLR.Round());
@@ -52,7 +52,7 @@ int main()
 
     ConsoleOutUtil::PrintDeckTotal(deckUtl);
 
-    if (!upUtl.Deck().empty()) 
+    if (!upUtl.Deck().empty())
     {
         ConsoleOutUtil::PrintUpPile(upUtl.Deck());
     }

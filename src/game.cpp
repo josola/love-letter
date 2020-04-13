@@ -15,30 +15,22 @@ const int GameITF::Round() { return round_count; }
 const int GameITF::OPCount() { return original_player_count; }
 const int GameITF::WinningTokenCount() { return winning_token_count; }
 vector<PlyrCNTLR> GameITF::Plyrs() { return players; }
+int GameITF::PCurrent()
+{
+    int output(0);
+    for (PlyrCNTLR iPUtil : players)
+    {
+        if (iPUtil.Current())
+        {
+            output = iPUtil.Value();
+        }
+    }
+    return output;
+}
 void GameITF::SetPCount(int input) { player_count = input; }
 void GameITF::SetOPCount(int input) { original_player_count = input; }
 void GameITF::SetPlyrs(vector<PlyrCNTLR> input) { players = input; }
-void GameITF::SetWinningTokenCount()
-{
-    switch (player_count)
-    {
-    case 2:
-        winning_token_count = 6;
-        break;
-    case 3:
-        winning_token_count = 5;
-        break;
-    case 4:
-        winning_token_count = 4;
-        break;
-    case 5:
-        winning_token_count = 3;
-        break;
-    case 6:
-        winning_token_count = 3;
-        break;
-    }
-}
+void GameITF::SetWinningTokenCount(int input) { winning_token_count = input; }
 void GameITF::SetStrtngPlyr(int output)
 {
     output--;
@@ -64,12 +56,12 @@ void GameITF::SetStrtngPlyr(int output)
         break;
     }
 }
-void GameCNTLR::PCountIn()
+void GameCNTLR::BuildPCount()
 {
     int count(ConsoleInUtil::GetIntInput());
-    if (!CorrectPlayerCount(count))
+    if (!PCountCorrect(count))
     {
-        FixPlayerCount();
+        FixPCount();
     }
     else
     {
@@ -77,7 +69,7 @@ void GameCNTLR::PCountIn()
         SetOPCount(count);
     }
 }
-bool GameCNTLR::CorrectPlayerCount(int input)
+bool GameCNTLR::PCountCorrect(int input)
 {
     if (input >= 2 && input <= 6)
     {
@@ -89,12 +81,12 @@ bool GameCNTLR::CorrectPlayerCount(int input)
         return false;
     }
 }
-void GameCNTLR::FixPlayerCount()
+void GameCNTLR::FixPCount()
 {
     ConsoleInUtil::ClearInput();
     PCount();
 }
-void GameCNTLR::PlayerBuilder()
+void GameCNTLR::BuildPContainer()
 {
     vector<PlyrCNTLR> plyrs;
     switch (player_count)
@@ -105,7 +97,6 @@ void GameCNTLR::PlayerBuilder()
         PlyrCNTLR p2Util("PLAYER[2]", 2);
         plyrs.push_back(p1Util);
         plyrs.push_back(p2Util);
-
         //give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
@@ -118,7 +109,6 @@ void GameCNTLR::PlayerBuilder()
         plyrs.push_back(p1Util);
         plyrs.push_back(p2Util);
         plyrs.push_back(p3Util);
-
         //give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
@@ -133,7 +123,6 @@ void GameCNTLR::PlayerBuilder()
         plyrs.push_back(p2Util);
         plyrs.push_back(p3Util);
         plyrs.push_back(p4Util);
-
         //give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
@@ -150,7 +139,6 @@ void GameCNTLR::PlayerBuilder()
         plyrs.push_back(p3Util);
         plyrs.push_back(p4Util);
         plyrs.push_back(p5Util);
-
         //Give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
@@ -169,7 +157,6 @@ void GameCNTLR::PlayerBuilder()
         plyrs.push_back(p4Util);
         plyrs.push_back(p5Util);
         plyrs.push_back(p6Util);
-
         //give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
@@ -178,14 +165,34 @@ void GameCNTLR::PlayerBuilder()
     {
         PlyrCNTLR p0Util("PLAYER[0]", 0);
         plyrs.push_back(p0Util);
-
         //give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
     }
     }
 }
-void GameCNTLR::BuildStartingPlayer()
+void GameCNTLR::BuildWinningTokenCount()
+{
+    switch (player_count)
+    {
+    case 2:
+        SetWinningTokenCount(6);
+        break;
+    case 3:
+        SetWinningTokenCount(5);
+        break;
+    case 4:
+        SetWinningTokenCount(4);
+        break;
+    case 5:
+        SetWinningTokenCount(3);
+        break;
+    case 6:
+        SetWinningTokenCount(3);
+        break;
+    }
+}
+void GameCNTLR::BuildStartingPlyr()
 {
     int target(GenerateNumberWithinRange(player_count));
     vector<int> duplicate_guess{};
@@ -255,18 +262,6 @@ bool GameCNTLR::DuplicateGuess(vector<int> guess_container, int guess)
         }
     }
     return false;
-}
-int GameCNTLR::GetCurrent()
-{
-    int output(0);
-    for (PlyrCNTLR iPUtil : players)
-    {
-        if (iPUtil.Current())
-        {
-            output = iPUtil.Value();
-        }
-    }
-    return output;
 }
 void GameCNTLR::DealStartingHand(DeckUtl &deck)
 {

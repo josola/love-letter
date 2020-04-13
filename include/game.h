@@ -31,12 +31,13 @@ public:
     const int OPCount();
     const int WinningTokenCount();
     vector<PlyrCNTLR> Plyrs();
+    int PCurrent();
 
     //setters
     void SetPCount(int input);
     void SetOPCount(int input);
     void SetPlyrs(vector<PlyrCNTLR> input);
-    void SetWinningTokenCount();
+    void SetWinningTokenCount(int input);
     void SetStrtngPlyr(int output);
 };
 
@@ -45,17 +46,17 @@ class GameCNTLR : public GameITF
 public:
     GameCNTLR() : GameITF{} {};
 
-    void PCountIn();
-    void PlayerBuilder();
-    bool CorrectPlayerCount(int input);
-    void FixPlayerCount();
-    void BuildStartingPlayer();
+    void BuildPCount();
+    void BuildPContainer();
+    bool PCountCorrect(int input);
+    void FixPCount();
+    void BuildWinningTokenCount();
+    void BuildStartingPlyr();
     int GenerateNumberWithinRange(int range);
     int GetPlayerGuess();
     bool CorrectGuessInput(int output);
     void FixGuessInput(int input);
     bool DuplicateGuess(vector<int> guess_container, int guess);
-    int GetCurrent();
     void DealStartingHand(DeckUtl &deck);
 };
 
