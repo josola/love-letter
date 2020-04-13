@@ -12,7 +12,7 @@
 #include "card.h"
 #include "player.h"
 #include "deck.h"
-#include "game_util.h"
+#include "game.h"
 
 using std::string;
 using std::vector;
@@ -32,12 +32,12 @@ public:
     static void PrintString(string output);
     static void PrintUpPile(vector<CardUtl> up_pile);
     static void PrintDownPile(vector<CardUtl> down_pile);
-    static void PrintMultipleWinners(vector<PlyrUtl> players, int range);
-    static void PrintClosestGuess(int target, PlyrUtl player);
+    static void PrintMultipleWinners(vector<PlyrCNTLR> players, int range);
+    static void PrintClosestGuess(int target, PlyrCNTLR player);
     static void PrintDeckTotal(DeckUtl deckUtil);
-    static void PrintRivalPlayers(GameUtl gameUtil);
-    static void PrintRivalsWithSpy(GameUtl gameUtil);
-    static void PrintPlayerHand(PlyrUtl plyrUtl);
+    static void PrintRivalPlayers(GameCNTLR gameUtil);
+    static void PrintRivalsWithSpy(GameCNTLR gameUtil);
+    static void PrintPlayerHand(PlyrCNTLR plyrUtl);
 
 private:
 };

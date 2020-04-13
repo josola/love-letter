@@ -14,14 +14,11 @@
 using std::string;
 using std::vector;
 
-class PlyrMdl
+class PlyrM
 {
-public:
-    PlyrMdl(string name = "", int value = 0) : name(name), value(value) {};
-
 protected:
-    const string name = "";
-    const int value = 0;
+    string name = "";
+    int value = 0;
     bool current = false;
     bool winner = false;
     int guess = 0;
@@ -29,10 +26,10 @@ protected:
     vector<CardUtl> hand;
 };
 
-class PlyrUtl : public PlyrMdl
+class PlyrITF : public PlyrM
 {
 public:
-    PlyrUtl(string name, int value) : PlyrMdl{ name, value } {};
+    PlyrITF(string name, int value) : PlyrM{} { SetName(name), SetValue(value); };
 
     //getters
     string const Name();
@@ -44,11 +41,19 @@ public:
     vector<CardUtl> const Hand();
 
     //setters
+    void SetName(string input);
+    void SetValue(int input);
     void IsCurrent();
     void NotCurrent();
     void IsWinner();
     void NotWinner();
     void SetGuess(int output);
+};
+
+class PlyrCNTLR : public PlyrITF
+{
+public:
+    PlyrCNTLR(string name, int value) : PlyrITF{ name, value } {};
 
     //actions
     template<typename Object>

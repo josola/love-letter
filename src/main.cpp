@@ -6,31 +6,30 @@
 
 #include "console_out_util.h"
 #include "console_in_util.h"
-#include "game_util.h"
+#include "game.h"
 #include "deck.h"
 
 int main()
 {
-    Game game;
-    GameUtl gameUtl(game);
+    GameCNTLR gameCNTLR;
 
-    if (gameUtl.RoundCount() == 1)
+    if (gameCNTLR.Round() == 1)
     {
         ConsoleOutUtil::PrintWelcome();
         ConsoleOutUtil::PrintStartingPlayerPrompt();
-        gameUtl.GetPlayerCount();
-        gameUtl.SetPlayers();
-        gameUtl.SetWinningTokenCount();
-        ConsoleOutUtil::PrintPlayerGuessPrompt(gameUtl.PlayerCount());
-        gameUtl.SetStartingPlayer(gameUtl.BuildStartingPlayer());
+        gameCNTLR.PCountIn();
+        gameCNTLR.PlayerBuilder();
+        gameCNTLR.SetWinningTokenCount();
+        ConsoleOutUtil::PrintPlayerGuessPrompt(gameCNTLR.PCount());
+        gameCNTLR.BuildStartingPlayer();
     }
-    else if (gameUtl.RoundCount() >= 2)
+    else if (gameCNTLR.Round() >= 2)
     {
 
     }
 
-    ConsoleOutUtil::PrintRound(gameUtl.RoundCount());
-    ConsoleOutUtil::PrintPlayerTurn(gameUtl.GetCurrent());
+    ConsoleOutUtil::PrintRound(gameCNTLR.Round());
+    ConsoleOutUtil::PrintPlayerTurn(gameCNTLR.GetCurrent());
 
     DeckUtl deckUtl;
 
@@ -44,12 +43,12 @@ int main()
 
     UpUtl upUtl;
 
-    if (gameUtl.PlayerCount() == 2)
+    if (gameCNTLR.PCount() == 2)
     {
         upUtl.Builder(deckUtl);
     }
 
-    gameUtl.DealStartingHand(deckUtl);
+    gameCNTLR.DealStartingHand(deckUtl);
 
     ConsoleOutUtil::PrintDeckTotal(deckUtl);
 
@@ -58,8 +57,8 @@ int main()
         ConsoleOutUtil::PrintUpPile(upUtl.Deck());
     }
 
-    ConsoleOutUtil::PrintRivalPlayers(gameUtl);
-    ConsoleOutUtil::PrintRivalsWithSpy(gameUtl);
+    ConsoleOutUtil::PrintRivalPlayers(gameCNTLR);
+    ConsoleOutUtil::PrintRivalsWithSpy(gameCNTLR);
 
     /*
     BEGINNING OF ROUNDS --
