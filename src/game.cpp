@@ -84,7 +84,7 @@ bool GameCNTLR::PCountCorrect(int input)
 void GameCNTLR::FixPCount()
 {
     ConsoleInUtil::ClearInput();
-    PCount();
+    BuildPCount();
 }
 void GameCNTLR::BuildPContainer()
 {
