@@ -53,7 +53,7 @@ public:
 class PlyrCNTLR : public PlyrITF
 {
 public:
-    PlyrCNTLR(string name, int value) : PlyrITF{ name, value } {};
+    PlyrCNTLR(string name = "", int value = 0) : PlyrITF{ name, value } {};
 
     //actions
     template<typename Object>

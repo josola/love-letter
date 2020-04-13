@@ -25,7 +25,7 @@ int main()
     }
     else if (gameCNTLR.Round() >= 2)
     {
-
+        gameCNTLR.SetStrtngPlyr(gameCNTLR.FindWinner());
     }
 
     ConsoleOutUtil::PrintRound(gameCNTLR.Round());
@@ -65,7 +65,7 @@ int main()
 
         AFTER FIRST ROUND --
 
-            Winner of first is set to current player.
+            Winner of first is set to current player. X
             Reset winner status.
             Set players who were out last round to active.
             Prompt previous round winner goes first.

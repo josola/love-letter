@@ -6,9 +6,13 @@
 
 #include <random>
 #include <ctime>
+#include <iterator>
 #include "game.h"
 #include "console_in_util.h"
 #include "console_out_util.h"
+
+using std::find;
+using std::distance;
 
 const int GameITF::PCount(){ return player_count; }
 const int GameITF::Round() { return round_count; }
@@ -26,6 +30,18 @@ int GameITF::PCurrent()
         }
     }
     return output;
+}
+int GameITF::FindWinner()
+{
+    int index(0);
+    for (int i = 0; i < players.size(); i++)
+    {
+        if (players.at(i).Winner())
+        {
+            index = i;
+        }
+    }
+    return index;
 }
 void GameITF::SetPCount(int input) { player_count = input; }
 void GameITF::SetOPCount(int input) { original_player_count = input; }

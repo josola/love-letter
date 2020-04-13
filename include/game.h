@@ -32,6 +32,7 @@ public:
     const int WinningTokenCount();
     vector<PlyrCNTLR> Plyrs();
     int PCurrent();
+    int FindWinner();
 
     //setters
     void SetPCount(int input);
@@ -58,6 +59,7 @@ public:
     void FixGuessInput(int input);
     bool DuplicateGuess(vector<int> guess_container, int guess);
     void DealStartingHand(DeckUtl &deck);
+    void SetWinnerStarting();
 };
 
 #endif
