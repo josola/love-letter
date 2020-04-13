@@ -97,7 +97,6 @@ void GameCNTLR::BuildPContainer()
         PlyrCNTLR p2Util("PLAYER[2]", 2);
         plyrs.push_back(p1Util);
         plyrs.push_back(p2Util);
-        //give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
     }
@@ -109,7 +108,6 @@ void GameCNTLR::BuildPContainer()
         plyrs.push_back(p1Util);
         plyrs.push_back(p2Util);
         plyrs.push_back(p3Util);
-        //give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
     }
@@ -123,7 +121,6 @@ void GameCNTLR::BuildPContainer()
         plyrs.push_back(p2Util);
         plyrs.push_back(p3Util);
         plyrs.push_back(p4Util);
-        //give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
     }
@@ -139,7 +136,6 @@ void GameCNTLR::BuildPContainer()
         plyrs.push_back(p3Util);
         plyrs.push_back(p4Util);
         plyrs.push_back(p5Util);
-        //Give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
     }
@@ -157,7 +153,6 @@ void GameCNTLR::BuildPContainer()
         plyrs.push_back(p4Util);
         plyrs.push_back(p5Util);
         plyrs.push_back(p6Util);
-        //give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
     }
@@ -165,7 +160,6 @@ void GameCNTLR::BuildPContainer()
     {
         PlyrCNTLR p0Util("PLAYER[0]", 0);
         plyrs.push_back(p0Util);
-        //give vector to GameITF setter
         SetPlyrs(plyrs);
         break;
     }
