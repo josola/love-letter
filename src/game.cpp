@@ -280,3 +280,17 @@ void GameCNTLR::DealStartingHand(DeckUtl &deck)
         iPUtl.InsertCardIntoHand(deck.Card(0));
     }
 }
+void GameCNTLR::ClearWinner()
+{
+    for (PlyrCNTLR iPCNTLR : players)
+    {
+        iPCNTLR.NotWinner();
+    }
+}
+void GameCNTLR::ClearPlaying()
+{
+    for (PlyrCNTLR iPCNTLR : players)
+    {
+        iPCNTLR.IsPlaying();
+    }
+}

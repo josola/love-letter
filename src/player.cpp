@@ -14,6 +14,7 @@ bool const PlyrITF::Current() { return current; }
 bool const PlyrITF::Spy() { return spy; }
 bool const PlyrITF::Winner() { return winner; }
 vector<CardUtl> const PlyrITF::Hand() { return hand; }
+constexpr bool const PlyrITF::Playing() { return playing; }
 
 //setters
 void PlyrITF::SetName(string input) { name = input; }
@@ -23,6 +24,8 @@ void PlyrITF::NotCurrent() { current = false; }
 void PlyrITF::IsWinner() { winner = true;}
 void PlyrITF::NotWinner() { winner = false; }
 void PlyrITF::SetGuess(int output) { guess = output; }
+void PlyrITF::IsPlaying() { playing = true; }
+void PlyrITF::NotPlaying() { playing = false; }
 
 //actions
 template<typename Object>

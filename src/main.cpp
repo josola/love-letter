@@ -26,6 +26,8 @@ int main()
     else if (gameCNTLR.Round() >= 2)
     {
         gameCNTLR.SetStrtngPlyr(gameCNTLR.FindWinner());
+        gameCNTLR.ClearWinner();
+        gameCNTLR.ClearPlaying();
     }
 
     ConsoleOutUtil::PrintRound(gameCNTLR.Round());
@@ -43,7 +45,7 @@ int main()
 
     UpUtl upUtl;
 
-    if (gameCNTLR.PCount() == 2)
+    if (gameCNTLR.PCount() == 2) 
     {
         upUtl.Builder(deckUtl);
     }
@@ -66,8 +68,8 @@ int main()
         AFTER FIRST ROUND --
 
             Winner of first is set to current player. X
-            Reset winner status.
-            Set players who were out last round to active.
+            Reset winner status. X
+            Set players who were out last round to active. X
             Prompt previous round winner goes first.
 
     BEGINNING OF PLAYER TURN --

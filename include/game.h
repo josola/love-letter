@@ -59,7 +59,8 @@ public:
     void FixGuessInput(int input);
     bool DuplicateGuess(vector<int> guess_container, int guess);
     void DealStartingHand(DeckUtl &deck);
-    void SetWinnerStarting();
+    void ClearWinner();
+    void ClearPlaying();
 };
 
 #endif

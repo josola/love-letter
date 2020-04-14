@@ -24,6 +24,7 @@ protected:
     int guess = 0;
     bool spy = false;
     vector<CardUtl> hand;
+    bool playing = true;
 };
 
 class PlyrITF : public PlyrM
@@ -39,6 +40,7 @@ public:
     bool const Spy();
     int const Guess();
     vector<CardUtl> const Hand();
+    constexpr bool const Playing();
 
     //setters
     void SetName(string input);
@@ -48,6 +50,8 @@ public:
     void IsWinner();
     void NotWinner();
     void SetGuess(int output);
+    void IsPlaying();
+    void NotPlaying();
 };
 
 class PlyrCNTLR : public PlyrITF
