@@ -31,7 +31,7 @@ protected:
 class PlayerInterface : public PlayerModel
 {
 public:
-    PlayerInterface(string name, int value) : PlayerModel{} { SetName(name), SetValue(value); };
+    PlayerInterface(string player_name, int player_value) : PlayerModel{} { SetName(player_name), SetValue(player_value); };
 
     //getters
     const string Name();
