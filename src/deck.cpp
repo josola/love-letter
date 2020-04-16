@@ -13,6 +13,7 @@ using std::random_shuffle;
 using std::srand;
 using std::time;
 
+//getters
 vector<CardUtl> DeckInterface::Deck() { return deck; }
 CardUtl DeckInterface::Card(int pos)
 {
@@ -21,8 +22,10 @@ CardUtl DeckInterface::Card(int pos)
     return card;
 }
 
+//setters
 void DeckInterface::InsertCard(CardUtl card) { deck.push_back(card); }
 
+//actions
 void DeckInterface::Shuffle()
 {
     srand(time(NULL));
@@ -30,7 +33,9 @@ void DeckInterface::Shuffle()
 }
 void DeckInterface::RemoveCard(int pos) { deck.erase(deck.begin() + pos); }
 
-void DeckUtl::Builder()
+
+//builds deck
+void DeckController::Builder()
 {
     CardUtl cardUtl("", 10);
     for (int i = 0; i < 2; i++)
@@ -66,4 +71,5 @@ void DeckUtl::Builder()
     InsertCard(cardUtl.Builder(9));
 }
 
-void UpUtl::Builder(DeckUtl deck) { for (int i = 0; i < 3; i++) { InsertCard(deck.Card(0)); } }
+//builds up pile (for 2 player games)
+void UpController::Builder(DeckController deck) { for (int i = 0; i < 3; i++) { InsertCard(deck.Card(0)); } }

@@ -54,17 +54,17 @@ int main()
             ConsoleOutUtil::PrintRound(gameCNTLR.Round());
             ConsoleOutUtil::PrintPlayerTurn(gameCNTLR.PCurrent());
 
-            DeckUtl deckUtl;
+            DeckController deckUtl;
 
             deckUtl.Builder();
             deckUtl.Shuffle();
 
-            DwnUtl dwnUtl;
+            DownController dwnUtl;
 
             //discard one card face down
             dwnUtl.InsertCard(deckUtl.Card(0));
 
-            UpUtl upUtl;
+            UpController upUtl;
 
             if (gameCNTLR.PCount() == 2)
             {

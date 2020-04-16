@@ -12,16 +12,16 @@
 
 using std::vector;
 
-class DeckMdl
+class DeckModel
 {
 protected:
     vector<CardUtl> deck;
 };
 
-class DeckInterface : public DeckMdl
+class DeckInterface : public DeckModel
 {
 public:
-    DeckInterface() : DeckMdl{} {};
+    DeckInterface() : DeckModel{} {};
 
     //getters
     vector<CardUtl> Deck();
@@ -35,26 +35,26 @@ public:
     void RemoveCard(int pos);
 };
 
-class DeckUtl : virtual public DeckInterface
+class DeckController : virtual public DeckInterface
 {
 public:
-    DeckUtl() : DeckInterface{} {};
+    DeckController() : DeckInterface{} {};
 
     virtual void Builder();
 };
 
-class UpUtl : virtual public DeckInterface
+class UpController : virtual public DeckInterface
 {
 public:
-    UpUtl() : DeckInterface{} {};
+    UpController() : DeckInterface{} {};
 
-    virtual void Builder(DeckUtl deck);
+    virtual void Builder(DeckController deck);
 };
 
-class DwnUtl : virtual public DeckInterface
+class DownController : virtual public DeckInterface
 {
 public:
-    DwnUtl() : DeckInterface{} {};
+    DownController() : DeckInterface{} {};
 };
 
 #endif

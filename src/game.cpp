@@ -273,7 +273,7 @@ bool GameController::DuplicateGuess(vector<int> guess_container, int guess)
     }
     return false;
 }
-void GameController::DealStartingHand(DeckUtl &deck)
+void GameController::DealStartingHand(DeckController &deck)
 {
     for (PlayerController &iPUtl : players)
     {

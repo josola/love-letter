@@ -131,7 +131,7 @@ void ConsoleOutUtil::PrintClosestGuess(int target, PlayerController player)
     cout << player.Name() << " has the closest guess to target[" << target << "]! They get to go first this round!\n";
 }
 
-void ConsoleOutUtil::PrintDeckTotal(DeckUtl deckUtil)
+void ConsoleOutUtil::PrintDeckTotal(DeckController deckUtil)
 {
     int size = deckUtil.Deck().size();
     cout << "Total cards in deck: " << size << '\n';

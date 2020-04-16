@@ -34,7 +34,7 @@ public:
     static void PrintDownPile(vector<CardUtl> down_pile);
     static void PrintMultipleWinners(vector<PlayerController> players, int range);
     static void PrintClosestGuess(int target, PlayerController player);
-    static void PrintDeckTotal(DeckUtl deckUtil);
+    static void PrintDeckTotal(DeckController deckUtil);
     static void PrintRivalPlayers(GameController gameUtil);
     static void PrintRivalsWithSpy(GameController gameUtil);
     static void PrintPlayerHand(PlayerController plyrUtl);
