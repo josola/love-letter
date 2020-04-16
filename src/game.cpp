@@ -14,12 +14,12 @@
 using std::find;
 using std::distance;
 
-const int GameITF::PCount(){ return player_count; }
-const int GameITF::Round() { return round_count; }
-const int GameITF::OPCount() { return original_player_count; }
-const int GameITF::WinningTokenCount() { return winning_token_count; }
-vector<PlayerController> GameITF::Plyrs() { return players; }
-int GameITF::PCurrent()
+const int GameInterface::PCount(){ return player_count; }
+const int GameInterface::Round() { return round_count; }
+const int GameInterface::OPCount() { return original_player_count; }
+const int GameInterface::WinningTokenCount() { return winning_token_count; }
+vector<PlayerController> GameInterface::Plyrs() { return players; }
+int GameInterface::PCurrent()
 {
     int output(0);
     for (PlayerController iPUtil : players)
@@ -31,7 +31,7 @@ int GameITF::PCurrent()
     }
     return output;
 }
-int GameITF::FindWinner()
+int GameInterface::FindWinner()
 {
     int index(0);
     for (int i = 0; i < players.size(); i++)
@@ -43,11 +43,11 @@ int GameITF::FindWinner()
     }
     return index;
 }
-void GameITF::SetPCount(int input) { player_count = input; }
-void GameITF::SetOPCount(int input) { original_player_count = input; }
-void GameITF::SetPlyrs(vector<PlayerController> input) { players = input; }
-void GameITF::SetWinningTokenCount(int input) { winning_token_count = input; }
-void GameITF::SetStrtngPlyr(int output)
+void GameInterface::SetPCount(int input) { player_count = input; }
+void GameInterface::SetOPCount(int input) { original_player_count = input; }
+void GameInterface::SetPlyrs(vector<PlayerController> input) { players = input; }
+void GameInterface::SetWinningTokenCount(int input) { winning_token_count = input; }
+void GameInterface::SetStrtngPlyr(int output)
 {
     output--;
     switch (output)
@@ -72,7 +72,7 @@ void GameITF::SetStrtngPlyr(int output)
         break;
     }
 }
-void GameCNTLR::BuildPCount()
+void GameController::BuildPCount()
 {
     int count(ConsoleInUtil::GetIntInput());
     if (!PCountCorrect(count))
@@ -85,7 +85,7 @@ void GameCNTLR::BuildPCount()
         SetOPCount(count);
     }
 }
-bool GameCNTLR::PCountCorrect(int input)
+bool GameController::PCountCorrect(int input)
 {
     if (input >= 2 && input <= 6)
     {
@@ -97,12 +97,12 @@ bool GameCNTLR::PCountCorrect(int input)
         return false;
     }
 }
-void GameCNTLR::FixPCount()
+void GameController::FixPCount()
 {
     ConsoleInUtil::ClearInput();
     BuildPCount();
 }
-void GameCNTLR::BuildPContainer()
+void GameController::BuildPContainer()
 {
     vector<PlayerController> plyrs;
     switch (player_count)
@@ -181,7 +181,7 @@ void GameCNTLR::BuildPContainer()
     }
     }
 }
-void GameCNTLR::BuildWinningTokenCount()
+void GameController::BuildWinningTokenCount()
 {
     switch (player_count)
     {
@@ -202,7 +202,7 @@ void GameCNTLR::BuildWinningTokenCount()
         break;
     }
 }
-void GameCNTLR::BuildStartingPlyr()
+void GameController::BuildStartingPlyr()
 {
     int target(GenerateNumberWithinRange(player_count));
     vector<int> duplicate_guess{};
@@ -229,13 +229,13 @@ void GameCNTLR::BuildStartingPlyr()
     }
     SetStrtngPlyr(player);
 }
-int GameCNTLR::GenerateNumberWithinRange(int range)
+int GameController::GenerateNumberWithinRange(int range)
 {
     srand(time(NULL));
     int output(rand() % range + 1);
     return output;
 }
-int GameCNTLR::GetPlayerGuess()
+int GameController::GetPlayerGuess()
 {
     int output(ConsoleInUtil::GetIntInput());
     if (!CorrectGuessInput(output))
@@ -244,7 +244,7 @@ int GameCNTLR::GetPlayerGuess()
     }
     return output;
 }
-bool GameCNTLR::CorrectGuessInput(int output)
+bool GameController::CorrectGuessInput(int output)
 {
     if (output >= 1 && output <= player_count)
     {
@@ -256,12 +256,12 @@ bool GameCNTLR::CorrectGuessInput(int output)
         return false;
     }
 }
-void GameCNTLR::FixGuessInput(int input)
+void GameController::FixGuessInput(int input)
 {
     ConsoleInUtil::ClearInput();
     input = GetPlayerGuess();
 }
-bool GameCNTLR::DuplicateGuess(vector<int> guess_container, int guess)
+bool GameController::DuplicateGuess(vector<int> guess_container, int guess)
 {
     for (int iInt : guess_container)
     {
@@ -273,21 +273,21 @@ bool GameCNTLR::DuplicateGuess(vector<int> guess_container, int guess)
     }
     return false;
 }
-void GameCNTLR::DealStartingHand(DeckUtl &deck)
+void GameController::DealStartingHand(DeckUtl &deck)
 {
     for (PlayerController &iPUtl : players)
     {
         iPUtl.InsertCardIntoHand(deck.Card(0));
     }
 }
-void GameCNTLR::ClearWinner()
+void GameController::ClearWinner()
 {
     for (PlayerController iPCNTLR : players)
     {
         iPCNTLR.NotWinner();
     }
 }
-void GameCNTLR::ClearPlaying()
+void GameController::ClearPlaying()
 {
     for (PlayerController iPCNTLR : players)
     {

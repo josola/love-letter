@@ -137,7 +137,7 @@ void ConsoleOutUtil::PrintDeckTotal(DeckUtl deckUtil)
     cout << "Total cards in deck: " << size << '\n';
 }
 
-void ConsoleOutUtil::PrintRivalPlayers(GameCNTLR gameUtil)
+void ConsoleOutUtil::PrintRivalPlayers(GameController gameUtil)
 {
     if (gameUtil.PCount() == 2)
     {
@@ -165,7 +165,7 @@ void ConsoleOutUtil::PrintRivalPlayers(GameCNTLR gameUtil)
     }
 }
 
-void ConsoleOutUtil::PrintRivalsWithSpy(GameCNTLR gameUtil)
+void ConsoleOutUtil::PrintRivalsWithSpy(GameController gameUtil)
 {
     int spy_count(0);
     for (PlayerController iPUtil : gameUtil.Plyrs())

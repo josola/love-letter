@@ -35,8 +35,8 @@ public:
     static void PrintMultipleWinners(vector<PlayerController> players, int range);
     static void PrintClosestGuess(int target, PlayerController player);
     static void PrintDeckTotal(DeckUtl deckUtil);
-    static void PrintRivalPlayers(GameCNTLR gameUtil);
-    static void PrintRivalsWithSpy(GameCNTLR gameUtil);
+    static void PrintRivalPlayers(GameController gameUtil);
+    static void PrintRivalsWithSpy(GameController gameUtil);
     static void PrintPlayerHand(PlayerController plyrUtl);
 
 private:

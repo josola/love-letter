@@ -10,7 +10,7 @@
 #include "player.h"
 #include "deck.h"
 
-class GameM
+class GameModel
 {
 protected:
     int player_count = 0;
@@ -20,10 +20,10 @@ protected:
     int winning_token_count = 0;
 };
 
-class GameITF : public GameM
+class GameInterface : public GameModel
 {
 public:
-    GameITF() : GameM{} {};
+    GameInterface() : GameModel{} {};
 
     //getters
     const int PCount();
@@ -42,10 +42,10 @@ public:
     void SetStrtngPlyr(int output);
 };
 
-class GameCNTLR : public GameITF
+class GameController : public GameInterface
 {
 public:
-    GameCNTLR() : GameITF{} {};
+    GameController() : GameInterface{} {};
 
     void BuildPCount();
     void BuildPContainer();

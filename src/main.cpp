@@ -18,7 +18,7 @@ int main()
 
     while (!game_over)
     {
-        GameCNTLR gameCNTLR;
+        GameController gameCNTLR;
 
         while (initial_setup && !game_over)
         {
