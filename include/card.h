@@ -11,17 +11,17 @@
 
 using std::string;
 
-class CardMdl
+class CardModel
 {
 protected:
     string name = "";
     int value = 0;
 };
 
-class CardInterface : public CardMdl
+class CardInterface : public CardModel
 {
 public:
-    CardInterface(string name, int value) : CardMdl{} { SetName(name), SetValue(value); };
+    CardInterface(string name, int value) : CardModel{} { SetName(name), SetValue(value); };
 
     //getters
     string Name();
@@ -32,12 +32,12 @@ public:
     void SetValue(int input);
 };
 
-class CardUtl : public CardInterface
+class CardController : public CardInterface
 {
 public:
-    CardUtl(string name, int value) : CardInterface{ name, value } {};
+    CardController(string name, int value) : CardInterface{ name, value } {};
 
-    CardUtl Builder(int input);
+    CardController Builder(int input);
 };
 
 #endif

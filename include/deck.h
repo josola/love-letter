@@ -15,7 +15,7 @@ using std::vector;
 class DeckModel
 {
 protected:
-    vector<CardUtl> deck;
+    vector<CardController> deck;
 };
 
 class DeckInterface : public DeckModel
@@ -24,11 +24,11 @@ public:
     DeckInterface() : DeckModel{} {};
 
     //getters
-    vector<CardUtl> Deck();
-    CardUtl Card(int pos);
+    vector<CardController> Deck();
+    CardController Card(int pos);
 
     //setters
-    void InsertCard(CardUtl card);
+    void InsertCard(CardController card);
 
     //actions
     void Shuffle();

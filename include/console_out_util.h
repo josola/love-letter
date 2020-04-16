@@ -30,8 +30,8 @@ public:
     static void PrintRound(int output);
     static void PrintPlayerTurn(int output);
     static void PrintString(string output);
-    static void PrintUpPile(vector<CardUtl> up_pile);
-    static void PrintDownPile(vector<CardUtl> down_pile);
+    static void PrintUpPile(vector<CardController> up_pile);
+    static void PrintDownPile(vector<CardController> down_pile);
     static void PrintMultipleWinners(vector<PlayerController> players, int range);
     static void PrintClosestGuess(int target, PlayerController player);
     static void PrintDeckTotal(DeckController deckUtil);

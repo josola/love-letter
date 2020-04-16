@@ -96,20 +96,20 @@ void ConsoleOutUtil::PrintString(string output)
     cout << output << '\n';
 }
 
-void ConsoleOutUtil::PrintUpPile(vector<CardUtl> up_pile)
+void ConsoleOutUtil::PrintUpPile(vector<CardController> up_pile)
 {
     cout << "Up pile:\n";
-    for (CardUtl iCUtil : up_pile)
+    for (CardController iCUtil : up_pile)
     {
         cout << ' ' << iCUtil.Name();
     }
     cout << '\n';
 }
 
-void ConsoleOutUtil::PrintDownPile(vector<CardUtl> down_pile)
+void ConsoleOutUtil::PrintDownPile(vector<CardController> down_pile)
 {
     cout << "Down pile:\n";
-    for (CardUtl iCUtil : down_pile)
+    for (CardController iCUtil : down_pile)
     {
         cout << ' ' << iCUtil.Name();
     }
@@ -192,7 +192,7 @@ void ConsoleOutUtil::PrintRivalsWithSpy(GameController gameUtil)
 void ConsoleOutUtil::PrintPlayerHand(PlayerController PlyrCNTLR)
 {
     cout << "Player hand: \n";
-    for (CardUtl iCUtil : PlyrCNTLR.Hand())
+    for (CardController iCUtil : PlyrCNTLR.Hand())
     {
         cout << ' ' << iCUtil.Name();
     }

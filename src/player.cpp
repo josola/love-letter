@@ -13,7 +13,7 @@ const int PlayerInterface::Guess() { return guess; }
 const bool PlayerInterface::Current() { return current; }
 const bool PlayerInterface::Spy() { return spy; }
 const bool PlayerInterface::Winner() { return winner; }
-vector<CardUtl> const PlayerInterface::Hand() { return hand; }
+vector<CardController> const PlayerInterface::Hand() { return hand; }
 constexpr bool const PlayerInterface::Playing() { return playing; }
 const int PlayerInterface::Tokens() { return token_count; }
 
@@ -30,9 +30,9 @@ void PlayerInterface::NotPlaying() { playing = false; }
 
 //actions
 template<typename Object>
-CardUtl PlayerController::DrawCard(Object &obj)
+CardController PlayerController::DrawCard(Object &obj)
 {
-    CardUtl top_card = obj.Card(0);
+    CardController top_card = obj.Card(0);
     return top_card;
 }
-void PlayerController::InsertCardIntoHand(CardUtl card) { hand.push_back(card); }
+void PlayerController::InsertCardIntoHand(CardController card) { hand.push_back(card); }

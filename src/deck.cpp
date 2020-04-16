@@ -14,16 +14,16 @@ using std::srand;
 using std::time;
 
 //getters
-vector<CardUtl> DeckInterface::Deck() { return deck; }
-CardUtl DeckInterface::Card(int pos)
+vector<CardController> DeckInterface::Deck() { return deck; }
+CardController DeckInterface::Card(int pos)
 {
-    CardUtl card = deck.at(pos);
+    CardController card = deck.at(pos);
     RemoveCard(pos);
     return card;
 }
 
 //setters
-void DeckInterface::InsertCard(CardUtl card) { deck.push_back(card); }
+void DeckInterface::InsertCard(CardController card) { deck.push_back(card); }
 
 //actions
 void DeckInterface::Shuffle()
@@ -37,7 +37,7 @@ void DeckInterface::RemoveCard(int pos) { deck.erase(deck.begin() + pos); }
 //builds deck
 void DeckController::Builder()
 {
-    CardUtl cardUtl("", 10);
+    CardController cardUtl("", 10);
     for (int i = 0; i < 2; i++)
     {
         InsertCard(cardUtl.Builder(0));

@@ -23,7 +23,7 @@ protected:
     bool winner = false;
     int guess = 0;
     bool spy = false;
-    vector<CardUtl> hand;
+    vector<CardController> hand;
     bool playing = true;
     int token_count = 0;
 };
@@ -40,7 +40,7 @@ public:
     const bool Current();
     const bool Spy();
     const int Guess();
-    vector<CardUtl> const Hand();
+    vector<CardController> const Hand();
     constexpr bool const Playing();
     const int Tokens();
 
@@ -63,8 +63,8 @@ public:
 
     //actions
     template<typename Object>
-    CardUtl DrawCard(Object &obj);
-    void InsertCardIntoHand(CardUtl card);
+    CardController DrawCard(Object &obj);
+    void InsertCardIntoHand(CardController card);
 };
 
 #endif
