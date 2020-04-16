@@ -39,7 +39,7 @@ int main()
 
         while (begin_round && !game_over)
         {
-            for (PlayerController iPCNTLR : gameController.Plyrs())
+            for (PlayerController iPCNTLR : gameController.Players())
             {
                 if (iPCNTLR.Tokens() > gameController.WinningTokenCount())
                 {

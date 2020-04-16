@@ -30,7 +30,7 @@ public:
     const int Round();
     const int OPCount();
     const int WinningTokenCount();
-    vector<PlayerController> Plyrs();
+    vector<PlayerController> Players();
     int PCurrent();
     int FindWinner();
 

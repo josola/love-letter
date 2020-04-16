@@ -142,7 +142,7 @@ void ConsoleOut::PrintRivalPlayers(GameController gameUtil)
     if (gameUtil.PCount() == 2)
     {
         cout << "Rival player: \n";
-        for (PlayerController iPUtil : gameUtil.Plyrs())
+        for (PlayerController iPUtil : gameUtil.Players())
         {
             if (!iPUtil.Current())
             {
@@ -154,7 +154,7 @@ void ConsoleOut::PrintRivalPlayers(GameController gameUtil)
     else
     {
         cout << "Rival players: \n";
-        for (PlayerController iPUtil : gameUtil.Plyrs())
+        for (PlayerController iPUtil : gameUtil.Players())
         {
             if (!iPUtil.Current())
             {
@@ -168,7 +168,7 @@ void ConsoleOut::PrintRivalPlayers(GameController gameUtil)
 void ConsoleOut::PrintRivalsWithSpy(GameController gameUtil)
 {
     int spy_count(0);
-    for (PlayerController iPUtil : gameUtil.Plyrs())
+    for (PlayerController iPUtil : gameUtil.Players())
     {
         if (iPUtil.Spy())
         {
@@ -178,7 +178,7 @@ void ConsoleOut::PrintRivalsWithSpy(GameController gameUtil)
     if (spy_count > 0)
     {
         cout << "Rivals with Spy: \n";
-        for (PlayerController iPUtil : gameUtil.Plyrs())
+        for (PlayerController iPUtil : gameUtil.Players())
         {
             if (iPUtil.Spy())
             {

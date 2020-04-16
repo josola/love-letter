@@ -18,7 +18,7 @@ const int GameInterface::PCount(){ return player_count; }
 const int GameInterface::Round() { return round_count; }
 const int GameInterface::OPCount() { return original_player_count; }
 const int GameInterface::WinningTokenCount() { return winning_token_count; }
-vector<PlayerController> GameInterface::Plyrs() { return players; }
+vector<PlayerController> GameInterface::Players() { return players; }
 int GameInterface::PCurrent()
 {
     int output(0);
