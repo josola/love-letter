@@ -25,6 +25,7 @@ protected:
     bool spy = false;
     vector<CardUtl> hand;
     bool playing = true;
+    int token_count = 0;
 };
 
 class PlyrITF : public PlyrM
@@ -33,14 +34,15 @@ public:
     PlyrITF(string name, int value) : PlyrM{} { SetName(name), SetValue(value); };
 
     //getters
-    string const Name();
-    int const Value();
-    bool const Winner();
-    bool const Current();
-    bool const Spy();
-    int const Guess();
+    const string Name();
+    const int Value();
+    const bool Winner();
+    const bool Current();
+    const bool Spy();
+    const int Guess();
     vector<CardUtl> const Hand();
     constexpr bool const Playing();
+    const int Tokens();
 
     //setters
     void SetName(string input);

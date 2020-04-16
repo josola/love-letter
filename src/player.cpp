@@ -7,14 +7,15 @@
 #include "player.h"
 
 //getters
-string const PlyrITF::Name() { return name; }
-int const PlyrITF::Value() { return value; }
-int const PlyrITF::Guess() { return guess; }
-bool const PlyrITF::Current() { return current; }
-bool const PlyrITF::Spy() { return spy; }
-bool const PlyrITF::Winner() { return winner; }
+const string PlyrITF::Name() { return name; }
+const int PlyrITF::Value() { return value; }
+const int PlyrITF::Guess() { return guess; }
+const bool PlyrITF::Current() { return current; }
+const bool PlyrITF::Spy() { return spy; }
+const bool PlyrITF::Winner() { return winner; }
 vector<CardUtl> const PlyrITF::Hand() { return hand; }
 constexpr bool const PlyrITF::Playing() { return playing; }
+const int PlyrITF::Tokens() { return token_count; }
 
 //setters
 void PlyrITF::SetName(string input) { name = input; }
