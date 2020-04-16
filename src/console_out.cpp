@@ -5,21 +5,21 @@
  */
 
 #include <iostream>
-#include "console_out_util.h"
+#include "console_out.h"
 
 using std::cout;
 
-void ConsoleOutUtil::PrintWelcome()
+void ConsoleOut::PrintWelcome()
 {
     cout << "-- Welcome to Love Letter --\n";
 }
 
-void ConsoleOutUtil::PrintStartingPlayerPrompt()
+void ConsoleOut::PrintStartingPlayerPrompt()
 {
     cout << "How many players will be playing?\n";
 }
 
-void ConsoleOutUtil::PrintInvalidInput(int output)
+void ConsoleOut::PrintInvalidInput(int output)
 {
     switch (output)
     {
@@ -41,32 +41,32 @@ void ConsoleOutUtil::PrintInvalidInput(int output)
     }
 }
 
-void ConsoleOutUtil::PrintExitPrompt()
+void ConsoleOut::PrintExitPrompt()
 {
     cout << "Type 'E' to exit:\n";
 }
 
-void ConsoleOutUtil::PrintPlayerGuessPrompt(int output)
+void ConsoleOut::PrintPlayerGuessPrompt(int output)
 {
     cout << "Guess any number between 1 and " << output << ".\n";
 }
 
-void ConsoleOutUtil::PrintNameGuess(string name)
+void ConsoleOut::PrintNameGuess(string name)
 {
     cout << name << " guess: \n";
 }
 
-void ConsoleOutUtil::PrintCorrectGuessPrompt(string name)
+void ConsoleOut::PrintCorrectGuessPrompt(string name)
 {
     cout << name << " got it! " << name << " goes first!\n";
 }
 
-void ConsoleOutUtil::PrintRound(int output)
+void ConsoleOut::PrintRound(int output)
 {
     cout << "-- ROUND " << output << " --\n";
 }
 
-void ConsoleOutUtil::PrintPlayerTurn(int output)
+void ConsoleOut::PrintPlayerTurn(int output)
 {
     switch (output)
     {
@@ -91,12 +91,12 @@ void ConsoleOutUtil::PrintPlayerTurn(int output)
     }
 }
 
-void ConsoleOutUtil::PrintString(string output)
+void ConsoleOut::PrintString(string output)
 {
     cout << output << '\n';
 }
 
-void ConsoleOutUtil::PrintUpPile(vector<CardController> up_pile)
+void ConsoleOut::PrintUpPile(vector<CardController> up_pile)
 {
     cout << "Up pile:\n";
     for (CardController iCUtil : up_pile)
@@ -106,7 +106,7 @@ void ConsoleOutUtil::PrintUpPile(vector<CardController> up_pile)
     cout << '\n';
 }
 
-void ConsoleOutUtil::PrintDownPile(vector<CardController> down_pile)
+void ConsoleOut::PrintDownPile(vector<CardController> down_pile)
 {
     cout << "Down pile:\n";
     for (CardController iCUtil : down_pile)
@@ -116,7 +116,7 @@ void ConsoleOutUtil::PrintDownPile(vector<CardController> down_pile)
     cout << '\n';
 }
 
-void ConsoleOutUtil::PrintMultipleWinners(vector<PlayerController> players, int range)
+void ConsoleOut::PrintMultipleWinners(vector<PlayerController> players, int range)
 {
     cout << "There were multiple winners last round.\n";
     for (PlayerController iPUtil : players)
@@ -126,18 +126,18 @@ void ConsoleOutUtil::PrintMultipleWinners(vector<PlayerController> players, int 
     cout << " please guess a number between 1 and " << range << '\n';
 }
 
-void ConsoleOutUtil::PrintClosestGuess(int target, PlayerController player)
+void ConsoleOut::PrintClosestGuess(int target, PlayerController player)
 {
     cout << player.Name() << " has the closest guess to target[" << target << "]! They get to go first this round!\n";
 }
 
-void ConsoleOutUtil::PrintDeckTotal(DeckController deckUtil)
+void ConsoleOut::PrintDeckTotal(DeckController deckUtil)
 {
     int size = deckUtil.Deck().size();
     cout << "Total cards in deck: " << size << '\n';
 }
 
-void ConsoleOutUtil::PrintRivalPlayers(GameController gameUtil)
+void ConsoleOut::PrintRivalPlayers(GameController gameUtil)
 {
     if (gameUtil.PCount() == 2)
     {
@@ -165,7 +165,7 @@ void ConsoleOutUtil::PrintRivalPlayers(GameController gameUtil)
     }
 }
 
-void ConsoleOutUtil::PrintRivalsWithSpy(GameController gameUtil)
+void ConsoleOut::PrintRivalsWithSpy(GameController gameUtil)
 {
     int spy_count(0);
     for (PlayerController iPUtil : gameUtil.Plyrs())
@@ -189,7 +189,7 @@ void ConsoleOutUtil::PrintRivalsWithSpy(GameController gameUtil)
     }
 }
 
-void ConsoleOutUtil::PrintPlayerHand(PlayerController PlyrCNTLR)
+void ConsoleOut::PrintPlayerHand(PlayerController PlyrCNTLR)
 {
     cout << "Player hand: \n";
     for (CardController iCUtil : PlyrCNTLR.Hand())

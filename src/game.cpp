@@ -8,8 +8,8 @@
 #include <ctime>
 #include <iterator>
 #include "game.h"
-#include "console_in_util.h"
-#include "console_out_util.h"
+#include "console_in.h"
+#include "console_out.h"
 
 using std::find;
 using std::distance;
@@ -74,7 +74,7 @@ void GameInterface::SetStrtngPlyr(int output)
 }
 void GameController::BuildPCount()
 {
-    int count(ConsoleInUtil::GetIntInput());
+    int count(ConsoleIn::GetIntInput());
     if (!PCountCorrect(count))
     {
         FixPCount();
@@ -93,13 +93,13 @@ bool GameController::PCountCorrect(int input)
     }
     else
     {
-        ConsoleOutUtil::PrintInvalidInput(1);
+        ConsoleOut::PrintInvalidInput(1);
         return false;
     }
 }
 void GameController::FixPCount()
 {
-    ConsoleInUtil::ClearInput();
+    ConsoleIn::ClearInput();
     BuildPCount();
 }
 void GameController::BuildPContainer()
@@ -209,7 +209,7 @@ void GameController::BuildStartingPlyr()
     int player(0);
     for (PlayerController iPUtil : players)
     {
-        ConsoleOutUtil::PrintNameGuess(iPUtil.Name());
+        ConsoleOut::PrintNameGuess(iPUtil.Name());
         int guess(GetPlayerGuess());
         while (DuplicateGuess(duplicate_guess, guess))
         {
@@ -217,7 +217,7 @@ void GameController::BuildStartingPlyr()
         }
         if (guess == target)
         {
-            ConsoleOutUtil::PrintCorrectGuessPrompt(iPUtil.Name());
+            ConsoleOut::PrintCorrectGuessPrompt(iPUtil.Name());
             duplicate_guess.erase(duplicate_guess.begin(), duplicate_guess.end());
             player = iPUtil.Value();
             break;
@@ -237,7 +237,7 @@ int GameController::GenerateNumberWithinRange(int range)
 }
 int GameController::GetPlayerGuess()
 {
-    int output(ConsoleInUtil::GetIntInput());
+    int output(ConsoleIn::GetIntInput());
     if (!CorrectGuessInput(output))
     {
         FixGuessInput(output);
@@ -252,13 +252,13 @@ bool GameController::CorrectGuessInput(int output)
     }
     else
     {
-        ConsoleOutUtil::PrintInvalidInput(2);
+        ConsoleOut::PrintInvalidInput(2);
         return false;
     }
 }
 void GameController::FixGuessInput(int input)
 {
-    ConsoleInUtil::ClearInput();
+    ConsoleIn::ClearInput();
     input = GetPlayerGuess();
 }
 bool GameController::DuplicateGuess(vector<int> guess_container, int guess)
@@ -267,7 +267,7 @@ bool GameController::DuplicateGuess(vector<int> guess_container, int guess)
     {
         if (iInt == guess)
         {
-            ConsoleOutUtil::PrintInvalidInput(3);
+            ConsoleOut::PrintInvalidInput(3);
             return true;
         }
     }

@@ -17,7 +17,7 @@
 using std::string;
 using std::vector;
 
-class ConsoleOutUtil
+class ConsoleOut
 {
 public:
     static void PrintWelcome();

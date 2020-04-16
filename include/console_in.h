@@ -7,7 +7,7 @@
 #ifndef CONSOLE_IN_UTIL_h
 #define CONSOLE_IN_UTIL_h
 
-class ConsoleInUtil
+class ConsoleIn
 {
 public:
     static int GetIntInput();

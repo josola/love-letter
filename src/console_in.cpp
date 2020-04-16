@@ -6,14 +6,14 @@
 
 #include <iostream>
 #include <limits>
-#include "console_in_util.h"
-#include "console_out_util.h"
+#include "console_in.h"
+#include "console_out.h"
 
 using std::cin;
 using std::numeric_limits;
 using std::streamsize;
 
-int ConsoleInUtil::GetIntInput()
+int ConsoleIn::GetIntInput()
 {
     int input;
     cin >> input;
@@ -30,11 +30,11 @@ int ConsoleInUtil::GetIntInput()
     }
 }
 
-bool ConsoleInUtil::CorrectInput(int input)
+bool ConsoleIn::CorrectInput(int input)
 {
     if (!cin)
     {
-        ConsoleOutUtil::PrintInvalidInput(0);
+        ConsoleOut::PrintInvalidInput(0);
         return false;
     }
     else
@@ -43,7 +43,7 @@ bool ConsoleInUtil::CorrectInput(int input)
     }
 }
 
-int ConsoleInUtil::FixIntInput(int input)
+int ConsoleIn::FixIntInput(int input)
 {
     bool correct = false;
     int fixed = 0;
@@ -59,7 +59,7 @@ int ConsoleInUtil::FixIntInput(int input)
     return fixed;
 }
 
-void ConsoleInUtil::ClearInput()
+void ConsoleIn::ClearInput()
 {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');

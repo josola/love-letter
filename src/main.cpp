@@ -4,8 +4,8 @@
  * Written by Jordan Sola 2019-2020
  */
 
-#include "console_out_util.h"
-#include "console_in_util.h"
+#include "console_out.h"
+#include "console_in.h"
 #include "game.h"
 #include "deck.h"
 
@@ -27,12 +27,12 @@ int main()
                 initial_setup = false;
                 break;
             }
-            ConsoleOutUtil::PrintWelcome();
-            ConsoleOutUtil::PrintStartingPlayerPrompt();
+            ConsoleOut::PrintWelcome();
+            ConsoleOut::PrintStartingPlayerPrompt();
             gameCNTLR.BuildPCount();
             gameCNTLR.BuildPContainer();
             gameCNTLR.BuildWinningTokenCount();
-            ConsoleOutUtil::PrintPlayerGuessPrompt(gameCNTLR.PCount());
+            ConsoleOut::PrintPlayerGuessPrompt(gameCNTLR.PCount());
             gameCNTLR.BuildStartingPlyr();
             initial_setup = false;
         }
@@ -51,8 +51,8 @@ int main()
             gameCNTLR.SetStrtngPlyr(gameCNTLR.FindWinner());
             gameCNTLR.ClearWinner();
             gameCNTLR.ClearPlaying();
-            ConsoleOutUtil::PrintRound(gameCNTLR.Round());
-            ConsoleOutUtil::PrintPlayerTurn(gameCNTLR.PCurrent());
+            ConsoleOut::PrintRound(gameCNTLR.Round());
+            ConsoleOut::PrintPlayerTurn(gameCNTLR.PCurrent());
 
             DeckController deckUtl;
 
@@ -73,15 +73,15 @@ int main()
 
             gameCNTLR.DealStartingHand(deckUtl);
 
-            ConsoleOutUtil::PrintDeckTotal(deckUtl);
+            ConsoleOut::PrintDeckTotal(deckUtl);
 
             if (!upUtl.Deck().empty())
             {
-                ConsoleOutUtil::PrintUpPile(upUtl.Deck());
+                ConsoleOut::PrintUpPile(upUtl.Deck());
             }
 
-            ConsoleOutUtil::PrintRivalPlayers(gameCNTLR);
-            ConsoleOutUtil::PrintRivalsWithSpy(gameCNTLR);
+            ConsoleOut::PrintRivalPlayers(gameCNTLR);
+            ConsoleOut::PrintRivalsWithSpy(gameCNTLR);
             begin_round = false;
         }
 
