@@ -14,7 +14,7 @@
 using std::string;
 using std::vector;
 
-class PlyrM
+class PlayerModel
 {
 protected:
     string name = "";
@@ -28,10 +28,10 @@ protected:
     int token_count = 0;
 };
 
-class PlyrITF : public PlyrM
+class PlayerInterface : public PlayerModel
 {
 public:
-    PlyrITF(string name, int value) : PlyrM{} { SetName(name), SetValue(value); };
+    PlayerInterface(string name, int value) : PlayerModel{} { SetName(name), SetValue(value); };
 
     //getters
     const string Name();
@@ -56,10 +56,10 @@ public:
     void NotPlaying();
 };
 
-class PlyrCNTLR : public PlyrITF
+class PlayerController : public PlayerInterface
 {
 public:
-    PlyrCNTLR(string name = "", int value = 0) : PlyrITF{ name, value } {};
+    PlayerController(string name = "", int value = 0) : PlayerInterface{ name, value } {};
 
     //actions
     template<typename Object>

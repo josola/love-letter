@@ -116,17 +116,17 @@ void ConsoleOutUtil::PrintDownPile(vector<CardUtl> down_pile)
     cout << '\n';
 }
 
-void ConsoleOutUtil::PrintMultipleWinners(vector<PlyrCNTLR> players, int range)
+void ConsoleOutUtil::PrintMultipleWinners(vector<PlayerController> players, int range)
 {
     cout << "There were multiple winners last round.\n";
-    for (PlyrCNTLR iPUtil : players)
+    for (PlayerController iPUtil : players)
     {
         cout << ' ' << iPUtil.Name();
     }
     cout << " please guess a number between 1 and " << range << '\n';
 }
 
-void ConsoleOutUtil::PrintClosestGuess(int target, PlyrCNTLR player)
+void ConsoleOutUtil::PrintClosestGuess(int target, PlayerController player)
 {
     cout << player.Name() << " has the closest guess to target[" << target << "]! They get to go first this round!\n";
 }
@@ -142,7 +142,7 @@ void ConsoleOutUtil::PrintRivalPlayers(GameCNTLR gameUtil)
     if (gameUtil.PCount() == 2)
     {
         cout << "Rival player: \n";
-        for (PlyrCNTLR iPUtil : gameUtil.Plyrs())
+        for (PlayerController iPUtil : gameUtil.Plyrs())
         {
             if (!iPUtil.Current())
             {
@@ -154,7 +154,7 @@ void ConsoleOutUtil::PrintRivalPlayers(GameCNTLR gameUtil)
     else
     {
         cout << "Rival players: \n";
-        for (PlyrCNTLR iPUtil : gameUtil.Plyrs())
+        for (PlayerController iPUtil : gameUtil.Plyrs())
         {
             if (!iPUtil.Current())
             {
@@ -168,7 +168,7 @@ void ConsoleOutUtil::PrintRivalPlayers(GameCNTLR gameUtil)
 void ConsoleOutUtil::PrintRivalsWithSpy(GameCNTLR gameUtil)
 {
     int spy_count(0);
-    for (PlyrCNTLR iPUtil : gameUtil.Plyrs())
+    for (PlayerController iPUtil : gameUtil.Plyrs())
     {
         if (iPUtil.Spy())
         {
@@ -178,7 +178,7 @@ void ConsoleOutUtil::PrintRivalsWithSpy(GameCNTLR gameUtil)
     if (spy_count > 0)
     {
         cout << "Rivals with Spy: \n";
-        for (PlyrCNTLR iPUtil : gameUtil.Plyrs())
+        for (PlayerController iPUtil : gameUtil.Plyrs())
         {
             if (iPUtil.Spy())
             {
@@ -189,7 +189,7 @@ void ConsoleOutUtil::PrintRivalsWithSpy(GameCNTLR gameUtil)
     }
 }
 
-void ConsoleOutUtil::PrintPlayerHand(PlyrCNTLR PlyrCNTLR)
+void ConsoleOutUtil::PrintPlayerHand(PlayerController PlyrCNTLR)
 {
     cout << "Player hand: \n";
     for (CardUtl iCUtil : PlyrCNTLR.Hand())

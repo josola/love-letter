@@ -7,32 +7,32 @@
 #include "player.h"
 
 //getters
-const string PlyrITF::Name() { return name; }
-const int PlyrITF::Value() { return value; }
-const int PlyrITF::Guess() { return guess; }
-const bool PlyrITF::Current() { return current; }
-const bool PlyrITF::Spy() { return spy; }
-const bool PlyrITF::Winner() { return winner; }
-vector<CardUtl> const PlyrITF::Hand() { return hand; }
-constexpr bool const PlyrITF::Playing() { return playing; }
-const int PlyrITF::Tokens() { return token_count; }
+const string PlayerInterface::Name() { return name; }
+const int PlayerInterface::Value() { return value; }
+const int PlayerInterface::Guess() { return guess; }
+const bool PlayerInterface::Current() { return current; }
+const bool PlayerInterface::Spy() { return spy; }
+const bool PlayerInterface::Winner() { return winner; }
+vector<CardUtl> const PlayerInterface::Hand() { return hand; }
+constexpr bool const PlayerInterface::Playing() { return playing; }
+const int PlayerInterface::Tokens() { return token_count; }
 
 //setters
-void PlyrITF::SetName(string input) { name = input; }
-void PlyrITF::SetValue(int input) { value = input; }
-void PlyrITF::IsCurrent() { current = true; }
-void PlyrITF::NotCurrent() { current = false; }
-void PlyrITF::IsWinner() { winner = true;}
-void PlyrITF::NotWinner() { winner = false; }
-void PlyrITF::SetGuess(int output) { guess = output; }
-void PlyrITF::IsPlaying() { playing = true; }
-void PlyrITF::NotPlaying() { playing = false; }
+void PlayerInterface::SetName(string input) { name = input; }
+void PlayerInterface::SetValue(int input) { value = input; }
+void PlayerInterface::IsCurrent() { current = true; }
+void PlayerInterface::NotCurrent() { current = false; }
+void PlayerInterface::IsWinner() { winner = true;}
+void PlayerInterface::NotWinner() { winner = false; }
+void PlayerInterface::SetGuess(int output) { guess = output; }
+void PlayerInterface::IsPlaying() { playing = true; }
+void PlayerInterface::NotPlaying() { playing = false; }
 
 //actions
 template<typename Object>
-CardUtl PlyrCNTLR::DrawCard(Object &obj)
+CardUtl PlayerController::DrawCard(Object &obj)
 {
     CardUtl top_card = obj.Card(0);
     return top_card;
 }
-void PlyrCNTLR::InsertCardIntoHand(CardUtl card) { hand.push_back(card); }
+void PlayerController::InsertCardIntoHand(CardUtl card) { hand.push_back(card); }

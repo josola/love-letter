@@ -16,7 +16,7 @@ protected:
     int player_count = 0;
     int original_player_count = 0;
     int round_count = 1;
-    vector<PlyrCNTLR> players;
+    vector<PlayerController> players;
     int winning_token_count = 0;
 };
 
@@ -30,14 +30,14 @@ public:
     const int Round();
     const int OPCount();
     const int WinningTokenCount();
-    vector<PlyrCNTLR> Plyrs();
+    vector<PlayerController> Plyrs();
     int PCurrent();
     int FindWinner();
 
     //setters
     void SetPCount(int input);
     void SetOPCount(int input);
-    void SetPlyrs(vector<PlyrCNTLR> input);
+    void SetPlyrs(vector<PlayerController> input);
     void SetWinningTokenCount(int input);
     void SetStrtngPlyr(int output);
 };

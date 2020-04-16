@@ -32,12 +32,12 @@ public:
     static void PrintString(string output);
     static void PrintUpPile(vector<CardUtl> up_pile);
     static void PrintDownPile(vector<CardUtl> down_pile);
-    static void PrintMultipleWinners(vector<PlyrCNTLR> players, int range);
-    static void PrintClosestGuess(int target, PlyrCNTLR player);
+    static void PrintMultipleWinners(vector<PlayerController> players, int range);
+    static void PrintClosestGuess(int target, PlayerController player);
     static void PrintDeckTotal(DeckUtl deckUtil);
     static void PrintRivalPlayers(GameCNTLR gameUtil);
     static void PrintRivalsWithSpy(GameCNTLR gameUtil);
-    static void PrintPlayerHand(PlyrCNTLR plyrUtl);
+    static void PrintPlayerHand(PlayerController plyrUtl);
 
 private:
 };

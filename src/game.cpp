@@ -18,11 +18,11 @@ const int GameITF::PCount(){ return player_count; }
 const int GameITF::Round() { return round_count; }
 const int GameITF::OPCount() { return original_player_count; }
 const int GameITF::WinningTokenCount() { return winning_token_count; }
-vector<PlyrCNTLR> GameITF::Plyrs() { return players; }
+vector<PlayerController> GameITF::Plyrs() { return players; }
 int GameITF::PCurrent()
 {
     int output(0);
-    for (PlyrCNTLR iPUtil : players)
+    for (PlayerController iPUtil : players)
     {
         if (iPUtil.Current())
         {
@@ -45,7 +45,7 @@ int GameITF::FindWinner()
 }
 void GameITF::SetPCount(int input) { player_count = input; }
 void GameITF::SetOPCount(int input) { original_player_count = input; }
-void GameITF::SetPlyrs(vector<PlyrCNTLR> input) { players = input; }
+void GameITF::SetPlyrs(vector<PlayerController> input) { players = input; }
 void GameITF::SetWinningTokenCount(int input) { winning_token_count = input; }
 void GameITF::SetStrtngPlyr(int output)
 {
@@ -104,13 +104,13 @@ void GameCNTLR::FixPCount()
 }
 void GameCNTLR::BuildPContainer()
 {
-    vector<PlyrCNTLR> plyrs;
+    vector<PlayerController> plyrs;
     switch (player_count)
     {
     case 2:
     {
-        PlyrCNTLR p1Util("PLAYER[1]", 1);
-        PlyrCNTLR p2Util("PLAYER[2]", 2);
+        PlayerController p1Util("PLAYER[1]", 1);
+        PlayerController p2Util("PLAYER[2]", 2);
         plyrs.push_back(p1Util);
         plyrs.push_back(p2Util);
         SetPlyrs(plyrs);
@@ -118,9 +118,9 @@ void GameCNTLR::BuildPContainer()
     }
     case 3:
     {
-        PlyrCNTLR p1Util("PLAYER[1]", 1);
-        PlyrCNTLR p2Util("PLAYER[2]", 2);
-        PlyrCNTLR p3Util("PLAYER[3]", 3);
+        PlayerController p1Util("PLAYER[1]", 1);
+        PlayerController p2Util("PLAYER[2]", 2);
+        PlayerController p3Util("PLAYER[3]", 3);
         plyrs.push_back(p1Util);
         plyrs.push_back(p2Util);
         plyrs.push_back(p3Util);
@@ -129,10 +129,10 @@ void GameCNTLR::BuildPContainer()
     }
     case 4:
     {
-        PlyrCNTLR p1Util("PLAYER[1]", 1);
-        PlyrCNTLR p2Util("PLAYER[2]", 2);
-        PlyrCNTLR p3Util("PLAYER[3]", 3);
-        PlyrCNTLR p4Util("PLAYER[4]", 4);
+        PlayerController p1Util("PLAYER[1]", 1);
+        PlayerController p2Util("PLAYER[2]", 2);
+        PlayerController p3Util("PLAYER[3]", 3);
+        PlayerController p4Util("PLAYER[4]", 4);
         plyrs.push_back(p1Util);
         plyrs.push_back(p2Util);
         plyrs.push_back(p3Util);
@@ -142,11 +142,11 @@ void GameCNTLR::BuildPContainer()
     }
     case 5:
     {
-        PlyrCNTLR p1Util("PLAYER[1]", 1);
-        PlyrCNTLR p2Util("PLAYER[2]", 2);
-        PlyrCNTLR p3Util("PLAYER[3]", 3);
-        PlyrCNTLR p4Util("PLAYER[4]", 4);
-        PlyrCNTLR p5Util("PLAYER[5]", 5);
+        PlayerController p1Util("PLAYER[1]", 1);
+        PlayerController p2Util("PLAYER[2]", 2);
+        PlayerController p3Util("PLAYER[3]", 3);
+        PlayerController p4Util("PLAYER[4]", 4);
+        PlayerController p5Util("PLAYER[5]", 5);
         plyrs.push_back(p1Util);
         plyrs.push_back(p2Util);
         plyrs.push_back(p3Util);
@@ -157,12 +157,12 @@ void GameCNTLR::BuildPContainer()
     }
     case 6:
     {
-        PlyrCNTLR p1Util("PLAYER[1]", 1);
-        PlyrCNTLR p2Util("PLAYER[2]", 2);
-        PlyrCNTLR p3Util("PLAYER[3]", 3);
-        PlyrCNTLR p4Util("PLAYER[4]", 4);
-        PlyrCNTLR p5Util("PLAYER[5]", 5);
-        PlyrCNTLR p6Util("PLAYER[6]", 6);
+        PlayerController p1Util("PLAYER[1]", 1);
+        PlayerController p2Util("PLAYER[2]", 2);
+        PlayerController p3Util("PLAYER[3]", 3);
+        PlayerController p4Util("PLAYER[4]", 4);
+        PlayerController p5Util("PLAYER[5]", 5);
+        PlayerController p6Util("PLAYER[6]", 6);
         plyrs.push_back(p1Util);
         plyrs.push_back(p2Util);
         plyrs.push_back(p3Util);
@@ -174,7 +174,7 @@ void GameCNTLR::BuildPContainer()
     }
     default:
     {
-        PlyrCNTLR p0Util("PLAYER[0]", 0);
+        PlayerController p0Util("PLAYER[0]", 0);
         plyrs.push_back(p0Util);
         SetPlyrs(plyrs);
         break;
@@ -207,7 +207,7 @@ void GameCNTLR::BuildStartingPlyr()
     int target(GenerateNumberWithinRange(player_count));
     vector<int> duplicate_guess{};
     int player(0);
-    for (PlyrCNTLR iPUtil : players)
+    for (PlayerController iPUtil : players)
     {
         ConsoleOutUtil::PrintNameGuess(iPUtil.Name());
         int guess(GetPlayerGuess());
@@ -275,21 +275,21 @@ bool GameCNTLR::DuplicateGuess(vector<int> guess_container, int guess)
 }
 void GameCNTLR::DealStartingHand(DeckUtl &deck)
 {
-    for (PlyrCNTLR &iPUtl : players)
+    for (PlayerController &iPUtl : players)
     {
         iPUtl.InsertCardIntoHand(deck.Card(0));
     }
 }
 void GameCNTLR::ClearWinner()
 {
-    for (PlyrCNTLR iPCNTLR : players)
+    for (PlayerController iPCNTLR : players)
     {
         iPCNTLR.NotWinner();
     }
 }
 void GameCNTLR::ClearPlaying()
 {
-    for (PlyrCNTLR iPCNTLR : players)
+    for (PlayerController iPCNTLR : players)
     {
         iPCNTLR.IsPlaying();
     }
