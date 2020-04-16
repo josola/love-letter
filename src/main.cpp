@@ -18,70 +18,70 @@ int main()
 
     while (!game_over)
     {
-        GameController gameCNTLR;
+        GameController gameController;
 
         while (initial_setup && !game_over)
         {
-            if (gameCNTLR.Round() > 1 || game_over)
+            if (gameController.Round() > 1 || game_over)
             {
                 initial_setup = false;
                 break;
             }
             ConsoleOut::PrintWelcome();
             ConsoleOut::PrintStartingPlayerPrompt();
-            gameCNTLR.BuildPCount();
-            gameCNTLR.BuildPContainer();
-            gameCNTLR.BuildWinningTokenCount();
-            ConsoleOut::PrintPlayerGuessPrompt(gameCNTLR.PCount());
-            gameCNTLR.BuildStartingPlyr();
+            gameController.BuildPCount();
+            gameController.BuildPContainer();
+            gameController.BuildWinningTokenCount();
+            ConsoleOut::PrintPlayerGuessPrompt(gameController.PCount());
+            gameController.BuildStartingPlyr();
             initial_setup = false;
         }
 
         while (begin_round && !game_over)
         {
-            for (PlayerController iPCNTLR : gameCNTLR.Plyrs())
+            for (PlayerController iPCNTLR : gameController.Plyrs())
             {
-                if (iPCNTLR.Tokens() > gameCNTLR.WinningTokenCount())
+                if (iPCNTLR.Tokens() > gameController.WinningTokenCount())
                 {
                     game_over = true;
                     begin_round = false;
                     break;
                 }
             }
-            gameCNTLR.SetStrtngPlyr(gameCNTLR.FindWinner());
-            gameCNTLR.ClearWinner();
-            gameCNTLR.ClearPlaying();
-            ConsoleOut::PrintRound(gameCNTLR.Round());
-            ConsoleOut::PrintPlayerTurn(gameCNTLR.PCurrent());
+            gameController.SetStrtngPlyr(gameController.FindWinner());
+            gameController.ClearWinner();
+            gameController.ClearPlaying();
+            ConsoleOut::PrintRound(gameController.Round());
+            ConsoleOut::PrintPlayerTurn(gameController.PCurrent());
 
-            DeckController deckUtl;
+            DeckController deckController;
 
-            deckUtl.Builder();
-            deckUtl.Shuffle();
+            deckController.Builder();
+            deckController.Shuffle();
 
-            DownController dwnUtl;
+            DownController downController;
 
             //discard one card face down
-            dwnUtl.InsertCard(deckUtl.Card(0));
+            downController.InsertCard(deckController.Card(0));
 
-            UpController upUtl;
+            UpController upController;
 
-            if (gameCNTLR.PCount() == 2)
+            if (gameController.PCount() == 2)
             {
-                upUtl.Builder(deckUtl);
+                upController.Builder(deckController);
             }
 
-            gameCNTLR.DealStartingHand(deckUtl);
+            gameController.DealStartingHand(deckController);
 
-            ConsoleOut::PrintDeckTotal(deckUtl);
+            ConsoleOut::PrintDeckTotal(deckController);
 
-            if (!upUtl.Deck().empty())
+            if (!upController.Deck().empty())
             {
-                ConsoleOut::PrintUpPile(upUtl.Deck());
+                ConsoleOut::PrintUpPile(upController.Deck());
             }
 
-            ConsoleOut::PrintRivalPlayers(gameCNTLR);
-            ConsoleOut::PrintRivalsWithSpy(gameCNTLR);
+            ConsoleOut::PrintRivalPlayers(gameController);
+            ConsoleOut::PrintRivalsWithSpy(gameController);
             begin_round = false;
         }
 
