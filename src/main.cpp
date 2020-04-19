@@ -85,6 +85,14 @@ int main()
         {
             ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
             ConsoleOut::PrintDrawPrompt(gameController.PCurrent().Name());
+            if (deckController.Deck().empty())
+            {
+                gameController.ProcessDraw(downController);
+            }
+            else
+            {
+                gameController.ProcessDraw(deckController);
+            }
             player_turn = false;
         }
     }

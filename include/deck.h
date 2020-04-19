@@ -43,7 +43,7 @@ public:
     virtual void Builder();
 };
 
-class UpController : virtual public DeckInterface
+class UpController : virtual public DeckController
 {
 public:
     UpController() : DeckInterface{} {};
@@ -51,7 +51,7 @@ public:
     virtual void Builder(DeckController deck);
 };
 
-class DownController : virtual public DeckInterface
+class DownController : virtual public DeckController
 {
 public:
     DownController() : DeckInterface{} {};

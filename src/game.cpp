@@ -7,12 +7,14 @@
 #include <random>
 #include <ctime>
 #include <iterator>
+#include <algorithm>
 #include "game.h"
 #include "console_in.h"
 #include "console_out.h"
 
 using std::find;
 using std::distance;
+using std::any_of;
 
 const int GameInterface::PCount(){ return player_count; }
 const int GameInterface::Round() { return round_count; }
@@ -291,4 +293,48 @@ void GameController::ClearPlaying()
     {
         iPCNTLR.IsPlaying();
     }
+}
+void GameController::ProcessDraw(DeckController &deck)
+{
+    string input = DrawInput();
+    if (!CorrectDrawInput(input))
+    {
+        input = FixDrawInput();
+    }
+    else
+    {
+        PCurrent().DrawCard(deck);
+    }
+}
+string GameController::DrawInput() { return ConsoleIn::GetStringInput(); }
+bool GameController::CorrectDrawInput(string input)
+{
+    vector<string> acceptable_input{ "draw", "Draw", "DRAW" };
+    if (any_of(acceptable_input.begin(), acceptable_input.end(), [input](string sIt) { return sIt == input; }))
+    {
+        return true;
+    }
+    else
+    {
+        ConsoleOut::PrintInvalidInput(0);
+        return false;
+    }
+}
+string GameController::FixDrawInput()
+{
+    string output = "";
+    bool correct = false;
+    while (!correct)
+    {
+        output = DrawInput();
+        if (!CorrectDrawInput(output))
+        {
+            ConsoleOut::PrintInvalidInput(5);
+        }
+        else
+        {
+            correct = true;
+        }
+    }
+    return output;
 }

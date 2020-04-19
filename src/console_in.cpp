@@ -18,10 +18,10 @@ int ConsoleIn::GetIntInput()
     int input;
     cin >> input;
 
-    if (!CorrectInput(input))
+    if (!CorrectIntInput(input))
     {
         int fixed = 0;
-        fixed = FixIntInput(input);
+        fixed = FixIntInput();
         return fixed;
     }
     else
@@ -29,12 +29,11 @@ int ConsoleIn::GetIntInput()
         return input;
     }
 }
-
-bool ConsoleIn::CorrectInput(int input)
+bool ConsoleIn::CorrectIntInput(int input)
 {
     if (!cin)
     {
-        ConsoleOut::PrintInvalidInput(0);
+        ConsoleOut::PrintInvalidInput(4);
         return false;
     }
     else
@@ -42,8 +41,7 @@ bool ConsoleIn::CorrectInput(int input)
         return true;
     }
 }
-
-int ConsoleIn::FixIntInput(int input)
+int ConsoleIn::FixIntInput()
 {
     bool correct = false;
     int fixed = 0;
@@ -58,9 +56,45 @@ int ConsoleIn::FixIntInput(int input)
     }
     return fixed;
 }
-
 void ConsoleIn::ClearInput()
 {
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
+string ConsoleIn::GetStringInput()
+{
+    string output = "";
+    getline(cin, output);
+    if (!CorrectStringInput(output))
+    {
+        output = FixStringInput();
+    }
+    return output;
+}
+bool ConsoleIn::CorrectStringInput(string input)
+{
+    if (!cin)
+    {
+        ConsoleOut::PrintInvalidInput(0);
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+string ConsoleIn::FixStringInput()
+{
+    bool correct = false;
+    string fixed = "";
+    while (!correct)
+    {
+        ClearInput();
+        cin >> fixed;
+        if (cin)
+        {
+            correct = true;
+        }
+    }
+    return fixed;
 }

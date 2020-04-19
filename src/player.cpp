@@ -29,10 +29,9 @@ void PlayerInterface::IsPlaying() { playing = true; }
 void PlayerInterface::NotPlaying() { playing = false; }
 
 //actions
-template<typename Object>
-CardController PlayerController::DrawCard(Object &obj)
+CardController PlayerController::DrawCard(DeckController &deck)
 {
-    CardController top_card = obj.Card(0);
+    CardController top_card = deck.Card(0);
     return top_card;
 }
 void PlayerController::InsertCardIntoHand(CardController card) { hand.push_back(card); }

@@ -7,8 +7,11 @@
 #ifndef GAME_h
 #define GAME_h
 
+#include <string>
 #include "player.h"
 #include "deck.h"
+
+using std::string;
 
 class GameModel
 {
@@ -61,6 +64,10 @@ public:
     void DealStartingHand(DeckController &deck);
     void ClearWinner();
     void ClearPlaying();
+    void ProcessDraw(DeckController &deck);
+    string DrawInput();
+    bool CorrectDrawInput(string input);
+    string FixDrawInput();
 };
 
 #endif

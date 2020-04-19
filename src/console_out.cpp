@@ -28,6 +28,12 @@ void ConsoleOut::PrintInvalidInput(int output)
     case 3:
         cout << "Invalid input. Number already guessed.\n";
         break;
+    case 4:
+        cout << "Invalid input. Please enter a string of characters.\n";
+        break;
+    case 5:
+        cout << "Invalid input. Please enter \"draw\", \"Draw\", or \"DRAW\".\n";
+        break;
     default:
         cout << "Invalid input.\n";
         break;

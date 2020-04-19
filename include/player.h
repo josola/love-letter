@@ -10,6 +10,7 @@
 #include <string>
 #include <vector>
 #include "card.h"
+#include "deck.h"
 
 using std::string;
 using std::vector;
@@ -62,8 +63,7 @@ public:
     PlayerController(string name = "", int value = 0) : PlayerInterface{ name, value } {};
 
     //actions
-    template<typename Object>
-    CardController DrawCard(Object &obj);
+    CardController DrawCard(DeckController &deck);
     void InsertCardIntoHand(CardController card);
 };
 
