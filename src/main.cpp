@@ -19,6 +19,9 @@ int main()
     while (!game_over)
     {
         GameController gameController;
+        DeckController deckController;
+        DownController downController;
+        UpController upController;
 
         while (initial_setup && !game_over)
         {
@@ -54,17 +57,11 @@ int main()
             ConsoleOut::PrintRound(gameController.Round());
             ConsoleOut::PrintPlayerTurn(gameController.PCurrent());
 
-            DeckController deckController;
-
             deckController.Builder();
             deckController.Shuffle();
 
-            DownController downController;
-
             //discard one card face down
             downController.InsertCard(deckController.Card(0));
-
-            UpController upController;
 
             if (gameController.PCount() == 2)
             {
@@ -87,7 +84,8 @@ int main()
 
         while (player_turn && !game_over)
         {
-
+            ConsoleOut::PrintPlayerHand(gameController.Players().at(gameController.PCurrent()));
+            player_turn = false;
         }
     }
     return 0;

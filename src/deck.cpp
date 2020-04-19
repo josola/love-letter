@@ -72,4 +72,10 @@ void DeckController::Builder()
 }
 
 //builds up pile (for 2 player games)
-void UpController::Builder(DeckController deck) { for (int i = 0; i < 3; i++) { InsertCard(deck.Card(0)); } }
+void UpController::Builder(DeckController deck)
+{
+    for (int i = 0; i < 3; i++)
+    {
+        InsertCard(deck.Card(0));
+    }
+}

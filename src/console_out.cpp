@@ -9,16 +9,8 @@
 
 using std::cout;
 
-void ConsoleOut::PrintWelcome()
-{
-    cout << "-- Welcome to Love Letter --\n";
-}
-
-void ConsoleOut::PrintStartingPlayerPrompt()
-{
-    cout << "How many players will be playing?\n";
-}
-
+void ConsoleOut::PrintWelcome() { cout << "-- Welcome to Love Letter --\n"; }
+void ConsoleOut::PrintStartingPlayerPrompt() { cout << "How many players will be playing?\n"; }
 void ConsoleOut::PrintInvalidInput(int output)
 {
     switch (output)
@@ -40,32 +32,11 @@ void ConsoleOut::PrintInvalidInput(int output)
         break;
     }
 }
-
-void ConsoleOut::PrintExitPrompt()
-{
-    cout << "Type 'E' to exit:\n";
-}
-
-void ConsoleOut::PrintPlayerGuessPrompt(int output)
-{
-    cout << "Guess any number between 1 and " << output << ".\n";
-}
-
-void ConsoleOut::PrintNameGuess(string name)
-{
-    cout << name << " guess: \n";
-}
-
-void ConsoleOut::PrintCorrectGuessPrompt(string name)
-{
-    cout << name << " got it! " << name << " goes first!\n";
-}
-
-void ConsoleOut::PrintRound(int output)
-{
-    cout << "-- ROUND " << output << " --\n";
-}
-
+void ConsoleOut::PrintExitPrompt() { cout << "Type 'E' to exit:\n"; }
+void ConsoleOut::PrintPlayerGuessPrompt(int output) { cout << "Guess any number between 1 and " << output << ".\n"; }
+void ConsoleOut::PrintNameGuess(string name) { cout << name << " guess: \n"; }
+void ConsoleOut::PrintCorrectGuessPrompt(string name) { cout << name << " got it! " << name << " goes first!\n"; }
+void ConsoleOut::PrintRound(int output) { cout << "-- ROUND " << output << " --\n"; }
 void ConsoleOut::PrintPlayerTurn(int output)
 {
     switch (output)
@@ -90,12 +61,7 @@ void ConsoleOut::PrintPlayerTurn(int output)
         break;
     }
 }
-
-void ConsoleOut::PrintString(string output)
-{
-    cout << output << '\n';
-}
-
+void ConsoleOut::PrintString(string output) { cout << output << '\n'; }
 void ConsoleOut::PrintUpPile(vector<CardController> up_pile)
 {
     cout << "Up pile:\n";
@@ -105,7 +71,6 @@ void ConsoleOut::PrintUpPile(vector<CardController> up_pile)
     }
     cout << '\n';
 }
-
 void ConsoleOut::PrintDownPile(vector<CardController> down_pile)
 {
     cout << "Down pile:\n";
@@ -115,7 +80,6 @@ void ConsoleOut::PrintDownPile(vector<CardController> down_pile)
     }
     cout << '\n';
 }
-
 void ConsoleOut::PrintMultipleWinners(vector<PlayerController> players, int range)
 {
     cout << "There were multiple winners last round.\n";
@@ -125,18 +89,15 @@ void ConsoleOut::PrintMultipleWinners(vector<PlayerController> players, int rang
     }
     cout << " please guess a number between 1 and " << range << '\n';
 }
-
 void ConsoleOut::PrintClosestGuess(int target, PlayerController player)
 {
     cout << player.Name() << " has the closest guess to target[" << target << "]! They get to go first this round!\n";
 }
-
 void ConsoleOut::PrintDeckTotal(DeckController deckUtil)
 {
     int size = deckUtil.Deck().size();
     cout << "Total cards in deck: " << size << '\n';
 }
-
 void ConsoleOut::PrintRivalPlayers(GameController gameUtil)
 {
     if (gameUtil.PCount() == 2)
@@ -164,7 +125,6 @@ void ConsoleOut::PrintRivalPlayers(GameController gameUtil)
         cout << '\n';
     }
 }
-
 void ConsoleOut::PrintRivalsWithSpy(GameController gameUtil)
 {
     int spy_count(0);
@@ -188,7 +148,6 @@ void ConsoleOut::PrintRivalsWithSpy(GameController gameUtil)
         cout << '\n';
     }
 }
-
 void ConsoleOut::PrintPlayerHand(PlayerController PlyrCNTLR)
 {
     cout << "Player hand: \n";
