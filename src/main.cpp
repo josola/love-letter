@@ -55,12 +55,11 @@ int main()
             gameController.ClearWinner();
             gameController.ClearPlaying();
             ConsoleOut::PrintRound(gameController.Round());
-            ConsoleOut::PrintPlayerTurn(gameController.PCurrent());
+            ConsoleOut::PrintPlayerTurn(gameController.PCurrent().Value());
 
             deckController.Builder();
             deckController.Shuffle();
 
-            //discard one card face down
             downController.InsertCard(deckController.Card(0));
 
             if (gameController.PCount() == 2)
@@ -84,7 +83,8 @@ int main()
 
         while (player_turn && !game_over)
         {
-            ConsoleOut::PrintPlayerHand(gameController.Players().at(gameController.PCurrent()));
+            ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
+            ConsoleOut::PrintDrawPrompt(gameController.PCurrent().Name());
             player_turn = false;
         }
     }

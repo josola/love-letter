@@ -5,6 +5,7 @@
  */
 
 #include <iostream>
+#include <typeinfo>
 #include "console_out.h"
 
 using std::cout;
@@ -148,12 +149,13 @@ void ConsoleOut::PrintRivalsWithSpy(GameController gameUtil)
         cout << '\n';
     }
 }
-void ConsoleOut::PrintPlayerHand(PlayerController PlyrCNTLR)
+void ConsoleOut::PrintPlayerHand(vector<CardController> hand)
 {
     cout << "Player hand: \n";
-    for (CardController iCUtil : PlyrCNTLR.Hand())
+    for (CardController iCCNTLR : hand)
     {
-        cout << ' ' << iCUtil.Name();
+        cout << ' ' << iCCNTLR.Name();
     }
     cout << '\n';
 }
+void ConsoleOut::PrintDrawPrompt(const string name) { cout << name << " please draw a card.\n"; }

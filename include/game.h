@@ -31,7 +31,7 @@ public:
     const int OPCount();
     const int WinningTokenCount();
     vector<PlayerController> Players();
-    int PCurrent();
+    PlayerController PCurrent();
     int FindWinner();
 
     //setters

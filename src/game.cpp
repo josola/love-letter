@@ -19,17 +19,15 @@ const int GameInterface::Round() { return round_count; }
 const int GameInterface::OPCount() { return original_player_count; }
 const int GameInterface::WinningTokenCount() { return winning_token_count; }
 vector<PlayerController> GameInterface::Players() { return players; }
-int GameInterface::PCurrent()
+PlayerController GameInterface::PCurrent()
 {
-    int output(0);
     for (PlayerController iPUtil : players)
     {
         if (iPUtil.Current())
         {
-            output = iPUtil.Value();
+            return iPUtil;
         }
     }
-    return output;
 }
 int GameInterface::FindWinner()
 {

@@ -37,7 +37,8 @@ public:
     static void PrintDeckTotal(DeckController deckUtil);
     static void PrintRivalPlayers(GameController gameUtil);
     static void PrintRivalsWithSpy(GameController gameUtil);
-    static void PrintPlayerHand(PlayerController plyrUtl);
+    static void PrintPlayerHand(vector<CardController> hand);
+    static void PrintDrawPrompt(const string name);
 
 private:
 };
