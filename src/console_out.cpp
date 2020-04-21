@@ -32,7 +32,10 @@ void ConsoleOut::PrintInvalidInput(int output)
         cout << "Invalid input. Please enter a string of characters.\n";
         break;
     case 5:
-        cout << "Invalid input. Please enter \"draw\", \"Draw\", or \"DRAW\".\n";
+        cout << "Invalid input. Please enter 'd'\n";
+        break;
+    case 6:
+        cout << "Invalid input. Please enter a string.\n";
         break;
     default:
         cout << "Invalid input.\n";

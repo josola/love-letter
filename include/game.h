@@ -65,9 +65,9 @@ public:
     void ClearWinner();
     void ClearPlaying();
     void ProcessDraw(DeckController &deck);
-    string DrawInput();
-    bool CorrectDrawInput(string input);
-    string FixDrawInput();
+    char DrawInput();
+    bool CorrectDrawInput(char input);
+    char FixDrawInput();
 };
 
 #endif

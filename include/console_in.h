@@ -18,9 +18,9 @@ public:
     static bool CorrectIntInput(int input);
     static int FixIntInput();
     static void ClearInput();
-    static string GetStringInput();
-    static bool CorrectStringInput(string input);
-    static string FixStringInput();
+    static char GatCharInput();
+    static bool CorrectCharInput(char input);
+    static char FixCharInput();
 };
 
 #endif

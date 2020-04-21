@@ -296,40 +296,46 @@ void GameController::ClearPlaying()
 }
 void GameController::ProcessDraw(DeckController &deck)
 {
-    string input = DrawInput();
+    char input = DrawInput();
     if (!CorrectDrawInput(input))
     {
         input = FixDrawInput();
     }
     else
     {
-        PCurrent().DrawCard(deck);
+        for (PlayerController& iPUtil : players)
+        {
+            if (iPUtil.Current())
+            {
+                iPUtil.InsertCardIntoHand(deck.Card(0));
+            }
+        }
     }
 }
-string GameController::DrawInput() { return ConsoleIn::GetStringInput(); }
-bool GameController::CorrectDrawInput(string input)
+char GameController::DrawInput() { return ConsoleIn::GatCharInput(); }
+bool GameController::CorrectDrawInput(char input)
 {
-    vector<string> acceptable_input{ "draw", "Draw", "DRAW" };
-    if (any_of(acceptable_input.begin(), acceptable_input.end(), [input](string sIt) { return sIt == input; }))
+    if (input == 'd')
     {
         return true;
     }
     else
     {
-        ConsoleOut::PrintInvalidInput(0);
+        ConsoleOut::PrintInvalidInput(5);
         return false;
     }
 }
-string GameController::FixDrawInput()
+char GameController::FixDrawInput()
 {
-    string output = "";
+    ConsoleIn::ClearInput();
+    char output;
     bool correct = false;
     while (!correct)
     {
         output = DrawInput();
         if (!CorrectDrawInput(output))
         {
-            ConsoleOut::PrintInvalidInput(5);
+            ConsoleIn::ClearInput();
         }
         else
         {

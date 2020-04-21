@@ -61,21 +61,21 @@ void ConsoleIn::ClearInput()
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
-string ConsoleIn::GetStringInput()
+char ConsoleIn::GatCharInput()
 {
-    string output = "";
-    getline(cin, output);
-    if (!CorrectStringInput(output))
+    char output;
+    cin >> output;
+    if (!CorrectCharInput(output))
     {
-        output = FixStringInput();
+        output = FixCharInput();
     }
     return output;
 }
-bool ConsoleIn::CorrectStringInput(string input)
+bool ConsoleIn::CorrectCharInput(char input)
 {
     if (!cin)
     {
-        ConsoleOut::PrintInvalidInput(0);
+        ConsoleOut::PrintInvalidInput(6);
         return false;
     }
     else
@@ -83,10 +83,10 @@ bool ConsoleIn::CorrectStringInput(string input)
         return true;
     }
 }
-string ConsoleIn::FixStringInput()
+char ConsoleIn::FixCharInput()
 {
     bool correct = false;
-    string fixed = "";
+    char fixed;
     while (!correct)
     {
         ClearInput();

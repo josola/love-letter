@@ -93,6 +93,7 @@ int main()
             {
                 gameController.ProcessDraw(deckController);
             }
+            ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
             player_turn = false;
         }
     }
