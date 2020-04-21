@@ -68,16 +68,6 @@ int main()
             }
 
             gameController.DealStartingHand(deckController);
-
-            ConsoleOut::PrintDeckTotal(deckController);
-
-            if (!upController.Deck().empty())
-            {
-                ConsoleOut::PrintUpPile(upController.Deck());
-            }
-
-            ConsoleOut::PrintRivalPlayers(gameController);
-            ConsoleOut::PrintRivalsWithSpy(gameController);
             begin_round = false;
         }
 
@@ -86,6 +76,13 @@ int main()
             gameController.PCurrent().NoHandmaid();
             if (!deckController.Deck().empty())
             {
+                ConsoleOut::PrintDeckTotal(deckController);
+                if (!upController.Deck().empty())
+                {
+                    ConsoleOut::PrintUpPile(upController.Deck());
+                }
+                ConsoleOut::PrintRivalPlayers(gameController);
+                ConsoleOut::PrintRivalsWithSpy(gameController);
                 ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
                 ConsoleOut::PrintDrawPrompt(gameController.PCurrent().Name());
                 if (deckController.Deck().empty())
@@ -97,12 +94,12 @@ int main()
                     gameController.ProcessDraw(deckController);
                 }
                 ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
-                ConsoleOut::PrintCardChoicePrompt(gameController.PCurrent());
             }
             else
             {
                 return;
             }
+            ConsoleOut::PrintCardChoicePrompt(gameController.PCurrent());
             player_turn = false;
         }
     }
