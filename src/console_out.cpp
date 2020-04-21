@@ -168,3 +168,4 @@ void ConsoleOut::PrintPlayerHand(vector<CardController> hand)
     cout << '\n';
 }
 void ConsoleOut::PrintDrawPrompt(const string name) { cout << name << " please draw a card.\n"; }
+void ConsoleOut::PrintCardChoicePrompt(PlayerController playerUtil) { cout << playerUtil.Name() << " please choose a card to play: \n"; }

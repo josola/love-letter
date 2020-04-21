@@ -94,6 +94,7 @@ int main()
                 gameController.ProcessDraw(deckController);
             }
             ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
+            ConsoleOut::PrintCardChoicePrompt(gameController.PCurrent());
             player_turn = false;
         }
     }
