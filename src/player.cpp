@@ -27,6 +27,8 @@ void PlayerInterface::NotWinner() { winner = false; }
 void PlayerInterface::SetGuess(int output) { guess = output; }
 void PlayerInterface::IsPlaying() { playing = true; }
 void PlayerInterface::NotPlaying() { playing = false; }
+void PlayerInterface::HasHandmaid() { handmaid = true; }
+void PlayerInterface::NoHandmaid() { handmaid = false; }
 
 //actions
 CardController PlayerController::DrawCard(DeckController &deck)

@@ -83,6 +83,7 @@ int main()
 
         while (player_turn && !game_over)
         {
+            gameController.PCurrent().NoHandmaid();
             ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
             ConsoleOut::PrintDrawPrompt(gameController.PCurrent().Name());
             if (deckController.Deck().empty())

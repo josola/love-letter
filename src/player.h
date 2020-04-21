@@ -27,6 +27,7 @@ protected:
     vector<CardController> hand;
     bool playing = true;
     int token_count = 0;
+    bool handmaid = false;
 };
 
 class PlayerInterface : public PlayerModel
@@ -55,6 +56,8 @@ public:
     void SetGuess(int output);
     void IsPlaying();
     void NotPlaying();
+    void HasHandmaid();
+    void NoHandmaid();
 };
 
 class PlayerController : public PlayerInterface
