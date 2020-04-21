@@ -33,7 +33,7 @@ bool ConsoleIn::CorrectIntInput(int input)
 {
     if (!cin)
     {
-        ConsoleOut::PrintInvalidInput(4);
+        ConsoleOut::PrintInvalidInput(0);
         return false;
     }
     else

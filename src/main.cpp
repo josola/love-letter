@@ -97,9 +97,10 @@ int main()
             }
             else
             {
-                return;
+                break;
             }
             ConsoleOut::PrintCardChoicePrompt(gameController.PCurrent());
+            int card_choice = gameController.ProcessCardChoice();
             player_turn = false;
         }
     }

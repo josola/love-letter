@@ -37,6 +37,12 @@ void ConsoleOut::PrintInvalidInput(int output)
     case 6:
         cout << "Invalid input. Please enter a string.\n";
         break;
+    case 7:
+        cout << "Invalid input. Please input a number between 0 and 9:\n";
+        break;
+    case 8:
+        cout << "Invalid input. Card not found in hand. Please input a card number that is in your hand:\n";
+        break;
     default:
         cout << "Invalid input.\n";
         break;

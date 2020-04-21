@@ -68,6 +68,9 @@ public:
     char DrawInput();
     bool CorrectDrawInput(char input);
     char FixDrawInput();
+    int ProcessCardChoice();
+    bool CorrectChoiceInput(int input);
+    int FixChoiceInput();
 };
 
 #endif

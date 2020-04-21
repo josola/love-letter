@@ -12,11 +12,11 @@
 #include "console_in.h"
 #include "console_out.h"
 
-using std::find;
-using std::distance;
 using std::any_of;
+using std::distance;
+using std::find;
 
-const int GameInterface::PCount(){ return player_count; }
+const int GameInterface::PCount() { return player_count; }
 const int GameInterface::Round() { return round_count; }
 const int GameInterface::OPCount() { return original_player_count; }
 const int GameInterface::WinningTokenCount() { return winning_token_count; }
@@ -303,7 +303,7 @@ void GameController::ProcessDraw(DeckController &deck)
     }
     else
     {
-        for (PlayerController& iPUtil : players)
+        for (PlayerController &iPUtil : players)
         {
             if (iPUtil.Current())
             {
@@ -340,6 +340,65 @@ char GameController::FixDrawInput()
         else
         {
             correct = true;
+        }
+    }
+    return output;
+}
+int GameController::ProcessCardChoice()
+{
+    int choice = ConsoleIn::GetIntInput();
+    if (!CorrectChoiceInput(choice))
+    {
+        choice = FixChoiceInput();
+    }
+    else
+    {
+        for (auto iCUtil : PCurrent().Hand())
+        {
+            bool in_hand = false;
+            while (!in_hand)
+            {
+                if (iCUtil.Value() == choice)
+                {
+                    in_hand = true;
+                }
+                else
+                {
+                    ConsoleOut::PrintInvalidInput(8);
+                    choice = FixChoiceInput();
+                }
+            }
+        }
+    }
+    return choice;
+}
+bool GameController::CorrectChoiceInput(int input)
+{
+    if (input < 0 && input > 9)
+    {
+        ConsoleOut::PrintInvalidInput(7);
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+int GameController::FixChoiceInput()
+{
+    int output = 0;
+    bool correct = false;
+    while (!correct)
+    {
+        ConsoleIn::ClearInput();
+        output = ConsoleIn::GetIntInput();
+        if (output >= 0 || output <= 9)
+        {
+            correct = true;
+        }
+        else
+        {
+            ConsoleOut::PrintInvalidInput(8);
         }
     }
     return output;
