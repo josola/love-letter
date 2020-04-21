@@ -84,18 +84,25 @@ int main()
         while (player_turn && !game_over)
         {
             gameController.PCurrent().NoHandmaid();
-            ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
-            ConsoleOut::PrintDrawPrompt(gameController.PCurrent().Name());
-            if (deckController.Deck().empty())
+            if (!deckController.Deck().empty())
             {
-                gameController.ProcessDraw(downController);
+                ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
+                ConsoleOut::PrintDrawPrompt(gameController.PCurrent().Name());
+                if (deckController.Deck().empty())
+                {
+                    gameController.ProcessDraw(downController);
+                }
+                else
+                {
+                    gameController.ProcessDraw(deckController);
+                }
+                ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
+                ConsoleOut::PrintCardChoicePrompt(gameController.PCurrent());
             }
             else
             {
-                gameController.ProcessDraw(deckController);
+                return;
             }
-            ConsoleOut::PrintPlayerHand(gameController.PCurrent().Hand());
-            ConsoleOut::PrintCardChoicePrompt(gameController.PCurrent());
             player_turn = false;
         }
     }
