@@ -273,9 +273,9 @@ bool GameController::DuplicateGuess(vector<int> guess_container, int guess)
     }
     return false;
 }
-void GameController::DealStartingHand(DeckController &deck)
+void GameController::DealStartingHand(DeckController& deck)
 {
-    for (PlayerController &iPUtl : players)
+    for (PlayerController& iPUtl : players)
     {
         iPUtl.InsertCardIntoHand(deck.Card(0));
     }
@@ -294,7 +294,7 @@ void GameController::ClearPlaying()
         iPCNTLR.IsPlaying();
     }
 }
-void GameController::ProcessDraw(DeckController &deck)
+void GameController::ProcessDraw(DeckController& deck)
 {
     char input = DrawInput();
     if (!CorrectDrawInput(input))
@@ -303,7 +303,7 @@ void GameController::ProcessDraw(DeckController &deck)
     }
     else
     {
-        for (PlayerController &iPUtil : players)
+        for (PlayerController& iPUtil : players)
         {
             if (iPUtil.Current())
             {
@@ -351,37 +351,39 @@ int GameController::ProcessCardChoice()
     {
         choice = FixChoiceInput();
     }
-    else
+    bool in_hand = false;
+    while (!in_hand)
     {
-        for (auto iCUtil : PCurrent().Hand())
+        vector<CardController> hand = PCurrent().Hand();
+        if (any_of(hand.begin(), hand.end(), [choice](CardController iCUtil){ return iCUtil.Value() == choice; }))
         {
-            bool in_hand = false;
-            while (!in_hand)
+            in_hand = true;
+        }
+        else
+        {
+            if (choice >= 0 && choice <= 9)
             {
-                if (iCUtil.Value() == choice)
-                {
-                    in_hand = true;
-                }
-                else
-                {
-                    ConsoleOut::PrintInvalidInput(8);
-                    choice = FixChoiceInput();
-                }
+                ConsoleOut::PrintInvalidInput(8);
             }
+            else
+            {
+                ConsoleOut::PrintInvalidInput(7);
+            }
+            choice = FixChoiceInput();
         }
     }
     return choice;
 }
 bool GameController::CorrectChoiceInput(int input)
 {
-    if (input < 0 && input > 9)
+    if (input >= 0 && input <= 9)
     {
-        ConsoleOut::PrintInvalidInput(7);
-        return false;
+        return true;
     }
     else
     {
-        return true;
+        ConsoleOut::PrintInvalidInput(7);
+        return false;
     }
 }
 int GameController::FixChoiceInput()
@@ -390,15 +392,14 @@ int GameController::FixChoiceInput()
     bool correct = false;
     while (!correct)
     {
-        ConsoleIn::ClearInput();
         output = ConsoleIn::GetIntInput();
-        if (output >= 0 || output <= 9)
+        if (output >= 0 && output <= 9)
         {
             correct = true;
         }
         else
         {
-            ConsoleOut::PrintInvalidInput(8);
+            ConsoleOut::PrintInvalidInput(7);
         }
     }
     return output;
