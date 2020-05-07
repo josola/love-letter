@@ -1,3 +1,3 @@
-# Love Letter
-<p>Program that lets you play the popular card game Love Letter against AI opponent(s).</p>
+# Missive
+<p>Program that lets you play a minimal console version of the popular card game Love Letter.</p>
 Written by Jordan Sola 2019-2020
