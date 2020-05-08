@@ -23,13 +23,15 @@ const int GameInterface::WinningTokenCount() { return winning_token_count; }
 vector<PlayerController> GameInterface::Players() { return players; }
 PlayerController GameInterface::PCurrent()
 {
-    for (PlayerController iPUtil : players)
+    PlayerController PlayerUtl;
+    for (PlayerController &iPUtil : players)
     {
         if (iPUtil.Current())
         {
-            return iPUtil;
+            PlayerUtl = iPUtil;
         }
     }
+    return PlayerUtl;
 }
 int GameInterface::FindWinner()
 {
