@@ -2,32 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/love-letter.vcxproj.user
-/love-letter.vcxproj
-/love-letter.sln
-/.vs/love-letter/v16
-/x64/Debug
-.DS_Store
-reference/love_letter.cpp
-reference/player.h
-documentation.odt
-.vscode/settings.json
-a.out
 .vscode/launch.json
 .vscode/tasks.json
-love_letter.dSYM/Contents/Info.plist
-love_letter.dSYM/Contents/Resources/DWARF/love_letter
-love_letter
-love_letter.exe
-/love_letter.vcxproj.user
-/love_letter.vcxproj.filters
-/love_letter.vcxproj
-/love_letter.sln
-/Debug
-bin/love_letter.dSYM/Contents/Info.plist
-.vscode/c_cpp_properties.json
 /.vs
-/love+letter.vcxproj.user
-/love+letter.vcxproj.filters
-/love+letter.vcxproj
-/love+letter.sln
+bin/missive
