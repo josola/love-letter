@@ -6,3 +6,8 @@
 .vscode/tasks.json
 /.vs
 bin/missive
+/x64/Debug
+/missive.vcxproj.user
+/missive.vcxproj.filters
+/missive.vcxproj
+/missive.sln
