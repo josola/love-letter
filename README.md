@@ -8,7 +8,9 @@ Branch one of this repository contains the intial program design and is a 99% wo
 
 Branch two contains the most current version of the Missive game. Written in object oriented style, with clean and easy to read design paradigms. This branch is currently in development and does not yet represent the finished game, for the finished game you can compile and run branch one.
 
-Developed using Visual Studio, Visual Studio Code, and XCode on the Mac, Windows, and Ubuntu (linux) platforms. The procedural version "branch 1" was designed primarly to run on Windows based operating systems, as it has elements that clear the terminal screen between player turns that work on windows.
+Developed using Visual Studio, Visual Studio Code, and XCode on the Mac, Windows, and Ubuntu (linux) platforms. Here is a link to a short demonstration:
+
+https://youtu.be/ybKOK7LfGsw
 
 All instructions on how to play the game are given to players as they play the game, like a texted based adventure game.
 
