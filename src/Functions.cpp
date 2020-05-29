@@ -1,8 +1,3 @@
-/*
-Jordan Sola 2019
-Functions used in Main.cpp
-*/
-
 #include "Functions.h"
 #include "SuitorClass.h"
 #include "Resources.h"

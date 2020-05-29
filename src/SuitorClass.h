@@ -1,3 +1,9 @@
+/*
+ * Suitor class, the suitor is another name for the player.
+ * Written by Jordan Sola 2019 - 2020
+ * This software uses the MIT license.
+ */
+
 #pragma once
 
 #include "Resources.h"

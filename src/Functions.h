@@ -1,7 +1,8 @@
 /*
-Jordan Sola 2019
-Function delcarations that are used in Functions.cpp
-*/
+ * Functions that determine gameplay capabilities.
+ * Written by Jordan Sola 2019 2020
+ * This software uses the MIT license.
+ */
 
 #pragma once
 

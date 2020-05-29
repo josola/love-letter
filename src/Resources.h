@@ -1,7 +1,8 @@
 /*
-Jordan Sola 2019
-Variables and objects that are used in Functions.cpp
-*/
+ * Information used to determine game state.
+ * Written by Jordan Sola 2019 - 2020
+ * This softwre uses the MIT license.
+ */
 
 #pragma once
 
