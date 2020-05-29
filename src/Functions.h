@@ -4,7 +4,8 @@
  * This software uses the MIT license.
  */
 
-#pragma once
+#ifndef FUNCTIONS_h
+#define FUNCTIONS_h
 
 //Game functions.
 void
@@ -63,3 +64,5 @@ King(),
 Princess();
 
 int HandPosition(int suitor, int pos);
+
+#endif

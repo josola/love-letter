@@ -4,7 +4,8 @@
  * This software uses the MIT license.
  */
 
-#pragma once
+#ifndef SUITOR_CLASS_h
+#define SUITOR_CLASS_h
 
 #include "Resources.h"
 
@@ -49,3 +50,5 @@ suitor4,
 suitor5,
 suitor6
 };
+
+#endif

@@ -4,7 +4,8 @@
  * This softwre uses the MIT license.
  */
 
-#pragma once
+#ifndef RESOURCES_h
+#define RESOURCES_h
 
 #include <iostream>
 #include <vector>
@@ -132,3 +133,5 @@ std::vector<int> playingDeck
 	countess,
 	princess
 };
+
+#endif
