@@ -1,5 +1,6 @@
 # Missive
 ### A text based card game inspired by the wildly popular card game Love Letter.
+**CURRENTLY UNDER DEVELOPMENT**
 
 Missive is written entirely in the C++ programming language. The developer's intention for this project was to learn how to write clean, easy to read, and reusable object oriented code using C++, while creating a usable product in the process. This intention is currently in development.
 
