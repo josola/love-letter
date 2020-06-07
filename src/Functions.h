@@ -22,7 +22,6 @@ void printHand(int suitor);
 void ClearInput();
 bool ProperCardInput();
 bool ProperSuitorInput();
-bool ProperCardInput();
 bool ProperSuitorCount();
 
 //to go into a suitor header
@@ -41,7 +40,6 @@ int HandPosition(int suitor, int pos);
 void InitialSetup();
 void SuitorTurn();
 void EndRound();
-void PlayCard();
 void PlayGame();
 void SetWinningTokenCount();
 void BeginRound();
@@ -58,7 +56,7 @@ void Baron();
 void Handmaid();
 void Prince();
 void Chancellor();
-void King();
+void King(int agressor, int victim);
 void Princess();
 
 #endif
