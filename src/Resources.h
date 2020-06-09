@@ -17,18 +17,17 @@
 #include <thread>
 #include <chrono>
 
-int
-activeSuitorCount,
-originalSuitorCount,
-currentSuitor,
-tokenCountToWin,
-cardNum,
-roundCount = 1,
-tempVictor,
-i,
-iLength,
-cardPosition,
-humanSuitor;
+int activeSuitorCount;
+int originalSuitorCount;
+int currentSuitor;
+int tokenCountToWin;
+int cardNum;
+int roundCount = 1;
+int tempVictor;
+int i;
+int iLength;
+int cardPosition;
+int humanSuitor;
 
 static const int
 spy = 0,
