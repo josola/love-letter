@@ -1,0 +1,39 @@
+NSPECTING OBJECTS
+
+COMMANDS:
+
+INSPECT DECK
+--
+Player one. what would you like to do?
+
+Choice: inspect, deck
+
+//print deck inspection//
+--
+
+INSPECT DISCARD PILE
+--
+Player one. what would you like to do?
+
+Choice: inspect, discard
+
+//print discard inspection//
+--
+
+INSPECT CARD
+--
+Player one. What would you like to do?
+
+Choice: inspect, prince
+
+//print prince inspection//
+--
+
+INSPECT REFERENCE
+--
+Player one. What would you like to do?
+
+Choice: inspect, reference
+
+//print reference inspection//
+--

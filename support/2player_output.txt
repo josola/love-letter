@@ -1,0 +1,81 @@
+This file represents the output for two player gameplay:
+
+SCENARIO 1:
+BASE EXAMPLE
+
+Enter number of players: 2
+
+Two players will compete for the
+heart of the princess!
+
+Let us determine which player will make
+their first attempt to deliver their
+missive to the princess.
+
+Who most recently wrote a letter? Emails count!
+
+Enter starting player number: 1
+
+Player one will go first. May lady luck
+shine on both of your hearts!
+
+Player one. Please take a reference card for yourself
+and please give a reference card to your opponent.
+
+Enter 'd' to distribute reference cards: d
+
+Player one. Shuffle the deck, if you please.
+
+Enter 's' to shuffle deck: s
+
+Player one shuffles the deck just enough,
+then places the deck face down on the table
+within reach of both players.
+
+Player one. Please take the top card of the
+deck and place it face down next to the deck.
+
+Enter 'r' to remove the top card of the deck: r
+
+Player one. Please take the top three cards
+from the deck and place them face up on the
+opposite side of the down pile.
+
+Enter 'r' to remove the top three cards: 'r
+
+Thank you Player one. Let us take a look at
+what the honorable Player one has removed for us:
+
+The Princess...
+The King...
+A Guard...
+
+That is indeed unfortunate for the two of you.
+
+Player one. Please deal one card to your opponent.
+Then take one card from the top of the deck.
+
+Enter 'd' to deal cards: d
+
+Excellent! Let us begin!
+
+Player one. Enter 'd' to draw a card: d
+
+Player one draws one card to their hand.
+
+Player one hand:
+Princess, Guard
+
+Player one. What would you like to do?
+
+Choice: inspect, princess
+
+9-Princess (x1)
+If you either play or discard the Princess
+for any reason, you are immediately out of the round.
+
+Choice: play, guard
+
+Player one plays the guard!
+
+Player two, it is your turn.
