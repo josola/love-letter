@@ -1,0 +1,21 @@
+OUTPUT WHEN INSPECTING YOUR OWN HAND
+
+--
+Number of cards in your hand: n
+
+Name of first card, etc.
+--
+
+n = total number of cards in current hand.
+
+Names are formatted as follows:
+Spy
+Guard
+Priest
+Baron
+Handmaid
+Prince
+Chancellor
+King
+Countess
+Princess

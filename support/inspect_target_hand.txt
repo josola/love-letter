@@ -1,0 +1,13 @@
+OUTPUT WHEN INSPECTING A TARGET HAND
+
+This is not the same as the Priest action.
+The Priest action will use the same output
+as the INSPECTING CURRENT HAND output.
+
+--
+Number of cards in hand: n
+
+Hey! No peeking!
+--
+
+n = total number of cards within hand.
