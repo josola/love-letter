@@ -1,0 +1,67 @@
+List of objects needed for gameplay:
+
+1. player
+2. player hand
+3. cards
+4. deck
+5. up pile
+6. discard pile
+7. tokens
+8. pile of tokens
+9. reference card
+10. bag to hold game pieces
+
+The player hand, discard pile, down pile, and deck contain cards:
+- the deck contains up to 21 cards (its count is lowered as cards are drawn from it) (can have cards removed and then inserted at a determined position)
+- the cards in the deck are never held in sequential order, they must be randomly shuffled at the beginning of the game and when instructed to do so.
+- the player may shuffle the deck whenever they are requested to do so
+- the down pile starts without any cards (can have cards inserted within) (can have cards removed but not inserted after its inital insertion)
+- The up pile starts without any cards (can have cards inserted within) (cannot have cards removed after they are inserted)
+
+Each deck needs its game state tracked:
+- the deck must keep track of how many cards it has at any time
+- the down pile must keep track of how many cards it has at any time
+- the up pile must keep track of hor many cards it has at any time
+- the deck must know when it is empty (has no cards)
+
+The player can contain tokens, a reference card, and a player hand. The player does not start with tokens or a hand"
+- the player hand can hold a maximum of four cards
+- the player hand must end a turn with no more, and no less, than two cards (unless the deck is empty and the player cannot draw another card to their hand)
+
+The player can perform multiple actions per game:
+- draw a card from either the main deck or the down pile
+- discard a card from their hand to the discard pile
+- choose a card within their hand to play
+- play a card from their hand
+- take tokens from the token pile
+- put tokens back into the token pile
+- read the power of a card
+- read the name of a card
+- read the description of a card
+- target another player
+- beome the target of another player
+- read their reference card
+- determine how many tokens they have
+- determine how many tokens their opponents have
+- guess how many of a certain card are in an opponents hand
+- guess how many of a certain card are in the deck, or the down pile
+- determine if an opponent has handmaid protection
+- determine who has a spy bonus
+- be able to decide between playing one card or another
+
+Each player needs their game state tracked:
+- handmaid protection
+- spy bonus
+- number of tokens
+- is playing or not
+- is current player
+- is agressor
+- is target
+- is winner
+- was winner of previous round
+- was the most recent to write a letter
+- number of cards in their hand
+
+There are multiple aspects of the overall game state that need to be tracked:
+- the number of players must be determined (two player games are different from games with more than two players)
+- number of tokens needed to win the game
