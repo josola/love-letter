@@ -34,11 +34,6 @@
 # Directories
 /.vscode
 /bin
-/vs_love_letter/.vs/vs_love_letter/v16
-/vs_love_letter/vs_love_letter.vcxproj.user
-/vs_love_letter/vs_love_letter.vcxproj.filters
-/vs_love_letter/vs_love_letter.vcxproj
-/vs_love_letter/vs_love_letter.sln
 /.vs
 /vs_love_letter.vcxproj.user
 /vs_love_letter.vcxproj.filters
