@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include <streambuf>
+#include <sstream>
 
 using std::ifstream;
 using std::string;

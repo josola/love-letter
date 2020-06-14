@@ -5,9 +5,6 @@
  */
 
 #include "card.h"
-#include <streambuf>
-
-using std::streambuf;
 
 Card::Card(const string name, const int value) : name_(name), value_(value){};
 const string Card::GetName()
