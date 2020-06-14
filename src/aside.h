@@ -15,7 +15,7 @@ class Aside : public Deck
 {
 public:
 
-private:
+protected:
     
 };
 

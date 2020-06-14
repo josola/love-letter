@@ -7,4 +7,12 @@
 #ifndef TOKEN_PILE_H
 #define TOKEN_PILE_H
 
+class TokenPile
+{
+public:
+
+protected:
+
+};
+
 #endif

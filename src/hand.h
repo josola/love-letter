@@ -16,7 +16,7 @@ class Hand
 {
 public:
 
-private:
+protected:
     vector<Card> hand;
 
 };

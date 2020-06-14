@@ -24,7 +24,7 @@ public:
     const string GetName();
     const int GetValue();
 
-private:
+protected:
     string name_ = "";
     int value_ = 0;
 

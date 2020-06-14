@@ -14,7 +14,7 @@ class Discard : public Deck
 public:
     vector<Card> GetDeck();
 
-private:
+protected:
 
 };
 
