@@ -8,12 +8,19 @@
 #define DECK_H
 
 #include "card.h"
+#include <vector>
+
+using std::vector;
 
 class Deck
 {
 public:
+    void Clear();
+    const int Size();
+    void Insert(Card card);
 
 private:
+    vector<Card> pile_;
 
 };
 

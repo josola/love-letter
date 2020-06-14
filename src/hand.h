@@ -7,4 +7,18 @@
 #ifndef NANO_H
 #define NANO_H
 
+#include "card.h"
+#include <vector>
+
+using std::vector;
+
+class Hand
+{
+public:
+
+private:
+    vector<Card> hand;
+
+};
+
 #endif
