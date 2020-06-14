@@ -4,7 +4,7 @@
  * (C) Jordan Sola 2020 - MIT License
  */
 
-int Main()
+int main()
 {
     return 0;
 }
