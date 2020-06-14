@@ -7,4 +7,15 @@
 #ifndef DISCARD_H
 #define DISCARD_H
 
+#include "deck.h"
+
+class Discard : public Deck
+{
+public:
+    vector<Card> GetDeck();
+
+private:
+
+};
+
 #endif

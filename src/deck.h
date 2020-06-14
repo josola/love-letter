@@ -19,7 +19,7 @@ public:
     const int Size();
     void Insert(Card card);
 
-private:
+protected:
     vector<Card> pile_;
 
 };
