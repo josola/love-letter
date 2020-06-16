@@ -10,8 +10,10 @@
 class Token
 {
 public:
+	const int GetValue() const;
 
 protected:
+	const int value_ = 1;
 
 };
 

@@ -6,12 +6,18 @@
 
 #include "card.h"
 
-Card::Card(const string name, const int value) : name_(name), value_(value){};
-const string Card::GetName()
+
+
+Card::Card(const string name, const string description) : name_(name), description_(description)
+{
+}
+
+const string Card::GetName() const
 {
     return name_;
 }
-const int Card::GetValue()
+
+const string Card::GetDescription() const
 {
-    return value_;
+    return description_;
 }

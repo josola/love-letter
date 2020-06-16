@@ -7,7 +7,10 @@
 #ifndef TOKEN_PILE_H
 #define TOKEN_PILE_H
 
-class TokenPile
+#include "token.h"
+#include "pile.h"
+
+class TokenPile : public Pile<Token>
 {
 public:
 

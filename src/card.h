@@ -9,24 +9,20 @@
 
 #include <string>
 #include <vector>
-#include <fstream>
-#include <sstream>
 
-using std::ifstream;
 using std::string;
-using std::stringstream;
 using std::vector;
 
 class Card
 {
 public:
-    Card(const string name, const int value);
-    const string GetName();
-    const int GetValue();
+    Card(const string name = "", const string description = "");
+    const string GetName() const;
+    const string GetDescription() const;
 
 protected:
     string name_ = "";
-    int value_ = 0;
+    string description_;
 
 };
 

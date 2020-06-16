@@ -7,9 +7,12 @@
 #ifndef REFERENCE_H
 #define REFERENCE_H
 
-class Reference
+#include "card.h"
+
+class Reference : public Card
 {
 public:
+	Reference(const string description);
 
 protected:
 

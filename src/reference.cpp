@@ -5,3 +5,5 @@
  */
 
 #include "reference.h"
+
+Reference::Reference(const string description) : Card{ "Reference", description } {};
