@@ -19,7 +19,7 @@ T Pile<T>::Remove(T obj)
 {
 	if (typeid(obj) == typeid(Card))
 	{
-		vector<T>::iterator it = find(pile_.begin(), pile_.end(), [obj](T& i) { return i == obj; });
+		typename vector<T>::iterator it = find(pile_.begin(), pile_.end(), [obj](T& i) { return i == obj; });
 		if (it != pile_.end())
 		{
 			int index = distance(pile_.begin(), it);
