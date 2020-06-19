@@ -1,0 +1,135 @@
+This file presents general output.
+
+This file is structured as follows:
+--
+First there will be a number followed by a colon.
+This marks the line number in the output window.
+
+Next will be a brief description, if needed,  of what is happening
+in the output line. This description will be below the output line.
+--
+
+--1: Enter number of players: N
+
+DESCRIPTION:
+'N' represents an integer input. This integer
+must not be larger that 9 and must not be smaller than 2.
+
+ERROR HANDLING:
+--1a: Invalid input!
+--1b:->1:
+
+--2: N players will compete for the
+--2a: heart of the princess!
+
+DESCRIPTION:
+'N' prints the total number of players
+based on input from line 1.
+
+--3: Let us determine which player will make
+--3a: their first attempt to deliver their
+missive to the princess.
+
+--4: Who most recently wrote a letter? Emails count!
+
+--5: Enter starting player number: N
+
+DESCRIPTION:
+Here the player who meets line 4 predicate will
+input their number 'n'. 'n' must not be any
+higher than 9 and must not be any
+lower than 1.
+
+ERROR HANDLING:
+--5a: Invalid input!
+--5b:->5:
+
+--6: PLAYER[N] will go first.
+--6a: May lady luck shine on both of your hearts!
+
+DESCRIPTION:
+'N' is the number of the first player. This should be
+equal to the number input in line 5, and is protected
+from error by line 5 error handling.
+
+--7: PLAYER[N]. Please take a reference card for yourself
+--7a: and please give a reference card to your opponent.
+
+DESCRIPTION:
+'N' is the number of the first player from line 6.
+
+--8: Enter 'd' to distribute reference cards: CHAR
+
+DESCRIPTION:
+CHAR is to be a character input and must equal 'd'.
+
+ERROR HANDLING:
+--8a: Invalid input!
+--8b:->8:
+If a player enters anything that does not either equal a character
+or narrows down to a character, eg. 145 for 'd', then an error prompt
+must be given, input must be cleared, then new input must be taken.
+
+--9: Player one. Shuffle the deck, if you please.
+
+--10: Enter 's' to shuffle deck: CHAR
+
+DESCRIPTION:
+Player one shuffles the deck just enough,
+then places the deck face down on the table
+within reach of both players.
+
+ERROR HANDLING:
+--10a: Invalid input!
+--10:b->10:
+If a player enters anything other than a character an
+error prompt must be given, the input stream must
+be cleared and the input must be taken again.
+
+Player one. Please take the top card of the
+deck and place it face down next to the deck.
+
+Enter 'r' to remove the top card of the deck: r
+
+Player one. Please take the top three cards
+from the deck and place them face up on the
+opposite side of the down pile.
+
+Enter 'r' to remove the top three cards: 'r
+
+Thank you Player one. Let us take a look at
+what the honorable Player one has removed for us:
+
+The Princess...
+The King...
+A Guard...
+
+That is indeed unfortunate for the two of you.
+
+Player one. Please deal one card to your opponent.
+Then take one card from the top of the deck.
+
+Enter 'd' to deal cards: d
+
+Excellent! Let us begin!
+
+Player one. Enter 'd' to draw a card: d
+
+Player one draws one card to their hand.
+
+Player one hand:
+Princess, Guard
+
+Player one. What would you like to do?
+
+Choice: inspect, princess
+
+9-Princess (x1)
+If you either play or discard the Princess
+for any reason, you are immediately out of the round.
+
+Choice: play, guard
+
+Player one plays the guard!
+
+Player two, it is your turn.
