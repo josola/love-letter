@@ -1,7 +1,0 @@
-OUTPUT WHEN INSPECTING THE DECK
-
---
-Number of cards in deck: n
---
-
-n = total number of cards in deck

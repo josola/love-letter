@@ -6,4 +6,4 @@
 
 #include "reference.h"
 
-Reference::Reference(const string description) : Card{ "Reference", description } {};
+Reference::Reference(const string description) : Card{ "Reference", -1, description} {};
