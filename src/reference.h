@@ -15,7 +15,6 @@ public:
 	Reference(const string description);
 
 protected:
-
 };
 
 #endif

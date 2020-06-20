@@ -8,11 +8,11 @@
 
 using std::exception;
 
-Player::Player(string name, int value, Reference &reference)
+Player::Player(const string name, const int value, const Reference &reference)
 	: name_(name), value_(value), reference_(reference){};
 
 template <typename T>
-void Player::Draw(Pile<T> &obj)
+void Player::Draw(const Pile<T> &obj)
 {
 	if (typeid(obj) == typeid(Card))
 	{
