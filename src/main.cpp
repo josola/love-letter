@@ -6,27 +6,42 @@
 
 #include "card.h"
 #include <iostream>
+#include <limits>
 
 using std::cin;
 using std::cout;
 using std::endl;
+using std::exception;
+using std::numeric_limits;
+using std::streamsize;
 
 int main()
 {
-    cout << "Enter number of players: ";
-    int player_count = 0;
-    while (player_count < 2 || player_count > 6)
+    bool game_over = false;
+    while (!game_over)
     {
-        cin >> player_count;
-        if (player_count < 2 || player_count > 6)
+        bool setup = true;
+        while (setup)
         {
-            cout << "Invalid input!" << endl;
-            cin.clear();
+            unsigned short int player_count = 0;
+            while (player_count !(>=)2 && player_count !(<=)6)
+            {
+                cout << "Enter number of players: ";
+                cin >> player_count;
+                if (player_count >= 2 && player_count <= 6 && cin)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << "Invalid input!" << endl;
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                }
+            }
+            !setup;
         }
-        else
-        {
-            break;
-        }
+        game_over;
     }
     return 0;
 }
