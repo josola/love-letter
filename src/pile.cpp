@@ -9,17 +9,17 @@
 #include <algorithm>
 #include <iterator>
 
-using std::find;
-using std::iterator;
 using std::distance;
 using std::exception;
+using std::find;
+using std::iterator;
 
 template <class T>
 T Pile<T>::Remove(T obj)
 {
 	if (typeid(obj) == typeid(Card))
 	{
-		vector<T>::iterator it = find(pile_.begin(), pile_.end(), [obj](T& i) { return i == obj; });
+		typename vector<T>::iterator it = find(pile_.begin(), pile_.end(), [obj](T &i) { return i == obj; });
 		if (it != pile_.end())
 		{
 			int index = distance(pile_.begin(), it);
@@ -65,7 +65,7 @@ void Pile<T>::Clear()
 }
 
 template <class T>
-void Pile<T>::InsertBottom(T& obj)
+void Pile<T>::InsertBottom(T &obj)
 {
 	pile_.push_back(obj);
 }

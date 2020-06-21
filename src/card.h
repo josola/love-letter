@@ -16,13 +16,15 @@ using std::vector;
 class Card
 {
 public:
-    Card(const string name = "", const string description = "");
+    Card(const string name = "", const int value = 0, const string description = "");
     const string GetName() const;
     const string GetDescription() const;
+    const int GetValue() const;
 
 protected:
     string name_ = "";
     string description_;
+    int value_ = 0;
 
 };
 

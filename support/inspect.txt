@@ -1,0 +1,183 @@
+This file explains the inspect mechanic.
+
+This document is structured as follows:
+
+- Overview of inspectable objects.
+- Input structure for inspect.
+- Output structure of inspect.
+- Input structure for card inspect.
+- Output structure for card inspect.
+
+-- THINGS THAT CAN BE INSPECTED --
+
+- deck
+- discard pile
+- aside pile
+- hand
+- community token pile
+- individual token pile
+- target player
+- card
+
+-- INPUT FOR GENERAL INSPECT --
+
+Choice: inspect, target
+
+TARGETS//
+deck
+discard pile
+aside pile
+hand
+token pile
+my tokens
+PLAYER[#]
+
+-- OUTPUT FOR GENERAL INSPECT --
+
+DECK
+Print total number of cards in deck.
+--
+EMPTY//
+Deck: EMPTY
+
+NOT EMPTY//
+Deck: 21
+--
+
+DISCARD PILE
+Print total number of cards in discard pile.
+--
+NO CARDS//
+Discard Pile: EMPTY
+
+ONE CARD//
+Discard Pile: Guard
+
+MUTLIPLE CARDS//
+Discard Pile:
+Guard, Prince, Chancellor,
+King, Guard
+--
+
+ASIDE PILE
+Print total number of cards in aside pile.
+--
+Aside Pile: 1
+--
+
+HAND
+Print number of cards in hand + card names within hand.
+--
+NO CARDS//
+Hand: EMPTY
+
+SINGLE CARD//
+Hand: Princess
+
+MULTIPLE CARDS//
+Hand: Princess, Prince, King
+--
+
+COMMUNITY TOKEN PILE
+Print total number of tokens available for players to acquire.
+--
+Available Tokens: 10
+--
+
+INDIVIDUAL TOKEN PILE
+Print total number of tokens in any player's token pile.
+--
+Tokens: 0
+--
+
+PLAYER[#]
+Prints information about target player. [#] should be replace with player number.
+--
+PLAYER PLAYING//
+PLAYER1:
+Spy: No
+Handmaid: Yes
+Hand: 1
+Tokens: 3
+
+PLAYER NOT PLAYING//
+PLAYER1 is out...
+--
+
+-- INPUT FOR CARD INSPECT --
+
+Choice: inspect, target
+
+TARGETS//
+Spy
+Guard
+Priest
+Baron
+Handmaid
+Prince
+Chancellor
+King
+Countess
+Princess
+
+-- OUTPUT FOR CARD INSPECT --
+
+SPY
+--
+0-Spy(x2)
+At the end of the round, if you are the only player in the round who played or discarded a Spy, gain 1 favor token.
+--
+
+GUARD
+--
+1-Guard(x6)
+Choose another player and name a non-Guard card. If that player has that card, they are out of the round.
+--
+
+PRIEST
+--
+2-Priest(x2)
+Choose and look at another player's hand.
+--
+
+BARON
+--
+3-Baron(x2)
+Choose and secretly compare hands with another player. whoever has the lower value is out of the round.
+--
+
+HANDMAID
+--
+4-Handmaid(x2)
+Until your next turn, other players cannot choose you for their card effects.
+--
+
+PRINCE
+--
+5-Prince(x2)
+Choose any player (including yourself). That player discards their hand and redraws.
+--
+
+CHANCELLOR
+--
+6-Chancellor(x2)
+Draw 2 cards. Keep 1 card and put your other 2 on the bottom of the deck in any order.
+--
+
+KING
+--
+7-King(x1)
+Choose and trade hands with another player.
+--
+
+COUNTESS
+--
+8-Countess(x1)
+If the King or Prince is in your hand, you must play this card.
+--
+
+PRINCESS
+--
+9-Princess(x1)
+If you play or discard this card, you are out of the round.
+--

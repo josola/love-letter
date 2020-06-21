@@ -15,10 +15,12 @@
 class Player
 {
 public:
-	Player(string name, int value, Reference& reference);
+	Player(const string name, const int value, const Reference &reference);
 
 	template <typename T>
-	void Draw(Pile<T>& obj);
+	void Draw(const Pile<T> &obj);
+	template <typename T>
+	void Discard(T &obj);
 
 protected:
 	string name_ = "";
@@ -28,7 +30,6 @@ protected:
 	vector<Token> tokens_;
 	bool handmaid_ = false;
 	bool spy_ = false;
-
 };
 
 #endif
