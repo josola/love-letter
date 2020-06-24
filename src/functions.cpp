@@ -1,6 +1,6 @@
 #include "Functions.h"
 #include "suitor.h"
-#include "Resources.h"
+#include "resources.h"
 
 #include <iostream>
 
