@@ -1,4 +1,4 @@
-#include "Functions.h"
+#include "functions.h"
 #include "suitor.h"
 #include "resources.h"
 
