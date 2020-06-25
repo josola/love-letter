@@ -39,6 +39,8 @@ int HandPosition(int suitor, int pos);
 //to go into a game state header
 void InitialSetup();
 void SuitorTurn();
+void EndRound();
+void PlayGame();
 void SetWinningTokenCount();
 void BeginRound();
 
