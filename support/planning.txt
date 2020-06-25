@@ -1,0 +1,17 @@
+This document serves as a board for planning purposes...
+
+Right now, main does not have the bulk of business logic contained within.
+This raises the problem that all the logic is held within a seperate set of functions outside of the main function.
+To solve this, obviously the logic needs to be integrated into the main function.
+Another problem arises from how the logic was originally developed.
+It was developed in a procedural style, using global recourses that are contained within a seperate file.
+Business logic is in one file, resources are all global and within a seperate file, and the main function is in its own file.
+This leaves three different connections that need to be assessed for quality.
+The business logic is deeply connected to the global resources file.
+Any changes that are made in the connection between main and the logic files instantly break all these connections.
+This is indeed an architecture error imposed by the original author. Which should be corrected.
+The answer to this architecture issue is to remove the need for global variables, by using objects.
+Removing the extra connection between the main function and the function file, by moving business logic to the main file.
+
+1. Isolate global resources to objects. (this is a large task)
+2. Move corrected business logic into a game loop within main.

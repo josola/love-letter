@@ -7,12 +7,11 @@
 #ifndef SUITOR_CLASS_h
 #define SUITOR_CLASS_h
 
-#include "Resources.h"
+#include "resources.h"
 
 class Suitor
 {
 private:
-
 	bool
 		hasSpy = false,
 		hasHandmaid = false;
@@ -20,7 +19,6 @@ private:
 	int tokenCount = 0;
 
 public:
-
 	void GainSpy() { hasSpy = true; }
 	void RemoveSpy() { hasSpy = false; }
 	void GainHandmaid() { hasHandmaid = true; }
@@ -28,27 +26,25 @@ public:
 	void GainToken() { tokenCount++; }
 
 	int GetTokenCount() { return tokenCount; }
-	
+
 	bool HandmaidStatus() { return hasHandmaid; }
 	bool SpyStatus() { return hasSpy; }
 };
 
 Suitor
-suitor1,
-suitor2,
-suitor3,
-suitor4,
-suitor5,
-suitor6;
+	suitor1,
+	suitor2,
+	suitor3,
+	suitor4,
+	suitor5,
+	suitor6;
 
-std::vector<Suitor> suitorObjects
-{
-suitor1,
-suitor2,
-suitor3,
-suitor4,
-suitor5,
-suitor6
-};
+std::vector<Suitor> suitorObjects{
+	suitor1,
+	suitor2,
+	suitor3,
+	suitor4,
+	suitor5,
+	suitor6};
 
 #endif
