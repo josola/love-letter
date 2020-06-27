@@ -23,9 +23,8 @@ public:
 
 protected:
     string name_ = "";
-    string description_;
+    string description_ = "";
     int value_ = 0;
-
 };
 
 #endif
