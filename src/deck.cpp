@@ -6,7 +6,10 @@
 
 #include "deck.h"
 #include <stdexcept>
+#include <iostream>
 
+using std::cout;
+using std::endl;
 using std::logic_error;
 
 void Deck::Clear()
@@ -21,4 +24,32 @@ const int Deck::Size()
 void Deck::Insert(Card card)
 {
     pile_.push_back(card);
+}
+void Deck::Print()
+{
+    if (pile_.empty())
+    {
+        cout << "EMPTY" << endl;
+    }
+    else
+    {
+        if (pile_.size() == 1)
+        {
+            cout << pile_.at(0).GetName() << endl;
+        }
+        else
+        {
+            for (size_t i = 0; i < pile_.size(); i++)
+            {
+                if (i < pile_.size() - 1)
+                {
+                    cout << pile_.at(i).GetName() << ", ";
+                }
+                else
+                {
+                    cout << pile_.at(i).GetName() << endl;
+                }
+            }
+        }
+    }
 }

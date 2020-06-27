@@ -18,10 +18,10 @@ public:
     void Clear();
     const int Size();
     void Insert(Card card);
+    void Print();
 
 protected:
     vector<Card> pile_;
-
 };
 
 #endif
