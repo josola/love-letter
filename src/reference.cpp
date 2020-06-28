@@ -4,6 +4,18 @@
  * (C) Jordan Sola 2020 - MIT License
  */
 
+#include <iostream>
 #include "reference.h"
 
-Reference::Reference(const string description) : Card{"Reference", -1, description} {};
+using std::cout;
+using std::endl;
+
+Reference::Reference() : Card{ "REFERENCE", -1 }{};
+
+void Reference::Print()
+{
+    for (const string i : reference)
+    {
+        cout << i << endl;
+    }
+}

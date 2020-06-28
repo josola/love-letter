@@ -21,6 +21,7 @@ public:
 	void Draw(const Pile<T> &obj);
 	template <typename T>
 	void Discard(T &obj);
+	void Print(short unsigned int choice);
 
 protected:
 	string name_ = "";

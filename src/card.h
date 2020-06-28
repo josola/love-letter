@@ -20,6 +20,7 @@ public:
     const string GetName() const;
     const string GetDescription() const;
     const int GetValue() const;
+    void Print(int choice);
 
 protected:
     string name_ = "";

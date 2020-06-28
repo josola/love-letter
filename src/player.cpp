@@ -4,9 +4,11 @@
  * (C) Jordan Sola 2020 - MIT License
  */
 
+#include <iostream>
 #include "player.h"
 
 using std::exception;
+using std::cout;
 
 Player::Player(const string name, const int value, const Reference &reference)
 	: name_(name), value_(value), reference_(reference){};
@@ -68,5 +70,26 @@ void Player::Discard(T &obj)
 	{
 		throw exception("Player does not know what to do with that type");
 		return;
+	}
+}
+
+void Player::Print(short unsigned int choice)
+{
+	switch (choice)
+	{
+	case 0:
+		cout << name_;
+		break;
+	
+	case 1:
+		cout << value_;
+		break;
+
+	case 2:
+		reference_.Print();
+		break;
+
+	default:
+		break;
 	}
 }

@@ -365,82 +365,6 @@ int HandPosition(int suitor, int pos)
 }
 
 //to go into a game state file
-void InitialSetup()
-{
-	//Tasks that are performed at the start of every GAME.
-	std::cout << "-- WELCOME TO LOVE LETTER --" << std::endl;
-LOOP:
-	std::cout << "How many suitors will be playing: " << std::endl;
-	std::cin >> activeSuitorCount;
-	PrintSeperator();
-	if (ProperSuitorCount())
-	{
-		originalSuitorCount = activeSuitorCount;
-		SetWinningTokenCount();
-		//Add hand vectors to a vector container.
-		for (i = 1; i < activeSuitorCount + 1; ++i)
-		{
-			suitors.push_back(i);
-		}
-		for (i = 1; i < activeSuitorCount + 1; ++i)
-		{
-			std::vector<int> hand;
-			activeSuitorHands.push_back(hand);
-		}
-		currentSuitor = 0;
-		humanSuitor = 0;
-	}
-	else
-	{
-		std::cout << "Invalid input, please input a number of Suitors between 2 and 6." << std::endl;
-		ClearInput();
-		goto LOOP;
-	}
-	//Removed setup for individual games.
-	//	//Set up the target number Suitors will need to guess correctly to go first.
-	//	srand((int)time(NULL));
-	//	int target = rand() % activeSuitorHands.size() + 1;
-	//	//Prompt and record all Suitor guesses, check if they are correct and if they are duplicates of previous guesses.
-	//	cout << "I have a suitor number (1 - " << activeSuitorHands.size() << ") in my head. Guess it!" << endl;
-	//LOOPA:
-	//	for (unsigned int i = 0; i < activeSuitorHands.size() + 1; ++i)
-	//	{
-	//	LOOPB:
-	//		cout << suitorNames.at(i) << " guess: " << endl;
-	//		cin >> guess;
-	//		if (guess <= activeSuitorHands.size() && guess >= 1)
-	//		{
-	//			//Duplicate guess.
-	//			for (unsigned int i = 0; i < tempVector.size(); ++i)
-	//			{
-	//				if (guess == tempVector.at(i))
-	//				{
-	//					cout << guess << " has already been guessed. Try again." << endl;
-	//					ClearInput();
-	//					goto LOOPB;
-	//				}
-	//			}
-	//			//Correct guess.
-	//			if (guess == target)
-	//			{
-	//				ClearScreen();
-	//				cout << suitorNames.at(i) << " got it!" << endl;
-	//				currentSuitor = i;
-	//				break;
-	//			}
-	//			//Add previous guesses to be checked as duplicates.
-	//			tempVector.push_back(guess);
-	//		}
-	//		else
-	//		{
-	//			cout << "Invalid input, please input a guess between 1 and " << activeSuitorCount << '.' << endl;
-	//			ClearInput();
-	//			goto LOOPA;
-	//		}
-	//	}
-	//	tempVector.clear();
-	//}
-}
 void SuitorTurn()
 {
 LOOP:
@@ -684,7 +608,6 @@ void SetWinningTokenCount()
 }
 void PlayGame()
 {
-	InitialSetup();
 	while (!gameOver)
 	{
 		BeginRound();
