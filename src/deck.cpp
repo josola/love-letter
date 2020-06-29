@@ -119,3 +119,9 @@ void Deck::Shuffle()
 {
     random_shuffle(pile_.begin(), pile_.end());
 }
+
+Card Deck::GetCard(const int position)
+{
+    return pile_.at(position);
+    pile_.erase(pile_.begin() + position);
+}

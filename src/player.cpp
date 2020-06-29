@@ -9,25 +9,14 @@
 
 using std::exception;
 using std::cout;
+using std::endl;
 
 Player::Player(const string name, const int value, const Reference &reference)
 	: name_(name), value_(value), reference_(reference){};
 
-template <typename T>
-void Player::Draw(const Pile<T> &obj)
+void Player::Draw(const Card obj)
 {
-	if (typeid(obj) == typeid(Card))
-	{
-		hand_.push_back(obj);
-	}
-	else if (typeid(obj) == typeid(Token))
-	{
-		tokens_.push_back(obj);
-	}
-	else
-	{
-		throw exception("Player does not know what to do with that type");
-	}
+	hand_.push_back(obj);
 }
 template <typename T>
 void Player::Discard(T &obj)
@@ -89,7 +78,35 @@ void Player::Print(short unsigned int choice)
 		reference_.Print();
 		break;
 
+	case 3:
+		if (hand_.empty())
+		{
+			cout << "EMPTY" << endl;
+		}
+		else
+		{
+			for (size_t i = 0; i < hand_.size(); i++)
+			{
+				if (i < hand_.size() - 1)
+				{
+					cout << hand_.at(i).GetName() << ", ";
+				}
+				else
+				{
+					cout << hand_.at(i).GetName() << endl;
+				}
+			}
+		}
+		break;
+
 	default:
 		break;
 	}
+}
+
+void Player::Reset()
+{
+	hand_.clear();
+	handmaid_ = false;
+	spy_ = false;
 }

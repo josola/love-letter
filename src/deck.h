@@ -21,6 +21,7 @@ public:
     void Print();
     void Set();
     void Shuffle();
+    Card GetCard(const int position);
 
 protected:
     vector<Card> pile_;

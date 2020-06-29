@@ -17,12 +17,11 @@ class Player
 public:
 	Player(const string name, const int value, const Reference &reference);
 
-	template <typename T>
-	void Draw(const Pile<T> &obj);
+	void Draw(const Card obj);
 	template <typename T>
 	void Discard(T &obj);
 	void Print(short unsigned int choice);
-	void ClearHand();
+	void Reset();
 
 protected:
 	string name_ = "";
