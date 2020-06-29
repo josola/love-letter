@@ -22,6 +22,7 @@ public:
 	template <typename T>
 	void Discard(T &obj);
 	void Print(short unsigned int choice);
+	void ClearHand();
 
 protected:
 	string name_ = "";
