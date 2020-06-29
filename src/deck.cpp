@@ -53,3 +53,58 @@ void Deck::Print()
         }
     }
 }
+void Deck::Set()
+{
+    vector<string> names;
+    names = { "SPY", "GUARD", "PRIEST", "BARON", "HANDMAID", "PRINCE", "CHANCELLOR", "KING", "COUNTESS", "PRINCESS" };
+    vector<string> descriptions;
+    descriptions = {
+        "SPY DESCRIPTION",
+        "GUARD DESCRIPTION",
+        "PRIEST DESCRIPTION",
+        "BARON DESCRIPTION",
+        "HANDMAID DESCRIPTION",
+        "PRINCE DESCRIPTION",
+        "CHANCELLOR DESCRIPTION",
+        "KING DESCRIPTION",
+        "COUNTESS DESCRIPTION",
+        "PRINCESS DESCRIPTION"
+    };
+    vector<Card> cards;
+    for (int i = 0; i < 10; i++)
+    {
+        Card card(names[i], i, descriptions[i]);
+        cards.push_back(card);
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        pile_.push_back(cards.at(0));
+    }
+    for (int i = 0; i < 6; i++)
+    {
+        pile_.push_back(cards.at(1));
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        pile_.push_back(cards.at(2));
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        pile_.push_back(cards.at(3));
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        pile_.push_back(cards.at(4));
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        pile_.push_back(cards.at(5));
+    }
+    for (int i = 0; i < 2; i++)
+    {
+        pile_.push_back(cards.at(6));
+    }
+    pile_.push_back(cards.at(7));
+    pile_.push_back(cards.at(8));
+    pile_.push_back(cards.at(9));
+}

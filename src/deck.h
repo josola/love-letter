@@ -19,6 +19,7 @@ public:
     const int Size();
     void Insert(Card card);
     void Print();
+    void Set();
 
 protected:
     vector<Card> pile_;

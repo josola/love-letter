@@ -16,13 +16,13 @@ using std::vector;
 using std::string;
 
 //functions that are updated
-void PrintUpPile(vector<int> up_pile, vector<string> names);
-void PrintDeckSize(vector<int> deck);
-void PrintSuitorsWithSpy(vector<vector<int>> hand, vector<Suitor> suitors);
-void PrintActiveSuitors(int current_suitor, vector<vector<int>>& hand, vector<int> suitors);
+void PrintUpPile();
+void PrintDeckSize();
+void PrintSuitorsWithSpy();
+void PrintActiveSuitors();
 void ClearScreen();
 void PrintSeperator();
-void returnSuitor(const int suitor);
-void printHand(int suitor, vector<string> card_names, vector<vector<int>> suitor_hands);
+void returnSuitor();
+void printHand();
 
 #endif //!OUTPUT_h

@@ -89,13 +89,11 @@ int main()
 	{
 		Deck deck;
 		deck.Set();
-		deck.Print();
-		deck.Shuffle();
+		//deck.Shuffle();
 		cout << "-- ROUND " << round_count << " --" << endl;
 		deck.Print();
-		!game_over;
+		game_over = true;
 	}
-
 	// PlayGame();
 
 	return 0;
