@@ -8,11 +8,13 @@
 #include <stdexcept>
 #include <iostream>
 #include <random>
+#include <chrono>
+#include <algorithm>
 
 using std::cout;
 using std::endl;
 using std::logic_error;
-using std::random_shuffle;
+using std::shuffle;
 
 void Deck::Clear()
 {
@@ -117,7 +119,7 @@ void Deck::Set()
 
 void Deck::Shuffle()
 {
-    random_shuffle(pile_.begin(), pile_.end());
+    shuffle(pile_.begin(), pile_.end(), std::default_random_engine(std::chrono::system_clock::now().time_since_epoch().count()));
 }
 
 Card Deck::GetCard(const int position)
