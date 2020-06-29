@@ -122,6 +122,7 @@ void Deck::Shuffle()
 
 Card Deck::GetCard(const int position)
 {
-    return pile_.at(position);
+    Card card = pile_.at(position);
     pile_.erase(pile_.begin() + position);
+    return card;
 }

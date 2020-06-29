@@ -5,6 +5,8 @@
 #include "player.h"
 #include "reference.h"
 #include "deck.h"
+#include "discard.h"
+#include "aside.h"
 
 using std::cin;
 using std::cout;
@@ -90,6 +92,10 @@ int main()
 		Deck deck;
 		deck.Set();
 		deck.Shuffle();
+
+		Discard discard;
+		Aside aside;
+
 		cout << "-- ROUND " << round_count << " --" << endl;
 
 		if (round_count > 1)
@@ -99,6 +105,13 @@ int main()
 			{
 				i.Reset();
 			}
+		}
+
+		aside.Insert(deck.GetCard(0));
+
+		if (players.size() == 2)
+		{
+
 		}
 		
 		game_over = true;
