@@ -111,7 +111,10 @@ int main()
 
 		if (players.size() == 2)
 		{
-
+			for (int i = 0; i < 2; i++)
+			{
+				discard.Insert(deck.GetCard(0));
+			}
 		}
 		
 		game_over = true;
