@@ -40,8 +40,6 @@ int HandPosition(int suitor, int pos);
 void SuitorTurn();
 void EndRound();
 void PlayGame();
-void SetWinningTokenCount();
-void BeginRound();
 
 //to go into a deck header
 void ShuffleDeck();

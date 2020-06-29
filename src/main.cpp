@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include <vector>
+#include <string>
 #include "functions.h"
 #include "player.h"
 #include "reference.h"
@@ -12,6 +13,7 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::vector;
+using std::to_string;
 
 int main()
 {
@@ -34,44 +36,50 @@ int main()
 
 		cout << "--" << endl;
 
+		//set players
 		if (suitor_count >= 2 && suitor_count <= 6 && cin)
 		{
 			correct_suitor_count = true;
 			switch (suitor_count)
 			{
 			case 2:
-				players.push_back(Player("PLAYER[1]", 1, reference));
-				players.push_back(Player("PLAYER[2]", 2, reference));
+				for (short unsigned int i = 0; i < 2; i++)
+				{
+					string name = "PLAYER[" + to_string(i + 1) + "]";
+					players.push_back(Player(name, i + 1, reference));
+				}
 				winning_token_count = 6;
 				break;
 			case 3:
-				players.push_back(Player("PLAYER[1]", 1, reference));
-				players.push_back(Player("PLAYER[2]", 2, reference));
-				players.push_back(Player("PLAYER[3]", 3, reference));
+				for (short unsigned int i = 0; i < 3; i++)
+				{
+					string name = "PLAYER[" + to_string(i + 1) + "]";
+					players.push_back(Player(name, i + 1, reference));
+				}
 				winning_token_count = 5;
 				break;
 			case 4:
-				players.push_back(Player("PLAYER[1]", 1, reference));
-				players.push_back(Player("PLAYER[2]", 2, reference));
-				players.push_back(Player("PLAYER[3]", 3, reference));
-				players.push_back(Player("PLAYER[4]", 4, reference));
+				for (short unsigned int i = 0; i < 4; i++)
+				{
+					string name = "PLAYER[" + to_string(i + 1) + "]";
+					players.push_back(Player(name, i + 1, reference));
+				}
 				winning_token_count = 4;
 				break;
 			case 5:
-				players.push_back(Player("PLAYER[1]", 1, reference));
-				players.push_back(Player("PLAYER[2]", 2, reference));
-				players.push_back(Player("PLAYER[3]", 3, reference));
-				players.push_back(Player("PLAYER[4]", 4, reference));
-				players.push_back(Player("PLAYER[5]", 5, reference));
+				for (short unsigned int i = 0; i < 5; i++)
+				{
+					string name = "PLAYER[" + to_string(i + 1) + "]";
+					players.push_back(Player(name, i + 1, reference));
+				}
 				winning_token_count = 3;
 				break;
 			case 6:
-				players.push_back(Player("PLAYER[1]", 1, reference));
-				players.push_back(Player("PLAYER[2]", 2, reference));
-				players.push_back(Player("PLAYER[3]", 3, reference));
-				players.push_back(Player("PLAYER[4]", 4, reference));
-				players.push_back(Player("PLAYER[5]", 5, reference));
-				players.push_back(Player("PLAYER[6]", 6, reference));
+				for (short unsigned int i = 0; i < 6; i++)
+				{
+					string name = "PLAYER[" + to_string(i + 1) + "]";
+					players.push_back(Player(name, i + 1, reference));
+				}
 				winning_token_count = 3;
 				break;
 			default:
@@ -98,17 +106,19 @@ int main()
 
 		cout << "-- ROUND " << round_count << " --" << endl;
 
+		//second round and above: reset player stats
 		if (round_count > 1)
 		{
-			//Round is second round or above.
 			for (Player& i : players)
 			{
 				i.Reset();
 			}
 		}
 
+		//discard to down pile
 		aside.Insert(deck.GetCard(0));
 
+		//two player game: discard two cards
 		if (players.size() == 2)
 		{
 			for (int i = 0; i < 2; i++)
@@ -116,63 +126,21 @@ int main()
 				discard.Insert(deck.GetCard(0));
 			}
 		}
+
+		//deal starting hand
+		for (size_t i = 0; i < players.size(); i++)
+		{
+			players.at(i).Draw(deck.GetCard(0));
+		}
 		
 		game_over = true;
 	}
 
-	/*PlayGame();*/
+	//PlayGame();
 
 	return 0;
 }
 // 	//new structure
-// 	bool game_over = false;
-// 	while (!game_over)
-// 	{
-// 		Deck deck;
-// 		deck.Set();
-// 		deck.Shuffle();
-// 		std::cout << "-- ROUND " << roundCount << " --" << std::endl;
-// 		//Check for starting round.
-// 		if (roundCount != startingRound)
-// 		{
-// 			//Round is second round or above.
-// 			activeSuitorCount = originalSuitorCount;
-// 			for (i = 1; i < activeSuitorCount + 1; ++i)
-// 			{
-// 				suitors.push_back(i);
-// 			}
-// 			for (i = 1; i < activeSuitorCount + 1; ++i)
-// 			{
-// 				std::vector<int> hand;
-// 				activeSuitorHands.push_back(hand);
-// 			}
-// 			std::cout << suitorNames.at(winner) << " won the last round. " << suitorNames.at(winner) << " goes first." << std::endl;
-// 			currentSuitor = winner;
-// 			winner = 0;
-// 		}
-// 		//Check for two Suitor game.
-// 		if (activeSuitorCount == minSuitorsPlaying)
-// 		{
-// 			downPile.push_back(playingDeck[0]);
-// 			playingDeck.erase(playingDeck.begin());
-// 			for (i = 0; i < 3; ++i)
-// 			{
-// 				upPile.push_back(playingDeck[i]);
-// 				playingDeck.erase(playingDeck.begin());
-// 			}
-// 		}
-// 		//Discard top card of deck to face down pile, no matter the activeSuitorCount.
-// 		else
-// 		{
-// 			downPile.push_back(playingDeck[0]);
-// 			playingDeck.erase(playingDeck.begin());
-// 		}
-// 		//Deal starting hand.
-// 		for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
-// 		{
-// 			activeSuitorHands.at(i).push_back(playingDeck[0]);
-// 			playingDeck.erase(playingDeck.begin());
-// 		}
 
 // 		SuitorTurn();
 

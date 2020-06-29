@@ -369,7 +369,7 @@ void SuitorTurn()
 {
 LOOP:
 	//More than one Suitor must be playing and the deck must not be empty.
-	while (activeSuitorCount > 1 && !playingDeck.empty())
+	while (!playingDeck.empty())
 	{
 		//Remove Handmaid protection from previous turn.
 		if (suitorObjects[currentSuitor].HandmaidStatus())
@@ -584,33 +584,10 @@ void EndRound()
 		gameOver = true;
 	}
 }
-void SetWinningTokenCount()
-{
-	//Token counts change by the number of Suitors that start the game.
-	switch (activeSuitorCount)
-	{
-	case 2:
-		tokenCountToWin = 6;
-		break;
-	case 3:
-		tokenCountToWin = 5;
-		break;
-	case 4:
-		tokenCountToWin = 4;
-		break;
-	case 5:
-		tokenCountToWin = 3;
-		break;
-	case 6:
-		tokenCountToWin = 3;
-		break;
-	}
-}
 void PlayGame()
 {
 	while (!gameOver)
 	{
-		BeginRound();
 		SuitorTurn();
 		EndRound();
 	}
