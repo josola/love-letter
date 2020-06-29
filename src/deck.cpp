@@ -7,24 +7,29 @@
 #include "deck.h"
 #include <stdexcept>
 #include <iostream>
+#include <random>
 
 using std::cout;
 using std::endl;
 using std::logic_error;
+using std::random_shuffle;
 
 void Deck::Clear()
 {
     (pile_.empty()) ? (throw logic_error("Pile is empty!")) : (pile_.erase(pile_.begin(), pile_.end()));
     (!pile_.empty()) ? (throw logic_error("Erase didn't work!")) : (NULL);
 }
+
 const int Deck::Size()
 {
     return pile_.size();
 }
+
 void Deck::Insert(Card card)
 {
     pile_.push_back(card);
 }
+
 void Deck::Print()
 {
     if (pile_.empty())
@@ -53,6 +58,7 @@ void Deck::Print()
         }
     }
 }
+
 void Deck::Set()
 {
     vector<string> names;
@@ -107,4 +113,9 @@ void Deck::Set()
     pile_.push_back(cards.at(7));
     pile_.push_back(cards.at(8));
     pile_.push_back(cards.at(9));
+}
+
+void Deck::Shuffle()
+{
+    random_shuffle(pile_.begin(), pile_.end());
 }

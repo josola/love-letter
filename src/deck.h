@@ -20,6 +20,7 @@ public:
     void Insert(Card card);
     void Print();
     void Set();
+    void Shuffle();
 
 protected:
     vector<Card> pile_;
