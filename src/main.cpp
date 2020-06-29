@@ -18,7 +18,7 @@ int main()
 	vector<Player> players;
 	Reference reference;
 	short unsigned int current_suitor = 0;
-	short unsigned int round_count = 2; //changed to 2 for testing, should be 1.
+	short unsigned int round_count = 1;
 
 	//Tasks that are performed at the start of every GAME.
 	cout << "-- WELCOME TO LOVE LETTER --" << endl;
@@ -92,11 +92,6 @@ int main()
 		deck.Shuffle();
 		cout << "-- ROUND " << round_count << " --" << endl;
 
-		//to test player reset.
-		players[0].Draw(deck.GetCard(0));
-
-		//finish testing the draw function and reset function for player
-
 		if (round_count > 1)
 		{
 			//Round is second round or above.
@@ -105,10 +100,11 @@ int main()
 				i.Reset();
 			}
 		}
+		
 		game_over = true;
 	}
 
-	PlayGame();
+	/*PlayGame();*/
 
 	return 0;
 }
