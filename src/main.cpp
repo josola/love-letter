@@ -2,6 +2,7 @@
 #include <thread>
 #include <vector>
 #include <string>
+#include <algorithm>
 #include "functions.h"
 #include "player.h"
 #include "reference.h"
@@ -14,6 +15,7 @@ using std::cout;
 using std::endl;
 using std::to_string;
 using std::vector;
+using std::any_of;
 
 int main()
 {
@@ -166,6 +168,8 @@ int main()
 
 				cout << "--" << endl;
 
+
+
 				bool card_input = false;
 				while (!card_input)
 				{
@@ -176,24 +180,57 @@ int main()
 						in_hand.push_back(iCard.GetValue());
 					}
 
-					cout << iPlayer.GetName() << " play a card: " << endl;
-					
-					int card = 0;
-					cin >> card;
-					for (Card &iCard : hand)
+					//countess restriction
+					bool countess = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 8; });
+					bool king = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 7; });
+					bool prince = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 5; });
+
+					if (countess && king || countess && prince)
 					{
-						if (iCard.GetValue() == card)
+						bool countess_input = false;
+						while (!countess_input)
 						{
-							card_input = true;
-							iPlayer.Discard(iCard.GetValue());
-							break;
+							cout << "You MUST play the Countess." << endl;
+
+							int card = 0;
+							cin >> card;
+
+							if (card == 8)
+							{
+								countess_input = true;
+								card_input = true;
+								iPlayer.Discard(8);
+								break;
+							}
+							else
+							{
+								cin.clear();
+								cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+								break;
+							}
 						}
-						else
+					}
+					else
+					{
+						cout << iPlayer.GetName() << " play a card: " << endl;
+
+						int card = 0;
+						cin >> card;
+						for (Card& iCard : hand)
 						{
-							cout << "Not in hand." << endl;
-							cin.clear();
-							cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-							break;
+							if (iCard.GetValue() == card)
+							{
+								card_input = true;
+								iPlayer.Discard(iCard.GetValue());
+								break;
+							}
+							else
+							{
+								cout << "Not in hand." << endl;
+								cin.clear();
+								cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+								break;
+							}
 						}
 					}
 				}
