@@ -25,6 +25,7 @@ public:
 	const bool Protection() const;
 	void ResetProtection();
 	const string GetName() const;
+	void PrintHand() const;
 
 protected:
 	string name_ = "";

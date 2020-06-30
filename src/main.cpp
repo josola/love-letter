@@ -128,9 +128,9 @@ int main()
 		}
 
 		//deal starting hand
-		for (size_t i = 0; i < players.size(); i++)
+		for (Player &i : players)
 		{
-			players.at(i).Draw(deck.GetCard(0));
+			i.Draw(deck.GetCard(0));
 		}
 
 		if (deck.Size() == 0)
@@ -161,6 +161,8 @@ int main()
 						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					}
 				}
+				i.Draw(deck.GetCard(0));
+				i.PrintHand();
 			}
 			else
 			{

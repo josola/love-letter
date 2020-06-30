@@ -88,3 +88,21 @@ const string Player::GetName() const
 {
 	return name_;
 }
+
+void Player::PrintHand() const
+{
+	if (!hand_.empty())
+	{
+		for (size_t i = 0; i < hand_.size(); i++)
+            {
+                if (i < hand_.size() - 1)
+                {
+                    cout << hand_.at(i).GetName() << ", ";
+                }
+                else
+                {
+                    cout << hand_.at(i).GetName() << endl;
+                }
+            }
+	}
+}
