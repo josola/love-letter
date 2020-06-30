@@ -169,14 +169,16 @@ int main()
 				bool card_input = false;
 				while (!card_input)
 				{
-					cout << iPlayer.GetName() << " play a card: " << endl;
-					int card = 0;
 					vector<int> in_hand;
 					vector<Card> hand = iPlayer.GetHand();
 					for (const Card iCard : hand)
 					{
 						in_hand.push_back(iCard.GetValue());
 					}
+
+					cout << iPlayer.GetName() << " play a card: " << endl;
+					
+					int card = 0;
 					cin >> card;
 					for (Card &iCard : hand)
 					{
