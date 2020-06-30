@@ -29,8 +29,9 @@ int main()
 	//Tasks that are performed at the start of every GAME.
 	cout << "-- WELCOME TO LOVE LETTER --" << endl;
 
-	bool correct_suitor_count = false;
-	while (!correct_suitor_count)
+	//starting player count
+	bool correct_player_count = false;
+	while (!correct_player_count)
 	{
 		cout << "How many suitors will be playing: " << endl;
 
@@ -41,7 +42,7 @@ int main()
 		//set players
 		if (suitor_count >= 2 && suitor_count <= 6 && cin)
 		{
-			correct_suitor_count = true;
+			correct_player_count = true;
 			switch (suitor_count)
 			{
 			case 2:
@@ -96,6 +97,7 @@ int main()
 		}
 	}
 
+	//game loop
 	bool game_over = false;
 	while (!game_over)
 	{
@@ -135,17 +137,23 @@ int main()
 			i.Draw(deck.GetCard(0));
 		}
 
+		//game ends with empty deck
 		if (deck.Size() == 0)
 		{
 			game_over = true;
 			break;
 		}
 
+		//player turn
 		for (Player &iPlayer : players)
 		{
+			//player must be playing
 			if (iPlayer.Status())
 			{
+				//remove handmaid protection
 				iPlayer.ResetProtection();
+
+				//draw card from deck
 				bool draw_input = false;
 				while (!draw_input)
 				{
@@ -168,8 +176,6 @@ int main()
 
 				cout << "--" << endl;
 
-
-
 				bool card_input = false;
 				while (!card_input)
 				{
@@ -184,7 +190,6 @@ int main()
 					bool countess = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 8; });
 					bool king = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 7; });
 					bool prince = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 5; });
-
 					if (countess && king || countess && prince)
 					{
 						bool countess_input = false;
@@ -210,6 +215,7 @@ int main()
 							}
 						}
 					}
+					//play card in hand: without restriction
 					else
 					{
 						cout << iPlayer.GetName() << " play a card: " << endl;
