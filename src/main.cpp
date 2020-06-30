@@ -139,15 +139,15 @@ int main()
 			break;
 		}
 
-		for (Player &i : players)
+		for (Player &iPlayer : players)
 		{
-			if (i.Status())
+			if (iPlayer.Status())
 			{
-				i.ResetProtection();
+				iPlayer.ResetProtection();
 				bool draw_input = false;
 				while (!draw_input)
 				{
-					cout << i.GetName() << " draw a card (d): " << endl;
+					cout << iPlayer.GetName() << " draw a card (d): " << endl;
 					char draw = ' ';
 					cin >> draw;
 					if (draw == 'd')
@@ -161,8 +161,40 @@ int main()
 						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					}
 				}
-				i.Draw(deck.GetCard(0));
-				i.PrintHand();
+				iPlayer.Draw(deck.GetCard(0));
+				iPlayer.PrintHand();
+
+				cout << "--" << endl;
+
+				bool card_input = false;
+				while (!card_input)
+				{
+					cout << iPlayer.GetName() << " play a card: " << endl;
+					int card = 0;
+					vector<int> in_hand;
+					vector<Card> hand = iPlayer.GetHand();
+					for (const Card iCard : hand)
+					{
+						in_hand.push_back(iCard.GetValue());
+					}
+					cin >> card;
+					for (Card &iCard : hand)
+					{
+						if (iCard.GetValue() == card)
+						{
+							card_input = true;
+							iPlayer.Discard(iCard.GetValue());
+							break;
+						}
+						else
+						{
+							cout << "Not in hand." << endl;
+							cin.clear();
+							cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+							break;
+						}
+					}
+				}
 			}
 			else
 			{

@@ -5,11 +5,15 @@
  */
 
 #include <iostream>
+#include <algorithm>
+#include <stdexcept>
 #include "player.h"
 
-using std::exception;
 using std::cout;
+using std::distance;
 using std::endl;
+using std::invalid_argument;
+using std::find;
 
 Player::Player(const string name, const int value, const Reference &reference)
 	: name_(name), value_(value), reference_(reference){};
@@ -18,47 +22,16 @@ void Player::Draw(const Card obj)
 {
 	hand_.push_back(obj);
 }
-template <typename T>
-void Player::Discard(T &obj)
+
+void Player::Discard(const int choice)
 {
-	if (typeid(obj) == typeid(Card) && typeid(obj) != typeid(int))
+	for (size_t i = 0; i < hand_.size(); i++)
 	{
-		typename vector<T>::iterator it =
-			find(hand_.begin(), hand_.end(), [obj](Card &i) { return i == obj; });
-		if (it != hand_.end())
+		if (hand_.at(i).GetValue() == choice)
 		{
-			int index = distance(hand_.begin(), it);
-			hand_.erase(hand_.begin() + index);
+			hand_.erase(hand_.begin() + i);
+			break;
 		}
-	}
-	else if (typeid(obj) == typeid(int) && typeid(obj) != typeid(Card))
-	{
-		if (obj >= 0 && obj <= 9)
-		{
-			typename vector<T>::iterator it =
-				find(hand_.begin(), hand_.end(),
-					 [obj](const Card &i) { return obj == i.GetValue(); });
-			if (it != hand_.end())
-			{
-				int index = distance(hand_.begin(), it);
-				hand_.erase(hand_.begin() + index);
-			}
-			else
-			{
-				throw exception("Object not in hand");
-				return;
-			}
-		}
-		else
-		{
-			throw exception("Object not in hand");
-			return;
-		}
-	}
-	else
-	{
-		throw exception("Player does not know what to do with that type");
-		return;
 	}
 }
 
@@ -94,15 +67,20 @@ void Player::PrintHand() const
 	if (!hand_.empty())
 	{
 		for (size_t i = 0; i < hand_.size(); i++)
-            {
-                if (i < hand_.size() - 1)
-                {
-                    cout << hand_.at(i).GetName() << ", ";
-                }
-                else
-                {
-                    cout << hand_.at(i).GetName() << endl;
-                }
-            }
+		{
+			if (i < hand_.size() - 1)
+			{
+				cout << hand_.at(i).GetValue() << '-' << hand_.at(i).GetName() << ", ";
+			}
+			else
+			{
+				cout << hand_.at(i).GetValue() << '-' << hand_.at(i).GetName() << endl;
+			}
+		}
 	}
+}
+
+const vector<Card> Player::GetHand() const
+{
+	return hand_;
 }

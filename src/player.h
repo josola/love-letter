@@ -18,14 +18,14 @@ public:
 	Player(const string name, const int value, const Reference &reference);
 
 	void Draw(const Card obj);
-	template <typename T>
-	void Discard(T &obj);
+	void Discard(const int choice);
 	void Reset();
 	const bool Status() const;
 	const bool Protection() const;
 	void ResetProtection();
 	const string GetName() const;
 	void PrintHand() const;
+	const vector<Card> GetHand() const;
 
 protected:
 	string name_ = "";
