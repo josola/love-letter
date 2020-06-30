@@ -190,6 +190,7 @@ int main()
 					bool countess = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 8; });
 					bool king = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 7; });
 					bool prince = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 5; });
+					int card = 0;
 					if (countess && king || countess && prince)
 					{
 						bool countess_input = false;
@@ -197,7 +198,6 @@ int main()
 						{
 							cout << "You MUST play the Countess." << endl;
 
-							int card = 0;
 							cin >> card;
 
 							if (card == 8)
@@ -220,7 +220,6 @@ int main()
 					{
 						cout << iPlayer.GetName() << " play a card: " << endl;
 
-						int card = 0;
 						cin >> card;
 						for (Card& iCard : hand)
 						{
