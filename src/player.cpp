@@ -110,3 +110,8 @@ void Player::Reset()
 	handmaid_ = false;
 	spy_ = false;
 }
+
+const bool Player::Status() const
+{
+	return current_;
+}

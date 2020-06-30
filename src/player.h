@@ -22,6 +22,7 @@ public:
 	void Discard(T &obj);
 	void Print(short unsigned int choice);
 	void Reset();
+	const bool Status() const;
 
 protected:
 	string name_ = "";
@@ -31,6 +32,7 @@ protected:
 	vector<Token> tokens_;
 	bool handmaid_ = false;
 	bool spy_ = false;
+	bool current_ = false;
 };
 
 #endif
