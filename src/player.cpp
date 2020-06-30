@@ -62,48 +62,6 @@ void Player::Discard(T &obj)
 	}
 }
 
-void Player::Print(short unsigned int choice)
-{
-	switch (choice)
-	{
-	case 0:
-		cout << name_;
-		break;
-	
-	case 1:
-		cout << value_;
-		break;
-
-	case 2:
-		reference_.Print();
-		break;
-
-	case 3:
-		if (hand_.empty())
-		{
-			cout << "EMPTY" << endl;
-		}
-		else
-		{
-			for (size_t i = 0; i < hand_.size(); i++)
-			{
-				if (i < hand_.size() - 1)
-				{
-					cout << hand_.at(i).GetName() << ", ";
-				}
-				else
-				{
-					cout << hand_.at(i).GetName() << endl;
-				}
-			}
-		}
-		break;
-
-	default:
-		break;
-	}
-}
-
 void Player::Reset()
 {
 	hand_.clear();
@@ -113,5 +71,20 @@ void Player::Reset()
 
 const bool Player::Status() const
 {
-	return current_;
+	return playing_;
+}
+
+const bool Player::Protection() const
+{
+	return handmaid_;
+}
+
+void Player::ResetProtection()
+{
+	handmaid_ = false;
+}
+
+const string Player::GetName() const
+{
+	return name_;
 }

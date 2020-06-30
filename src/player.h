@@ -20,9 +20,11 @@ public:
 	void Draw(const Card obj);
 	template <typename T>
 	void Discard(T &obj);
-	void Print(short unsigned int choice);
 	void Reset();
 	const bool Status() const;
+	const bool Protection() const;
+	void ResetProtection();
+	const string GetName() const;
 
 protected:
 	string name_ = "";
@@ -32,7 +34,7 @@ protected:
 	vector<Token> tokens_;
 	bool handmaid_ = false;
 	bool spy_ = false;
-	bool current_ = false;
+	bool playing_ = true;
 };
 
 #endif

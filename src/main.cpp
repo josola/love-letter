@@ -133,9 +133,39 @@ int main()
 			players.at(i).Draw(deck.GetCard(0));
 		}
 
-		while (!deck.Size() == 0)
+		if (deck.Size() == 0)
 		{
-			
+			game_over = true;
+			break;
+		}
+
+		for (Player &i : players)
+		{
+			if (i.Status())
+			{
+				i.ResetProtection();
+				bool draw_input = false;
+				while (!draw_input)
+				{
+					cout << i.GetName() << " draw a card (d): " << endl;
+					char draw = ' ';
+					cin >> draw;
+					if (draw == 'd')
+					{
+						break;
+					}
+					else
+					{
+						cout << "Invalid input." << endl;
+						cin.clear();
+						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+					}
+				}
+			}
+			else
+			{
+				break;
+			}
 		}
 
 		game_over = true;
