@@ -64,10 +64,8 @@ void Deck::Print()
 
 void Deck::Set()
 {
-    vector<string> names;
-    names = { "SPY", "GUARD", "PRIEST", "BARON", "HANDMAID", "PRINCE", "CHANCELLOR", "KING", "COUNTESS", "PRINCESS" };
-    vector<string> descriptions;
-    descriptions = {
+    vector<string> names = { "SPY", "GUARD", "PRIEST", "BARON", "HANDMAID", "PRINCE", "CHANCELLOR", "KING", "COUNTESS", "PRINCESS" };
+    vector<string> descriptions = {
         "At the end of the round, if you are the only player in the round who played or discarded a Spy, gain 1 favor token.",
         "Choose another player and name a non-Guard card. If that player has that card, they are out of the round.",
         "Choose and look at another player's hand.",
