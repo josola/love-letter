@@ -86,11 +86,12 @@ const vector<Card> Player::GetHand() const
 
 void Player::Play(const int choice)
 {
+	Player* player = this;
 	for (Card &i : hand_)
 	{
 		if (i.GetValue() == choice)
 		{
-			i.Action();
+			i.Action(player);
 		}
 	}
 }

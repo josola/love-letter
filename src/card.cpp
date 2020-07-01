@@ -43,7 +43,7 @@ void Card::PrintDescription() const
     cout << description_;
 }
 
-void Card::Action()
+void Card::Action(Player* player)
 {
     cout << "CARD ACTION!" << endl;
 }

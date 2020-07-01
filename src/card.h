@@ -6,6 +6,7 @@
 #ifndef CARD_H
 #define CARD_H
 
+#include "player.h"
 #include <string>
 #include <vector>
 
@@ -22,7 +23,7 @@ public:
     void PrintName() const;
     void PrintValue() const;
     void PrintDescription() const;
-    virtual void Action();
+    virtual void Action(Player* player);
 
 protected:
     string name_ = "";
