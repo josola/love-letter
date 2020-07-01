@@ -11,8 +11,8 @@
 using std::cout;
 using std::distance;
 using std::endl;
-using std::invalid_argument;
 using std::find;
+using std::invalid_argument;
 
 Player::Player(const string name, const int value, const Reference &reference)
 	: name_(name), value_(value), reference_(reference){};
@@ -86,18 +86,11 @@ const vector<Card> Player::GetHand() const
 
 void Player::Play(const int choice)
 {
-	switch (choice)
+	for (Card &i : hand_)
 	{
-	case 0:
-		for (Card& i : hand_)
+		if (i.GetValue() == choice)
 		{
-			if (i.GetValue() == 0)
-			{
-				i.Action();
-			}
+			i.Action();
 		}
-		break;
-	default:
-		break;
 	}
 }
