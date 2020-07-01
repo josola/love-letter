@@ -19,7 +19,9 @@ public:
     const string GetName() const;
     const string GetDescription() const;
     const int GetValue() const;
-    void Print(int choice);
+    void PrintName() const;
+    void PrintValue() const;
+    void PrintDescription() const;
     virtual void Action();
 
 protected:

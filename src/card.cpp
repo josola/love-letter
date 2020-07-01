@@ -9,7 +9,7 @@
 using std::cout;
 using std::endl;
 
-Card::Card(const string name, const int value, const string description) : name_(name), description_(description), value_(value)
+Card::Card(const string name, const int value, const string description) : name_(name), value_(value), description_(description)
 {
 }
 
@@ -28,25 +28,19 @@ const int Card::GetValue() const
     return value_;
 }
 
-void Card::Print(int choice)
+void Card::PrintName() const
 {
-    switch (choice)
-    {
-    case 0:
-        cout << name_;
-        break;
-    
-    case 1:
-        cout << value_;
-        break;
+    cout << name_;
+}
 
-    case 2:
-        cout << description_;
-        break;
-        
-    default:
-        break;
-    }
+void Card::PrintValue() const
+{
+    cout << value_;
+}
+
+void Card::PrintDescription() const
+{
+    cout << description_;
 }
 
 void Card::Action()

@@ -25,7 +25,7 @@ public:
 	const string GetName() const;
 	void PrintHand() const;
 	const vector<Card> GetHand() const;
-	void Player::Play(const int choice);
+	void Play(const int choice);
 
 protected:
 	string name_ = "";

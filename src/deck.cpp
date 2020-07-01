@@ -63,25 +63,7 @@ void Deck::Print()
 
 void Deck::Set()
 {
-    vector<string> names = { "SPY", "GUARD", "PRIEST", "BARON", "HANDMAID", "PRINCE", "CHANCELLOR", "KING", "COUNTESS", "PRINCESS" };
-    vector<string> descriptions = {
-        "At the end of the round, if you are the only player in the round who played or discarded a Spy, gain 1 favor token.",
-        "Choose another player and name a non-Guard card. If that player has that card, they are out of the round.",
-        "Choose and look at another player's hand.",
-        "Choose and secretly compare hands with another player. Whoever has the lower value is out of the round.",
-        "Until yout next turn, other players cannot choose you for their card effects.",
-        "Choose any player (including yourself). That player discards their hand and redraws.",
-        "Draw 2 cards. Keep 1 card and put your other 2 on the bottom of the deck in any order.",
-        "Choose and trade hands with another player.",
-        "If the King or Prince is in your hand, you must play this card.",
-        "If you play or discard this card, you are out of the round."
-    };
-    vector<Card> cards;
-    for (int i = 0; i < 10; i++)
-    {
-        Card card(names[i], i, descriptions[i]);
-        cards.push_back(card);
-    }
+    vector<Card> cards = {Spy(), Guard(), Priest(), Baron(), Handmaid(), Prince(), Chancellor(), King(), Countess(), Princess()};
     for (int i = 0; i < 2; i++)
     {
         pile_.push_back(cards.at(0));

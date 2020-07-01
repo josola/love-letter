@@ -8,6 +8,9 @@
 class Spy : virtual public Card
 {
 public:
-	void Action();
+	Spy();
+	virtual void Action();
+
 protected:
+
 };
