@@ -1,9 +1,9 @@
 /*
- * Output
- * Uses the standard output stream to output to screen.
- * Written by Jordan Sola 2019 - 2020
- * This software uses the MIT license
+ * output.h
+ * (C) Jordan Sola 2019/2020 - MIT License
  */
+
+//deprecated
 
 #ifndef OUTPUT_h
 #define OUTPUT_h

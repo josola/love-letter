@@ -1,8 +1,6 @@
 /*
- * Functions
- * Functions that determine gameplay capabilities.
- * Written by Jordan Sola 2019 2020
- * This software uses the MIT license.
+ * functions.h
+ * (C) Jordan Sola 2019/2020 - MIT License
  */
 
 //deprecated

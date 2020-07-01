@@ -1,7 +1,6 @@
 /*
- * Information used to determine game state.
- * Written by Jordan Sola 2019 - 2020
- * This softwre uses the MIT license.
+ * resources.h
+ * (C) Jordan Sola 2019/2020 - MIT License
  */
 
 //deprecated
