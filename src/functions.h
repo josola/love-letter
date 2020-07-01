@@ -5,6 +5,8 @@
  * This software uses the MIT license.
  */
 
+//deprecated
+
 #ifndef FUNCTIONS_h
 #define FUNCTIONS_h
 

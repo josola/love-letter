@@ -4,6 +4,8 @@
  * This softwre uses the MIT license.
  */
 
+//deprecated
+
 #ifndef RESOURCES_h
 #define RESOURCES_h
 

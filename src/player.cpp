@@ -84,3 +84,21 @@ const vector<Card> Player::GetHand() const
 {
 	return hand_;
 }
+
+void Player::Play(const int choice)
+{
+	switch (choice)
+	{
+	case 0:
+		for (Card& i : hand_)
+		{
+			if (i.GetValue() == 0)
+			{
+				i.Action();
+			}
+		}
+		break;
+	default:
+		break;
+	}
+}

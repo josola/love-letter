@@ -21,6 +21,7 @@ public:
     const string GetDescription() const;
     const int GetValue() const;
     void Print(int choice);
+    virtual void Action();
 
 protected:
     string name_ = "";

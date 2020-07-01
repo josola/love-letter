@@ -8,6 +8,7 @@
 #include <iostream>
 
 using std::cout;
+using std::endl;
 
 Card::Card(const string name, const int value, const string description) : name_(name), description_(description), value_(value)
 {
@@ -47,4 +48,9 @@ void Card::Print(int choice)
     default:
         break;
     }
+}
+
+void Card::Action()
+{
+    cout << "CARD ACTION!" << endl;
 }

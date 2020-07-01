@@ -19,6 +19,7 @@ using std::any_of;
 
 int main()
 {
+	//game state
 	short unsigned int suitor_count = 0;
 	short unsigned int winning_token_count = 0;
 	vector<Player> players;
@@ -175,7 +176,7 @@ int main()
 				iPlayer.PrintHand();
 
 				cout << "--" << endl;
-
+				int card = 0;
 				bool card_input = false;
 				while (!card_input)
 				{
@@ -190,7 +191,7 @@ int main()
 					bool countess = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 8; });
 					bool king = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 7; });
 					bool prince = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 5; });
-					int card = 0;
+					
 					if (countess && king || countess && prince)
 					{
 						bool countess_input = false;
@@ -204,7 +205,6 @@ int main()
 							{
 								countess_input = true;
 								card_input = true;
-								iPlayer.Discard(8);
 								break;
 							}
 							else
@@ -226,7 +226,6 @@ int main()
 							if (iCard.GetValue() == card)
 							{
 								card_input = true;
-								iPlayer.Discard(iCard.GetValue());
 								break;
 							}
 							else
@@ -239,6 +238,8 @@ int main()
 						}
 					}
 				}
+				iPlayer.Play(card);
+				iPlayer.Discard(card);
 			}
 			else
 			{

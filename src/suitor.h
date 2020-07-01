@@ -4,6 +4,8 @@
  * This software uses the MIT license.
  */
 
+//deprecated
+
 #ifndef SUITOR_CLASS_h
 #define SUITOR_CLASS_h
 

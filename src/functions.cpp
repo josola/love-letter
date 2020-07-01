@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+//deprecated
+
 //to go into output file
 void PrintUpPile()
 {

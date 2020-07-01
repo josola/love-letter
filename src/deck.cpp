@@ -5,6 +5,7 @@
  */
 
 #include "deck.h"
+#include "suits.h"
 #include <stdexcept>
 #include <iostream>
 #include <random>
