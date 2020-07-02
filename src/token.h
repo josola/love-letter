@@ -1,19 +1,19 @@
-/*
- * token.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- token.h - Token class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-----------------------------------------------------------===//
 
 #ifndef TOKEN_H
 #define TOKEN_H
 
-class Token
-{
+class Token {
 public:
-	const int GetValue() const;
+  const int GetValue() const;
 
 protected:
-	const int value_ = 1;
-
+  const int value_ = 1;
 };
 
 #endif

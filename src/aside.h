@@ -1,7 +1,9 @@
-/*
- * aside.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- aside.h - Aside class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-----------------------------------------------------------===//
 
 #ifndef ASIDE_H
 #define ASIDE_H
@@ -10,12 +12,9 @@
 
 using std::vector;
 
-class Aside : public Deck
-{
+class Aside : public Deck {
 public:
-
 protected:
-    
 };
 
 #endif

@@ -1,20 +1,19 @@
-/*
- * token_pile.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- token_pile.h - Token Piel class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-----------------------------------------------------------===//
 
 #ifndef TOKEN_PILE_H
 #define TOKEN_PILE_H
 
-#include "token.h"
 #include "pile.h"
+#include "token.h"
 
-class TokenPile : public Pile<Token>
-{
+class TokenPile : public Pile<Token> {
 public:
-
 protected:
-
 };
 
 #endif

@@ -1,16 +1,16 @@
-/*
- * handmaid.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- handmaid.h - Handmaid class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-----------------------------------------------------------===//
 
 #include "card.h"
 
-class Handmaid : virtual public Card
-{
+class Handmaid : virtual public Card {
 public:
-    Handmaid();
-    virtual void Action();
-    
-protected:
+  Handmaid();
+  virtual void Action();
 
+protected:
 };

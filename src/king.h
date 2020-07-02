@@ -1,15 +1,16 @@
-/*
- * king.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- king.h - King class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===---------------------------------------------------===//
 
 #include "card.h"
 
-class King : virtual public Card
-{
+class King : virtual public Card {
 public:
-    King();
-    virtual void Action();
-    
+  King();
+  virtual void Action();
+
 protected:
 };

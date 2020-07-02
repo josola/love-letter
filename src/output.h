@@ -1,21 +1,23 @@
-/*
- * output.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- output.h - Output functions definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-----------------------------------------------------------===//
 
-//deprecated
+// deprecated
 
 #ifndef OUTPUT_h
 #define OUTPUT_h
 
-#include <vector>
-#include <string>
 #include "suitor.h"
+#include <string>
+#include <vector>
 
-using std::vector;
 using std::string;
+using std::vector;
 
-//functions that are updated
+// functions that are updated
 void PrintUpPile();
 void PrintDeckSize();
 void PrintSuitorsWithSpy();
@@ -25,4 +27,4 @@ void PrintSeperator();
 void returnSuitor();
 void printHand();
 
-#endif //!OUTPUT_h
+#endif //! OUTPUT_h

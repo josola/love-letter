@@ -1,7 +1,9 @@
-/*
- * pile.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- pile.h - Pile class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===---------------------------------------------------===//
 
 #ifndef PILE_H
 #define PILE_H
@@ -10,18 +12,15 @@
 
 using std::vector;
 
-template <class T>
-class Pile
-{
+template <class T> class Pile {
 public:
-	T Remove(T obj);
-	void Clear();
-	void InsertBottom(T &obj);
-	int Size() const;
+  T Remove(T obj);
+  void Clear();
+  void InsertBottom(T &obj);
+  int Size() const;
 
 protected:
-	vector<T> pile_;
-
+  vector<T> pile_;
 };
 
 #endif // !PILE_H

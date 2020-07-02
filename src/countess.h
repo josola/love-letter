@@ -1,15 +1,16 @@
-/*
- * countess.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- countess.h - Countess class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-----------------------------------------------------------===//
 
 #include "card.h"
 
-class Countess : virtual public Card
-{
+class Countess : virtual public Card {
 public:
-    Countess();
-    virtual void Action();
-    
+  Countess();
+  virtual void Action();
+
 protected:
 };

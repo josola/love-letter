@@ -1,14 +1,16 @@
-/*
- * functions.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- functions.h - definition of gameplay functions -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-------------------------------------------------------------------===//
 
-//deprecated
+// deprecated
 
 #ifndef FUNCTIONS_h
 #define FUNCTIONS_h
 
-//to go into an output header
+// to go into an output header
 void PrintUpPile();
 void PrintDeckSize();
 void PrintSuitorsWithSpy();
@@ -18,13 +20,13 @@ void PrintSeperator();
 void returnSuitor(int suitor);
 void printHand(int suitor);
 
-//to go into an input header
+// to go into an input header
 void ClearInput();
 bool ProperCardInput();
 bool ProperSuitorInput();
 bool ProperSuitorCount();
 
-//to go into a suitor header
+// to go into a suitor header
 void SwitchSuitor();
 void DiscardPlayedCard();
 void ChooseTargetSuitor(int target);
@@ -36,16 +38,16 @@ bool IsSuitorPlaying();
 bool CardInHand(int suitor, int card);
 int HandPosition(int suitor, int pos);
 
-//to go into a game state header
+// to go into a game state header
 void SuitorTurn();
 void EndRound();
 void PlayGame();
 
-//to go into a deck header
+// to go into a deck header
 void ShuffleDeck();
 void ResetDeck();
 
-//to go into a card header
+// to go into a card header
 void Spy();
 void Guard();
 void Priest();

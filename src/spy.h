@@ -1,16 +1,17 @@
-/*
- * spy.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- spy.h - Spy class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-----------------------------------------------------------===//
 
 #include "card.h"
+#include "player.h"
 
-class Spy : virtual public Card
-{
+class Spy : virtual public Card {
 public:
-	Spy();
-	virtual void Action();
+  Spy();
+  virtual void Action(Player *player);
 
 protected:
-
 };

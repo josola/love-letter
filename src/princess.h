@@ -1,15 +1,16 @@
-/*
- * princess.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- princess.h - Princess class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-----------------------------------------------------------===//
 
 #include "card.h"
 
-class Princess : virtual public Card
-{
+class Princess : virtual public Card {
 public:
-    Princess();
-    virtual void Action();
-    
+  Princess();
+  virtual void Action();
+
 protected:
 };

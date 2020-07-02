@@ -1,19 +1,19 @@
-/*
- * guard.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- guard.h - Guard class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-----------------------------------------------------===//
 
 #include "card.h"
 #include <string>
 
 using std::string;
 
-class Guard : virtual public Card
-{
+class Guard : virtual public Card {
 public:
-    Guard();
-    virtual void Action();
+  Guard();
+  virtual void Action();
 
 protected:
-
 };

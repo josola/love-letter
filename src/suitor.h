@@ -1,51 +1,39 @@
-/*
- * suitor.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- suitor.h - Suitor class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-------------------------------------------------------===//
 
-//deprecated
+// deprecated
 
 #ifndef SUITOR_CLASS_h
 #define SUITOR_CLASS_h
 
 #include "resources.h"
 
-class Suitor
-{
+class Suitor {
 private:
-	bool
-		hasSpy = false,
-		hasHandmaid = false;
+  bool hasSpy = false, hasHandmaid = false;
 
-	int tokenCount = 0;
+  int tokenCount = 0;
 
 public:
-	void GainSpy() { hasSpy = true; }
-	void RemoveSpy() { hasSpy = false; }
-	void GainHandmaid() { hasHandmaid = true; }
-	void RemoveHandmaid() { hasHandmaid = false; }
-	void GainToken() { tokenCount++; }
+  void GainSpy() { hasSpy = true; }
+  void RemoveSpy() { hasSpy = false; }
+  void GainHandmaid() { hasHandmaid = true; }
+  void RemoveHandmaid() { hasHandmaid = false; }
+  void GainToken() { tokenCount++; }
 
-	int GetTokenCount() { return tokenCount; }
+  int GetTokenCount() { return tokenCount; }
 
-	bool HandmaidStatus() { return hasHandmaid; }
-	bool SpyStatus() { return hasSpy; }
+  bool HandmaidStatus() { return hasHandmaid; }
+  bool SpyStatus() { return hasSpy; }
 };
 
-Suitor
-	suitor1,
-	suitor2,
-	suitor3,
-	suitor4,
-	suitor5,
-	suitor6;
+Suitor suitor1, suitor2, suitor3, suitor4, suitor5, suitor6;
 
-std::vector<Suitor> suitorObjects{
-	suitor1,
-	suitor2,
-	suitor3,
-	suitor4,
-	suitor5,
-	suitor6};
+std::vector<Suitor> suitorObjects{suitor1, suitor2, suitor3,
+                                  suitor4, suitor5, suitor6};
 
 #endif

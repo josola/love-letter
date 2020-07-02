@@ -1,15 +1,16 @@
-/*
- * prince.h
- * (C) Jordan Sola 2019/2020 - MIT License
- */
+//===-- prince.h - Prince class definition -------*- C++ -*-===//
+//
+// This software uses the MIT license.
+// See https://mit-license.org/ for license information.
+//
+//===-------------------------------------------------------===//
 
 #include "card.h"
 
-class Prince : virtual public Card
-{
+class Prince : virtual public Card {
 public:
-    Prince();
-    virtual void Action();
+  Prince();
+  virtual void Action();
 
 protected:
 };
