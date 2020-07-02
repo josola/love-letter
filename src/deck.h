@@ -3,7 +3,12 @@
 // This software uses the MIT license.
 // See https://mit-license.org/ for license information.
 //
-//===-----------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
+///
+/// This file determines the capabilities of the main Deck. The "Discard" and
+/// the "Aside" piles are derived from this class.
+///
+//===----------------------------------------------------------------------===//
 
 #ifndef DECK_H
 #define DECK_H

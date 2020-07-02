@@ -3,7 +3,12 @@
 // This software uses the MIT license.
 // See https://mit-license.org/ for license information.
 //
-//===-----------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
+///
+/// This file determines the capabilities of the Aside Pile "face down pile"
+/// during gameplay.
+///
+//===----------------------------------------------------------------------===//
 
 #ifndef ASIDE_H
 #define ASIDE_H

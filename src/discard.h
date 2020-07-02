@@ -3,7 +3,11 @@
 // This software uses the MIT license.
 // See https://mit-license.org/ for license information.
 //
-//===-----------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
+///
+/// This file determines the capabilities of the Discard pile.
+///
+//===----------------------------------------------------------------------===//
 
 #ifndef DISCARD_H
 #define DISCARD_H

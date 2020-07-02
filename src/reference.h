@@ -3,7 +3,12 @@
 // This software uses the MIT license.
 // See https://mit-license.org/ for license information.
 //
-//===-----------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
+///
+/// This file determines the Reference card class. This card is the reference
+/// for players to view during gameplay.
+///
+//===----------------------------------------------------------------------===//
 
 #ifndef REFERENCE_H
 #define REFERENCE_H

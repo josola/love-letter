@@ -3,7 +3,11 @@
 // This software uses the MIT license.
 // See https://mit-license.org/ for license information.
 //
-//===-------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
+///
+/// This file was an attempt at using classes before the rewrite.
+///
+//===----------------------------------------------------------------------===//
 
 // deprecated
 

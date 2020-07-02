@@ -3,7 +3,12 @@
 // This software uses the MIT license.
 // See https://mit-license.org/ for license information.
 //
-//===-----------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
+///
+/// This file contains variables that are used in the old version of this
+/// program.
+///
+//===----------------------------------------------------------------------===//
 
 // deprecated
 

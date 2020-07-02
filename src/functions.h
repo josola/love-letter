@@ -3,7 +3,11 @@
 // This software uses the MIT license.
 // See https://mit-license.org/ for license information.
 //
-//===-------------------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
+///
+/// This file contains functions that are used in the main program.
+///
+//===----------------------------------------------------------------------===//
 
 // deprecated
 

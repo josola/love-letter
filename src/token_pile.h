@@ -3,7 +3,11 @@
 // This software uses the MIT license.
 // See https://mit-license.org/ for license information.
 //
-//===-----------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
+///
+/// This file contains the Token Pile that players can take from.
+///
+//===----------------------------------------------------------------------===//
 
 #ifndef TOKEN_PILE_H
 #define TOKEN_PILE_H

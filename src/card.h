@@ -3,7 +3,12 @@
 // This software uses the MIT license.
 // See https://mit-license.org/ for license information.
 //
-//===-----------------------------------------------------------===//
+//===----------------------------------------------------------------------===//
+///
+/// The file is the Card base class. Individual suits ie. "Baron" are derived
+/// from this class.
+///
+//===----------------------------------------------------------------------===//
 
 #ifndef CARD_H
 #define CARD_H
