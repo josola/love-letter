@@ -17,7 +17,8 @@ using std::endl;
 using std::to_string;
 using std::vector;
 
-int main() {
+int main()
+{
   // game state
   short unsigned int suitor_count = 0;
   short unsigned int winning_token_count = 0;
@@ -31,7 +32,8 @@ int main() {
 
   // starting player count
   bool correct_player_count = false;
-  while (!correct_player_count) {
+  while (!correct_player_count)
+  {
     cout << "How many suitors will be playing: " << endl;
 
     cin >> suitor_count;
@@ -39,39 +41,46 @@ int main() {
     cout << "--" << endl;
 
     // set players
-    if (suitor_count >= 2 && suitor_count <= 6 && cin) {
+    if (suitor_count >= 2 && suitor_count <= 6 && cin)
+    {
       correct_player_count = true;
-      switch (suitor_count) {
+      switch (suitor_count)
+      {
       case 2:
-        for (short unsigned int i = 0; i < 2; i++) {
+        for (short unsigned int i = 0; i < 2; i++)
+        {
           string name = "PLAYER[" + to_string(i + 1) + "]";
           players.push_back(Player(name, i + 1, reference));
         }
         winning_token_count = 6;
         break;
       case 3:
-        for (short unsigned int i = 0; i < 3; i++) {
+        for (short unsigned int i = 0; i < 3; i++)
+        {
           string name = "PLAYER[" + to_string(i + 1) + "]";
           players.push_back(Player(name, i + 1, reference));
         }
         winning_token_count = 5;
         break;
       case 4:
-        for (short unsigned int i = 0; i < 4; i++) {
+        for (short unsigned int i = 0; i < 4; i++)
+        {
           string name = "PLAYER[" + to_string(i + 1) + "]";
           players.push_back(Player(name, i + 1, reference));
         }
         winning_token_count = 4;
         break;
       case 5:
-        for (short unsigned int i = 0; i < 5; i++) {
+        for (short unsigned int i = 0; i < 5; i++)
+        {
           string name = "PLAYER[" + to_string(i + 1) + "]";
           players.push_back(Player(name, i + 1, reference));
         }
         winning_token_count = 3;
         break;
       case 6:
-        for (short unsigned int i = 0; i < 6; i++) {
+        for (short unsigned int i = 0; i < 6; i++)
+        {
           string name = "PLAYER[" + to_string(i + 1) + "]";
           players.push_back(Player(name, i + 1, reference));
         }
@@ -80,7 +89,9 @@ int main() {
       default:
         break;
       }
-    } else {
+    }
+    else
+    {
       cout << "Invalid input, please input a number of Suitors between 2 and 6."
            << endl;
       cin.clear();
@@ -90,7 +101,8 @@ int main() {
 
   // game loop
   bool game_over = false;
-  while (!game_over) {
+  while (!game_over)
+  {
     Deck deck;
     deck.Set();
     deck.Shuffle();
@@ -101,8 +113,10 @@ int main() {
     cout << "-- ROUND " << round_count << " --" << endl;
 
     // second round and above: reset player stats
-    if (round_count > 1) {
-      for (Player &i : players) {
+    if (round_count > 1)
+    {
+      for (Player &i : players)
+      {
         i.Reset();
       }
     }
@@ -111,39 +125,49 @@ int main() {
     aside.Insert(deck.GetCard(0));
 
     // two player game: discard two cards
-    if (players.size() == 2) {
-      for (int i = 0; i < 2; i++) {
+    if (players.size() == 2)
+    {
+      for (int i = 0; i < 2; i++)
+      {
         discard.Insert(deck.GetCard(0));
       }
     }
 
     // deal starting hand
-    for (Player &i : players) {
+    for (Player &i : players)
+    {
       i.Draw(deck.GetCard(0));
     }
 
     // game ends with empty deck
-    if (deck.Size() == 0) {
+    if (deck.Size() == 0)
+    {
       game_over = true;
       break;
     }
 
     // player turn
-    for (Player &iPlayer : players) {
+    for (Player &iPlayer : players)
+    {
       // player must be playing
-      if (iPlayer.Status()) {
+      if (iPlayer.Status())
+      {
         // remove handmaid protection
         iPlayer.ResetProtection();
 
         // draw card from deck
         bool draw_input = false;
-        while (!draw_input) {
+        while (!draw_input)
+        {
           cout << iPlayer.GetName() << " draw a card (d): " << endl;
           char draw = ' ';
           cin >> draw;
-          if (draw == 'd') {
+          if (draw == 'd')
+          {
             break;
-          } else {
+          }
+          else
+          {
             cout << "Invalid input." << endl;
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -155,10 +179,12 @@ int main() {
         cout << "--" << endl;
         int card = 0;
         bool card_input = false;
-        while (!card_input) {
+        while (!card_input)
+        {
           vector<int> in_hand;
           vector<Card> hand = iPlayer.GetHand();
-          for (const Card iCard : hand) {
+          for (const Card iCard : hand)
+          {
             in_hand.push_back(iCard.GetValue());
           }
 
@@ -170,18 +196,23 @@ int main() {
           bool prince = any_of(in_hand.begin(), in_hand.end(),
                                [](int i) { return i == 5; });
 
-          if (countess && king || countess && prince) {
+          if (countess && king || countess && prince)
+          {
             bool countess_input = false;
-            while (!countess_input) {
+            while (!countess_input)
+            {
               cout << "You MUST play the Countess." << endl;
 
               cin >> card;
 
-              if (card == 8) {
+              if (card == 8)
+              {
                 countess_input = true;
                 card_input = true;
                 break;
-              } else {
+              }
+              else
+              {
                 cin.clear();
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 break;
@@ -189,15 +220,20 @@ int main() {
             }
           }
           // play card in hand: without restriction
-          else {
+          else
+          {
             cout << iPlayer.GetName() << " play a card: " << endl;
 
             cin >> card;
-            for (Card &iCard : hand) {
-              if (iCard.GetValue() == card) {
+            for (Card &iCard : hand)
+            {
+              if (iCard.GetValue() == card)
+              {
                 card_input = true;
                 break;
-              } else {
+              }
+              else
+              {
                 cout << "Not in hand." << endl;
                 cin.clear();
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -208,7 +244,9 @@ int main() {
         }
         /// play card
         iPlayer.Discard(card);
-      } else {
+      }
+      else
+      {
         break;
       }
     }
@@ -221,7 +259,7 @@ int main() {
   return 0;
 }
 
-#if 0
+/*
 	//new structure
 		//end round
 		if (playingDeck.empty())
@@ -340,4 +378,4 @@ princess." << endl; 			cout << "-- GAME OVER --" << endl;
 		}
 	}
 }
-#endif
+*/
