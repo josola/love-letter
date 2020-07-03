@@ -86,8 +86,6 @@ int main()
         }
         winning_token_count = 3;
         break;
-      default:
-        break;
       }
     }
     else
