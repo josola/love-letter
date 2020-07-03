@@ -35,10 +35,7 @@ int main()
   while (!correct_player_count)
   {
     cout << "How many suitors will be playing: ";
-
     cin >> suitor_count;
-
-    cout << "--\n";
 
     // set players
     if (suitor_count >= 2 && suitor_count <= 6 && cin)
