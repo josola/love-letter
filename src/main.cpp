@@ -28,17 +28,17 @@ int main()
   short unsigned int round_count = 1;
 
   // Tasks that are performed at the start of every GAME.
-  cout << "-- WELCOME TO LOVE LETTER --" << endl;
+  cout << "-- WELCOME TO LOVE LETTER --\n";
 
   // starting player count
   bool correct_player_count = false;
   while (!correct_player_count)
   {
-    cout << "How many suitors will be playing: " << endl;
+    cout << "How many suitors will be playing: ";
 
     cin >> suitor_count;
 
-    cout << "--" << endl;
+    cout << "--\n";
 
     // set players
     if (suitor_count >= 2 && suitor_count <= 6 && cin)
@@ -90,8 +90,7 @@ int main()
     }
     else
     {
-      cout << "Invalid input, please input a number of Suitors between 2 and 6."
-           << endl;
+      cout << "Please input a number of Suitors between 2 and 6.\n";
       cin.clear();
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
@@ -108,7 +107,7 @@ int main()
     Discard discard;
     Aside aside;
 
-    cout << "-- ROUND " << round_count << " --" << endl;
+    cout << "-- ROUND " << round_count << " --\n";
 
     // second round and above: reset player stats
     if (round_count > 1)
@@ -157,7 +156,7 @@ int main()
         bool draw_input = false;
         while (!draw_input)
         {
-          cout << iPlayer.GetName() << " draw a card (d): " << endl;
+          cout << iPlayer.GetName() << " draw a card (d): ";
           char draw = ' ';
           cin >> draw;
           if (draw == 'd')
@@ -166,7 +165,7 @@ int main()
           }
           else
           {
-            cout << "Invalid input." << endl;
+            cout << "Invalid input.\n";
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
           }
@@ -199,7 +198,7 @@ int main()
             bool countess_input = false;
             while (!countess_input)
             {
-              cout << "You MUST play the Countess." << endl;
+              cout << "You MUST play the Countess.\n";
 
               cin >> card;
 
@@ -220,7 +219,7 @@ int main()
           // play card in hand: without restriction
           else
           {
-            cout << iPlayer.GetName() << " play a card: " << endl;
+            cout << iPlayer.GetName() << " play a card: ";
 
             cin >> card;
             for (Card &iCard : hand)
