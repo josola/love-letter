@@ -12,7 +12,8 @@
 #include "card.h"
 #include "player.h"
 
-class Spy : virtual public Card {
+class Spy : virtual public Card
+{
 public:
   Spy();
   virtual void Action(Player *player);
