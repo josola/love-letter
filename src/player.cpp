@@ -127,7 +127,5 @@ void Player::Play(Card &card)
     princess.Action();
     break;
   }
-  default:
-    break;
   }
 }
