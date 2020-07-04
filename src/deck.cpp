@@ -1,5 +1,4 @@
 #include "deck.h"
-#include "suits.h"
 #include <algorithm>
 #include <chrono>
 #include <iostream>
@@ -40,33 +39,30 @@ void Deck::Print() {
 }
 
 void Deck::Set() {
-  vector<Card> cards = {Spy(),      Guard(),   Priest(),     Baron(),
-                        Handmaid(), Prince(),  Chancellor(), King(),
-                        Countess(), Princess()};
   for (int i = 0; i < 2; i++) {
-    pile_.push_back(cards.at(0));
+    pile_.push_back(Card("SPY", 0, "REF"));
   }
   for (int i = 0; i < 6; i++) {
-    pile_.push_back(cards.at(1));
+    pile_.push_back(Card("GUARD", 1, "REF"));
   }
   for (int i = 0; i < 2; i++) {
-    pile_.push_back(cards.at(2));
+    pile_.push_back(Card("PRIEST", 2, "REF"));
   }
   for (int i = 0; i < 2; i++) {
-    pile_.push_back(cards.at(3));
+    pile_.push_back(Card("BARON", 3, "REF"));
   }
   for (int i = 0; i < 2; i++) {
-    pile_.push_back(cards.at(4));
+    pile_.push_back(Card("HANDMAID", 4, "REF"));
   }
   for (int i = 0; i < 2; i++) {
-    pile_.push_back(cards.at(5));
+    pile_.push_back(Card("PRINCE", 5, "REF"));
   }
   for (int i = 0; i < 2; i++) {
-    pile_.push_back(cards.at(6));
+    pile_.push_back(Card("CHANCELLOR", 6, "REF"));
   }
-  pile_.push_back(cards.at(7));
-  pile_.push_back(cards.at(8));
-  pile_.push_back(cards.at(9));
+  pile_.push_back(Card("KING", 7, "REF"));
+  pile_.push_back(Card("COUNTESS", 8, "REF"));
+  pile_.push_back(Card("PRINCESS", 9, "REF"));
 }
 
 void Deck::Shuffle() {
