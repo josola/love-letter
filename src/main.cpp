@@ -1,6 +1,4 @@
-#include "aside.h"
 #include "deck.h"
-#include "discard.h"
 #include "functions.h"
 #include "player.h"
 #include "reference.h"
@@ -98,11 +96,9 @@ int main()
   while (!game_over)
   {
     Deck deck;
+
     deck.Set();
     deck.Shuffle();
-
-    Discard discard;
-    Aside aside;
 
     cout << "-- ROUND " << round_count << " --\n";
 
@@ -115,9 +111,11 @@ int main()
       }
     }
 
+    Deck aside;
     // discard to down pile
     aside.Insert(deck.GetCard(0));
 
+    Deck discard;
     // two player game: discard two cards
     if (players.size() == 2)
     {
