@@ -43,6 +43,7 @@ public:
   // actions
   void Spy();
   void Guard(vector<Player>* players);
+  void Priest(vector<Player>* players);
 
 private:
   // information

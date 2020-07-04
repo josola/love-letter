@@ -137,3 +137,32 @@ void Player::Guard(vector<Player> *players)
   }
   cout << "No match!\n";
 }
+void Player::Priest(vector<Player>* players)
+{
+  cout << this->GetName() << " choose a target player: ";
+  short unsigned int target = 0;
+  cin >> target;
+  bool target_input = false;
+  while (!target_input)
+  {
+    if (target != this->GetValue() && target <= 1 && target >= 6 && cin)
+    {
+      target_input = true;
+    }
+    else
+    {
+      cout << "Invalid input.\n";
+    }
+  }
+  Player* target_player = NULL;
+  for (Player &iPlayer : *players)
+  {
+    if (iPlayer.GetValue() == target)
+    {
+      target_player = &iPlayer;
+      break;
+    }
+  }
+  cout << target_player->GetName() << "'s hand is:\n";
+  target_player->PrintHand();
+}
