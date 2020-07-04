@@ -137,7 +137,7 @@ void Player::Guard(vector<Player> *players)
   }
   cout << "No match!\n";
 }
-void Player::Priest(vector<Player>* players)
+void Player::Priest(vector<Player> *players)
 {
   cout << this->GetName() << " choose a target player: ";
   short unsigned int target = 0;
@@ -154,7 +154,7 @@ void Player::Priest(vector<Player>* players)
       cout << "Invalid input.\n";
     }
   }
-  Player* target_player = NULL;
+  Player *target_player = NULL;
   for (Player &iPlayer : *players)
   {
     if (iPlayer.GetValue() == target)
@@ -165,4 +165,59 @@ void Player::Priest(vector<Player>* players)
   }
   cout << target_player->GetName() << "'s hand is:\n";
   target_player->PrintHand();
+}
+void Player::Baron(vector<Player> *players)
+{
+  cout << this->GetName() << " choose a target player: ";
+  short unsigned int target = 0;
+  cin >> target;
+  bool target_input = false;
+  while (!target_input)
+  {
+    if (target != this->GetValue() && target >= 1 && target <= 6 && cin)
+    {
+      target_input = true;
+    }
+    else
+    {
+      cout << "Invalid input.\n";
+    }
+  }
+  Player *target_player = NULL;
+  for (Player &iPlayer : *players)
+  {
+    if (iPlayer.GetValue() == target)
+    {
+      target_player = &iPlayer;
+    }
+  }
+  vector<Card> *hand;
+  for (Card iCard : this->GetHand())
+  {
+    hand->push_back(iCard);
+  }
+  for (Card iCard : target_player->GetHand())
+  {
+    hand->push_back(iCard);
+  }
+  if (hand->at(0).GetValue() > hand->at(1).GetValue())
+  {
+    cout << target_player->GetName() << " had the lower card!\n";
+    cout << target_player->GetName() << " is out!\n";
+    target_player->Discard(0);
+    target_player->Reset();
+    target_player->Playing(0);
+  }
+  else if (hand->at(0).GetValue() == hand->at(1).GetValue())
+  {
+    cout << "Hands are equal! Play moves on!\n";
+  }
+  else
+  {
+    cout << this->GetName() << " had the lower card!\n";
+    cout << this->GetName() << " is out!\n";
+    this->Discard(0);
+    this->Reset();
+    this->Playing(0);
+  }
 }
