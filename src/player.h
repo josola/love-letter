@@ -17,7 +17,8 @@
 #include "reference.h"
 #include "token.h"
 
-class Player {
+class Player
+{
 public:
   Player(const string name, const int value, const Reference &reference);
 

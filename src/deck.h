@@ -18,7 +18,8 @@
 
 using std::vector;
 
-class Deck {
+class Deck
+{
 public:
   void Clear();
   const int Size();

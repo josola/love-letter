@@ -15,7 +15,8 @@
 #include "pile.h"
 #include "token.h"
 
-class TokenPile : public Pile<Token> {
+class TokenPile : public Pile<Token>
+{
 public:
 protected:
 };

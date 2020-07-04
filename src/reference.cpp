@@ -6,8 +6,10 @@ using std::endl;
 
 Reference::Reference() : Card{"REFERENCE", -1} {};
 
-void Reference::Print() {
-  for (const string i : reference) {
+void Reference::Print()
+{
+  for (const string i : reference)
+  {
     cout << i << endl;
   }
 }

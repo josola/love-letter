@@ -3,8 +3,8 @@
 #include <iostream>
 #include <stdexcept>
 
-using std::cout;
 using std::cin;
+using std::cout;
 
 Player::Player(const string name, const int value, const Reference &reference)
     : name_(name), value_(value), reference_(reference){};

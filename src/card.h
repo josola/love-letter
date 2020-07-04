@@ -19,7 +19,8 @@
 using std::string;
 using std::vector;
 
-class Card {
+class Card
+{
 public:
   Card(const string name = "", const int value = 0,
        const string description = "");
@@ -29,7 +30,8 @@ public:
   void PrintName() const;
   void PrintValue() const;
   void PrintDescription() const;
-  template <class T> void Action(T *obj);
+  template <class T>
+  void Action(T *obj);
 
 protected:
   string name_ = "";

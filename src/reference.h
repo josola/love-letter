@@ -18,7 +18,8 @@
 
 using std::string;
 
-class Reference : public Card {
+class Reference : public Card
+{
 public:
   Reference();
   void Print();

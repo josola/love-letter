@@ -12,7 +12,8 @@
 #ifndef TOKEN_H
 #define TOKEN_H
 
-class Token {
+class Token
+{
 public:
   const int GetValue() const;
 

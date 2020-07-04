@@ -17,7 +17,9 @@
 
 using std::vector;
 
-template <class T> class Pile {
+template <class T>
+class Pile
+{
 public:
   T Remove(T obj);
   void Clear();

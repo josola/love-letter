@@ -16,7 +16,8 @@
 
 #include "resources.h"
 
-class Suitor {
+class Suitor
+{
 private:
   bool hasSpy = false, hasHandmaid = false;
 
