@@ -55,3 +55,6 @@ void Player::PrintHand() const
     }
   }
 }
+
+// actions
+void Player::Spy() { spy_ = true; }

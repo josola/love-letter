@@ -38,6 +38,9 @@ public:
   // printer
   void PrintHand() const;
 
+  // actions
+  void Spy();
+
 private:
   // information
   string name_ = "";
