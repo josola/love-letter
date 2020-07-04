@@ -17,7 +17,6 @@ using std::vector;
 int main()
 {
   // game state
-  short unsigned int suitor_count = 0;
   short unsigned int winning_token_count = 0;
   vector<Player> players;
   Reference reference;
@@ -32,6 +31,7 @@ int main()
   while (!correct_player_count)
   {
     cout << "How many suitors will be playing: ";
+    short unsigned int suitor_count = 0;
     cin >> suitor_count;
 
     // set players
@@ -233,7 +233,7 @@ int main()
             }
           }
         }
-        iPlayer.Play(card);
+        // play card
         iPlayer.Discard(card);
       }
       else
