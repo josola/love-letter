@@ -62,10 +62,10 @@ void Player::PrintHand() const
 
 const vector<Card> Player::GetHand() const { return hand_; }
 
-void Player::Play(Card &card)
+void Player::Play(const int choice)
 {
   Player *player = this;
-  switch (card.GetValue())
+  switch (choice)
   {
   case 0:
   {
@@ -128,4 +128,9 @@ void Player::Play(Card &card)
     break;
   }
   }
+}
+
+void Player::GainSpy()
+{
+  spy_ = true;
 }

@@ -30,7 +30,8 @@ public:
   const string GetName() const;
   void PrintHand() const;
   const vector<Card> GetHand() const;
-  void Play(Card &card);
+  void Play(const int choice);
+  void GainSpy();
 
 protected:
   string name_ = "";

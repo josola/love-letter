@@ -9,4 +9,7 @@ Spy::Spy()
            "At the end of the round, if you are the only player in the round "
            "who played or discarded a Spy, gain 1 favor token."} {};
 
-void Spy::Action(Player *player) {}
+void Spy::Action(Player *player)
+{
+    player->GainSpy();
+}
