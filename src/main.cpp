@@ -247,6 +247,9 @@ int main()
         case 1:
           iPlayer.Guard(&players);
           break;
+        case 2:
+          iPlayer.Priest(&players);
+          break;
         }
         iPlayer.Discard(card);
       }
