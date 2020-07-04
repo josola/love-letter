@@ -38,11 +38,16 @@ public:
   void PrintHand() const;
 
 private:
+  // information
   string name_ = "";
   int value_ = 0;
+
+  // objects
   Reference reference_;
   vector<Card> hand_;
   vector<Token> tokens_;
+
+  // state
   bool handmaid_ = false;
   bool spy_ = false;
   bool playing_ = true;
