@@ -27,6 +27,7 @@ public:
   const string GetName() const;
   const vector<Card> GetHand() const;
   const bool Status() const;
+  const int GetValue() const;
 
   // setters
   void Draw(const Card obj);
@@ -34,12 +35,14 @@ public:
   void Reset();
   void SetProtection(const bool state);
   void Discard(const int choice);
+  void Playing(const bool state);
 
   // printer
   void PrintHand() const;
 
   // actions
   void Spy();
+  void Guard(vector<Player>* players);
 
 private:
   // information

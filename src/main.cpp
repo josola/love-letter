@@ -233,7 +233,15 @@ int main()
             }
           }
         }
-        // play card
+        switch (card)
+        {
+        case 0:
+          iPlayer.Spy();
+          break;
+        case 1:
+          iPlayer.Guard(&players);
+          break;
+        }
         iPlayer.Discard(card);
       }
       else
