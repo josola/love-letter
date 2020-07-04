@@ -250,6 +250,9 @@ int main()
         case 2:
           iPlayer.Priest(&players);
           break;
+        case 3:
+          iPlayer.Baron(&players);
+          break;
         }
         iPlayer.Discard(card);
       }
