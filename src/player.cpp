@@ -13,8 +13,22 @@ using std::invalid_argument;
 Player::Player(const string name, const int value, const Reference &reference)
     : name_(name), value_(value), reference_(reference){};
 
-void Player::Draw(const Card obj) { hand_.push_back(obj); }
+// getters
+const bool Player::ProtectionStatus() const { return handmaid_; }
+const string Player::GetName() const { return name_; }
+const vector<Card> Player::GetHand() const { return hand_; }
+const bool Player::Status() const { return playing_; }
 
+// setters
+void Player::Draw(const Card obj) { hand_.push_back(obj); }
+void Player::SetProtection(const bool state) { handmaid_ = state; }
+void Player::GainSpy() { spy_ = true; }
+void Player::Reset()
+{
+  hand_.clear();
+  handmaid_ = false;
+  spy_ = false;
+}
 void Player::Discard(const int choice)
 {
   for (size_t i = 0; i < hand_.size(); i++)
@@ -27,21 +41,7 @@ void Player::Discard(const int choice)
   }
 }
 
-void Player::Reset()
-{
-  hand_.clear();
-  handmaid_ = false;
-  spy_ = false;
-}
-
-const bool Player::Status() const { return playing_; }
-
-const bool Player::ProtectionStatus() const { return handmaid_; }
-
-void Player::ResetProtection() { handmaid_ = false; }
-
-const string Player::GetName() const { return name_; }
-
+// printer
 void Player::PrintHand() const
 {
   if (!hand_.empty())
@@ -58,11 +58,4 @@ void Player::PrintHand() const
       }
     }
   }
-}
-
-const vector<Card> Player::GetHand() const { return hand_; }
-
-void Player::GainSpy()
-{
-  spy_ = true;
 }

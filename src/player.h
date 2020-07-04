@@ -21,17 +21,21 @@ class Player {
 public:
   Player(const string name, const int value, const Reference &reference);
 
-  void Draw(const Card obj);
-  void Discard(const int choice);
-  void Reset();
-  const bool Status() const;
+  // getters
   const bool ProtectionStatus() const;
-  void ResetProtection();
   const string GetName() const;
-  void PrintHand() const;
   const vector<Card> GetHand() const;
-  void Play(const int choice);
+  const bool Status() const;
+
+  // setters
+  void Draw(const Card obj);
   void GainSpy();
+  void Reset();
+  void SetProtection(const bool state);
+  void Discard(const int choice);
+
+  // printer
+  void PrintHand() const;
 
 protected:
   string name_ = "";
