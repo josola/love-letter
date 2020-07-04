@@ -31,14 +31,14 @@ int main()
   while (!correct_player_count)
   {
     cout << "How many suitors will be playing: ";
-    short unsigned int suitor_count = 0;
-    cin >> suitor_count;
+    short unsigned int player_count = 0;
+    cin >> player_count;
 
     // set players
-    if (suitor_count >= 2 && suitor_count <= 6 && cin)
+    if (player_count >= 2 && player_count <= 6 && cin)
     {
       correct_player_count = true;
-      switch (suitor_count)
+      switch (player_count)
       {
       case 2:
         for (short unsigned int i = 0; i < 2; i++)
