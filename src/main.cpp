@@ -11,7 +11,6 @@
 using std::any_of;
 using std::cin;
 using std::cout;
-using std::endl;
 using std::to_string;
 using std::vector;
 
@@ -168,7 +167,7 @@ int main()
         iPlayer.Draw(deck.GetCard(0));
         iPlayer.PrintHand();
 
-        cout << "--" << endl;
+        cout << "--\n";
         int card = 0;
         bool card_input = false;
         while (!card_input)
@@ -226,7 +225,7 @@ int main()
               }
               else
               {
-                cout << "Not in hand." << endl;
+                cout << "Not in hand.\n";
                 cin.clear();
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 break;
