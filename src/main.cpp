@@ -144,7 +144,7 @@ int main()
       if (iPlayer.Status())
       {
         // remove handmaid protection
-        iPlayer.ResetProtection();
+        iPlayer.SetProtection(0);
 
         // draw card from deck
         bool draw_input = false;
