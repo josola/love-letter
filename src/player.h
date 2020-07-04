@@ -37,7 +37,7 @@ public:
   // printer
   void PrintHand() const;
 
-protected:
+private:
   string name_ = "";
   int value_ = 0;
   Reference reference_;
