@@ -5,10 +5,6 @@
 
 using std::cout;
 using std::cin;
-using std::distance;
-using std::endl;
-using std::find;
-using std::invalid_argument;
 
 Player::Player(const string name, const int value, const Reference &reference)
     : name_(name), value_(value), reference_(reference){};
@@ -54,7 +50,7 @@ void Player::PrintHand() const
       }
       else
       {
-        cout << hand_.at(i).GetValue() << '-' << hand_.at(i).GetName() << endl;
+        cout << hand_.at(i).GetValue() << '-' << hand_.at(i).GetName() << '\n';
       }
     }
   }
