@@ -213,21 +213,27 @@ int main()
           // play card in hand: without restriction
           else
           {
-            cout << iPlayer.GetName() << " play a card: ";
-
-            cin >> card;
-            for (Card &iCard : hand)
+            bool in_hand = false;
+            while (!in_hand)
             {
-              if (iCard.GetValue() == card)
+              cout << iPlayer.GetName() << " play a card: ";
+              cin >> card;
+              for (Card &iCard : hand)
               {
-                card_input = true;
-                break;
+                if (iCard.GetValue() == card)
+                {
+                  in_hand = true;
+                  card_input = true;
+                }
               }
-              else
+              if (!in_hand)
               {
                 cout << "Not in hand.\n";
                 cin.clear();
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+              }
+              else
+              {
                 break;
               }
             }
