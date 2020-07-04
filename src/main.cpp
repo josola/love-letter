@@ -31,7 +31,7 @@ int main()
   while (!correct_player_count)
   {
     cout << "How many suitors will be playing: ";
-    short unsigned int player_count = 0;
+    int player_count = 0;
     cin >> player_count;
 
     // set players
