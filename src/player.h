@@ -45,6 +45,7 @@ public:
   void Guard(vector<Player>* players);
   void Priest(vector<Player>* players);
   void Baron(vector<Player>* players);
+  void Handmaid();
 
 private:
   // information

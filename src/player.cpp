@@ -221,3 +221,4 @@ void Player::Baron(vector<Player> *players)
     this->Playing(0);
   }
 }
+void Player::Handmaid() { this->SetProtection(1); }
