@@ -36,7 +36,7 @@ void Player::Reset()
 
 const bool Player::Status() const { return playing_; }
 
-const bool Player::Protection() const { return handmaid_; }
+const bool Player::ProtectionStatus() const { return handmaid_; }
 
 void Player::ResetProtection() { handmaid_ = false; }
 

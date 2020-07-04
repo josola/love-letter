@@ -25,7 +25,7 @@ public:
   void Discard(const int choice);
   void Reset();
   const bool Status() const;
-  const bool Protection() const;
+  const bool ProtectionStatus() const;
   void ResetProtection();
   const string GetName() const;
   void PrintHand() const;
