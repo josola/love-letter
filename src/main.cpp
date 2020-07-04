@@ -236,7 +236,7 @@ int main()
             }
           }
         }
-        /// play card
+        iPlayer.Play(card);
         iPlayer.Discard(card);
       }
       else
