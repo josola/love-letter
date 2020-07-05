@@ -256,6 +256,9 @@ int main()
         case 4:
           iPlayer.Handmaid();
           break;
+        case 5:
+          iPlayer.Prince(&players);
+          break;
         }
         iPlayer.Discard(card);
       }
