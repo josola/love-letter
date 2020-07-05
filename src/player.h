@@ -48,6 +48,7 @@ public:
   void Baron(vector<Player>* players);
   void Handmaid();
   void Prince(vector<Player>* players);
+  void Chancellor();
 
 private:
   // information

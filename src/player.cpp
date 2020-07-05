@@ -275,3 +275,38 @@ void Player::Prince(vector<Player> *players)
     }
   }
 }
+void Player::Chancellor()
+{
+  bool first_card_input = false;
+  while (!first_card_input)
+  {
+    cout << "First card to put back: ";
+    short unsigned int choice = 0;
+    cin >> choice;
+    if (choice >= 0 && choice <= 9 && cin)
+    {
+      this->Discard(choice);
+      first_card_input = true;
+    }
+    else
+    {
+      cout << "Invalid input.\n";
+    }
+  }
+  bool second_card_input = false;
+  while (!second_card_input)
+  {
+    cout << "Second card to put back: ";
+    short unsigned int choice = 0;
+    cin >> choice;
+    if (choice >= 0 && choice <= 9 && cin)
+    {
+      this->Discard(choice);
+      second_card_input = true;
+    }
+    else
+    {
+      cout << "Invalid input.\n";
+    }
+  }
+}
