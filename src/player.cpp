@@ -46,7 +46,7 @@ void Player::DiscardHand()
 }
 void Player::Playing(const bool state) { playing_ = state; }
 
-// printer
+// printers
 void Player::PrintHand() const
 {
   if (!hand_.empty())
@@ -65,6 +65,7 @@ void Player::PrintHand() const
   }
 }
 
+// actions
 void Player::Spy() { spy_ = true; }
 void Player::Guard(vector<Player> *players)
 {
