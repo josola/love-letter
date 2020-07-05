@@ -51,6 +51,7 @@ public:
   void Chancellor();
   void King(vector<Player>* players);
   void Countess();
+  void Princess();
 
 private:
   // information

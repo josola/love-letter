@@ -345,3 +345,11 @@ void Player::Countess()
   cout << this->GetName() << " has played the Countess!\n";
   this->Discard(8);
 }
+void Player::Princess()
+{
+  cout << this->GetName() << " has played the Princess!\n";
+  cout << this->GetName() << " is out!\n";
+  this->DiscardHand();
+  this->Reset();
+  this->Playing(0);
+}
