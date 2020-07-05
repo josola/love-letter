@@ -49,6 +49,7 @@ public:
   void Handmaid();
   void Prince(vector<Player>* players);
   void Chancellor();
+  void King(vector<Player>* players);
 
 private:
   // information
