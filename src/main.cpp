@@ -165,6 +165,25 @@ int main()
           }
         }
         iPlayer.Draw(deck.GetCard(0));
+        deck.Size();
+        cout << "\nDiscard pile:\n";
+        discard.Print();
+        // print opponents
+        cout << "\nOpponents:\n";
+        for (size_t i = 0; i < players.size(); i++)
+        {
+          if (players.at(i).GetValue() != iPlayer.GetValue())
+          {
+            if (i == players.size() - 1)
+            {
+              cout << players.at(i).GetName() << '\n';
+            }
+            else
+            {
+              cout << players.at(i).GetName() << ", ";
+            }
+          }
+        }
         iPlayer.PrintHand();
 
         cout << "--\n";
@@ -272,7 +291,7 @@ int main()
           iPlayer.Princess();
           break;
         }
-        iPlayer.Discard(card);
+        discard.Insert(iPlayer.Discard(card));
       }
       else
       {

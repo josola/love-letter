@@ -34,7 +34,7 @@ public:
   void GainSpy();
   void Reset();
   void SetProtection(const bool state);
-  void Discard(const int choice);
+  Card Discard(const int choice);
   void DiscardHand();
   void Playing(const bool state);
 

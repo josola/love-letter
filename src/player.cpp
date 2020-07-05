@@ -26,16 +26,19 @@ void Player::Reset()
   handmaid_ = false;
   spy_ = false;
 }
-void Player::Discard(const int choice)
+Card Player::Discard(const int choice)
 {
+  Card* card_output = NULL;
   for (size_t i = 0; i < hand_.size(); i++)
   {
     if (hand_.at(i).GetValue() == choice)
     {
+      card_output = &hand_.at(i);
       hand_.erase(hand_.begin() + i);
       break;
     }
   }
+  return *card_output;
 }
 void Player::DiscardHand()
 {
@@ -49,6 +52,7 @@ void Player::Playing(const bool state) { playing_ = state; }
 // printers
 void Player::PrintHand() const
 {
+  cout << '\n' << this->GetName() << " hand:\n";
   if (!hand_.empty())
   {
     for (size_t i = 0; i < hand_.size(); i++)
