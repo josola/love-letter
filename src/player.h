@@ -50,6 +50,7 @@ public:
   void Prince(vector<Player>* players);
   void Chancellor();
   void King(vector<Player>* players);
+  void Countess();
 
 private:
   // information

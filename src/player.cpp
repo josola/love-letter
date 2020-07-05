@@ -340,3 +340,8 @@ void Player::King(vector<Player>* players)
     }
   }
 }
+void Player::Countess()
+{
+  cout << this->GetName() << " has played the Countess!\n";
+  this->Discard(8);
+}
