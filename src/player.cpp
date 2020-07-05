@@ -37,6 +37,13 @@ void Player::Discard(const int choice)
     }
   }
 }
+void Player::DiscardHand()
+{
+  for (Card &iCard : hand_)
+  {
+    Discard(iCard.GetValue());
+  }
+}
 void Player::Playing(const bool state) { playing_ = state; }
 
 // printer
@@ -222,3 +229,49 @@ void Player::Baron(vector<Player> *players)
   }
 }
 void Player::Handmaid() { this->SetProtection(1); }
+void Player::Prince(vector<Player> *players)
+{
+  bool target_input = false;
+  while (!target_input)
+  {
+    cout << this->GetName() << " choose a target player: ";
+    short unsigned int target = 0;
+    cin >> target;
+    if (target == this->GetValue())
+    {
+      cout << "You chose yourself!\n";
+      bool self_discard = false;
+      while (!self_discard)
+      {
+        cout << "Please discard your hand (d): ";
+        char discard = ' ';
+        cin >> discard;
+        if (discard == 'd')
+        {
+          this->DiscardHand();
+          self_discard = true;
+        }
+        else
+        {
+          cout << discard << " is invald.\n";
+        }
+      }
+    }
+    else if (target >= 1 && target <= 6 && cin)
+    {
+      Player *player_target = NULL;
+      for (Player &iPlayer : *players)
+      {
+        if (iPlayer.GetValue() == target)
+        {
+          player_target = &iPlayer;
+        }
+      }
+      cout << player_target->GetName() << " discards their hand!\n";
+    }
+    else
+    {
+      cout << "Invalid input.\n";
+    }
+  }
+}

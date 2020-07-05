@@ -35,6 +35,7 @@ public:
   void Reset();
   void SetProtection(const bool state);
   void Discard(const int choice);
+  void DiscardHand();
   void Playing(const bool state);
 
   // printer
@@ -46,6 +47,7 @@ public:
   void Priest(vector<Player>* players);
   void Baron(vector<Player>* players);
   void Handmaid();
+  void Prince(vector<Player>* players);
 
 private:
   // information
