@@ -279,7 +279,7 @@ int main()
           iPlayer.Prince(&players);
           break;
         case 6:
-          iPlayer.Chancellor();
+          iPlayer.Chancellor(&deck);
           break;
         case 7:
           iPlayer.King(&players);
