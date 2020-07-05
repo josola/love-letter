@@ -16,6 +16,7 @@
 #include "pile.h"
 #include "reference.h"
 #include "token.h"
+#include "deck.h"
 
 class Player
 {
@@ -48,7 +49,7 @@ public:
   void Baron(vector<Player>* players);
   void Handmaid();
   void Prince(vector<Player>* players);
-  void Chancellor();
+  void Chancellor(Deck* deck);
   void King(vector<Player>* players);
   void Countess();
   void Princess();

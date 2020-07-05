@@ -280,8 +280,23 @@ void Player::Prince(vector<Player> *players)
     }
   }
 }
-void Player::Chancellor()
+void Player::Chancellor(Deck* deck)
 {
+  bool draw_input = false;
+  while (!draw_input)
+  {
+    cout << this->GetName() << " draw two cards (d): ";
+    char input = ' ';
+    cin >> input;
+    if (input == 'd')
+    {
+      for (int i = 0; i < 2; i++)
+      {
+        this->Draw(deck->GetCard(0));
+      }
+    }
+  }
+  this->PrintHand();
   bool first_card_input = false;
   while (!first_card_input)
   {
