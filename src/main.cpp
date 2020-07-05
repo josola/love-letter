@@ -262,6 +262,9 @@ int main()
         case 6:
           iPlayer.Chancellor();
           break;
+        case 7:
+          iPlayer.King(&players);
+          break;
         }
         iPlayer.Discard(card);
       }
