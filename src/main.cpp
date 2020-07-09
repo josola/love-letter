@@ -294,11 +294,17 @@ int main()
 		if (deck.Size() == 0)
 		{
 			cout << "Deck is empty, players compare hands!\n";
-			sort(gameState.players_.begin(), gameState.players_.end(), [](Player &i) { return i.GetHand().at(0).GetValue(); });
-			cout << gameState.players_.at(0).GetName() << " is the winner!\n";
-			gameState.players_.at(0).Addtoken();
-			cout << gameState.players_.at(0).GetName() << " token count: " << gameState.players_.at(0).GetTokenCount() << '\n';
-			gameState.players_.at(0).Winner(1);
+			Player* winner = nullptr;
+			for (Player& iPlayer : gameState.players_)
+			{
+				if (iPlayer.GetValue() > winner->GetValue())
+				{
+					winner == &iPlayer;
+				}
+			}
+			cout << winner->GetName() << " has the highest hand! " << winner->GetHand().at(0).GetName() << '\n';
+			winner->Addtoken();
+			winner->Winner(1);
 		}
 
 		// spy bonus
