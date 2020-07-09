@@ -191,7 +191,7 @@ void Player::Priest(vector<Player> *players)
   cout << target_player->GetName() << "'s hand is:\n";
   target_player->PrintHand();
 }
-void Player::Baron(vector<Player> *players)
+void Player::Baron(vector<Player> *players) // segmentation fault when executing this function?
 {
   cout << this->GetName() << " choose a target player: ";
   short unsigned int target = 0;
