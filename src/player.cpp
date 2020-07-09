@@ -339,20 +339,13 @@ void Player::King(vector<Player>* players)
   {
     cout << "Choose target player: ";
     cin >> target;
-    if (target != this->GetValue() && target >= 1 && target <= 6 && cin)
+    if (inputCheck.CheckTargetPlayer(target))
     {
-      target_input = true;
-      for (Player &iPlayer : *players)
-      {
-        if (iPlayer.GetValue() == target)
-        {
-          target_player = &iPlayer;
-        }
-      }
+        target_input = true;
     }
     else
     {
-      cout << "Invalid input.\n";
+        cout << "Invalid input.\n";
     }
   }
   cout << target_player->GetName() << " trade hands with ";
