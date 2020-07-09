@@ -37,7 +37,7 @@ int main()
 		cin >> player_count;
 
 		// set players
-		if (inputCheck.CheckStartingPlayerCount(player_count))
+		if (inputCheck.CheckStartingPlayerCount(player_count)) // Doesn't check for bad values, let 1 through to hit an assertion latter in execution.
 		{
 			pass_input_check = true;
 		}
@@ -196,7 +196,7 @@ int main()
 					// play card in hand: without restriction
 					else
 					{
-						bool in_hand = false;
+						bool in_hand = false; // Does not handle character input, allows 'd' to be used and ends player turn before anything happens.
 						while (!in_hand)
 						{
 							cout << iPlayer.GetName() << " play a card: ";
@@ -224,7 +224,7 @@ int main()
 				}
 
 				// discard card
-				discard.Insert(iPlayer.Discard(card));
+				discard.Insert(iPlayer.Discard(card)); // Discard pile shows second card in previous hand? Instead of card that was actually discraded?
 
 				// play card action
 				switch (card)
@@ -242,10 +242,10 @@ int main()
 					iPlayer.Baron(&gameState.players_);
 					break;
 				case 4:
-					iPlayer.Handmaid();
+					iPlayer.Handmaid(); // Play ends after last player plays the Handmaid?
 					break;
 				case 5:
-					iPlayer.Prince(&gameState.players_);
+					iPlayer.Prince(&gameState.players_); // Does not end turn after choosing oneself.
 					break;
 				case 6:
 					iPlayer.Chancellor(&deck);
