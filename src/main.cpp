@@ -1,5 +1,4 @@
 #include "deck.h"
-#include "functions.h"
 #include "player.h"
 #include "reference.h"
 #include "game_state.h"
@@ -275,8 +274,6 @@ int main()
 
 		game_over = true;
 	}
-
-	// PlayGame();
 
 	return 0;
 }
