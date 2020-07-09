@@ -28,7 +28,7 @@ void Player::Reset()
 }
 Card Player::Discard(const int choice)
 {
-  Card* card_output = NULL;
+  Card* card_output = nullptr;
   for (size_t i = 0; i < hand_.size(); i++)
   {
     if (hand_.at(i).GetValue() == choice)
@@ -363,7 +363,6 @@ void Player::King(vector<Player>* players)
 void Player::Countess()
 {
   cout << this->GetName() << " has played the Countess!\n";
-  this->Discard(8);
 }
 void Player::Princess()
 {
