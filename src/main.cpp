@@ -21,9 +21,9 @@ int main()
 {
 	// game state
 	GameState gameState;
-	short unsigned int winning_token_count = 0;
-	short unsigned int current_suitor = 0;
-	short unsigned int round_count = 1;
+	int winning_token_count = 0;
+	int current_suitor = 0;
+	int round_count = 1;
 
 	// input checks
 	InputCheck inputCheck;
