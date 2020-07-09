@@ -18,6 +18,7 @@
 #include "token.h"
 #include "deck.h"
 #include "input_check.h"
+#include "converter.h"
 
 class Player
 {
@@ -51,7 +52,7 @@ public:
   void Handmaid();
   void Prince(vector<Player>* players);
   void Chancellor(Deck* deck);
-  void King(vector<Player>* players);
+  void King(GameState &state, InputCheck &check);
   void Countess();
   void Princess();
 
@@ -71,7 +72,7 @@ private:
   bool playing_ = true;
 
   // data
-  InputCheck inputCheck;
+  Converter convert;
 
 };
 

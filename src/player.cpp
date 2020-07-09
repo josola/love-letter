@@ -330,7 +330,7 @@ void Player::Chancellor(Deck* deck)
     }
   }
 }
-void Player::King(vector<Player>* players)
+void Player::King(GameState &state, InputCheck &check)
 {
   bool target_input = false;
   short unsigned int target = 0;
@@ -338,7 +338,7 @@ void Player::King(vector<Player>* players)
   {
     cout << "Choose target player: ";
     cin >> target;
-    if (inputCheck.CheckTargetPlayer(target))
+    if (check.CheckTargetPlayer(target))
     {
         target_input = true;
     }
@@ -347,7 +347,7 @@ void Player::King(vector<Player>* players)
         cout << "Invalid input.\n";
     }
   }
-  // assign local player object as target
+  Player* target_player = convert.NumPlayer(target, state);
   cout << target_player->GetName() << " trade hands with ";
   cout << this->GetName() << '\n';
   this->hand_.swap(target_player->hand_);
