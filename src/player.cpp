@@ -162,7 +162,7 @@ void Player::Guard(vector<Player> *players)
   }
   cout << "No match!\n";
 }
-void Player::Priest(vector<Player> *players)
+void Player::Priest(vector<Player> *players) // Infinite loop when choosing a target player?
 {
   cout << this->GetName() << " choose a target player: ";
   short unsigned int target = 0;
