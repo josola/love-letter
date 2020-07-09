@@ -258,6 +258,7 @@ int main()
             }
           }
         }
+        discard.Insert(iPlayer.Discard(card));
         switch (card)
         {
         case 0:
@@ -291,7 +292,6 @@ int main()
           iPlayer.Princess();
           break;
         }
-        discard.Insert(iPlayer.Discard(card));
       }
       else
       {
