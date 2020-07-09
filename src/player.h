@@ -36,6 +36,8 @@ public:
   const vector<Card> GetHand() const;
   const bool Status() const;
   const int GetValue() const;
+  const int GetTokenCount() const;
+  const bool SpyStatus() const;
 
   // setters
   void Draw(const Card obj);
@@ -45,6 +47,8 @@ public:
   Card Discard(const int choice);
   void DiscardHand();
   void Playing(const bool state);
+  void Addtoken();
+  void Winner(const bool state);
 
   // printer
   void PrintHand() const;
@@ -69,12 +73,13 @@ private:
   // objects
   Reference reference_;
   vector<Card> hand_;
-  vector<int> tokens_;
+  int token_count_ = 0;
 
   // state
   bool handmaid_ = false;
   bool spy_ = false;
   bool playing_ = true;
+  bool winner_ = false;
 
   // data
   Converter convert;

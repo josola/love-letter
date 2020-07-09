@@ -21,6 +21,8 @@ const string Player::GetName() const { return name_; }
 const vector<Card> Player::GetHand() const { return hand_; }
 const bool Player::Status() const { return playing_; }
 const int Player::GetValue() const { return value_; }
+const int Player::GetTokenCount() const { return token_count_; }
+const bool Player::SpyStatus() const { return spy_; }
 
 // setters
 void Player::Draw(const Card obj) { hand_.push_back(obj); }
@@ -31,10 +33,12 @@ void Player::Reset()
   hand_.clear();
   handmaid_ = false;
   spy_ = false;
+  winner_ = false;
+  playing_ = true;
 }
 Card Player::Discard(const int choice)
 {
-  Card* card_output = nullptr;
+  Card *card_output = nullptr;
   for (size_t i = 0; i < hand_.size(); i++)
   {
     if (hand_.at(i).GetValue() == choice)
@@ -54,11 +58,14 @@ void Player::DiscardHand()
   }
 }
 void Player::Playing(const bool state) { playing_ = state; }
+void Player::Addtoken() { token_count_++; }
+void Player::Winner(const bool state) { winner_ = state; }
 
 // printers
 void Player::PrintHand() const
 {
-  cout << '\n' << this->GetName() << " hand:\n";
+  cout << '\n'
+       << this->GetName() << " hand:\n";
   if (!hand_.empty())
   {
     for (size_t i = 0; i < hand_.size(); i++)
@@ -259,6 +266,15 @@ void Player::Prince(vector<Player> *players)
         cin >> discard;
         if (discard == 'd')
         {
+          for (Card &iCard : this->hand_)
+          {
+            if (iCard.GetValue() == 9)
+            {
+              cout << this->GetName() << " discarded the Princess!\n";
+              cout << this->GetName() << " is out!\n";
+              this->Playing(0);
+            }
+          }
           this->DiscardHand();
           self_discard = true;
         }
@@ -279,6 +295,16 @@ void Player::Prince(vector<Player> *players)
         }
       }
       cout << player_target->GetName() << " discards their hand!\n";
+      for (Card &iCard : player_target->hand_)
+      {
+        if (iCard.GetValue() == 9)
+        {
+          cout << player_target->GetName() << " discarded the Princess!\n";
+          cout << player_target->GetName() << " is out!\n";
+          player_target->Playing(0);
+        }
+      }
+      player_target->DiscardHand();
     }
     else
     {
@@ -286,7 +312,7 @@ void Player::Prince(vector<Player> *players)
     }
   }
 }
-void Player::Chancellor(Deck* deck)
+void Player::Chancellor(Deck *deck)
 {
   bool draw_input = false;
   while (!draw_input)
@@ -311,8 +337,19 @@ void Player::Chancellor(Deck* deck)
     cin >> choice;
     if (choice >= 0 && choice <= 9 && cin)
     {
-      this->Discard(choice);
-      first_card_input = true;
+      if (choice == 9)
+      {
+        cout << this->GetName() << " discarded the Princess!\n";
+        cout << this->GetName() << " is out!\n";
+        this->Playing(0);
+        this->Discard(choice);
+        break;
+      }
+      else
+      {
+        this->Discard(choice);
+        first_card_input = true;
+      }
     }
     else
     {
@@ -327,8 +364,19 @@ void Player::Chancellor(Deck* deck)
     cin >> choice;
     if (choice >= 0 && choice <= 9 && cin)
     {
-      this->Discard(choice);
-      second_card_input = true;
+      if (choice == 9)
+      {
+        cout << this->GetName() << " discarded the Princess!\n";
+        cout << this->GetName() << " is out!\n";
+        this->Playing(0);
+        this->Discard(choice);
+        break;
+      }
+      else
+      {
+        this->Discard(choice);
+        second_card_input = true;
+      }
     }
     else
     {
@@ -346,14 +394,14 @@ void Player::King(GameState &state, InputCheck &check)
     cin >> target;
     if (check.CheckTargetPlayer(target))
     {
-        target_input = true;
+      target_input = true;
     }
     else
     {
-        cout << "Invalid input.\n";
+      cout << "Invalid input.\n";
     }
   }
-  Player* target_player = convert.NumPlayer(target, state);
+  Player *target_player = convert.NumPlayer(target, state);
   cout << target_player->GetName() << " trade hands with ";
   cout << this->GetName() << '\n';
   this->hand_.swap(target_player->hand_);

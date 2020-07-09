@@ -13,6 +13,7 @@
 using std::any_of;
 using std::cin;
 using std::cout;
+using std::sort;
 using std::to_string;
 using std::vector;
 
@@ -64,7 +65,7 @@ int main()
 		// second round and above: reset player stats
 		if (gameState.round_count_ > 1)
 		{
-			for (Player& i : gameState.players_)
+			for (Player &i : gameState.players_)
 			{
 				i.Reset();
 			}
@@ -87,21 +88,14 @@ int main()
 		}
 
 		// deal starting hand
-		for (Player& i : gameState.players_)
+		for (Player &i : gameState.players_)
 		{
 			i.Draw(deck.GetCard(0));
 		}
 
 		// player turn
-		for (Player& iPlayer : gameState.players_)
+		for (Player &iPlayer : gameState.players_)
 		{
-			// game ends with empty deck
-			if (deck.Size() == 0)
-			{
-				game_over = true;
-				break;
-			}
-
 			// player must be playing
 			if (iPlayer.Status())
 			{
@@ -130,7 +124,8 @@ int main()
 				// current player draw card
 				iPlayer.Draw(deck.GetCard(0));
 
-				cout << "\nDeck size: \n" << deck.Size() << '\n';
+				cout << "\nDeck size: \n"
+					 << deck.Size() << '\n';
 
 				cout << "\nDiscard pile:\n";
 				discard.Print();
@@ -168,11 +163,11 @@ int main()
 
 					// countess restriction check
 					bool countess = any_of(in_hand.begin(), in_hand.end(),
-						[](int i) { return i == 8; });
+										   [](int i) { return i == 8; });
 					bool king = any_of(in_hand.begin(), in_hand.end(),
-						[](int i) { return i == 7; });
+									   [](int i) { return i == 7; });
 					bool prince = any_of(in_hand.begin(), in_hand.end(),
-						[](int i) { return i == 5; });
+										 [](int i) { return i == 5; });
 
 					if (countess && king || countess && prince)
 					{
@@ -206,7 +201,7 @@ int main()
 						{
 							cout << iPlayer.GetName() << " play a card: ";
 							cin >> card;
-							for (Card& iCard : hand)
+							for (Card &iCard : hand)
 							{
 								if (iCard.GetValue() == card)
 								{
@@ -265,6 +260,29 @@ int main()
 					iPlayer.Princess();
 					break;
 				}
+
+				// round ends when one player is standing
+				vector<Player *> remaining_players;
+				for (Player &iPlayer : gameState.players_)
+				{
+					if (iPlayer.Status())
+					{
+						remaining_players.push_back(&iPlayer);
+					}
+				}
+				if (remaining_players.size() == 1)
+				{
+					break;
+				}
+
+				// rounds ends with empty deck
+				if (deck.Size() == 0)
+				{
+					break;
+				}
+
+				// increase round count
+				gameState.round_count_++;
 			}
 			else
 			{
@@ -272,129 +290,50 @@ int main()
 			}
 		}
 
-		game_over = true;
+		// round end
+		if (deck.Size() == 0)
+		{
+			cout << "Deck is empty, players compare hands!\n";
+			sort(gameState.players_.begin(), gameState.players_.end(), [](Player &i) { return i.GetHand().at(0).GetValue(); });
+			cout << gameState.players_.at(0).GetName() << " is the winner!\n";
+			gameState.players_.at(0).Addtoken();
+			cout << gameState.players_.at(0).GetName() << " token count: " << gameState.players_.at(0).GetTokenCount() << '\n';
+			gameState.players_.at(0).Winner(1);
+		}
+
+		// spy bonus
+		int spy_count = 0;
+		Player *spy_bonus = nullptr;
+		for (Player &iPlayer : gameState.players_)
+		{
+			if (iPlayer.Status() && iPlayer.SpyStatus() && spy_count < 2)
+			{
+				spy_bonus = &iPlayer;
+				spy_count++;
+			}
+		}
+
+		if (spy_count >= 2)
+		{
+			cout << "Multiple players had the Spy, no one gets a bonus\n";
+		}
+		else
+		{
+			cout << spy_bonus->GetName() << " had the Spy!\n";
+			spy_bonus->Addtoken();
+			cout << spy_bonus->GetName() << " token count: " << spy_bonus->GetTokenCount() << '\n';
+		}
+
+		for (Player &iPlayer : gameState.players_)
+		{
+			if (iPlayer.GetTokenCount() == gameState.winning_token_count_)
+			{
+				cout << iPlayer.GetName() << " has " << iPlayer.GetTokenCount() << " tokens!\n";
+				cout << iPlayer.GetName() << " wins the game!\n";
+				game_over = true;
+			}
+		}
 	}
 
 	return 0;
 }
-
-/*
-	//new structure
-		//end round
-		if (playingDeck.empty())
-		{
-			cout << "The deck is empty, suitors compare hands" <<
-endl; 			for (unsigned int i = 0; i < activeSuitorHands.size(); i++)
-			{
-				if (!activeSuitorHands[i].empty())
-				{
-					cout << suitorNames[i] << " hand: " <<
-activeSuitorHands[i][0] << endl;
-				}
-			}
-			for (unsigned int i = 0; i < activeSuitorHands.size();
-i++)
-			{
-				if (!activeSuitorHands[i].empty())
-				{
-					if (winner < activeSuitorHands[i][0])
-					{
-						winner =
-activeSuitorHands[i][0];
-					}
-				}
-			}
-			for (unsigned int i = 0; i < activeSuitorHands.size();
-i++)
-			{
-				if (!activeSuitorHands[i].empty() &&
-activeSuitorHands[i][0] == winner)
-				{
-					winner = i;
-					break;
-				}
-			}
-			if (activeSuitorCount > 1)
-			{
-				for (unsigned int i = 0; i < activeSuitorHands.size();
-i++)
-				{
-					if (suitorObjects[i].SpyStatus())
-					{
-						tempVector.push_back(i);
-					}
-				}
-				if (tempVector.size() > 1)
-				{
-					cout << "Multiple suitors had the Spy. No one gets a
-bonus." << endl;
-				}
-				if (tempVector.size() == 1)
-				{
-					cout << suitorNames.at(tempVector[0]) << " Has the
-Spy, they gain an extra favor token <3" << endl;
-					suitorObjects.at(tempVector[0]).GainToken();
-					cout << suitorNames.at(tempVector[0]) << " token
-count: " << suitorObjects.at(tempVector[0]).GetTokenCount() << endl;
-				}
-				if (tempVector.empty())
-				{
-					cout << "No one had the Spy this round." <<
-endl;
-				}
-			}
-		}
-		else
-		{
-			for (unsigned int i = 0; i < activeSuitorHands.size();
-i++)
-			{
-				if (!activeSuitorHands[i].empty())
-				{
-					winner = i;
-				}
-			}
-			cout << "Round over. " << suitorNames[winner] << " is the last
-suitor standing." << endl; 			if (suitorObjects[winner].SpyStatus())
-			{
-				cout << suitorNames[winner] << " has the Spy, they gain
-an extra favor token <3" << endl; 				suitorObjects[winner].GainToken();
-				suitorObjects[winner].RemoveSpy();
-				cout << suitorNames[winner] << " token count: " <<
-suitorObjects[winner].GetTokenCount() << endl;
-			}
-		}
-		suitorObjects[winner].GainToken();
-		cout << suitorNames[winner] << " gains one[1] favor token <3" <<
-endl; 		cout << suitorNames[winner] << " total tokens: " <<
-suitorObjects[winner].GetTokenCount() << endl; 		for (unsigned int i = 0; i <
-activeSuitorHands.size(); i++)
-		{
-			suitorObjects[i].RemoveHandmaid();
-		}
-		if (suitorObjects[winner].GetTokenCount() < tokenCountToWin)
-		{
-			++roundCount;
-			activeSuitorHands.clear();
-			suitors.clear();
-			downPile.clear();
-			upPile.clear();
-			activeSuitorCount = 0;
-			cout << "Moving on to the next round..." << endl;
-			std::this_thread::sleep_for(std::chrono::seconds(3));
-			ClearScreen();
-		}
-		if (suitorObjects[winner].GetTokenCount() == tokenCountToWin)
-		{
-			cout << suitorNames[winner] << " has won the heart of the
-princess." << endl; 			cout << "-- GAME OVER --" << endl;
-			activeSuitorHands.clear();
-			suitors.clear();
-			downPile.clear();
-			upPile.clear();
-			activeSuitorCount = 0;
-			game_over = true;
-		}
-	}
-}
-*/
