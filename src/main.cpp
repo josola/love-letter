@@ -261,6 +261,8 @@ int main()
 					break;
 				}
 
+				// no prompt that player turn is ending?
+
 				// round ends when one player is standing
 				vector<Player *> remaining_players;
 				for (Player &iPlayer : gameState.players_)
