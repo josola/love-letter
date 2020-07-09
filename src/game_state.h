@@ -12,11 +12,11 @@
 #ifndef GAME_STATE_h
 #define GAME_STATE_h
 
-#include "player.h"
-
 #include <vector>
 
 using std::vector;
+
+class Player;
 
 struct GameState
 {

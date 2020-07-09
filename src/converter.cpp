@@ -1,4 +1,6 @@
 #include "converter.h"
+#include "player.h"
+#include "game_state.h"
 
 #include <cassert>
 

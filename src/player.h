@@ -12,13 +12,18 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "card.h"
-#include "pile.h"
-#include "reference.h"
-#include "token.h"
-#include "deck.h"
-#include "input_check.h"
 #include "converter.h"
+#include "reference.h"
+
+#include <string>
+
+class Card;
+class Reference;
+class Token;
+class Deck;
+class InputCheck;
+
+using std::string;
 
 class Player
 {
@@ -64,7 +69,7 @@ private:
   // objects
   Reference reference_;
   vector<Card> hand_;
-  vector<Token> tokens_;
+  vector<int> tokens_;
 
   // state
   bool handmaid_ = false;

@@ -22,8 +22,6 @@ int main()
   // game state
 	GameState gameState;
   short unsigned int winning_token_count = 0;
-  vector<Player> players;
-  Reference reference;
   short unsigned int current_suitor = 0;
   short unsigned int round_count = 1;
 
@@ -54,49 +52,7 @@ int main()
     }
   }
 
-  switch (player_count)
-  {
-  case 2:
-      for (short unsigned int i = 0; i < 2; i++)
-      {
-          string name = "PLAYER[" + to_string(i + 1) + "]";
-          gameState.InsertPlayer(Player(name, i + 1, reference));
-      }
-      winning_token_count = 6;
-      break;
-  case 3:
-      for (short unsigned int i = 0; i < 3; i++)
-      {
-          string name = "PLAYER[" + to_string(i + 1) + "]";
-          players.push_back(Player(name, i + 1, reference));
-      }
-      winning_token_count = 5;
-      break;
-  case 4:
-      for (short unsigned int i = 0; i < 4; i++)
-      {
-          string name = "PLAYER[" + to_string(i + 1) + "]";
-          players.push_back(Player(name, i + 1, reference));
-      }
-      winning_token_count = 4;
-      break;
-  case 5:
-      for (short unsigned int i = 0; i < 5; i++)
-      {
-          string name = "PLAYER[" + to_string(i + 1) + "]";
-          players.push_back(Player(name, i + 1, reference));
-      }
-      winning_token_count = 3;
-      break;
-  case 6:
-      for (short unsigned int i = 0; i < 6; i++)
-      {
-          string name = "PLAYER[" + to_string(i + 1) + "]";
-          players.push_back(Player(name, i + 1, reference));
-      }
-      winning_token_count = 3;
-      break;
-  }
+  gameState.SetPlayers(player_count);
 
   // game loop
   bool game_over = false;
@@ -112,7 +68,7 @@ int main()
     // second round and above: reset player stats
     if (round_count > 1)
     {
-      for (Player &i : players)
+      for (Player &i : gameState.players_)
       {
         i.Reset();
       }
@@ -124,7 +80,7 @@ int main()
 
     Deck discard;
     // two player game: discard two cards
-    if (players.size() == 2)
+    if (gameState.players_.size() == 2)
     {
       for (int i = 0; i < 2; i++)
       {
@@ -133,7 +89,7 @@ int main()
     }
 
     // deal starting hand
-    for (Player &i : players)
+    for (Player &i : gameState.players_)
     {
       i.Draw(deck.GetCard(0));
     }
@@ -146,7 +102,7 @@ int main()
     }
 
     // player turn
-    for (Player &iPlayer : players)
+    for (Player &iPlayer : gameState.players_)
     {
       // player must be playing
       if (iPlayer.Status())
@@ -178,17 +134,17 @@ int main()
         discard.Print();
         // print opponents
         cout << "\nOpponents:\n";
-        for (size_t i = 0; i < players.size(); i++)
+        for (size_t i = 0; i < gameState.players_.size(); i++)
         {
-          if (players.at(i).GetValue() != iPlayer.GetValue())
+          if (gameState.players_.at(i).GetValue() != iPlayer.GetValue())
           {
-            if (i == players.size() - 1)
+            if (i == gameState.players_.size() - 1)
             {
-              cout << players.at(i).GetName() << '\n';
+              cout << gameState.players_.at(i).GetName() << '\n';
             }
             else
             {
-              cout << players.at(i).GetName() << ", ";
+              cout << gameState.players_.at(i).GetName() << ", ";
             }
           }
         }
@@ -273,25 +229,25 @@ int main()
           iPlayer.Spy();
           break;
         case 1:
-          iPlayer.Guard(&players);
+          iPlayer.Guard(&gameState.players_);
           break;
         case 2:
-          iPlayer.Priest(&players);
+          iPlayer.Priest(&gameState.players_);
           break;
         case 3:
-          iPlayer.Baron(&players);
+          iPlayer.Baron(&gameState.players_);
           break;
         case 4:
           iPlayer.Handmaid();
           break;
         case 5:
-          iPlayer.Prince(&players);
+          iPlayer.Prince(&gameState.players_);
           break;
         case 6:
           iPlayer.Chancellor(&deck);
           break;
         case 7:
-          iPlayer.King(&players);
+          iPlayer.King(gameState, inputCheck);
           break;
         case 8:
           iPlayer.Countess();

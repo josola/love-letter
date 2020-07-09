@@ -1,4 +1,10 @@
 #include "player.h"
+#include "reference.h"
+#include "deck.h"
+#include "card.h"
+#include "input_check.h"
+#include "game_state.h"
+
 #include <algorithm>
 #include <iostream>
 #include <stdexcept>

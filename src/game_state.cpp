@@ -1,5 +1,6 @@
 #include "game_state.h"
 #include "reference.h"
+#include "player.h"
 
 #include <cassert>
 

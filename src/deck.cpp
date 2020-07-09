@@ -1,4 +1,6 @@
 #include "deck.h"
+#include "card.h"
+
 #include <algorithm>
 #include <chrono>
 #include <iostream>

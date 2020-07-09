@@ -12,16 +12,16 @@
 #ifndef CONVERTER_h
 #define CONVERTER_h
 
-#include "player.h"
-#include "game_state.h"
-
 #include <vector>
+
+class Player;
+class GameState;
 
 using std::vector;
 
 struct Converter
 {
-	Player* NumPlayer(int num, GameState &state);
+	Player* NumPlayer(int num, GameState& state);
 };
 
 #endif // !CONVERTER_h
