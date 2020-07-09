@@ -333,15 +333,15 @@ void Player::Chancellor(Deck* deck)
 void Player::King(vector<Player>* players)
 {
   bool target_input = false;
+  short unsigned int target = 0;
+  Player* target_player = nullptr;
   while (!target_input)
   {
     cout << "Choose target player: ";
-    short unsigned int target = 0;
     cin >> target;
     if (target != this->GetValue() && target >= 1 && target <= 6 && cin)
     {
       target_input = true;
-      Player* target_player = NULL;
       for (Player &iPlayer : *players)
       {
         if (iPlayer.GetValue() == target)
@@ -349,16 +349,16 @@ void Player::King(vector<Player>* players)
           target_player = &iPlayer;
         }
       }
-      cout << target_player->GetName() << " trade hands with ";
-      cout << this->GetName() << '\n';
-      this->hand_.swap(target_player->hand_);
-      this->PrintHand();
     }
     else
     {
       cout << "Invalid input.\n";
     }
   }
+  cout << target_player->GetName() << " trade hands with ";
+  cout << this->GetName() << '\n';
+  this->hand_.swap(target_player->hand_);
+  this->PrintHand();
 }
 void Player::Countess()
 {
