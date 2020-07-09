@@ -15,6 +15,7 @@
 struct InputCheck
 {
 	bool CheckTargetPlayer(int input);
+	bool CheckStartingPlayerCount(int input);
 };
 
 #endif // !INPUT_CHECK_h

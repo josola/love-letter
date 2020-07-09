@@ -11,3 +11,15 @@ bool InputCheck::CheckTargetPlayer(int input)
 		return false;
 	}
 }
+
+bool InputCheck::CheckStartingPlayerCount(int input)
+{
+	if (input >= 1 && input <= 9)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
