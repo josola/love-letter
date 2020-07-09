@@ -37,7 +37,7 @@ int main()
 		cin >> player_count;
 
 		// set players
-		if (inputCheck.CheckStartingPlayerCount(player_count)) // Doesn't check for bad values, let 1 through to hit an assertion latter in execution.
+		if (inputCheck.CheckStartingPlayerCount(player_count))
 		{
 			pass_input_check = true;
 		}
@@ -133,15 +133,22 @@ int main()
 				cout << "\nOpponents:\n"; // Extra comma after player name when on second player turn?
 				for (size_t i = 0; i < gameState.players_.size(); i++)
 				{
-					if (gameState.players_.at(i).GetValue() != iPlayer.GetValue())
+					if (gameState.players_.size() == 2 && gameState.players_.at(i).GetValue() != iPlayer.GetValue())
 					{
-						if (i == gameState.players_.size() - 1)
+						cout << gameState.players_.at(i).GetName() << '\n';
+					}
+					else
+					{
+						if (gameState.players_.at(i).GetValue() != iPlayer.GetValue())
 						{
-							cout << gameState.players_.at(i).GetName() << '\n';
-						}
-						else
-						{
-							cout << gameState.players_.at(i).GetName() << ", ";
+							if (i == gameState.players_.size() - 1)
+							{
+								cout << gameState.players_.at(i).GetName() << '\n';
+							}
+							else
+							{
+								cout << gameState.players_.at(i).GetName() << ", ";
+							}
 						}
 					}
 				}
@@ -296,8 +303,8 @@ int main()
 		if (deck.Size() == 0)
 		{
 			cout << "Deck is empty, players compare hands!\n";
-			Player* winner = nullptr;
-			for (Player& iPlayer : gameState.players_)
+			Player *winner = nullptr;
+			for (Player &iPlayer : gameState.players_)
 			{
 				if (iPlayer.GetValue() > winner->GetValue())
 				{
