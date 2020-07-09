@@ -14,7 +14,7 @@ bool InputCheck::CheckTargetPlayer(int input)
 
 bool InputCheck::CheckStartingPlayerCount(int input)
 {
-	if (input >= 1 && input <= 9)
+	if (input >= 2 && input <= 9)
 	{
 		return true;
 	}
