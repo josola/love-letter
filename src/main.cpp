@@ -130,7 +130,7 @@ int main()
 				cout << "\nDiscard pile:\n";
 				discard.Print();
 
-				cout << "\nOpponents:\n";
+				cout << "\nOpponents:\n"; // Extra comma after player name when on second player turn?
 				for (size_t i = 0; i < gameState.players_.size(); i++)
 				{
 					if (gameState.players_.at(i).GetValue() != iPlayer.GetValue())
