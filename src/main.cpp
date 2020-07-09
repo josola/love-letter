@@ -2,6 +2,9 @@
 #include "functions.h"
 #include "player.h"
 #include "reference.h"
+#include "game_state.h"
+#include "input_check.h"
+
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -17,70 +20,31 @@ using std::vector;
 int main()
 {
   // game state
+	GameState gameState;
   short unsigned int winning_token_count = 0;
   vector<Player> players;
   Reference reference;
   short unsigned int current_suitor = 0;
   short unsigned int round_count = 1;
 
+  // input checks
+  InputCheck inputCheck;
+
   // Tasks that are performed at the start of every GAME.
   cout << "-- WELCOME TO LOVE LETTER --\n";
 
   // starting player count
   bool correct_player_count = false;
+  int player_count = 0;
   while (!correct_player_count)
   {
     cout << "How many suitors will be playing: ";
-    int player_count = 0;
     cin >> player_count;
 
     // set players
-    if (player_count >= 2 && player_count <= 6 && cin)
+    if (inputCheck.CheckStartingPlayerCount(player_count))
     {
       correct_player_count = true;
-      switch (player_count)
-      {
-      case 2:
-        for (short unsigned int i = 0; i < 2; i++)
-        {
-          string name = "PLAYER[" + to_string(i + 1) + "]";
-          players.push_back(Player(name, i + 1, reference));
-        }
-        winning_token_count = 6;
-        break;
-      case 3:
-        for (short unsigned int i = 0; i < 3; i++)
-        {
-          string name = "PLAYER[" + to_string(i + 1) + "]";
-          players.push_back(Player(name, i + 1, reference));
-        }
-        winning_token_count = 5;
-        break;
-      case 4:
-        for (short unsigned int i = 0; i < 4; i++)
-        {
-          string name = "PLAYER[" + to_string(i + 1) + "]";
-          players.push_back(Player(name, i + 1, reference));
-        }
-        winning_token_count = 4;
-        break;
-      case 5:
-        for (short unsigned int i = 0; i < 5; i++)
-        {
-          string name = "PLAYER[" + to_string(i + 1) + "]";
-          players.push_back(Player(name, i + 1, reference));
-        }
-        winning_token_count = 3;
-        break;
-      case 6:
-        for (short unsigned int i = 0; i < 6; i++)
-        {
-          string name = "PLAYER[" + to_string(i + 1) + "]";
-          players.push_back(Player(name, i + 1, reference));
-        }
-        winning_token_count = 3;
-        break;
-      }
     }
     else
     {
@@ -88,6 +52,50 @@ int main()
       cin.clear();
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
+  }
+
+  switch (player_count)
+  {
+  case 2:
+      for (short unsigned int i = 0; i < 2; i++)
+      {
+          string name = "PLAYER[" + to_string(i + 1) + "]";
+          gameState.InsertPlayer(Player(name, i + 1, reference));
+      }
+      winning_token_count = 6;
+      break;
+  case 3:
+      for (short unsigned int i = 0; i < 3; i++)
+      {
+          string name = "PLAYER[" + to_string(i + 1) + "]";
+          players.push_back(Player(name, i + 1, reference));
+      }
+      winning_token_count = 5;
+      break;
+  case 4:
+      for (short unsigned int i = 0; i < 4; i++)
+      {
+          string name = "PLAYER[" + to_string(i + 1) + "]";
+          players.push_back(Player(name, i + 1, reference));
+      }
+      winning_token_count = 4;
+      break;
+  case 5:
+      for (short unsigned int i = 0; i < 5; i++)
+      {
+          string name = "PLAYER[" + to_string(i + 1) + "]";
+          players.push_back(Player(name, i + 1, reference));
+      }
+      winning_token_count = 3;
+      break;
+  case 6:
+      for (short unsigned int i = 0; i < 6; i++)
+      {
+          string name = "PLAYER[" + to_string(i + 1) + "]";
+          players.push_back(Player(name, i + 1, reference));
+      }
+      winning_token_count = 3;
+      break;
   }
 
   // game loop
