@@ -21,7 +21,7 @@ class Player;
 struct GameState
 {
 	// methods
-	void InsertPlayer(Player &player);
+	void InsertPlayer(Player player);
 	void SetPlayers(int count);
 
 	// data

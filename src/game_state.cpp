@@ -6,7 +6,7 @@
 
 using std::to_string;
 
-void GameState::InsertPlayer(Player& player)
+void GameState::InsertPlayer(Player player)
 {
 	players_.push_back(player);
 }
