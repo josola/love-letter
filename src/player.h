@@ -17,6 +17,7 @@
 #include "reference.h"
 #include "token.h"
 #include "deck.h"
+#include "input_check.h"
 
 class Player
 {
@@ -68,6 +69,10 @@ private:
   bool handmaid_ = false;
   bool spy_ = false;
   bool playing_ = true;
+
+  // data
+  InputCheck inputCheck;
+
 };
 
 #endif
