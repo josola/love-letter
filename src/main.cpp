@@ -21,7 +21,6 @@ int main()
 {
 	// game state
 	GameState gameState;
-	int winning_token_count = 0;
 	int current_suitor = 0;
 	int round_count = 1;
 
