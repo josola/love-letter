@@ -312,7 +312,7 @@ void Player::Prince(vector<Player> *players)
     }
   }
 }
-void Player::Chancellor(Deck *deck)
+void Player::Chancellor(Deck *deck) // infinite loop when drawing two cards?
 {
   bool draw_input = false;
   while (!draw_input)
