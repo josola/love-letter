@@ -27,6 +27,8 @@ struct GameState
 	// data
 	vector<Player> players_;
 	int winning_token_count_ = 0;
+	int current_player_ = 0;
+	int round_count_ = 1;
 };
 
 #endif // !GAME_STATE_h

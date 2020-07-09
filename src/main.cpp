@@ -21,8 +21,6 @@ int main()
 {
 	// game state
 	GameState gameState;
-	int current_suitor = 0;
-	int round_count = 1;
 
 	// checks
 	InputCheck inputCheck;
@@ -31,9 +29,9 @@ int main()
 	cout << "-- WELCOME TO LOVE LETTER --\n";
 
 	// starting player count
-	bool correct_player_count = false;
+	bool pass_input_check = false;
 	int player_count = 0;
-	while (!correct_player_count)
+	while (!pass_input_check)
 	{
 		cout << "How many suitors will be playing: ";
 		cin >> player_count;
@@ -41,7 +39,7 @@ int main()
 		// set players
 		if (inputCheck.CheckStartingPlayerCount(player_count))
 		{
-			correct_player_count = true;
+			pass_input_check = true;
 		}
 		else
 		{
@@ -62,10 +60,10 @@ int main()
 		deck.Set();
 		deck.Shuffle();
 
-		cout << "-- ROUND " << round_count << " --\n";
+		cout << "-- ROUND " << gameState.round_count_ << " --\n";
 
 		// second round and above: reset player stats
-		if (round_count > 1)
+		if (gameState.round_count_ > 1)
 		{
 			for (Player& i : gameState.players_)
 			{
@@ -74,10 +72,12 @@ int main()
 		}
 
 		Deck aside;
+
 		// discard to down pile
 		aside.Insert(deck.GetCard(0));
 
 		Deck discard;
+
 		// two player game: discard two cards
 		if (gameState.players_.size() == 2)
 		{
@@ -93,25 +93,25 @@ int main()
 			i.Draw(deck.GetCard(0));
 		}
 
-		// game ends with empty deck
-		if (deck.Size() == 0)
-		{
-			game_over = true;
-			break;
-		}
-
 		// player turn
 		for (Player& iPlayer : gameState.players_)
 		{
+			// game ends with empty deck
+			if (deck.Size() == 0)
+			{
+				game_over = true;
+				break;
+			}
+
 			// player must be playing
 			if (iPlayer.Status())
 			{
 				// remove handmaid protection
 				iPlayer.SetProtection(0);
 
-				// draw card from deck
-				bool draw_input = false;
-				while (!draw_input)
+				// draw input check
+				bool check_passed = false;
+				while (!check_passed)
 				{
 					cout << iPlayer.GetName() << " draw a card (d): ";
 					char draw = ' ';
@@ -127,11 +127,15 @@ int main()
 						cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					}
 				}
+
+				// current player draw card
 				iPlayer.Draw(deck.GetCard(0));
-				deck.Size();
+
+				cout << "\nDeck size: \n" << deck.Size() << '\n';
+
 				cout << "\nDiscard pile:\n";
 				discard.Print();
-				// print opponents
+
 				cout << "\nOpponents:\n";
 				for (size_t i = 0; i < gameState.players_.size(); i++)
 				{
@@ -147,13 +151,15 @@ int main()
 						}
 					}
 				}
-				iPlayer.PrintHand();
 
+				iPlayer.PrintHand();
 				cout << "--\n";
+
 				int card = 0;
 				bool card_input = false;
 				while (!card_input)
 				{
+					// log cards already in hand
 					vector<int> in_hand;
 					vector<Card> hand = iPlayer.GetHand();
 					for (const Card iCard : hand)
@@ -161,7 +167,7 @@ int main()
 						in_hand.push_back(iCard.GetValue());
 					}
 
-					// countess restriction
+					// countess restriction check
 					bool countess = any_of(in_hand.begin(), in_hand.end(),
 						[](int i) { return i == 8; });
 					bool king = any_of(in_hand.begin(), in_hand.end(),
@@ -192,6 +198,7 @@ int main()
 							}
 						}
 					}
+
 					// play card in hand: without restriction
 					else
 					{
@@ -221,7 +228,11 @@ int main()
 						}
 					}
 				}
+
+				// discard card
 				discard.Insert(iPlayer.Discard(card));
+
+				// play card action
 				switch (card)
 				{
 				case 0:
