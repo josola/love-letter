@@ -334,7 +334,6 @@ void Player::King(vector<Player>* players)
 {
   bool target_input = false;
   short unsigned int target = 0;
-  Player* target_player = nullptr;
   while (!target_input)
   {
     cout << "Choose target player: ";
@@ -348,6 +347,7 @@ void Player::King(vector<Player>* players)
         cout << "Invalid input.\n";
     }
   }
+  // assign local player object as target
   cout << target_player->GetName() << " trade hands with ";
   cout << this->GetName() << '\n';
   this->hand_.swap(target_player->hand_);
