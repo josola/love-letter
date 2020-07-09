@@ -22,10 +22,11 @@ struct GameState
 {
 	// methods
 	void InsertPlayer(Player &player);
-	void SetPlayers();
+	void SetPlayers(int count);
 
 	// data
 	vector<Player> players_;
+	int winning_token_count_ = 0;
 };
 
 #endif // !GAME_STATE_h
