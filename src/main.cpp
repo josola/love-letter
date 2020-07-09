@@ -24,7 +24,7 @@ int main()
 	int current_suitor = 0;
 	int round_count = 1;
 
-	// input checks
+	// checks
 	InputCheck inputCheck;
 
 	// Tasks that are performed at the start of every GAME.
