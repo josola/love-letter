@@ -105,6 +105,7 @@ void Player::Guard(vector<Player> *players)
     cin >> target;
     if (target != this->GetValue() && target >= 1 && target <= 6 && cin)
     {
+      bool handmaid_protection = false;
       for (Player &iPlayer : *players)
       {
         if (iPlayer.GetValue() == target)
@@ -114,9 +115,14 @@ void Player::Guard(vector<Player> *players)
             cout << iPlayer.GetName() << " has Handmaid protection...\n";
             cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            handmaid_protection = true;
             break;
           }
         }
+      }
+      if (handmaid_protection)
+      {
+        break;
       }
       for (Player &iPlayer : *players)
       {
@@ -232,7 +238,9 @@ void Player::Baron(vector<Player> *players) // segmentation fault when executing
       cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
   }
-  Player *target_player = NULL;
+
+  // assign target player to a variable
+  Player *target_player = nullptr;
   for (Player &iPlayer : *players)
   {
     if (iPlayer.GetValue() == target)
@@ -240,16 +248,20 @@ void Player::Baron(vector<Player> *players) // segmentation fault when executing
       target_player = &iPlayer;
     }
   }
-  vector<Card> *hand;
+
+  // assign this player's hand to a container
+  vector<Card*> hand;
   for (Card iCard : this->GetHand())
   {
-    hand->push_back(iCard);
+    hand.push_back(&iCard);
   }
+
+  // assign target player's hand to a container
   for (Card iCard : target_player->GetHand())
   {
-    hand->push_back(iCard);
+    hand.push_back(&iCard);
   }
-  if (hand->at(0).GetValue() > hand->at(1).GetValue())
+  if (hand.at(0)->GetValue() > hand.at(1)->GetValue())
   {
     cout << target_player->GetName() << " had the lower card!\n";
     cout << target_player->GetName() << " is out!\n";
@@ -257,7 +269,7 @@ void Player::Baron(vector<Player> *players) // segmentation fault when executing
     target_player->Reset();
     target_player->Playing(0);
   }
-  else if (hand->at(0).GetValue() == hand->at(1).GetValue())
+  else if (hand.at(0)->GetValue() == hand.at(1)->GetValue())
   {
     cout << "Hands are equal! Play moves on!\n";
   }
