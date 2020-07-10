@@ -303,7 +303,8 @@ int main()
 					break;
 				}
 
-				// no prompt that player turn is ending?
+				cout << '\n' << iPlayer.GetName() << " end turn.\n";
+				cout << "Moving on to " << iPlayer.GetName() << "'s turn.\n";
 
 				// round ends when one player is standing
 				vector<Player *> remaining_players;
