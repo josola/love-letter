@@ -36,7 +36,7 @@ void Player::Reset()
   winner_ = false;
   playing_ = true;
 }
-Card* Player::Discard(const int choice)
+Card *Player::Discard(const int choice)
 {
   Card *card_output = nullptr;
   for (size_t i = 0; i < hand_.size(); i++)
@@ -127,6 +127,12 @@ void Player::Guard(vector<Player> *players)
       }
       break;
     }
+    else if (target == this->GetValue())
+    {
+      cout << "You cannot choose yourself.\n";
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
     else
     {
       cout << target << " is not a player...\n";
@@ -203,19 +209,27 @@ void Player::Priest(vector<Player> *players) // Infinite loop when choosing a ta
 }
 void Player::Baron(vector<Player> *players) // segmentation fault when executing this function?
 {
-  cout << this->GetName() << " choose a target player: ";
   short unsigned int target = 0;
-  cin >> target;
   bool target_input = false;
   while (!target_input)
   {
+    cout << this->GetName() << " choose a target player: ";
+    cin >> target;
     if (target != this->GetValue() && target >= 1 && target <= 6 && cin)
     {
       target_input = true;
     }
+    else if (this->GetValue() == target)
+    {
+      cout << "You cannot choose yourself\n";
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
     else
     {
       cout << "Invalid input.\n";
+      cin.clear();
+      cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
   }
   Player *target_player = NULL;
