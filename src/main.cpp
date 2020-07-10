@@ -95,6 +95,11 @@ int main()
 		}
 
 		// player turn
+		bool round_end = false;
+		while (!round_end)
+		{
+
+		}
 		for (Player &iPlayer : gameState.players_)
 		{
 			// player must be playing
@@ -303,9 +308,6 @@ int main()
 					break;
 				}
 
-				cout << '\n' << iPlayer.GetName() << " end turn.\n";
-				cout << "Moving on to " << iPlayer.GetName() << "'s turn.\n";
-
 				// round ends when one player is standing
 				vector<Player *> remaining_players;
 				for (Player &iPlayer : gameState.players_)
@@ -325,6 +327,9 @@ int main()
 				{
 					break;
 				}
+
+				cout << '\n' << iPlayer.GetName() << " end turn.\n";
+				cout << "Moving on to " << iPlayer.GetName() << "'s turn.\n";
 
 				// increase round count
 				gameState.round_count_++;
