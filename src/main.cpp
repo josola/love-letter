@@ -125,8 +125,8 @@ int main()
 				// current player draw card
 				iPlayer.Draw(deck.GetCard(0));
 
-				cout << "\nDeck size: \n"
-					 << deck.Size() << '\n';
+				cout << "\nDeck size: \n";
+				cout << deck.Size() << '\n';
 
 				cout << "\nDiscard pile:\n";
 				discard.Print();
