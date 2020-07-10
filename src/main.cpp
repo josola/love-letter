@@ -258,7 +258,7 @@ int main()
 					iPlayer.Handmaid();
 					break;
 				case 5:
-					iPlayer.Prince(&gameState.players_); // Does not end turn after choosing oneself.
+					iPlayer.Prince(&gameState.players_);
 					break;
 				case 6:
 					iPlayer.Chancellor(&deck);

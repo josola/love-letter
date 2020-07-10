@@ -316,6 +316,7 @@ void Player::Prince(vector<Player> *players)
         }
       }
       player_target->DiscardHand();
+      target_input = true;
     }
     else
     {
@@ -422,7 +423,7 @@ void Player::Countess()
 {
   cout << this->GetName() << " has played the Countess!\n";
 }
-void Player::Princess()
+void Player::Princess() // Segmentation fault when player discards Princess?
 {
   cout << this->GetName() << " has played the Princess!\n";
   cout << this->GetName() << " is out!\n";
