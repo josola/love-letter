@@ -44,11 +44,12 @@ public:
   void GainSpy();
   void Reset();
   void SetProtection(const bool state);
-  Card Discard(const int choice);
+  Card* Discard(const int choice);
   void DiscardHand();
   void Playing(const bool state);
   void Addtoken();
   void Winner(const bool state);
+  void RemoveCard(const int card);
 
   // printer
   void PrintHand() const;

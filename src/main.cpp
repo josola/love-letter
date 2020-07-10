@@ -236,7 +236,8 @@ int main()
 				}
 
 				// discard card
-				discard.Insert(iPlayer.Discard(card)); // Discard pile shows second card in previous hand? Instead of card that was actually discraded?
+				discard.Insert(*iPlayer.Discard(card));
+				iPlayer.RemoveCard(card);
 
 				// play card action
 				switch (card)

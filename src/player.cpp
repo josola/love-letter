@@ -36,7 +36,7 @@ void Player::Reset()
   winner_ = false;
   playing_ = true;
 }
-Card Player::Discard(const int choice)
+Card* Player::Discard(const int choice)
 {
   Card *card_output = nullptr;
   for (size_t i = 0; i < hand_.size(); i++)
@@ -44,11 +44,10 @@ Card Player::Discard(const int choice)
     if (hand_.at(i).GetValue() == choice)
     {
       card_output = &hand_.at(i);
-      hand_.erase(hand_.begin() + i);
       break;
     }
   }
-  return *card_output;
+  return card_output;
 }
 void Player::DiscardHand()
 {
@@ -60,6 +59,17 @@ void Player::DiscardHand()
 void Player::Playing(const bool state) { playing_ = state; }
 void Player::Addtoken() { token_count_++; }
 void Player::Winner(const bool state) { winner_ = state; }
+void Player::RemoveCard(const int card)
+{
+  for (size_t i = 0; i < hand_.size(); i++)
+  {
+    if (hand_.at(i).GetValue() == card)
+    {
+      hand_.erase(hand_.begin() + i);
+      break;
+    }
+  }
+}
 
 // printers
 void Player::PrintHand() const
@@ -150,7 +160,7 @@ void Player::Guard(vector<Player> *players)
     }
   }
 
-  vector<Card> target_hand = target_player->GetHand();
+  vector<Card> target_hand = target_player->GetHand(); // Segmentation fault after match is made?
   for (Card &iCard : target_hand)
   {
     if (iCard.GetValue() == card_choice)
