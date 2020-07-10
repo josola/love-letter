@@ -250,7 +250,7 @@ void Player::Baron(GameState &state) // segmentation fault when executing this f
   }
 
   // assign this player's hand to a container
-  vector<Card*> hand;
+  vector<Card *> hand;
   for (Card iCard : this->GetHand())
   {
     hand.push_back(&iCard);
@@ -331,18 +331,26 @@ void Player::Prince(vector<Player> *players)
           player_target = &iPlayer;
         }
       }
-      cout << player_target->GetName() << " discards their hand!\n";
-      for (Card &iCard : player_target->hand_)
+      if (player_target->ProtectionStatus())
       {
-        if (iCard.GetValue() == 9)
-        {
-          cout << player_target->GetName() << " discarded the Princess!\n";
-          cout << player_target->GetName() << " is out!\n";
-          player_target->Playing(0);
-        }
+        cout << player_target->GetName() << " has Handmaid protection!\n";
+        break;
       }
-      player_target->DiscardHand();
-      target_input = true;
+      else
+      {
+        cout << player_target->GetName() << " discards their hand!\n";
+        for (Card &iCard : player_target->hand_)
+        {
+          if (iCard.GetValue() == 9)
+          {
+            cout << player_target->GetName() << " discarded the Princess!\n";
+            cout << player_target->GetName() << " is out!\n";
+            player_target->Playing(0);
+          }
+        }
+        player_target->DiscardHand();
+        target_input = true;
+      }
     }
     else
     {
