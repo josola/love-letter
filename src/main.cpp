@@ -16,6 +16,7 @@ using std::cout;
 using std::sort;
 using std::to_string;
 using std::vector;
+using std::none_of;
 
 int main()
 {
@@ -153,6 +154,34 @@ int main()
 					}
 				}
 
+				// print opponents with Handmaid protection
+				cout << "\nHandmaid protection:\n";
+				for (size_t i = 0; i < gameState.players_.size(); i++)
+				{
+					if (gameState.players_.size() == 2 && gameState.players_.at(i).GetValue() != iPlayer.GetValue() && gameState.players_.at(i).ProtectionStatus())
+					{
+						cout << gameState.players_.at(i).GetName() << '\n';
+					}
+					else
+					{
+						if (gameState.players_.at(i).GetValue() != iPlayer.GetValue() && gameState.players_.at(i).ProtectionStatus())
+						{
+							if (i == gameState.players_.size() - 1)
+							{
+								cout << gameState.players_.at(i).GetName() << '\n';
+							}
+							else if (gameState.players_.at(i).ProtectionStatus())
+							{
+								cout << gameState.players_.at(i).GetName() << ", ";
+							}
+						}
+					}
+				}
+				if (none_of(gameState.players_.begin(), gameState.players_.end(), [](Player& i) { return i.ProtectionStatus(); }))
+				{
+					cout << "NONE\n";
+				}
+
 				iPlayer.PrintHand();
 				cout << "--\n";
 
@@ -252,7 +281,7 @@ int main()
 					iPlayer.Priest(&gameState.players_);
 					break;
 				case 3:
-					iPlayer.Baron(&gameState.players_);
+					iPlayer.Baron(gameState);
 					break;
 				case 4:
 					iPlayer.Handmaid();
