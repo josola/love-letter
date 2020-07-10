@@ -255,7 +255,7 @@ int main()
 					iPlayer.Baron(&gameState.players_);
 					break;
 				case 4:
-					iPlayer.Handmaid(); // Play ends after last player plays the Handmaid?
+					iPlayer.Handmaid();
 					break;
 				case 5:
 					iPlayer.Prince(&gameState.players_); // Does not end turn after choosing oneself.

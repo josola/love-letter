@@ -287,6 +287,7 @@ void Player::Prince(vector<Player> *players)
           }
           this->DiscardHand();
           self_discard = true;
+          target_input = true;
         }
         else
         {
