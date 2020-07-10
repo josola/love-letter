@@ -23,3 +23,16 @@ bool InputCheck::CheckStartingPlayerCount(int input)
 		return false;
 	}
 }
+
+bool InputCheck::CheckCard(int input)
+{
+	if (input >= 0 && input <= 9)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+	
+}

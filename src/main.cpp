@@ -130,7 +130,7 @@ int main()
 				cout << "\nDiscard pile:\n";
 				discard.Print();
 
-				cout << "\nOpponents:\n"; // Extra comma after player name when on second player turn?
+				cout << "\nOpponents:\n";
 				for (size_t i = 0; i < gameState.players_.size(); i++)
 				{
 					if (gameState.players_.size() == 2 && gameState.players_.at(i).GetValue() != iPlayer.GetValue())
@@ -203,28 +203,33 @@ int main()
 					// play card in hand: without restriction
 					else
 					{
-						bool in_hand = false; // Does not handle character input, allows 'd' to be used and ends player turn before anything happens.
+						bool in_hand = false;
 						while (!in_hand)
 						{
 							cout << iPlayer.GetName() << " play a card: ";
 							cin >> card;
-							for (Card &iCard : hand)
+
+							if (!inputCheck.CheckCard(card))
 							{
-								if (iCard.GetValue() == card)
-								{
-									in_hand = true;
-									card_input = true;
-								}
-							}
-							if (!in_hand)
-							{
-								cout << "Not in hand.\n";
-								cin.clear();
-								cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+								cout << "Invalid input.\n";
 							}
 							else
 							{
-								break;
+								for (Card &iCard : hand)
+								{
+									if (iCard.GetValue() == card)
+									{
+										in_hand = true;
+										card_input = true;
+										break;
+									}
+								}
+								if (!in_hand)
+								{
+									cout << "Not in hand.\n";
+									cin.clear();
+									cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+								}
 							}
 						}
 					}
