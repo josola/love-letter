@@ -323,6 +323,7 @@ void Player::Prince(vector<Player> *players)
     }
     else if (target >= 1 && target <= 6 && cin)
     {
+      // set target player
       Player *player_target = NULL;
       for (Player &iPlayer : *players)
       {
@@ -331,6 +332,8 @@ void Player::Prince(vector<Player> *players)
           player_target = &iPlayer;
         }
       }
+
+      // target cannot be target with Handmaid protection
       if (player_target->ProtectionStatus())
       {
         cout << player_target->GetName() << " has Handmaid protection!\n";
