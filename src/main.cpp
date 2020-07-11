@@ -126,7 +126,10 @@ int main()
 					}
 
 					// current player draw card
-					iPlayer.Draw(deck.GetCard(0));
+					// iPlayer.Draw(deck.GetCard(0)); // standard logic
+
+					//debugging logic
+					iPlayer.Draw(Card("BARON", 3, "REF"));
 
 					cout << "\nDeck size: \n";
 					cout << deck.Size() << '\n';
@@ -284,13 +287,13 @@ int main()
 						iPlayer.Priest(&gameState.players_);
 						break;
 					case 3:
-						iPlayer.Baron(gameState);
+						iPlayer.Baron(gameState, inputCheck);
 						break;
 					case 4:
 						iPlayer.Handmaid();
 						break;
 					case 5:
-						iPlayer.Prince(&gameState.players_); // does not respect handmaid protection
+						iPlayer.Prince(gameState);
 						break;
 					case 6:
 						iPlayer.Chancellor(&deck);

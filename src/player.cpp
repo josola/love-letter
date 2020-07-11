@@ -213,15 +213,15 @@ void Player::Priest(vector<Player> *players) // Infinite loop when choosing a ta
   cout << target_player->GetName() << "'s hand is:\n";
   target_player->PrintHand();
 }
-void Player::Baron(GameState &state) // segmentation fault when executing this function?
+void Player::Baron(GameState &state, InputCheck &check) // segmentation fault when executing this function?
 {
-  short unsigned int target = 0;
+  int target = 0;
   bool target_input = false;
   while (!target_input)
   {
     cout << this->GetName() << " choose a target player: ";
     cin >> target;
-    if (target != this->GetValue() && target >= 1 && target <= 6 && cin)
+    if (check.CheckTargetPlayer(target))
     {
       target_input = true;
     }
@@ -240,28 +240,22 @@ void Player::Baron(GameState &state) // segmentation fault when executing this f
   }
 
   // assign target player to a variable
-  Player *target_player = nullptr;
-  for (Player &iPlayer : state.players_)
-  {
-    if (iPlayer.GetValue() == target)
-    {
-      target_player = &iPlayer;
-    }
-  }
+  Player *target_player = convert.NumPlayer(target, state);
 
   // assign this player's hand to a container
-  vector<Card *> hand;
-  for (Card iCard : this->GetHand())
+  vector<Card> aggressor_hand;
+  for (Card iCard : this->hand_)
   {
-    hand.push_back(&iCard);
+    aggressor_hand.push_back(iCard);
+  }
+  // assign target player's hand to a container
+  vector<Card> target_hand;
+  for (Card jCard : target_player->hand_)
+  {
+    target_hand.push_back(jCard);
   }
 
-  // assign target player's hand to a container
-  for (Card iCard : target_player->GetHand())
-  {
-    hand.push_back(&iCard);
-  }
-  if (hand.at(0)->GetValue() > hand.at(1)->GetValue())
+  if (aggressor_hand.at(0).GetValue() > target_hand.at(0).GetValue())
   {
     cout << target_player->GetName() << " had the lower card!\n";
     cout << target_player->GetName() << " is out!\n";
@@ -269,7 +263,7 @@ void Player::Baron(GameState &state) // segmentation fault when executing this f
     target_player->Reset();
     target_player->Playing(0);
   }
-  else if (hand.at(0)->GetValue() == hand.at(1)->GetValue())
+  else if (aggressor_hand.at(0).GetValue() == target_hand.at(0).GetValue())
   {
     cout << "Hands are equal! Play moves on!\n";
   }
@@ -283,13 +277,13 @@ void Player::Baron(GameState &state) // segmentation fault when executing this f
   }
 }
 void Player::Handmaid() { this->SetProtection(1); }
-void Player::Prince(vector<Player> *players)
+void Player::Prince(GameState &state)
 {
   bool target_input = false;
   while (!target_input)
   {
     cout << this->GetName() << " choose a target player: ";
-    short unsigned int target = 0;
+    int target = 0;
     cin >> target;
     if (target == this->GetValue())
     {
@@ -324,14 +318,7 @@ void Player::Prince(vector<Player> *players)
     else if (target >= 1 && target <= 6 && cin)
     {
       // set target player
-      Player *player_target = NULL;
-      for (Player &iPlayer : *players)
-      {
-        if (iPlayer.GetValue() == target)
-        {
-          player_target = &iPlayer;
-        }
-      }
+      Player* player_target = convert.NumPlayer(target, state);
 
       // target cannot be target with Handmaid protection
       if (player_target->ProtectionStatus())

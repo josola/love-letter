@@ -58,9 +58,9 @@ public:
   void Spy();
   void Guard(vector<Player>* players);
   void Priest(vector<Player>* players);
-  void Baron(GameState &state);
+  void Baron(GameState &state, InputCheck &check);
   void Handmaid();
-  void Prince(vector<Player>* players);
+  void Prince(GameState &state);
   void Chancellor(Deck* deck);
   void King(GameState &state, InputCheck &check);
   void Countess();
