@@ -12,9 +12,11 @@
 #ifndef INPUT_CHECK_h
 #define INPUT_CHECK_h
 
+class GameState;
+
 struct InputCheck
 {
-	const bool CheckTargetPlayer(const int input);
+	const bool CheckTarget(int input, GameState &state);
 	const bool CheckStartingPlayerCount(const int input);
 	const bool CheckCard(const int input);
 };

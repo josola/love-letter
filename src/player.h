@@ -15,15 +15,14 @@
 #include "converter.h"
 #include "reference.h"
 
-#include <string>
-
 class Card;
 class Reference;
 class Token;
 class Deck;
 class InputCheck;
-
-using std::string;
+class Deck;
+string;
+vector<Card>;
 
 class Player
 {
@@ -38,33 +37,22 @@ public:
   const int GetValue() const;
   const int GetTokenCount() const;
   const bool SpyStatus() const;
+  Converter* GetConversion();
 
   // setters
   void Draw(const Card obj);
   void GainSpy();
   void Reset();
   void SetProtection(const bool state);
-  Card* Discard(const int choice);
-  void DiscardHand();
-  void Playing(const bool state);
+  void Discard(const int choice, Deck &deck);
+  void DiscardHand(Deck &deck);
   void Addtoken();
   void Winner(const bool state);
   void RemoveCard(const int card);
+  void Out(Deck &deck);
 
   // printer
   void PrintHand() const;
-
-  // actions
-  void Spy();
-  void Guard(vector<Player>* players);
-  void Priest(vector<Player>* players);
-  void Baron(GameState &state, InputCheck &check);
-  void Handmaid();
-  void Prince(GameState &state);
-  void Chancellor(Deck* deck);
-  void King(GameState &state, InputCheck &check);
-  void Countess();
-  void Princess();
 
 private:
   // information
