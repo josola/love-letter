@@ -5,11 +5,9 @@
 #include <chrono>
 #include <iostream>
 #include <random>
-#include <stdexcept>
 
 using std::cout;
 using std::endl;
-using std::logic_error;
 using std::shuffle;
 
 // getters
@@ -23,12 +21,7 @@ Card Deck::GetCard(const int position)
 }
 
 // setters
-void Deck::Clear()
-{
-  (pile_.empty()) ? (throw logic_error("Pile is empty!"))
-                  : (pile_.erase(pile_.begin(), pile_.end()));
-  (!pile_.empty()) ? (throw logic_error("Erase didn't work!")) : (NULL);
-}
+void Deck::Clear() { pile_.erase(pile_.begin(), pile_.end()); }
 void Deck::Set()
 {
   for (int i = 0; i < 2; i++)
@@ -65,12 +58,7 @@ void Deck::Set()
 }
 
 // actions
-void Deck::Shuffle()
-{
-  shuffle(pile_.begin(), pile_.end(),
-          std::default_random_engine(
-              std::chrono::system_clock::now().time_since_epoch().count()));
-}
+void Deck::Shuffle() { shuffle(pile_.begin(), pile_.end(), std::default_random_engine(std::chrono::system_clock::now().time_since_epoch().count())); }
 void Deck::Insert(Card card) { pile_.push_back(card); }
 void Deck::Print() const
 {
