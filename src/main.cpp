@@ -403,6 +403,7 @@ int main()
 		}
 
 		cout << winner->GetName() << " was the last player standing!\n";
+		winner->Addtoken();
 		cout << winner->GetName() << " token count: " << winner->GetTokenCount() << '\n';
 	}
 
