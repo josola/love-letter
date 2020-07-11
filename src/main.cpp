@@ -20,34 +20,23 @@ using std::vector;
 
 int main()
 {
-	// game state
 	GameState gameState;
-
-	// checks
 	InputCheck inputCheck;
 
-	// Tasks that are performed at the start of every GAME.
 	cout << "-- WELCOME TO LOVE LETTER --\n";
 
-	// starting player count
-	bool pass_input_check = false;
+	cout << "How many players will be playing: ";
 	int player_count = 0;
-	while (!pass_input_check)
+	cin >> player_count;
+	while (player_count < 2 || player_count > 6)
 	{
-		cout << "How many suitors will be playing: ";
-		cin >> player_count;
-
-		// set players
-		if (inputCheck.CheckStartingPlayerCount(player_count))
+		if (cin.fail())
 		{
-			pass_input_check = true;
-		}
-		else
-		{
-			cout << "Please input a number of Suitors between 2 and 6.\n";
 			cin.clear();
-			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cin.ignore(1000, '\n');
 		}
+		cout << "Number must be between 2 and 6 players:\n";
+		cin >> player_count;
 	}
 
 	gameState.SetPlayers(player_count);
@@ -57,7 +46,6 @@ int main()
 	while (!game_over)
 	{
 		Deck deck;
-
 		deck.Set();
 		deck.Shuffle();
 
@@ -309,7 +297,7 @@ int main()
 						break;
 					}
 
-					// track remaining players
+					// round ends when one player is standing or deck is empty
 					vector<Player *> remaining_players;
 					for (Player &iPlayer : gameState.players_)
 					{
@@ -319,7 +307,6 @@ int main()
 						}
 					}
 
-					// round ends when one player is standing or deck is empty
 					if (remaining_players.size() == 1 || deck.Size() == 0)
 					{
 						session_end = true;
@@ -397,7 +384,7 @@ int main()
 		}
 
 		// celebrate the last player standing
-		Player* winner = nullptr;
+		Player *winner = nullptr;
 		for (Player &iPlayer : gameState.players_)
 		{
 			if (iPlayer.Status())
