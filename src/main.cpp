@@ -359,25 +359,27 @@ int main()
 
 		// spy bonus
 		int spy_count = 0;
-		Player *spy_bonus = nullptr;
-		for (Player &iPlayer : gameState.players_)
+		if (any_of(gameState.players_.begin(), gameState.players_.end(), [](Player &iPlayer) { return iPlayer.SpyStatus(); }))
 		{
-			if (iPlayer.Status() && iPlayer.SpyStatus() && spy_count < 2)
+			Player *spy_bonus = nullptr;
+			for (Player &iPlayer : gameState.players_)
 			{
-				spy_bonus = &iPlayer;
-				spy_count++;
+				if (iPlayer.Status() && iPlayer.SpyStatus() && spy_count < 2)
+				{
+					spy_bonus = &iPlayer;
+					spy_count++;
+				}
 			}
-		}
-
-		if (spy_count >= 2)
-		{
-			cout << "Multiple players had the Spy, no one gets a bonus\n";
-		}
-		else
-		{
-			cout << spy_bonus->GetName() << " had the Spy!\n";
-			spy_bonus->Addtoken();
-			cout << spy_bonus->GetName() << " token count: " << spy_bonus->GetTokenCount() << '\n';
+			if (spy_count >= 2)
+			{
+				cout << "Multiple players had the Spy, no one gets a bonus\n";
+			}
+			else if (spy_count == 1)
+			{
+				cout << spy_bonus->GetName() << " had the Spy!\n";
+				spy_bonus->Addtoken();
+				cout << spy_bonus->GetName() << " token count: " << spy_bonus->GetTokenCount() << '\n';
+			}
 		}
 
 		for (Player &iPlayer : gameState.players_)
@@ -387,8 +389,21 @@ int main()
 				cout << iPlayer.GetName() << " has " << iPlayer.GetTokenCount() << " tokens!\n";
 				cout << iPlayer.GetName() << " wins the game!\n";
 				game_over = true;
+				break;
 			}
 		}
+
+		Player* winner = nullptr;
+		for (Player &iPlayer : gameState.players_)
+		{
+			if (iPlayer.Status())
+			{
+				winner = &iPlayer;
+			}
+		}
+
+		cout << winner->GetName() << " was the last player standing!\n";
+		cout << winner->GetName() << " token count: " << winner->GetTokenCount() << '\n';
 	}
 
 	return 0;

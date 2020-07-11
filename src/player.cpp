@@ -213,7 +213,7 @@ void Player::Priest(vector<Player> *players) // Infinite loop when choosing a ta
   cout << target_player->GetName() << "'s hand is:\n";
   target_player->PrintHand();
 }
-void Player::Baron(GameState &state, InputCheck &check) // segmentation fault when executing this function?
+void Player::Baron(GameState &state, InputCheck &check)
 {
   int target = 0;
   bool target_input = false;
