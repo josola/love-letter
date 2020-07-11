@@ -341,6 +341,8 @@ int main()
 		}
 
 		// round end
+
+		// deck is empty, players compare hands, highest hand wins the round
 		if (deck.Size() == 0)
 		{
 			cout << "Deck is empty, players compare hands!\n";
@@ -382,6 +384,7 @@ int main()
 			}
 		}
 
+		// check that player has winning token count
 		for (Player &iPlayer : gameState.players_)
 		{
 			if (iPlayer.GetTokenCount() == gameState.winning_token_count_)
@@ -393,6 +396,7 @@ int main()
 			}
 		}
 
+		// celebrate the last player standing
 		Player* winner = nullptr;
 		for (Player &iPlayer : gameState.players_)
 		{
