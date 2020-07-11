@@ -14,9 +14,9 @@
 
 struct InputCheck
 {
-	bool CheckTargetPlayer(int input);
-	bool CheckStartingPlayerCount(int input);
-	bool CheckCard(int input);
+	const bool CheckTargetPlayer(const int input);
+	const bool CheckStartingPlayerCount(const int input);
+	const bool CheckCard(const int input);
 };
 
 #endif // !INPUT_CHECK_h
