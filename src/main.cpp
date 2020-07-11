@@ -51,7 +51,6 @@ int main()
 
 		cout << "-- ROUND " << gameState.round_count_ << " --\n";
 
-		// second round and above: reset player stats
 		if (gameState.round_count_ > 1)
 		{
 			for (Player &i : gameState.players_)
@@ -61,13 +60,9 @@ int main()
 		}
 
 		Deck aside;
-
-		// discard to down pile
 		aside.Insert(deck.GetCard(0));
 
 		Deck discard;
-
-		// two player game: discard two cards
 		if (gameState.players_.size() == 2)
 		{
 			for (int i = 0; i < 2; i++)
@@ -76,15 +71,13 @@ int main()
 			}
 		}
 
-		// deal starting hand
 		for (Player &i : gameState.players_)
 		{
 			i.Draw(deck.GetCard(0));
 		}
 
-		// player turn
-		bool session_end = false;
-		while (!session_end)
+		vector<Player*> remaining_players;
+		while (remaining_players.size() > 1 || !deck.Empty())
 		{
 			for (Player &iPlayer : gameState.players_)
 			{
@@ -305,12 +298,6 @@ int main()
 						{
 							remaining_players.push_back(&iPlayer);
 						}
-					}
-
-					if (remaining_players.size() == 1 || deck.Size() == 0)
-					{
-						session_end = true;
-						break;
 					}
 
 					cout << '\n';

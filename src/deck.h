@@ -22,13 +22,19 @@ class Card;
 class Deck
 {
 public:
-  void Clear();
-  const int Size();
-  void Insert(Card card);
-  void Print();
-  void Set();
-  void Shuffle();
+  // getters
+  const int Size() const;
+  const bool Empty() const;
   Card GetCard(const int position);
+
+  // setters
+  void Clear();
+  void Set();
+
+  // actions
+  void Shuffle();
+  void Insert(Card card);
+  void Print() const;
 
 protected:
   vector<Card> pile_;
