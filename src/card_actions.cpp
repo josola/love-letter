@@ -12,26 +12,6 @@ using std::cout;
 using std::sort;
 
 // supporting functions
-const bool CheckTarget(const int input, GameState &state)
-{
-    if (input < 1 || input > state.players_.size() || cin.fail())
-        return false;
-    else
-        return true;
-}
-void FixTarget(int input, GameState &state)
-{
-    while (input < 1 || input > state.players_.size())
-    {
-        if (cin.fail())
-        {
-            cin.clear();
-            cin.ignore(100, '\n');
-        }
-        cout << "Number must be between 1 and " << state.players_.size() << '\n';
-        cin >> input;
-    }
-}
 const bool CheckCard(const int card)
 {
     if (card < 0 || card > 9 || cin.fail())
@@ -52,7 +32,65 @@ void FixCard(int card)
         cin >> card;
     }
 }
-Player *ChooseTarget(Player &aggressor, GameState &state, const int card)
+void SanitizeCard(int target, const int originator)
+{
+    switch (originator)
+    {
+    case 1:
+    {
+        while (!CheckCard(target) || target == 1)
+        {
+            cout << "You cannot choose a Guard.\n";
+            FixCard(target);
+        }
+    }
+    default:
+    {
+        while (!CheckCard(target))
+            FixCard(target);
+    }
+    }
+}
+const bool CheckTarget(const int input, const GameState &state)
+{
+    if (input < 1 || input > state.players_.size() || cin.fail())
+        return false;
+    else
+        return true;
+}
+void FixTarget(int input, const GameState &state)
+{
+    while (input < 1 || input > state.players_.size())
+    {
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(100, '\n');
+        }
+        cout << "Number must be between 1 and " << state.players_.size() << '\n';
+        cin >> input;
+    }
+}
+void SanitizeTarget(int target, const GameState &state, const int card, Player &aggressor)
+{
+    switch (card)
+    {
+    case 1:
+    {
+        while (!CheckTarget(target, state) || target == aggressor.GetValue())
+        {
+            cout << "You cannot choose yourself.\n";
+            FixTarget(target, state);
+        }
+    }
+    default:
+    {
+        while (!CheckTarget(target, state))
+            FixTarget(target, state);
+    }
+    }
+}
+Player *GetTarget(Player &aggressor, GameState &state, const int card)
 {
     Player *target_player = nullptr;
     bool protected_target = true;
@@ -61,12 +99,7 @@ Player *ChooseTarget(Player &aggressor, GameState &state, const int card)
         cout << aggressor.GetName() << " choose a target player: ";
         int target = 0;
         cin >> target;
-        while (!CheckTarget(target, state) || target == aggressor.GetValue())
-        {
-            if (card != 5 && target == aggressor.GetValue())
-                cout << "You cannot choose yourself\n";
-            FixTarget(target, state);
-        }
+        SanitizeTarget(target, state, card, aggressor);
         target_player = aggressor.GetConversion()->NumPlayer(target, state);
         if (target_player->ProtectionStatus())
             cout << target_player->ProtectionStatus() << " has Handmaid protection.\n";
@@ -75,22 +108,42 @@ Player *ChooseTarget(Player &aggressor, GameState &state, const int card)
     }
     return target_player;
 }
+const bool CheckCharacter(const char input, const char target)
+{
+    if (input == target)
+        return true;
+    else
+        return false;
+}
+void FixCharacter(char input, const char target)
+{
+    while (input != target)
+    {
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(1000, '\n');
+        }
+        cout << "Input must be '" << target << "'\n";
+        cin >> input;
+    }
+}
+void SanitizeCharacter(char input, const char target)
+{
+    while (!CheckCharacter(input, target))
+        FixCharacter(input, target);
+}
 
 // actions
-void Action::Spy(Player &player) { player.GainSpy(); }
-void Action::Guard(GameState &state, Player &aggressor, Deck &deck)
+void Spy(Player &player) { player.GainSpy(); }
+void Guard(GameState &state, Player &aggressor, Deck &deck)
 {
-    Player *target = ChooseTarget(aggressor, state, 1);
+    Player *target = GetTarget(aggressor, state, 1);
     int card = 0;
     cout << aggressor.GetName() << " guess a card: ";
     cin >> card;
-    while (!CheckCard(card) || card == 1)
-    {
-        if (card == 1)
-            cout << "You cannot choose a guard.\n";
-        FixCard(card);
-    }
-    for (const Card &iCard : target->GetHand())
+    SanitizeCard(card, 1);
+    for (const Card &iCard : *target->GetHand())
     {
         if (iCard.GetValue() == card)
         {
@@ -101,48 +154,38 @@ void Action::Guard(GameState &state, Player &aggressor, Deck &deck)
     }
     cout << "No match!\n";
 }
-void Action::Priest(GameState &state, Player &aggressor)
+void Priest(GameState &state, Player &aggressor)
 {
-    Player *target = ChooseTarget(aggressor, state, 2);
+    Player *target = GetTarget(aggressor, state, 2);
     cout << target->GetName() << "'s hand is:\n";
     target->PrintHand();
     cout << '\n';
 }
-void Action::Baron(GameState &state, Player &aggressor, Deck &deck)
+void Baron(GameState &state, Player &aggressor, Deck &deck)
 {
-    Player *target = ChooseTarget(aggressor, state, 3);
+    Player *target = GetTarget(aggressor, state, 3);
     vector<Player *> players;
     players.push_back(&aggressor);
     players.push_back(target);
-    sort(players.begin(), players.end(), [](const Player iPlayer) { return iPlayer.GetHand().at(0).GetValue(); });
+    sort(players.begin(), players.end());
     cout << players.at(0)->GetName() << " had the higher card!\n";
     players.at(1)->Out(deck);
 }
-void Action::Handmaid(Player &player) { player.SetProtection(1); }
-void Action::Prince(GameState &state, Player &player, Deck &deck)
+void Handmaid(Player &player) { player.SetProtection(1); }
+void Prince(GameState &state, Player &player, Deck &deck)
 {
-    Player *target = ChooseTarget(player, state, 5);
+    Player *target = GetTarget(player, state, 5);
     if (target->GetValue() == player.GetValue())
     {
         cout << "You chose yourself!\n";
         cout << "Please discard your hand (d): ";
         char discard = ' ';
         cin >> discard;
-        while (discard != 'd')
+        SanitizeCharacter(discard, 'd');
+        vector<Card>* hand = player.GetHand();
+        if (any_of(hand->begin(), hand->end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
         {
-            if (cin.fail())
-            {
-                cin.clear();
-                cin.ignore(1000, '\n');
-            }
-            cout << "Please enter 'd'.\n";
-            cin >> discard;
-        }
-        vector<Card> hand = player.GetHand();
-        if (any_of(hand.begin(), hand.end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
-        {
-            cout << "You discarded the Princess!\n";
-            player.Out(deck);
+            Princess(player, deck);
         }
         else
             player.DiscardHand(deck);
@@ -150,120 +193,58 @@ void Action::Prince(GameState &state, Player &player, Deck &deck)
     else
     {
         cout << target->GetName() << " discards their hand!\n";
-        vector<Card> hand = target->GetHand();
-        if (any_of(hand.begin(), hand.end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
+        vector<Card>* hand = target->GetHand();
+        if (any_of(hand->begin(), hand->end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
         {
-            cout << target->GetName() << " discarded the Princess!\n";
-            target->Out(deck);
+            Princess(*target, deck);
         }
         else
             target->DiscardHand(deck);
     }
 }
-void Action::Chancellor(Deck *deck) // infinite loop when drawing two cards?
+void Chancellor(Deck &deck, Player &player) // infinite loop when drawing two cards?
 {
-    bool draw_input = false;
-    while (!draw_input)
+    cout << player.GetName() << " draw two cards (d): ";
+    char draw = ' ';
+    cin >> draw;
+    SanitizeCharacter(draw, 'd');
+    for (int i = 0; i < 2; i++)
+        player.Draw(deck.GetCard(0));
+    player.PrintHand();
+    cout << "First card to put back: ";
+    int first = 0;
+    cin >> first;
+    SanitizeCard(first, 6);
+    if (first == 9)
     {
-        cout << this->GetName() << " draw two cards (d): ";
-        char input = ' ';
-        cin >> input;
-        if (input == 'd')
-        {
-            for (int i = 0; i < 2; i++)
-            {
-                this->Draw(deck->GetCard(0));
-            }
-        }
+        Princess(player, deck);
     }
-    this->PrintHand();
-    bool first_card_input = false;
-    while (!first_card_input)
+    else
+        player.Discard(first, deck);
+    cout << "Second card to put back: ";
+    int second = 0;
+    cin >> second;
+    SanitizeCard(second, 6);
+    if (second == 9)
     {
-        cout << "First card to put back: ";
-        short unsigned int choice = 0;
-        cin >> choice;
-        if (choice >= 0 && choice <= 9 && cin)
-        {
-            if (choice == 9)
-            {
-                cout << this->GetName() << " discarded the Princess!\n";
-                cout << this->GetName() << " is out!\n";
-                this->Playing(0);
-                this->Discard(choice);
-                break;
-            }
-            else
-            {
-                this->Discard(choice);
-                first_card_input = true;
-            }
-        }
-        else
-        {
-            cout << "Invalid input.\n";
-        }
+        Princess(player, deck);
     }
-    bool second_card_input = false;
-    while (!second_card_input)
-    {
-        cout << "Second card to put back: ";
-        short unsigned int choice = 0;
-        cin >> choice;
-        if (choice >= 0 && choice <= 9 && cin)
-        {
-            if (choice == 9)
-            {
-                cout << this->GetName() << " discarded the Princess!\n";
-                cout << this->GetName() << " is out!\n";
-                this->Playing(0);
-                this->Discard(choice);
-                break;
-            }
-            else
-            {
-                this->Discard(choice);
-                second_card_input = true;
-            }
-        }
-        else
-        {
-            cout << "Invalid input.\n";
-        }
-    }
+    else
+        player.Discard(second, deck);
 }
-void Action::King(GameState &state, InputCheck &check)
+void King(GameState &state, Player &aggressor)
 {
-    bool target_input = false;
-    short unsigned int target = 0;
-    while (!target_input)
-    {
-        cout << "Choose target player: ";
-        cin >> target;
-        if (check.CheckTargetPlayer(target))
-        {
-            target_input = true;
-        }
-        else
-        {
-            cout << "Invalid input.\n";
-        }
-    }
-    Player *target_player = convert.NumPlayer(target, state);
-    cout << target_player->GetName() << " trade hands with ";
-    cout << this->GetName() << '\n';
-    this->hand_.swap(target_player->hand_);
-    this->PrintHand();
+    Player *target = GetTarget(aggressor, state, 7);
+    cout << target->GetName() << " trade hands with ";
+    cout << aggressor.GetName() << '\n';
+    vector<Card>* instigator_hand = aggressor.GetHand();
+    vector<Card>* target_hand = target->GetHand();
+    swap(instigator_hand, target_hand);
+    aggressor.PrintHand();
 }
-void Action::Countess()
+void Countess(Player &player) { cout << player.GetName() << " has played the Countess!\n"; }
+void Princess(Player &player, Deck &deck)
 {
-    cout << this->GetName() << " has played the Countess!\n";
-}
-void Action::Princess() // Segmentation fault when player discards Princess?
-{
-    cout << this->GetName() << " has played the Princess!\n";
-    cout << this->GetName() << " is out!\n";
-    this->DiscardHand();
-    this->Reset();
-    this->Playing(0);
+    cout << player.GetName() << " had the Princess!\n";
+    player.Out(deck);
 }

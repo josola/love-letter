@@ -21,8 +21,6 @@ class Token;
 class Deck;
 class InputCheck;
 class Deck;
-string;
-vector<Card>;
 
 class Player
 {
@@ -32,7 +30,7 @@ public:
   // getters
   const bool ProtectionStatus() const;
   const string GetName() const;
-  const vector<Card> GetHand() const;
+  vector<Card>* GetHand();
   const bool Status() const;
   const int GetValue() const;
   const int GetTokenCount() const;
@@ -53,6 +51,9 @@ public:
 
   // printer
   void PrintHand() const;
+
+  // overload
+  friend bool operator<(const Player &l, const Player &r);
 
 private:
   // information

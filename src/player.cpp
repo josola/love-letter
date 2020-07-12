@@ -18,7 +18,7 @@ Player::Player(const string name, const int value, const Reference &reference)
 // getters
 const bool Player::ProtectionStatus() const { return handmaid_; }
 const string Player::GetName() const { return name_; }
-const vector<Card> Player::GetHand() const { return hand_; }
+vector<Card>* Player::GetHand() { return &hand_; }
 const bool Player::Status() const { return playing_; }
 const int Player::GetValue() const { return value_; }
 const int Player::GetTokenCount() const { return token_count_; }
@@ -95,4 +95,10 @@ void Player::PrintHand() const
       }
     }
   }
+}
+
+// overload
+bool operator<(const Player &l, const Player &r)
+{
+  return l.hand_.at(0).GetValue() < r.hand_.at(0).GetValue();
 }
