@@ -9,12 +9,15 @@
 #include <string>
 #include <thread>
 #include <vector>
+#include <limits>
 
 using std::any_of;
 using std::cin;
 using std::cout;
 using std::none_of;
+using std::numeric_limits;
 using std::sort;
+using std::streamsize;
 using std::to_string;
 using std::vector;
 
@@ -25,17 +28,18 @@ int main()
 	cout << "-- WELCOME TO LOVE LETTER --\n";
 
 	cout << "How many players will be playing: ";
-	int player_count = 0;
+	int player_count = -1;
 	cin >> player_count;
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	while (player_count < 2 || player_count > 6)
 	{
 		if (cin.fail())
 		{
 			cin.clear();
-			cin.ignore(1000, '\n');
 		}
 		cout << "Number must be between 2 and 6 players:\n";
 		cin >> player_count;
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	}
 
 	gameState.SetPlayers(player_count);
@@ -187,45 +191,41 @@ int main()
 					bool prince = any_of(in_hand.begin(), in_hand.end(),
 										 [](int i) { return i == 5; });
 
-					cout << iPlayer.GetName() << " play a card: ";
+					bool correct_input = false;
 					int card = 0;
-					cin >> card;
-					SanitizeCard(card, -1);
-					if (countess && king || countess && prince)
+					while (!correct_input)
 					{
-						cout << "You MUST play the Countess.\n";
+						cout << iPlayer.GetName() << " play a card: ";
 						cin >> card;
-						while (card != 8)
-						{
-							if (cin.fail())
-							{
-								cin.clear();
-								cin.ignore(1000, '\n');
-							}
-							cout << "Again. You MUST play the Countess.\n";
-							cin >> card;
-						}
-					}
+						SanitizeCard(card, -1);
 
-					// play card in hand: without restriction
-					else
-					{
-						bool in_hand = false;
-						while (!in_hand)
+						if (countess && king || countess && prince)
+						{
+							while (card != 8)
+							{
+								if (cin.fail())
+								{
+									cin.clear();
+									cin.ignore(1000, '\n');
+								}
+								cout << "You MUST play the Countess.\n";
+							}
+						}
+
+						// play card in hand: without restriction
+						else
 						{
 							for (Card &iCard : hand)
 							{
 								if (iCard.GetValue() == card)
 								{
-									in_hand = true;
+									correct_input = true;
 									break;
 								}
 							}
-							if (!in_hand)
+							if (!correct_input)
 							{
 								cout << "Not in hand.\n";
-								cin.clear();
-								cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 							}
 						}
 					}
