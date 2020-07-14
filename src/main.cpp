@@ -36,6 +36,7 @@ int main()
 		if (cin.fail())
 		{
 			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 		cout << "Number must be between 2 and 6 players:\n";
 		cin >> player_count;
