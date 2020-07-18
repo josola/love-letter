@@ -19,6 +19,14 @@ const bool CheckCard(const int card)
     else
         return true;
 }
+template <typename T>
+const bool CheckInput(T input)
+{
+    if (cin.fail())
+        return true;
+    else
+        return false;
+}
 void FixCard(int card)
 {
     while (card < 0 || card > 9 || cin.fail())
@@ -73,9 +81,7 @@ void FixTarget(int input, const GameState &state)
 }
 void SanitizeTarget(int target, const GameState &state, const int card, Player &aggressor)
 {
-    switch (card)
-    {
-    case 1:
+    if (card == 1 || card == 3)
     {
         while (!CheckTarget(target, state) || target == aggressor.GetValue())
         {
@@ -83,11 +89,10 @@ void SanitizeTarget(int target, const GameState &state, const int card, Player &
             FixTarget(target, state);
         }
     }
-    default:
+    else
     {
         while (!CheckTarget(target, state))
             FixTarget(target, state);
-    }
     }
 }
 Player *GetTarget(Player &aggressor, GameState &state, const int card)
@@ -161,7 +166,7 @@ void Priest(GameState &state, Player &aggressor)
     target->PrintHand();
     cout << '\n';
 }
-void Baron(GameState &state, Player &aggressor, Deck &deck)
+void Baron(GameState &state, Player &aggressor, Deck &deck) // round does not end during 2 player games
 {
     Player *target = GetTarget(aggressor, state, 3);
     vector<Player *> players;
@@ -182,7 +187,7 @@ void Prince(GameState &state, Player &player, Deck &deck)
         char discard = ' ';
         cin >> discard;
         SanitizeCharacter(discard, 'd');
-        vector<Card>* hand = player.GetHand();
+        vector<Card> *hand = player.GetHand();
         if (any_of(hand->begin(), hand->end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
         {
             Princess(player, deck);
@@ -193,7 +198,7 @@ void Prince(GameState &state, Player &player, Deck &deck)
     else
     {
         cout << target->GetName() << " discards their hand!\n";
-        vector<Card>* hand = target->GetHand();
+        vector<Card> *hand = target->GetHand();
         if (any_of(hand->begin(), hand->end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
         {
             Princess(*target, deck);
@@ -237,8 +242,8 @@ void King(GameState &state, Player &aggressor)
     Player *target = GetTarget(aggressor, state, 7);
     cout << target->GetName() << " trade hands with ";
     cout << aggressor.GetName() << '\n';
-    vector<Card>* instigator_hand = aggressor.GetHand();
-    vector<Card>* target_hand = target->GetHand();
+    vector<Card> *instigator_hand = aggressor.GetHand();
+    vector<Card> *target_hand = target->GetHand();
     swap(instigator_hand, target_hand);
     aggressor.PrintHand();
 }

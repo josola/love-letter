@@ -90,29 +90,26 @@ int main()
 					// remove handmaid protection
 					iPlayer.SetProtection(0);
 
-					// draw input check
-					bool check_passed = false;
-					while (!check_passed)
+					// draw input
+					cout << iPlayer.GetName() << " draw a card (d): ";
+					char draw = ' ';
+					cin >> draw;
+					cin.ignore(numeric_limits<streamsize>::max(), '\n');
+					while (draw != 'd')
 					{
-						cout << iPlayer.GetName() << " draw a card (d): ";
-						char draw = ' ';
-						cin >> draw;
-						if (draw == 'd')
+						if (cin.fail())
 						{
-							break;
-						}
-						else
-						{
-							cout << "Invalid input.\n";
 							cin.clear();
-							cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+							cin.ignore(numeric_limits<streamsize>::max(), '\n');
 						}
+						cout << "Input MUST be 'd':\n";
+						cin >> draw;
 					}
 
 					// current player draw card
 					// iPlayer.Draw(deck.GetCard(0)); // standard logic
 
-					//debugging logic
+					//debugging logic  YOU WERE FIXING SELF CHOICE IN BARON!
 					iPlayer.Draw(Card("BARON", 3, "REF"));
 
 					cout << "\nDeck size: \n";
