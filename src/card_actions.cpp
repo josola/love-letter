@@ -27,6 +27,8 @@ const bool CheckCard(const int card)
 
 void FixCard(int card)
 {
+    assert(card < 0 || card > 9);
+
     while (card < 0 || card > 9 || cin.fail())
     {
         if (cin.fail())
@@ -41,6 +43,8 @@ void FixCard(int card)
 
 void SanitizeCard(int target, const int originator)
 {
+    assert(originator >= 0 && originator <= 9);
+
     switch (originator)
     {
         case 1:
@@ -75,6 +79,8 @@ const bool CheckTarget(const int input, const GameState &state)
 
 void FixTarget(int input, const GameState &state)
 {
+    assert(input < 1 || input > 6);
+
     while (input < 1 || input > state.players_.size())
     {
         if (cin.fail())
@@ -89,6 +95,8 @@ void FixTarget(int input, const GameState &state)
 
 void SanitizeTarget(int target, const GameState &state, const int card, Player &aggressor)
 {
+    assert(card >= 0 && card <= 9);
+
     if (card == 1 || card == 3)
     {
         while (!CheckTarget(target, state) || target == aggressor.GetValue())
@@ -108,6 +116,8 @@ void SanitizeTarget(int target, const GameState &state, const int card, Player &
 
 Player *GetTarget(Player &aggressor, GameState &state, const int card)
 {
+    assert(card >= 0 && card <= 9);
+
     Player *target_player = nullptr;
 
     bool protected_target = true;
@@ -170,6 +180,7 @@ void SanitizeCharacter(char input, const char target)
 // actions
 void Spy(Player &player)
 {
+    assert(!player.SpyStatus());
     player.GainSpy();
 }
 
@@ -223,6 +234,7 @@ void Baron(GameState &state, Player &aggressor, Deck &deck) // round does not en
 
 void Handmaid(Player &player)
 {
+    assert(!player.ProtectionStatus());
     player.SetProtection(1);
 }
 
@@ -317,7 +329,7 @@ void King(GameState &state, Player &aggressor)
 {
     Player *target = GetTarget(aggressor, state, 7);
 
-    cout << target->GetName() << " trade hands with ";
+    cout << target->GetName() << " trade hands with "; // update formatting
     cout << aggressor.GetName() << '\n';
 
     vector<Card> *instigator_hand = aggressor.GetHand();
