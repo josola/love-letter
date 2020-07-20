@@ -2,13 +2,8 @@
 #include "player.h"
 #include "game_state.h"
 
-#include <cassert>
-
 Player* Converter::NumPlayer(int num, GameState& state)
 {
-	assert(num >= 1 && num <= 6);
-	assert(!state.players_.empty());
-
 	Player* output = nullptr;
 
 	for (Player& iPlayer : state.players_)
