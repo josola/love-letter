@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <algorithm>
+#include <cassert>
 
 using std::any_of;
 using std::cin;
