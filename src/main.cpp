@@ -181,12 +181,9 @@ int main()
 					}
 
 					// countess restriction check
-					bool countess = any_of(in_hand.begin(), in_hand.end(),
-										   [](int i) { return i == 8; });
-					bool king = any_of(in_hand.begin(), in_hand.end(),
-									   [](int i) { return i == 7; });
-					bool prince = any_of(in_hand.begin(), in_hand.end(),
-										 [](int i) { return i == 5; });
+					bool countess = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 8; });
+					bool king = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 7; });
+					bool prince = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 5; });
 
 					bool correct_input = false;
 					int card = 0;
