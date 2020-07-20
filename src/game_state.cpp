@@ -19,45 +19,55 @@ void GameState::SetPlayers(int count)
 
     switch (count)
     {
-    case 2:
-        for (short unsigned int i = 0; i < 2; i++)
+        case 2:
         {
-            string name = "PLAYER[" + to_string(i + 1) + "]";
-            InsertPlayer(Player(name, i + 1, reference));
+            for (short unsigned int i = 0; i < 2; i++)
+            {
+                string name = "PLAYER[" + to_string(i + 1) + "]";
+                InsertPlayer(Player(name, i + 1, reference));
+            }
+            winning_token_count_ = 6;
+            break;
         }
-        winning_token_count_ = 6;
-        break;
-    case 3:
-        for (short unsigned int i = 0; i < 3; i++)
+        case 3:
         {
-            string name = "PLAYER[" + to_string(i + 1) + "]";
-            InsertPlayer(Player(name, i + 1, reference));
+            for (short unsigned int i = 0; i < 3; i++)
+            {
+                string name = "PLAYER[" + to_string(i + 1) + "]";
+                InsertPlayer(Player(name, i + 1, reference));
+            }
+            winning_token_count_ = 5;
+            break;
         }
-        winning_token_count_ = 5;
-        break;
-    case 4:
-        for (short unsigned int i = 0; i < 4; i++)
+        case 4:
         {
-            string name = "PLAYER[" + to_string(i + 1) + "]";
-            InsertPlayer(Player(name, i + 1, reference));
+            for (short unsigned int i = 0; i < 4; i++)
+            {
+                string name = "PLAYER[" + to_string(i + 1) + "]";
+                InsertPlayer(Player(name, i + 1, reference));
+            }
+            winning_token_count_ = 4;
+            break;
         }
-        winning_token_count_ = 4;
-        break;
-    case 5:
-        for (short unsigned int i = 0; i < 5; i++)
+        case 5:
         {
-            string name = "PLAYER[" + to_string(i + 1) + "]";
-            InsertPlayer(Player(name, i + 1, reference));
+            for (short unsigned int i = 0; i < 5; i++)
+            {
+                string name = "PLAYER[" + to_string(i + 1) + "]";
+                InsertPlayer(Player(name, i + 1, reference));
+            }
+            winning_token_count_ = 3;
+            break;
         }
-        winning_token_count_ = 3;
-        break;
-    case 6:
-        for (short unsigned int i = 0; i < 6; i++)
+        case 6:
         {
-            string name = "PLAYER[" + to_string(i + 1) + "]";
-            InsertPlayer(Player(name, i + 1, reference));
+            for (short unsigned int i = 0; i < 6; i++)
+            {
+                string name = "PLAYER[" + to_string(i + 1) + "]";
+                InsertPlayer(Player(name, i + 1, reference));
+            }
+            winning_token_count_ = 3;
+            break;
         }
-        winning_token_count_ = 3;
-        break;
     }
 }
