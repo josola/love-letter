@@ -19,7 +19,7 @@ void GameState::SetPlayers(int count)
     {
         case 2:
         {
-            for (short unsigned int i = 0; i < 2; i++)
+            for (int i = 0; i < 2; i++)
             {
                 string name = "PLAYER[" + to_string(i + 1) + "]";
                 InsertPlayer(Player(name, i + 1, reference));
@@ -29,7 +29,7 @@ void GameState::SetPlayers(int count)
         }
         case 3:
         {
-            for (short unsigned int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 string name = "PLAYER[" + to_string(i + 1) + "]";
                 InsertPlayer(Player(name, i + 1, reference));
@@ -39,7 +39,7 @@ void GameState::SetPlayers(int count)
         }
         case 4:
         {
-            for (short unsigned int i = 0; i < 4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 string name = "PLAYER[" + to_string(i + 1) + "]";
                 InsertPlayer(Player(name, i + 1, reference));
@@ -49,7 +49,7 @@ void GameState::SetPlayers(int count)
         }
         case 5:
         {
-            for (short unsigned int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 string name = "PLAYER[" + to_string(i + 1) + "]";
                 InsertPlayer(Player(name, i + 1, reference));
@@ -59,7 +59,7 @@ void GameState::SetPlayers(int count)
         }
         case 6:
         {
-            for (short unsigned int i = 0; i < 6; i++)
+            for (int i = 0; i < 6; i++)
             {
                 string name = "PLAYER[" + to_string(i + 1) + "]";
                 InsertPlayer(Player(name, i + 1, reference));
