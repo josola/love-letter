@@ -13,8 +13,6 @@ void GameState::InsertPlayer(Player player)
 
 void GameState::SetPlayers(int count)
 {
-    assert(count >= 2 && count <= 6);
-
     Reference reference;
 
     switch (count)
