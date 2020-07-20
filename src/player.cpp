@@ -134,7 +134,7 @@ void Player::Out(Deck &deck)
 void Player::PrintHand() const
 {
   cout << '\n' << this->GetName() << " hand:\n";
-  
+
   if (!hand_.empty())
   {
     for (size_t i = 0; i < hand_.size(); i++)
@@ -148,6 +148,10 @@ void Player::PrintHand() const
         cout << hand_.at(i).GetValue() << '-' << hand_.at(i).GetName() << '\n';
       }
     }
+  }
+  else
+  {
+    cout << "EMPTY\n";
   }
 }
 
