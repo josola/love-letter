@@ -5,6 +5,7 @@
 #include <chrono>
 #include <iostream>
 #include <random>
+#include <cassert>
 
 using std::cout;
 using std::endl;
@@ -31,7 +32,10 @@ Card Deck::GetCard(const int position)
 // setters
 void Deck::Clear()
 {
-  pile_.erase(pile_.begin(), pile_.end());
+  if (!pile_.empty())
+  {
+    pile_.erase(pile_.begin(), pile_.end());
+  }
 }
 
 void Deck::Set()
