@@ -72,7 +72,7 @@ private:
   bool winner_ = false;
 
   // data
-  Converter convert;
+  Converter convert_;
 
 };
 

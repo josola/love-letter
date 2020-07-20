@@ -52,7 +52,7 @@ const bool Player::SpyStatus() const
 
 Converter *Player::GetConversion()
 {
-  return &convert;
+  return &convert_;
 }
 
 // setters
