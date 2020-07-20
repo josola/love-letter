@@ -32,14 +32,14 @@ Card Deck::GetCard(const int position)
 // setters
 void Deck::Clear()
 {
-  if (!pile_.empty())
-  {
-    pile_.erase(pile_.begin(), pile_.end());
-  }
+  assert(!pile_.empty());
+  pile_.erase(pile_.begin(), pile_.end());
 }
 
 void Deck::Set()
 {
+  assert(pile_.empty());
+
   for (int i = 0; i < 2; i++)
   {
     pile_.push_back(Card("SPY", 0, "REF"));
@@ -76,6 +76,7 @@ void Deck::Set()
 // actions
 void Deck::Shuffle()
 {
+  assert(!pile_.empty());
   shuffle(pile_.begin(), pile_.end(), std::default_random_engine(std::chrono::system_clock::now().time_since_epoch().count()));
 }
 
