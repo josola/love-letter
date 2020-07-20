@@ -52,9 +52,6 @@ public:
   // printer
   void PrintHand() const;
 
-  // overload
-  friend bool operator<(const Player &l, const Player &r);
-
 private:
   // information
   string name_ = "";

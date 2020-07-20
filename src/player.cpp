@@ -154,9 +154,3 @@ void Player::PrintHand() const
     cout << "EMPTY\n";
   }
 }
-
-// overload
-bool operator<(const Player &l, const Player &r)
-{
-  return l.hand_.at(0).GetValue() < r.hand_.at(0).GetValue();
-}
