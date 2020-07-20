@@ -24,19 +24,6 @@ const bool CheckCard(const int card)
     }
 }
 
-template <typename T>
-const bool CheckInput(T input)
-{
-    if (cin.fail())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
 void FixCard(int card)
 {
     while (card < 0 || card > 9 || cin.fail())
