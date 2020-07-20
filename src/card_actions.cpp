@@ -329,8 +329,7 @@ void King(GameState &state, Player &aggressor)
 {
     Player *target = GetTarget(aggressor, state, 7);
 
-    cout << target->GetName() << " trade hands with "; // update formatting
-    cout << aggressor.GetName() << '\n';
+    cout << target->GetName() << " trade hands with " << aggressor.GetName() << '\n';
 
     vector<Card> *instigator_hand = aggressor.GetHand();
     vector<Card> *target_hand = target->GetHand();
