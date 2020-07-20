@@ -29,8 +29,6 @@ public:
   void PrintName() const;
   void PrintValue() const;
   void PrintDescription() const;
-  template <class T>
-  void Action(T *obj);
 
 protected:
   string name_ = "";

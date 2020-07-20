@@ -35,9 +35,3 @@ void Card::PrintDescription() const
 {
     cout << description_;
 }
-
-template <class T>
-void Action(T *obj)
-{
-    cout << "CARD ACTION!" << endl;
-}
