@@ -1,4 +1,4 @@
-#include "card_support.h"
+#include "input.h"
 #include "game_state.h"
 #include "player.h"
 
