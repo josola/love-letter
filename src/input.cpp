@@ -38,8 +38,6 @@ void FixCard(int card)
 
 void SanitizeCard(int target, const int originator)
 {
-    assert(originator >= 0 && originator <= 9);
-
     switch (originator)
     {
         case 1:

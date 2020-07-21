@@ -80,10 +80,14 @@ int main()
 		}
 
 		vector<Player *> remaining_players;
-		while (remaining_players.size() > 1 || !deck.Empty())
-		{
+		do
 			for (Player &iPlayer : gameState.players_)
 			{
+				if (remaining_players.size() == 1)
+				{
+					break;
+				}
+
 				// player must be playing
 				if (iPlayer.Status())
 				{
@@ -261,29 +265,26 @@ int main()
 						Princess(iPlayer, discard);
 						break;
 					}
-
-					// round ends when one player is standing or deck is empty
-					vector<Player *> remaining_players;
-					for (Player &iPlayer : gameState.players_)
-					{
-						if (iPlayer.Status())
-						{
-							remaining_players.push_back(&iPlayer);
-						}
-					}
-
 					cout << '\n';
 					cout << iPlayer.GetName() << " end turn.\n";
-
-					// increase round count
-					gameState.round_count_++;
 				}
 				else
 				{
 					break;
 				}
+				// round ends when one player is standing or deck is empty
+				for (Player &iPlayer : gameState.players_)
+				{
+					if (iPlayer.Status())
+					{
+						remaining_players.push_back(&iPlayer);
+					}
+				}
 			}
-		}
+		while (remaining_players.size() > 1 && !deck.Empty());
+
+		// increase round count
+		gameState.round_count_++;
 
 		// round end
 
