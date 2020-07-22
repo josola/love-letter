@@ -32,12 +32,12 @@
 *.app
 
 # Directories
-/.vscode
-/bin
-/.vs
-/vs_love_letter.vcxproj.user
-/vs_love_letter.vcxproj.filters
-/vs_love_letter.vcxproj
-/vs_love_letter.sln
-/Debug
-/x64/Debug
+.vscode/**
+bin/**
+.vs/**
+Debug/**
+/x64/Debug/**
+love_letter/**
+
+# macOS Specifics
+.DS_Store
