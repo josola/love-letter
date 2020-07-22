@@ -197,7 +197,7 @@ int main()
 						cin >> card;
 						SanitizeCard(card, -1);
 
-						if (countess && king || countess && prince)
+						if ((countess && king) || (countess && prince))
 						{
 							while (card != 8)
 							{
