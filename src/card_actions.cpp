@@ -56,16 +56,24 @@ void Priest(GameState &state, Player &aggressor)
 void Baron(GameState &state, Player &aggressor, Deck &deck) // round does not end during 2 player games
 {
     Player *target = GetTarget(aggressor, state, 3);
+    
+    vector<Card>* target_hand = target->GetHand();
+    vector<Card>* aggressor_hand = aggressor.GetHand();
 
-    vector<Player *> players;
-    players.push_back(&aggressor);
-    players.push_back(target);
-
-    sort(players.begin(), players.end());
-
-    cout << players.at(0)->GetName() << " had the higher card!\n";
-
-    players.at(1)->Out(deck);
+    if (aggressor_hand->at(0).GetValue() > target_hand->at(0).GetValue())
+    {
+        cout << aggressor.GetName() << " had the higher card!\n";
+        target->Out(deck);
+    }
+    else if (aggressor_hand->at(0).GetValue() == target_hand->at(0).GetValue())
+    {
+        cout << "Players hand the same card!\n";
+    }
+    else
+    {
+        cout << target->GetName() << " had the higher card!\n";
+        aggressor.Out(deck);
+    }
 }
 
 void Handmaid(Player &player)
