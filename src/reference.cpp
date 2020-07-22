@@ -8,7 +8,7 @@ Reference::Reference() : Card{"REFERENCE", -1} {};
 
 void Reference::Print()
 {
-  for (const string i : reference)
+  for (string i : reference)
   {
     cout << i << endl;
   }
