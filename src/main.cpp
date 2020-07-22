@@ -179,7 +179,7 @@ int main()
 					// log cards already in hand
 					vector<int> in_hand;
 					vector<Card> hand = *iPlayer.GetHand();
-					for (const Card iCard : hand)
+					for (Card iCard : hand)
 					{
 						in_hand.push_back(iCard.GetValue());
 					}
@@ -297,7 +297,7 @@ int main()
 			{
 				if (iPlayer.GetValue() > winner->GetValue())
 				{
-					winner == &iPlayer;
+        					winner = &iPlayer;  
 				}
 			}
 			cout << winner->GetName() << " has the highest hand! " << winner->GetHand()->at(0).GetName() << '\n';
