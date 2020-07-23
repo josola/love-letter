@@ -70,7 +70,7 @@ const bool CheckTarget(const int input, const GameState &state)
     }
 }
 
-void FixTarget(int input, const GameState &state)
+void FixTarget(int &input, const GameState &state)
 {
     while (input < 1 || input > state.players_.size())
     {
@@ -84,23 +84,27 @@ void FixTarget(int input, const GameState &state)
     }
 }
 
-void SanitizeTarget(int target, const GameState &state, const int card, Player &aggressor)
+void SanitizeTarget(int &target, const GameState &state, const int card, Player &aggressor)
 {
     assert(card >= 0 && card <= 9);
-
-    if (card == 1 || card == 3)
+    
+    bool good_target = false;
+    while (!good_target)
     {
-        while (!CheckTarget(target, state) || target == aggressor.GetValue())
-        {
-            cout << "You cannot choose yourself.\n";
-            cin >> target;
-        }
-    }
-    else
-    {
-        while (!CheckTarget(target, state))
+        if (!CheckTarget(target, state))
         {
             FixTarget(target, state);
+        }
+        else if ((card == 1 || card == 3) && target == aggressor.GetValue())
+        {
+            cout << "You cannot choose yourself.\n";
+            cin.clear();
+            cin.ignore(100, '\n');
+            cin >> target;
+        }
+        else
+        {
+            good_target = true;
         }
     }
 }

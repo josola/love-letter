@@ -17,8 +17,8 @@ void FixCard(int card);
 void SanitizeCard(int target, const int originator);
 
 const bool CheckTarget(const int input, const GameState &state);
-void FixTarget(int input, const GameState &state);
-void SanitizeTarget(int target, const GameState &state, const int card, Player &aggressor);
+void FixTarget(int &input, const GameState &state);
+void SanitizeTarget(int &target, const GameState &state, const int card, Player &aggressor);
 
 Player *GetTarget(Player &aggressor, GameState &state, const int card);
 
