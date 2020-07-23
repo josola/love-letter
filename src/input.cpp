@@ -72,8 +72,6 @@ const bool CheckTarget(const int input, const GameState &state)
 
 void FixTarget(int input, const GameState &state)
 {
-    assert(input < 1 || input > 6);
-
     while (input < 1 || input > state.players_.size())
     {
         if (cin.fail())
@@ -95,7 +93,7 @@ void SanitizeTarget(int target, const GameState &state, const int card, Player &
         while (!CheckTarget(target, state) || target == aggressor.GetValue())
         {
             cout << "You cannot choose yourself.\n";
-            FixTarget(target, state);
+            cin >> target;
         }
     }
     else
