@@ -80,20 +80,20 @@ void Player::Reset()
   playing_ = true;
 }
 
-void Player::Discard(const int choice, Deck &deck)
+void Player::Discard(const int choice, vector<Card> &deck)
 {
   for (Card &iCard : hand_)
   {
     if (iCard.GetValue() == choice)
     {
-      deck.Insert(iCard);
+      deck.push_back(iCard);
       RemoveCard(iCard.GetValue());
       break;
     }
   }
 }
 
-void Player::DiscardHand(Deck &deck)
+void Player::DiscardHand(vector<Card> &deck)
 {
   for (Card &iCard : hand_)
   {
@@ -123,7 +123,7 @@ void Player::RemoveCard(const int card)
   }
 }
 
-void Player::Out(Deck &deck)
+void Player::Out(vector<Card> &deck)
 {
   this->DiscardHand(deck);
   this->Reset();

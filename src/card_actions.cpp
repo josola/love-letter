@@ -20,7 +20,7 @@ void Spy(Player &player)
     player.GainSpy();
 }
 
-void Guard(GameState &state, Player &aggressor, Deck &deck)
+void Guard(GameState &state, Player &aggressor, vector<Card> &deck)
 {
     Player *target = GetTarget(aggressor, state, 1);
 
@@ -53,7 +53,7 @@ void Priest(GameState &state, Player &aggressor)
     cout << '\n';
 }
 
-void Baron(GameState &state, Player &aggressor, Deck &deck) // round does not end during 2 player games
+void Baron(GameState &state, Player &aggressor, vector<Card> &deck) // round does not end during 2 player games
 {
     Player *target = GetTarget(aggressor, state, 3);
     
@@ -82,7 +82,7 @@ void Handmaid(Player &player)
     player.SetProtection(1);
 }
 
-void Prince(GameState &state, Player &player, Deck &deck)
+void Prince(GameState &state, Player &player, vector<Card> &deck)
 {
     Player *target = GetTarget(player, state, 5);
 
@@ -123,7 +123,7 @@ void Prince(GameState &state, Player &player, Deck &deck)
     }
 }
 
-void Chancellor(Deck &deck, Player &player) // infinite loop when drawing two cards?
+void Chancellor(vector<Card> &deck, Player &player) // infinite loop when drawing two cards?
 {
     cout << player.GetName() << " draw two cards (d): ";
 
@@ -133,7 +133,7 @@ void Chancellor(Deck &deck, Player &player) // infinite loop when drawing two ca
 
     for (int i = 0; i < 2; i++)
     {
-        player.Draw(deck.GetCard(0));
+        player.Draw(deck.at(0));
     }
 
     player.PrintHand();
@@ -188,7 +188,7 @@ void Countess(Player &player)
     cout << player.GetName() << " has played the Countess!\n";
 }
 
-void Princess(Player &player, Deck &deck)
+void Princess(Player &player, vector<Card> &deck)
 {
     cout << player.GetName() << " had the Princess!\n";
     player.Out(deck);

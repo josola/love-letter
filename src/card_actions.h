@@ -12,10 +12,15 @@
 #ifndef CARD_ACTIONS_h
 #define CARD_ACTIONS_h
 
+#include <vector>
+
+using std::vector;
+
 class GameState;
 class InputCheck;
 class Player;
 class Deck;
+class Card;
 
 // supporting functions
 const bool CheckCard(const int card);
@@ -31,14 +36,14 @@ void SanitizeCharacter(char input, const char target);
 
 // actions
 void Spy(Player &player);
-void Guard(GameState &state, Player &aggressor, Deck &deck);
+void Guard(GameState &state, Player &aggressor, vector<Card> &deck);
 void Priest(GameState &state, Player &aggressor);
-void Baron(GameState &state, Player &aggressor, Deck &deck);
+void Baron(GameState &state, Player &aggressor, vector<Card> &deck);
 void Handmaid(Player &player);
-void Prince(GameState &state, Player &player, Deck &deck);
-void Chancellor(Deck &deck, Player &player);
+void Prince(GameState &state, Player &player, vector<Card> &deck);
+void Chancellor(vector<Card> &deck, Player &player);
 void King(GameState &state, Player &aggressor);
 void Countess(Player &player);
-void Princess(Player &player, Deck &deck);
+void Princess(Player &player, vector<Card> &deck);
 
 #endif // !CARD_ACTIONS_h

@@ -42,12 +42,12 @@ public:
   void GainSpy();
   void Reset();
   void SetProtection(const bool state);
-  void Discard(const int choice, Deck &deck);
-  void DiscardHand(Deck &deck);
+  void Discard(const int choice, vector<Card> &deck);
+  void DiscardHand(vector<Card> &deck);
   void Addtoken();
   void Winner(const bool state);
   void RemoveCard(const int card);
-  void Out(Deck &deck);
+  void Out(vector<Card> &deck);
 
   // printer
   void PrintHand() const;

@@ -48,9 +48,9 @@ int main()
 	bool game_over = false;
 	while (!game_over)
 	{
-		Deck deck;
-		deck.Set();
-		deck.Shuffle();
+        vector<Card> deck;
+        Build(deck);
+        Shuffle(deck);
 
 		cout << "-- ROUND " << gameState.round_count_ << " --\n";
 
@@ -62,21 +62,24 @@ int main()
 			}
 		}
 
-		Deck aside;
-		aside.Insert(deck.GetCard(0));
+        vector<Card> aside;
+		aside.push_back(deck.at(0));
+        deck.erase(deck.begin() + 0);
 
-		Deck discard;
+        vector<Card> discard;
 		if (gameState.players_.size() == 2)
 		{
 			for (int i = 0; i < 2; i++)
 			{
-				discard.Insert(deck.GetCard(0));
+				discard.push_back(deck.at(0));
+                deck.erase(deck.begin() + 0);
 			}
 		}
 
 		for (Player &i : gameState.players_)
 		{
-			i.Draw(deck.GetCard(0));
+			i.Draw(deck.at(0));
+            deck.erase(deck.begin() + 0);
 		}
 
 		vector<Player *> remaining_players;
@@ -117,10 +120,34 @@ int main()
 					iPlayer.Draw(Card("BARON", 3, "REF"));
 
 					cout << "\nDeck size: \n";
-					cout << deck.Size() << '\n';
+					cout << deck.size() << '\n';
 
 					cout << "\nDiscard pile:\n";
-					discard.Print();
+                    if (discard.empty())
+                    {
+                        cout << "EMPTY" << '\n';
+                    }
+                    else
+                    {
+                        if (discard.size() == 1)
+                        {
+                            cout << discard.at(0).GetName() << '\n';
+                        }
+                        else
+                        {
+                            for (size_t i = 0; i < discard.size(); i++)
+                            {
+                                if (i < discard.size() - 1)
+                                {
+                                    cout << discard.at(i).GetName() << ", ";
+                                }
+                                else
+                                {
+                                    cout << discard.at(i).GetName() << '\n';
+                                }
+                            }
+                        }
+                    }
 
 					cout << "\nOpponents:\n";
 					for (size_t i = 0; i < gameState.players_.size(); i++)
@@ -281,7 +308,7 @@ int main()
 					}
 				}
 			}
-		while (remaining_players.size() > 1 && !deck.Empty());
+		while (remaining_players.size() > 1 && !deck.empty());
 
 		// increase round count
 		gameState.round_count_++;
@@ -289,7 +316,7 @@ int main()
 		// round end
 
 		// deck is empty, players compare hands, highest hand wins the round
-		if (deck.Size() == 0)
+		if (deck.size() == 0)
 		{
 			cout << "Deck is empty, players compare hands!\n";
 			Player *winner = nullptr;

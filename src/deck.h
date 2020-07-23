@@ -1,4 +1,4 @@
-//===-- deck.h - Deck class definition -------*- C++ -*-===//
+//===-- deck_support.h - Deck class definition -------*- C++ -*-===//
 //
 // This software uses the MIT license.
 // See https://mit-license.org/ for license information.
@@ -10,8 +10,8 @@
 ///
 //===----------------------------------------------------------------------===//
 
-#ifndef DECK_H
-#define DECK_H
+#ifndef DECK_SUPPORT_h
+#define DECK_SUPPORT_h
 
 #include <vector>
 
@@ -19,25 +19,7 @@ using std::vector;
 
 class Card;
 
-class Deck
-{
-public:
-  // getters
-  const int Size() const;
-  const bool Empty() const;
-  Card GetCard(const int position);
-
-  // setters
-  void Clear();
-  void Set();
-
-  // actions
-  void Shuffle();
-  void Insert(Card card);
-  void Print() const;
-
-protected:
-  vector<Card> pile_;
-};
+void Build(vector<Card> &input);
+void Shuffle(vector<Card> &input);
 
 #endif
