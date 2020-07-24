@@ -93,13 +93,6 @@ void SanitizeTarget(int &target, const GameState &state, const int card, Player 
         {
             FixTarget(target, state);
         }
-        else if ((card == 1 || card == 3 || card == 2) && target == aggressor.GetValue())
-        {
-            cout << "You cannot choose yourself.\n";
-            cin.clear();
-            cin.ignore(100, '\n');
-            cin >> target;
-        }
         else
         {
             good_target = true;
@@ -151,6 +144,10 @@ Player *GetTarget(Player &aggressor, GameState &state, const int card)
         else if (!target_player->Status())
         {
             cout << target_player->GetName() << " is out.\n";
+        }
+        else if (card != 5 && (target_player->GetValue() == aggressor.GetValue()))
+        {
+            cout << "You cannot choose yourself.\n";
         }
         else
         {
