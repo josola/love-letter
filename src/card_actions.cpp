@@ -223,7 +223,7 @@ void King(GameState &state, Player &aggressor)
     vector<Card> *instigator_hand = aggressor.GetHand();
     vector<Card> *target_hand = target->GetHand();
 
-    swap(instigator_hand, target_hand);
+    swap(*instigator_hand, *target_hand);
 
     aggressor.PrintHand();
 }
