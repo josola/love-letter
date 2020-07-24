@@ -22,8 +22,6 @@ const bool CheckCard(const int card)
 
 void FixCard(int card)
 {
-    assert(card < 0 || card > 9);
-
     while (card < 0 || card > 9 || cin.fail())
     {
         if (cin.fail())

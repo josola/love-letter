@@ -114,10 +114,15 @@ int main()
 					}
 
 					// current player draw card
-					// iPlayer.Draw(deck.GetCard(0)); // standard logic
+					// iPlayer.Draw(deck.at(0)); // standard logic
 
-					//debugging logic  YOU WERE FIXING SELF CHOICE IN BARON!
-					iPlayer.Draw(Card("BARON", 3, "REF"));
+					//debugging logic begin
+                    
+					iPlayer.Draw(Card("GUARD", 1, "REF"));
+                    
+                    gameState.players_.at(1).SetProtection(1);
+                    
+                    // debug logic end
 
 					cout << "\nDeck size: \n";
 					cout << deck.size() << '\n';
@@ -299,6 +304,10 @@ int main()
 				{
 					break;
 				}
+                
+                // reset remaining players after round start
+                remaining_players.erase(remaining_players.begin(), remaining_players.end());
+                
 				// round ends when one player is standing or deck is empty
 				for (Player &iPlayer : gameState.players_)
 				{
