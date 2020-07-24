@@ -20,7 +20,7 @@ const bool CheckCard(const int card)
     }
 }
 
-void FixCard(int card)
+void FixCard(int &card)
 {
     while (card < 0 || card > 9 || cin.fail())
     {
@@ -34,7 +34,7 @@ void FixCard(int card)
     }
 }
 
-void SanitizeCard(int target, const int originator)
+void SanitizeCard(int &target, const int originator)
 {
     switch (originator)
     {
@@ -168,7 +168,7 @@ const bool CheckCharacter(const char input, const char target)
     }
 }
 
-void FixCharacter(char input, const char target)
+void FixCharacter(char &input, const char target)
 {
     while (input != target)
     {
@@ -182,7 +182,7 @@ void FixCharacter(char input, const char target)
     }
 }
 
-void SanitizeCharacter(char input, const char target)
+void SanitizeCharacter(char &input, const char target)
 {
     while (!CheckCharacter(input, target))
     {
