@@ -109,23 +109,43 @@ void SanitizeTarget(int &target, const GameState &state, const int card, Player 
     }
 }
 
+const bool OpponentsProtected(Player &aggressor, GameState &state)
+{
+    int protected_count = 0;
+    for (Player &iPlayer : state.players_)
+    {
+        if (iPlayer.ProtectionStatus() && (iPlayer.GetValue() != aggressor.GetValue()))
+        {
+            protected_count++;
+        }
+    }
+    if (protected_count == state.players_.size() - 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 Player *GetTarget(Player &aggressor, GameState &state, const int card)
 {
     assert(card >= 0 && card <= 9);
 
     Player *target_player = nullptr;
-
+    
     bool protected_target = true;
     while (protected_target)
     {
         cout << aggressor.GetName() << " choose a target player: ";
-
+        
         int target = 0;
         cin >> target;
         SanitizeTarget(target, state, card, aggressor);
-
+        
         target_player = aggressor.GetConversion()->NumPlayer(target, state);
-
+        
         if (target_player->ProtectionStatus())
         {
             cout << target_player->GetName() << " has Handmaid protection.\n";

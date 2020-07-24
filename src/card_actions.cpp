@@ -22,20 +22,26 @@ void Spy(Player &player)
 
 void Guard(GameState &state, Player &aggressor, vector<Card> &deck)
 {
+    if (OpponentsProtected(aggressor, state))
+    {
+        cout << "All players have Handmaid protection!\n";
+        return;
+    }
+    
     Player *target = GetTarget(aggressor, state, 1);
-
+    
     cout << aggressor.GetName() << " guess a card: ";
-
+    
     int card = 0;
     cin >> card;
     SanitizeCard(card, 1);
-
+    
     for (const Card &iCard : *target->GetHand())
     {
         if (iCard.GetValue() == card)
         {
             cout << "Match!\n";
-
+            
             target->Out(deck);
             return;
         }
@@ -45,6 +51,12 @@ void Guard(GameState &state, Player &aggressor, vector<Card> &deck)
 
 void Priest(GameState &state, Player &aggressor)
 {
+    if (OpponentsProtected(aggressor, state))
+    {
+        cout << "All players have Handmaid protection!\n";
+        return;
+    }
+    
     Player *target = GetTarget(aggressor, state, 2);
 
     cout << target->GetName() << "'s hand is:\n";
@@ -55,6 +67,12 @@ void Priest(GameState &state, Player &aggressor)
 
 void Baron(GameState &state, Player &aggressor, vector<Card> &deck) // round does not end during 2 player games
 {
+    if (OpponentsProtected(aggressor, state))
+    {
+        cout << "All players have Handmaid protection!\n";
+        return;
+    }
+    
     Player *target = GetTarget(aggressor, state, 3);
     
     vector<Card>* target_hand = target->GetHand();
@@ -82,11 +100,29 @@ void Handmaid(Player &player)
     player.SetProtection(1);
 }
 
-void Prince(GameState &state, Player &player, vector<Card> &deck)
+void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
 {
-    Player *target = GetTarget(player, state, 5);
+    if (OpponentsProtected(aggressor, state))
+    {
+        cout << "All players have Handmaid protection!\n";
+        cout << "Prince applies to you!\n";
+        
+        vector<Card> *hand = aggressor.GetHand();
+        
+        if (any_of(hand->begin(), hand->end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
+        {
+            Princess(aggressor, deck);
+        }
+        else
+        {
+            aggressor.DiscardHand(deck);
+        }
+        return;
+    }
+    
+    Player *target = GetTarget(aggressor, state, 5);
 
-    if (target->GetValue() == player.GetValue())
+    if (target->GetValue() == aggressor.GetValue())
     {
         cout << "You chose yourself!\n";
         cout << "Please discard your hand (d): ";
@@ -95,15 +131,15 @@ void Prince(GameState &state, Player &player, vector<Card> &deck)
         cin >> discard;
         SanitizeCharacter(discard, 'd');
 
-        vector<Card> *hand = player.GetHand();
+        vector<Card> *hand = aggressor.GetHand();
 
         if (any_of(hand->begin(), hand->end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
         {
-            Princess(player, deck);
+            Princess(aggressor, deck);
         }
         else
         {
-            player.DiscardHand(deck);
+            aggressor.DiscardHand(deck);
         }
     }
     else
@@ -171,6 +207,12 @@ void Chancellor(vector<Card> &deck, Player &player) // infinite loop when drawin
 
 void King(GameState &state, Player &aggressor)
 {
+    if (OpponentsProtected(aggressor, state))
+    {
+        cout << "All players have Handmaid protection!\n";
+        return;
+    }
+    
     Player *target = GetTarget(aggressor, state, 7);
 
     cout << target->GetName() << " trade hands with " << aggressor.GetName() << '\n';
