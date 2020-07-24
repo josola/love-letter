@@ -93,7 +93,7 @@ void SanitizeTarget(int &target, const GameState &state, const int card, Player 
         {
             FixTarget(target, state);
         }
-        else if ((card == 1 || card == 3) && target == aggressor.GetValue())
+        else if ((card == 1 || card == 3 || card == 2) && target == aggressor.GetValue())
         {
             cout << "You cannot choose yourself.\n";
             cin.clear();

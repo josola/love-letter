@@ -38,6 +38,7 @@ bin/**
 Debug/**
 /x64/Debug/**
 love_letter/**
+support/**
 
 # macOS Specifics
 .DS_Store
