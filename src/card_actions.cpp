@@ -60,7 +60,6 @@ void Priest(GameState &state, Player &aggressor)
     Player *target = GetTarget(aggressor, state, 2);
 
     target->PrintHand();
-    cout << '\n';
 }
 
 void Baron(GameState &state, Player &aggressor, vector<Card> &deck)
