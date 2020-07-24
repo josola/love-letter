@@ -1,5 +1,6 @@
 #include "deck.h"
 #include "player.h"
+#include "input.h"
 #include "reference.h"
 #include "game_state.h"
 #include "card_actions.h"
@@ -83,241 +84,228 @@ int main()
 		}
 
 		vector<Player *> remaining_players;
-		do
-			for (Player &iPlayer : gameState.players_)
-			{
-				if (remaining_players.size() == 1)
-				{
-					break;
-				}
+        for (Player &iPlayer : gameState.players_)
+        {
+            // player must be playing
+            if (iPlayer.Status() && (remaining_players.size() != 1) && !deck.empty())
+            {
+                // remove handmaid protection
+                iPlayer.SetProtection(0);
 
-				// player must be playing
-				if (iPlayer.Status())
-				{
-					// remove handmaid protection
-					iPlayer.SetProtection(0);
-
-					// draw input
-					cout << iPlayer.GetName() << " draw a card (d): ";
-					char draw = ' ';
-					cin >> draw;
-					cin.ignore(numeric_limits<streamsize>::max(), '\n');
-					while (draw != 'd')
-					{
-						if (cin.fail())
-						{
-							cin.clear();
-							cin.ignore(numeric_limits<streamsize>::max(), '\n');
-						}
-						cout << "Input MUST be 'd':\n";
-						cin >> draw;
-					}
-
-					// current player draw card
-					// iPlayer.Draw(deck.at(0)); // standard logic
-
-					//debugging logic begin
-                    
-					iPlayer.Draw(Card("GUARD", 1, "REF"));
-                    
-                    gameState.players_.at(1).SetProtection(1);
-                    
-                    // debug logic end
-
-					cout << "\nDeck size: \n";
-					cout << deck.size() << '\n';
-
-					cout << "\nDiscard pile:\n";
-                    if (discard.empty())
+                // draw input
+                cout << iPlayer.GetName() << " draw a card (d): ";
+                char draw = ' ';
+                cin >> draw;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                while (draw != 'd')
+                {
+                    if (cin.fail())
                     {
-                        cout << "EMPTY" << '\n';
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    }
+                    cout << "Input MUST be 'd':\n";
+                    cin >> draw;
+                }
+
+                // current player draw card
+                // iPlayer.Draw(deck.at(0)); // standard logic
+
+                //debugging logic begin
+                
+                iPlayer.Draw(Card("BARON", 3, "REF"));
+                
+                // debug logic end
+
+                cout << "\nDeck size: \n";
+                cout << deck.size() << '\n';
+
+                cout << "\nDiscard pile:\n";
+                if (discard.empty())
+                {
+                    cout << "EMPTY" << '\n';
+                }
+                else
+                {
+                    if (discard.size() == 1)
+                    {
+                        cout << discard.at(0).GetName() << '\n';
                     }
                     else
                     {
-                        if (discard.size() == 1)
+                        for (size_t i = 0; i < discard.size(); i++)
                         {
-                            cout << discard.at(0).GetName() << '\n';
-                        }
-                        else
-                        {
-                            for (size_t i = 0; i < discard.size(); i++)
+                            if (i < discard.size() - 1)
                             {
-                                if (i < discard.size() - 1)
-                                {
-                                    cout << discard.at(i).GetName() << ", ";
-                                }
-                                else
-                                {
-                                    cout << discard.at(i).GetName() << '\n';
-                                }
+                                cout << discard.at(i).GetName() << ", ";
+                            }
+                            else
+                            {
+                                cout << discard.at(i).GetName() << '\n';
                             }
                         }
                     }
+                }
 
-					cout << "\nOpponents:\n";
-					for (size_t i = 0; i < gameState.players_.size(); i++)
-					{
-						if (gameState.players_.size() == 2 && gameState.players_.at(i).GetValue() != iPlayer.GetValue())
-						{
-							cout << gameState.players_.at(i).GetName() << '\n';
-						}
-						else
-						{
-							if (gameState.players_.at(i).GetValue() != iPlayer.GetValue())
-							{
-								if (i == gameState.players_.size() - 1)
-								{
-									cout << gameState.players_.at(i).GetName() << '\n';
-								}
-								else
-								{
-									cout << gameState.players_.at(i).GetName() << ", ";
-								}
-							}
-						}
-					}
+                cout << "\nOpponents:\n";
+                for (size_t i = 0; i < gameState.players_.size(); i++)
+                {
+                    if (gameState.players_.size() == 2 && gameState.players_.at(i).GetValue() != iPlayer.GetValue())
+                    {
+                        cout << gameState.players_.at(i).GetName() << '\n';
+                    }
+                    else
+                    {
+                        if (gameState.players_.at(i).GetValue() != iPlayer.GetValue())
+                        {
+                            if (i == gameState.players_.size() - 1)
+                            {
+                                cout << gameState.players_.at(i).GetName() << '\n';
+                            }
+                            else
+                            {
+                                cout << gameState.players_.at(i).GetName() << ", ";
+                            }
+                        }
+                    }
+                }
 
-					// print opponents with Handmaid protection
-					cout << "\nHandmaid protection:\n";
-					for (size_t i = 0; i < gameState.players_.size(); i++)
-					{
-						if (gameState.players_.size() == 2 && gameState.players_.at(i).GetValue() != iPlayer.GetValue() && gameState.players_.at(i).ProtectionStatus())
-						{
-							cout << gameState.players_.at(i).GetName() << '\n';
-						}
-						else
-						{
-							if (gameState.players_.at(i).GetValue() != iPlayer.GetValue() && gameState.players_.at(i).ProtectionStatus())
-							{
-								if (i == gameState.players_.size() - 1)
-								{
-									cout << gameState.players_.at(i).GetName() << '\n';
-								}
-								else if (gameState.players_.at(i).ProtectionStatus())
-								{
-									cout << gameState.players_.at(i).GetName() << ", ";
-								}
-							}
-						}
-					}
-					if (none_of(gameState.players_.begin(), gameState.players_.end(), [](Player &i) { return i.ProtectionStatus(); }))
-					{
-						cout << "NONE\n";
-					}
+                // print opponents with Handmaid protection
+                cout << "\nHandmaid protection:\n";
+                for (size_t i = 0; i < gameState.players_.size(); i++)
+                {
+                    if (gameState.players_.size() == 2 && gameState.players_.at(i).GetValue() != iPlayer.GetValue() && gameState.players_.at(i).ProtectionStatus())
+                    {
+                        cout << gameState.players_.at(i).GetName() << '\n';
+                    }
+                    else
+                    {
+                        if (gameState.players_.at(i).GetValue() != iPlayer.GetValue() && gameState.players_.at(i).ProtectionStatus())
+                        {
+                            if (i == gameState.players_.size() - 1)
+                            {
+                                cout << gameState.players_.at(i).GetName() << '\n';
+                            }
+                            else if (gameState.players_.at(i).ProtectionStatus())
+                            {
+                                cout << gameState.players_.at(i).GetName() << ", ";
+                            }
+                        }
+                    }
+                }
+                if (none_of(gameState.players_.begin(), gameState.players_.end(), [](Player &i) { return i.ProtectionStatus(); }))
+                {
+                    cout << "NONE\n";
+                }
 
-					iPlayer.PrintHand();
-					cout << "--\n";
+                iPlayer.PrintHand();
+                cout << "--\n";
 
-					// log cards already in hand
-					vector<int> in_hand;
-					vector<Card> hand = *iPlayer.GetHand();
-					for (Card iCard : hand)
-					{
-						in_hand.push_back(iCard.GetValue());
-					}
+                // log cards already in hand
+                vector<int> in_hand;
+                vector<Card> hand = *iPlayer.GetHand();
+                for (Card iCard : hand)
+                {
+                    in_hand.push_back(iCard.GetValue());
+                }
 
-					// countess restriction check
-					bool countess = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 8; });
-					bool king = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 7; });
-					bool prince = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 5; });
+                // countess restriction check
+                bool countess = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 8; });
+                bool king = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 7; });
+                bool prince = any_of(in_hand.begin(), in_hand.end(), [](int i) { return i == 5; });
 
-					bool correct_input = false;
-					int card = 0;
-					while (!correct_input)
-					{
-						cout << iPlayer.GetName() << " play a card: ";
-						cin >> card;
-						SanitizeCard(card, -1);
+                bool correct_input = false;
+                int card = 0;
+                while (!correct_input)
+                {
+                    cout << iPlayer.GetName() << " play a card: ";
+                    cin >> card;
+                    SanitizeCard(card, -1);
 
-						if ((countess && king) || (countess && prince))
-						{
-							while (card != 8)
-							{
-								if (cin.fail())
-								{
-									cin.clear();
-									cin.ignore(1000, '\n');
-								}
-								cout << "You MUST play the Countess.\n";
-							}
-						}
+                    if ((countess && king) || (countess && prince))
+                    {
+                        while (card != 8)
+                        {
+                            if (cin.fail())
+                            {
+                                cin.clear();
+                                cin.ignore(1000, '\n');
+                            }
+                            cout << "You MUST play the Countess.\n";
+                        }
+                    }
 
-						// play card in hand: without restriction
-						else
-						{
-							for (Card &iCard : hand)
-							{
-								if (iCard.GetValue() == card)
-								{
-									correct_input = true;
-									break;
-								}
-							}
-							if (!correct_input)
-							{
-								cout << "Not in hand.\n";
-							}
-						}
-					}
+                    // play card in hand: without restriction
+                    else
+                    {
+                        for (Card &iCard : hand)
+                        {
+                            if (iCard.GetValue() == card)
+                            {
+                                correct_input = true;
+                                break;
+                            }
+                        }
+                        if (!correct_input)
+                        {
+                            cout << "Not in hand.\n";
+                        }
+                    }
+                }
 
-					// discard card
-					iPlayer.Discard(card, discard);
+                // discard card
+                iPlayer.Discard(card, discard);
 
-					// play card action
-					switch (card)
-					{
-					case 0:
-						Spy(iPlayer);
-						break;
-					case 1:
-						Guard(gameState, iPlayer, discard);
-						break;
-					case 2:
-						Priest(gameState, iPlayer);
-						break;
-					case 3:
-						Baron(gameState, iPlayer, discard);
-						break;
-					case 4:
-						Handmaid(iPlayer);
-						break;
-					case 5:
-						Prince(gameState, iPlayer, discard);
-						break;
-					case 6:
-						Chancellor(discard, iPlayer);
-						break;
-					case 7:
-						King(gameState, iPlayer);
-						break;
-					case 8:
-						Countess(iPlayer);
-						break;
-					case 9:
-						Princess(iPlayer, discard);
-						break;
-					}
-					cout << '\n';
-					cout << iPlayer.GetName() << " end turn.\n";
-				}
-				else
-				{
-					break;
-				}
-                
-                // reset remaining players after round start
-                remaining_players.erase(remaining_players.begin(), remaining_players.end());
-                
-				// round ends when one player is standing or deck is empty
-				for (Player &iPlayer : gameState.players_)
-				{
-					if (iPlayer.Status())
-					{
-						remaining_players.push_back(&iPlayer);
-					}
-				}
-			}
-		while (remaining_players.size() > 1 && !deck.empty());
+                // play card action
+                switch (card)
+                {
+                case 0:
+                    Spy(iPlayer);
+                    break;
+                case 1:
+                    Guard(gameState, iPlayer, discard);
+                    break;
+                case 2:
+                    Priest(gameState, iPlayer);
+                    break;
+                case 3:
+                    Baron(gameState, iPlayer, discard);
+                    break;
+                case 4:
+                    Handmaid(iPlayer);
+                    break;
+                case 5:
+                    Prince(gameState, iPlayer, discard);
+                    break;
+                case 6:
+                    Chancellor(discard, iPlayer);
+                    break;
+                case 7:
+                    King(gameState, iPlayer);
+                    break;
+                case 8:
+                    Countess(iPlayer);
+                    break;
+                case 9:
+                    Princess(iPlayer, discard);
+                    break;
+                }
+                cout << '\n';
+                cout << iPlayer.GetName() << " end turn.\n";
+            }
+            
+            // reset remaining players after round start
+            remaining_players.erase(remaining_players.begin(), remaining_players.end());
+            
+            // round ends when one player is standing or deck is empty
+            for (Player &iPlayer : gameState.players_)
+            {
+                if (iPlayer.Status())
+                {
+                    remaining_players.push_back(&iPlayer);
+                }
+            }
+        }
 
 		// increase round count
 		gameState.round_count_++;
