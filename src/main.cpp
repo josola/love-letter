@@ -370,6 +370,20 @@ int main()
 			}
 		}
 
+        // celebrate the last player standing
+        Player *winner = nullptr;
+        for (Player &iPlayer : gameState.players_)
+        {
+            if (iPlayer.Status())
+            {
+                winner = &iPlayer;
+            }
+        }
+        
+        cout << winner->GetName() << " was the last player standing!\n";
+        winner->Addtoken();
+        cout << winner->GetName() << " token count: " << winner->GetTokenCount() << '\n';
+        
 		// check that player has winning token count
 		for (Player &iPlayer : gameState.players_)
 		{
@@ -381,20 +395,6 @@ int main()
 				break;
 			}
 		}
-
-		// celebrate the last player standing
-		Player *winner = nullptr;
-		for (Player &iPlayer : gameState.players_)
-		{
-			if (iPlayer.Status())
-			{
-				winner = &iPlayer;
-			}
-		}
-
-		cout << winner->GetName() << " was the last player standing!\n";
-		winner->Addtoken();
-		cout << winner->GetName() << " token count: " << winner->GetTokenCount() << '\n';
 	}
 
 	return 0;
