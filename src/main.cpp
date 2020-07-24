@@ -150,21 +150,24 @@ int main()
                 cout << "\nOpponents:\n";
                 for (size_t i = 0; i < gameState.players_.size(); i++)
                 {
-                    if (gameState.players_.size() == 2 && gameState.players_.at(i).GetValue() != iPlayer.GetValue())
+                    if (gameState.players_.at(i).Status())
                     {
-                        cout << gameState.players_.at(i).GetName() << '\n';
-                    }
-                    else
-                    {
-                        if (gameState.players_.at(i).GetValue() != iPlayer.GetValue())
+                        if (gameState.players_.size() == 2 && gameState.players_.at(i).GetValue() != iPlayer.GetValue())
                         {
-                            if (i == gameState.players_.size() - 1)
+                            cout << gameState.players_.at(i).GetName() << '\n';
+                        }
+                        else
+                        {
+                            if (gameState.players_.at(i).GetValue() != iPlayer.GetValue())
                             {
-                                cout << gameState.players_.at(i).GetName() << '\n';
-                            }
-                            else
-                            {
-                                cout << gameState.players_.at(i).GetName() << ", ";
+                                if (i == gameState.players_.size() - 1)
+                                {
+                                    cout << gameState.players_.at(i).GetName() << '\n';
+                                }
+                                else
+                                {
+                                    cout << gameState.players_.at(i).GetName() << ", ";
+                                }
                             }
                         }
                     }
