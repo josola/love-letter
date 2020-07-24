@@ -148,6 +148,10 @@ Player *GetTarget(Player &aggressor, GameState &state, const int card)
         {
             cout << target_player->GetName() << " has Handmaid protection.\n";
         }
+        else if (!target_player->Status())
+        {
+            cout << target_player->GetName() << " is out.\n";
+        }
         else
         {
             protected_target = false;
