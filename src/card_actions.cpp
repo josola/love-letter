@@ -63,7 +63,7 @@ void Priest(GameState &state, Player &aggressor)
     cout << '\n';
 }
 
-void Baron(GameState &state, Player &aggressor, vector<Card> &deck) // round does not end during 2 player games
+void Baron(GameState &state, Player &aggressor, vector<Card> &deck)
 {
     if (OpponentsProtected(aggressor, state))
     {
