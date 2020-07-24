@@ -54,17 +54,6 @@ int main()
         Build(deck);
         Shuffle(deck);
 
-        // round count prompt
-		cout << "-- ROUND " << gameState.round_count_ << " --\n";
-
-		if (gameState.round_count_ > 1)
-		{
-			for (Player &i : gameState.players_)
-			{
-				i.Reset();
-			}
-		}
-
         // face up deck
         vector<Card> aside;
 		aside.push_back(deck.at(0));
@@ -88,6 +77,17 @@ int main()
             deck.erase(deck.begin() + 0);
 		}
 
+        // round count prompt
+        cout << "-- ROUND " << gameState.round_count_ << " --\n";
+        
+        if (gameState.round_count_ > 1)
+        {
+            for (Player &i : gameState.players_)
+            {
+                i.Reset();
+            }
+        }
+        
         // player turn
 		vector<Player *> remaining_players;
         bool end_round = false;
@@ -118,11 +118,11 @@ int main()
                     }
                     
                     // current player draw card
-                    // iPlayer.Draw(deck.at(0)); // standard logic
+                    // iPlayer.Draw(deck.at(0));
+                    // deck.erase(deck.begin() + 0);
                     
-                    //debug logic begin
-                    iPlayer.Draw(Card("HANDMAID", 4, "REF"));
-                    // debug logic end
+                    // debug
+                    iPlayer.Draw(Card("PRINCESS", 9, "REF"));
                     
                     // print game state
                     cout << "\nDeck size: \n";
@@ -235,15 +235,12 @@ int main()
                         
                         if ((countess && king) || (countess && prince))
                         {
-                            while (card != 8)
+                            if (cin.fail())
                             {
-                                if (cin.fail())
-                                {
-                                    cin.clear();
-                                    cin.ignore(1000, '\n');
-                                }
-                                cout << "You MUST play the Countess.\n";
+                                cin.clear();
+                                cin.ignore(1000, '\n');
                             }
+                            cout << "You MUST play the Countess.\n";
                         }
                         
                         // play card in hand: without restriction
