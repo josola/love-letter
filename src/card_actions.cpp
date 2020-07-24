@@ -59,8 +59,6 @@ void Priest(GameState &state, Player &aggressor)
     
     Player *target = GetTarget(aggressor, state, 2);
 
-    cout << target->GetName() << "'s hand is:\n";
-
     target->PrintHand();
     cout << '\n';
 }
