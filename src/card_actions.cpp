@@ -113,6 +113,8 @@ void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
         else
         {
             aggressor.DiscardHand(deck);
+            aggressor.Draw(deck.at(0));
+            deck.erase(deck.begin() + 0);
         }
         return;
     }
@@ -137,6 +139,8 @@ void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
         else
         {
             aggressor.DiscardHand(deck);
+            aggressor.Draw(deck.at(0));
+            deck.erase(deck.begin() + 0);
         }
     }
     else
@@ -152,6 +156,8 @@ void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
         else
         {
             target->DiscardHand(deck);
+            target->Draw(deck.at(0));
+            deck.erase(deck.begin() + 0);
         }
     }
 }
