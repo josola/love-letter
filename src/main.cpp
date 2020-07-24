@@ -318,6 +318,7 @@ int main()
                 if (deck.empty() || remaining_players.size() == 1)
                 {
                     end_round = true;
+                    break;
                 }
             }
         }
