@@ -379,7 +379,7 @@ int main()
         
         cout << winner->GetName() << " was the last player standing!\n";
         winner->Addtoken();
-        cout << winner->GetName() << " token count: " << winner->GetTokenCount() << '\n';
+        cout << winner->GetName() << " token count: " << winner->GetTokenCount() << "\n\n";
         
 		// check that player has winning token count
 		for (Player &iPlayer : gameState.players_)
