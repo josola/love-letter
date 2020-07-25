@@ -26,22 +26,22 @@ int main()
 {
 	GameState gameState;
 
-	cout << "-- WELCOME TO LOVE LETTER --\n";
+	cout << "\n-- WELCOME TO LOVE LETTER --\n";
 
-	cout << "How many players will be playing: ";
+    // get starting player count
 	int player_count = -1;
-	cin >> player_count;
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	while (player_count < 2 || player_count > 6)
 	{
+        cout << "How many players will be playing: ";
+        cin >> player_count;
 		if (cin.fail())
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 		cout << "Number must be between 2 and 6 players:\n";
-		cin >> player_count;
 	}
+    cout << '\n';
 
 	gameState.SetPlayers(player_count);
 
@@ -78,7 +78,7 @@ int main()
 		}
 
         // round count prompt
-        cout << "-- ROUND " << gameState.round_count_ << " --\n";
+        cout << "-- ROUND " << gameState.round_count_ << " --\n\n";
         
         if (gameState.round_count_ > 1)
         {
@@ -118,11 +118,8 @@ int main()
                     }
                     
                     // current player draw card
-                    // iPlayer.Draw(deck.at(0));
-                    // deck.erase(deck.begin() + 0);
-                    
-                    // debug
-                    iPlayer.Draw(Card("PRINCESS", 9, "REF"));
+                    iPlayer.Draw(deck.at(0));
+                    deck.erase(deck.begin() + 0);
                     
                     // print game state
                     cout << "\nDeck size: \n";
