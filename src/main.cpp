@@ -205,7 +205,6 @@ int main()
                     }
                     
                     iPlayer.PrintHand();
-                    cout << "--\n";
                     
                     // log cards already in hand
                     vector<int> in_hand;

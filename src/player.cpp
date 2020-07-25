@@ -145,7 +145,7 @@ void Player::PrintHand() const
       }
       else
       {
-        cout << hand_.at(i).GetValue() << '-' << hand_.at(i).GetName() << '\n';
+        cout << hand_.at(i).GetValue() << '-' << hand_.at(i).GetName() << "\n\n";
       }
     }
   }
