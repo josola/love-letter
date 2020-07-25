@@ -26,7 +26,7 @@ int main()
 {
 	GameState gameState;
 
-	cout << "\n-- WELCOME TO LOVE LETTER --\n";
+	cout << "\n-- WELCOME TO LOVE LETTER --\n\n";
 
     // get starting player count
 	int player_count = -1;
