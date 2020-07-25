@@ -137,7 +137,7 @@ Player *GetTarget(Player &aggressor, GameState &state, const int card)
         
         target_player = aggressor.GetConversion()->NumPlayer(target, state);
         
-        if (target_player->ProtectionStatus())
+        if (target_player->ProtectionStatus() && (target_player->GetValue() != aggressor.GetValue()))
         {
             cout << target_player->GetName() << " has Handmaid protection.\n";
         }
