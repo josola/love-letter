@@ -102,19 +102,17 @@ int main()
                     iPlayer.SetProtection(0);
                     
                     // draw input
-                    cout << iPlayer.GetName() << " draw a card (d): ";
                     char draw = ' ';
-                    cin >> draw;
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     while (draw != 'd')
                     {
+                        cout << iPlayer.GetName() << " draw a card (d): ";
+                        cin >> draw;
                         if (cin.fail())
                         {
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         }
                         cout << "Input MUST be 'd':\n";
-                        cin >> draw;
                     }
                     
                     // current player draw card
