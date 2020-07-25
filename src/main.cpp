@@ -39,7 +39,10 @@ int main()
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
-		cout << "Number must be between 2 and 6 players:\n";
+        if (player_count < 2 || player_count > 9)
+        {
+            cout << "Number must be between 2 and 6 players:\n";
+        }
 	}
     cout << '\n';
 
@@ -112,7 +115,10 @@ int main()
                             cin.clear();
                             cin.ignore(numeric_limits<streamsize>::max(), '\n');
                         }
-                        cout << "Input MUST be 'd':\n";
+                        if (draw != 'd')
+                        {
+                            cout << "Input MUST be 'd':\n";
+                        }
                     }
                     
                     // current player draw card
@@ -236,8 +242,6 @@ int main()
                             }
                             cout << "You MUST play the Countess.\n";
                         }
-                        
-                        // play card in hand: without restriction
                         else
                         {
                             for (Card &iCard : hand)
@@ -293,7 +297,6 @@ int main()
                             break;
                     }
                     cout << '\n';
-                    cout << iPlayer.GetName() << " end turn.\n";
                 }
                 
                 // reset remaining players, so as not to stack remainders
