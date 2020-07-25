@@ -37,7 +37,7 @@ bin/**
 .vs/**
 Debug/**
 /x64/Debug/**
-love_letter/**
+love_letter_vscode/**
 support/**
 
 # macOS Specifics
