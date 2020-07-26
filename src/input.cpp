@@ -82,7 +82,7 @@ void FixTarget(int &input, const GameState &state)
     }
 }
 
-void SanitizeTarget(int &target, const GameState &state, const int card, Player &aggressor)
+void SanitizeTarget(int &target, const GameState &state, const int card, Player *aggressor)
 {
     assert(card >= 0 && card <= 9);
     
@@ -100,12 +100,12 @@ void SanitizeTarget(int &target, const GameState &state, const int card, Player 
     }
 }
 
-const bool OpponentsProtected(Player &aggressor, GameState &state)
+const bool OpponentsProtected(Player *aggressor, GameState &state)
 {
     int protected_count = 0;
     for (Player &iPlayer : state.players_)
     {
-        if (iPlayer.ProtectionStatus() && (iPlayer.GetValue() != aggressor.GetValue()))
+        if (iPlayer.ProtectionStatus() && (iPlayer.GetValue() != aggressor->GetValue()))
         {
             protected_count++;
         }
@@ -120,7 +120,7 @@ const bool OpponentsProtected(Player &aggressor, GameState &state)
     }
 }
 
-Player *GetTarget(Player &aggressor, GameState &state, const int card)
+Player *GetTarget(Player *aggressor, GameState &state, const int card)
 {
     assert(card >= 0 && card <= 9);
 
@@ -129,15 +129,15 @@ Player *GetTarget(Player &aggressor, GameState &state, const int card)
     bool protected_target = true;
     while (protected_target)
     {
-        cout << aggressor.GetName() << " choose a target player: ";
+        cout << aggressor->GetName() << " choose a target player: ";
         
         int target = 0;
         cin >> target;
         SanitizeTarget(target, state, card, aggressor);
         
-        target_player = aggressor.GetConversion()->NumPlayer(target, state);
+        target_player = aggressor->GetConversion()->NumPlayer(target, state);
         
-        if (target_player->ProtectionStatus() && (target_player->GetValue() != aggressor.GetValue()))
+        if (target_player->ProtectionStatus() && (target_player->GetValue() != aggressor->GetValue()))
         {
             cout << target_player->GetName() << " has Handmaid protection.\n";
         }
@@ -145,7 +145,7 @@ Player *GetTarget(Player &aggressor, GameState &state, const int card)
         {
             cout << target_player->GetName() << " is out.\n";
         }
-        else if (card != 5 && (target_player->GetValue() == aggressor.GetValue()))
+        else if (card != 5 && (target_player->GetValue() == aggressor->GetValue()))
         {
             cout << "You cannot choose yourself.\n";
         }

@@ -36,6 +36,7 @@ public:
   const int GetTokenCount() const;
   const bool SpyStatus() const;
   Converter* GetConversion();
+  const bool Starting() const;
 
   // setters
   void Draw(const Card obj);
@@ -48,6 +49,7 @@ public:
   void Winner(const bool state);
   void RemoveCard(const int card);
   void Out(vector<Card> &deck);
+  void SetStarting(const bool state);
 
   // printer
   void PrintHand() const;
@@ -67,6 +69,7 @@ private:
   bool spy_ = false;
   bool playing_ = true;
   bool winner_ = false;
+  bool starting_ = false;
 
   // data
   Converter convert_;

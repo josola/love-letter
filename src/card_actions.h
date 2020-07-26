@@ -23,15 +23,15 @@ class Deck;
 class Card;
 
 // actions
-void Spy(Player &player);
-void Guard(GameState &state, Player &aggressor, vector<Card> &deck);
-void Priest(GameState &state, Player &aggressor);
-void Baron(GameState &state, Player &aggressor, vector<Card> &deck);
-void Handmaid(Player &player);
-void Prince(GameState &state, Player &player, vector<Card> &deck);
-void Chancellor(vector<Card> &deck, Player &player);
-void King(GameState &state, Player &aggressor);
-void Countess(Player &player);
-void Princess(Player &player, vector<Card> &deck);
+void Spy(Player *player);
+void Guard(GameState &state, Player *aggressor, vector<Card> &deck);
+void Priest(GameState &state, Player *aggressor);
+void Baron(GameState &state, Player *aggressor, vector<Card> &deck);
+void Handmaid(Player *player);
+void Prince(GameState &state, Player *player, vector<Card> &deck);
+void Chancellor(vector<Card> &deck, Player *player);
+void King(GameState &state, Player *aggressor);
+void Countess(Player *player);
+void Princess(Player *player, vector<Card> &deck);
 
 #endif // !CARD_ACTIONS_h

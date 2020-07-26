@@ -14,13 +14,13 @@ using std::cout;
 using std::sort;
 
 // actions
-void Spy(Player &player)
+void Spy(Player *player)
 {
-    assert(!player.SpyStatus());
-    player.GainSpy();
+    assert(!player->SpyStatus());
+    player->GainSpy();
 }
 
-void Guard(GameState &state, Player &aggressor, vector<Card> &deck)
+void Guard(GameState &state, Player *aggressor, vector<Card> &deck)
 {
     if (OpponentsProtected(aggressor, state))
     {
@@ -30,7 +30,7 @@ void Guard(GameState &state, Player &aggressor, vector<Card> &deck)
     
     Player *target = GetTarget(aggressor, state, 1);
     
-    cout << aggressor.GetName() << " guess a card: ";
+    cout << aggressor->GetName() << " guess a card: ";
     
     int card = 0;
     cin >> card;
@@ -49,7 +49,7 @@ void Guard(GameState &state, Player &aggressor, vector<Card> &deck)
     cout << "No match!\n";
 }
 
-void Priest(GameState &state, Player &aggressor)
+void Priest(GameState &state, Player *aggressor)
 {
     if (OpponentsProtected(aggressor, state))
     {
@@ -62,7 +62,7 @@ void Priest(GameState &state, Player &aggressor)
     target->PrintHand();
 }
 
-void Baron(GameState &state, Player &aggressor, vector<Card> &deck)
+void Baron(GameState &state, Player *aggressor, vector<Card> &deck)
 {
     if (OpponentsProtected(aggressor, state))
     {
@@ -73,11 +73,11 @@ void Baron(GameState &state, Player &aggressor, vector<Card> &deck)
     Player *target = GetTarget(aggressor, state, 3);
     
     vector<Card>* target_hand = target->GetHand();
-    vector<Card>* aggressor_hand = aggressor.GetHand();
+    vector<Card>* aggressor_hand = aggressor->GetHand();
 
     if (aggressor_hand->at(0).GetValue() > target_hand->at(0).GetValue())
     {
-        cout << aggressor.GetName() << " had the higher card!\n";
+        cout << aggressor->GetName() << " had the higher card!\n";
         target->Out(deck);
     }
     else if (aggressor_hand->at(0).GetValue() == target_hand->at(0).GetValue())
@@ -87,24 +87,24 @@ void Baron(GameState &state, Player &aggressor, vector<Card> &deck)
     else
     {
         cout << target->GetName() << " had the higher card!\n";
-        aggressor.Out(deck);
+        aggressor->Out(deck);
     }
 }
 
-void Handmaid(Player &player)
+void Handmaid(Player *player)
 {
-    assert(!player.ProtectionStatus());
-    player.SetProtection(1);
+    assert(!player->ProtectionStatus());
+    player->SetProtection(1);
 }
 
-void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
+void Prince(GameState &state, Player *aggressor, vector<Card> &deck)
 {
     if (OpponentsProtected(aggressor, state))
     {
         cout << "All players have Handmaid protection!\n";
         cout << "Prince applies to you!\n";
         
-        vector<Card> *hand = aggressor.GetHand();
+        vector<Card> *hand = aggressor->GetHand();
         
         if (any_of(hand->begin(), hand->end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
         {
@@ -112,8 +112,8 @@ void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
         }
         else
         {
-            aggressor.DiscardHand(deck);
-            aggressor.Draw(deck.at(0));
+            aggressor->DiscardHand(deck);
+            aggressor->Draw(deck.at(0));
             deck.erase(deck.begin() + 0);
         }
         return;
@@ -121,7 +121,7 @@ void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
     
     Player *target = GetTarget(aggressor, state, 5);
 
-    if (target->GetValue() == aggressor.GetValue())
+    if (target->GetValue() == aggressor->GetValue())
     {
         cout << "You chose yourself!\n";
         cout << "Please discard your hand (d): ";
@@ -130,7 +130,7 @@ void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
         cin >> discard;
         SanitizeCharacter(discard, 'd');
 
-        vector<Card> *hand = aggressor.GetHand();
+        vector<Card> *hand = aggressor->GetHand();
 
         if (any_of(hand->begin(), hand->end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
         {
@@ -138,8 +138,8 @@ void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
         }
         else
         {
-            aggressor.DiscardHand(deck);
-            aggressor.Draw(deck.at(0));
+            aggressor->DiscardHand(deck);
+            aggressor->Draw(deck.at(0));
             deck.erase(deck.begin() + 0);
         }
     }
@@ -151,7 +151,7 @@ void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
 
         if (any_of(hand->begin(), hand->end(), [](const Card &iCard) { return iCard.GetValue() == 9; }))
         {
-            Princess(*target, deck);
+            Princess(target, deck);
         }
         else
         {
@@ -162,9 +162,9 @@ void Prince(GameState &state, Player &aggressor, vector<Card> &deck)
     }
 }
 
-void Chancellor(vector<Card> &deck, Player &player) // infinite loop when drawing two cards?
+void Chancellor(vector<Card> &deck, Player *player) // infinite loop when drawing two cards?
 {
-    cout << player.GetName() << " draw two cards (d): ";
+    cout << player->GetName() << " draw two cards (d): ";
 
     char draw = ' ';
     cin >> draw;
@@ -172,10 +172,10 @@ void Chancellor(vector<Card> &deck, Player &player) // infinite loop when drawin
 
     for (int i = 0; i < 2; i++)
     {
-        player.Draw(deck.at(0));
+        player->Draw(deck.at(0));
     }
 
-    player.PrintHand();
+    player->PrintHand();
 
     cout << "First card to put back: ";
 
@@ -189,7 +189,7 @@ void Chancellor(vector<Card> &deck, Player &player) // infinite loop when drawin
     }
     else
     {
-        player.Discard(first, deck);
+        player->Discard(first, deck);
     }
 
     cout << "Second card to put back: ";
@@ -204,11 +204,11 @@ void Chancellor(vector<Card> &deck, Player &player) // infinite loop when drawin
     }
     else
     {
-        player.Discard(second, deck);
+        player->Discard(second, deck);
     }
 }
 
-void King(GameState &state, Player &aggressor)
+void King(GameState &state, Player *aggressor)
 {
     if (OpponentsProtected(aggressor, state))
     {
@@ -218,23 +218,23 @@ void King(GameState &state, Player &aggressor)
     
     Player *target = GetTarget(aggressor, state, 7);
 
-    cout << target->GetName() << " trade hands with " << aggressor.GetName() << '\n';
+    cout << target->GetName() << " trade hands with " << aggressor->GetName() << '\n';
 
-    vector<Card> *instigator_hand = aggressor.GetHand();
+    vector<Card> *instigator_hand = aggressor->GetHand();
     vector<Card> *target_hand = target->GetHand();
 
     swap(*instigator_hand, *target_hand);
 
-    aggressor.PrintHand();
+    aggressor->PrintHand();
 }
 
-void Countess(Player &player)
+void Countess(Player *player)
 {
-    cout << player.GetName() << " has played the Countess!\n";
+    cout << player->GetName() << " has played the Countess!\n";
 }
 
-void Princess(Player &player, vector<Card> &deck)
+void Princess(Player *player, vector<Card> &deck)
 {
-    cout << player.GetName() << " had the Princess!\n";
-    player.Out(deck);
+    cout << player->GetName() << " had the Princess!\n";
+    player->Out(deck);
 }

@@ -55,6 +55,11 @@ Converter *Player::GetConversion()
   return &convert_;
 }
 
+const bool Player::Starting() const
+{
+  return starting_;
+}
+
 // setters
 void Player::Draw(const Card obj)
 {
@@ -76,7 +81,6 @@ void Player::Reset()
   hand_.clear();
   handmaid_ = false;
   spy_ = false;
-  winner_ = false;
   playing_ = true;
 }
 
@@ -128,6 +132,11 @@ void Player::Out(vector<Card> &deck)
   this->DiscardHand(deck);
   this->Reset();
   this->playing_ = false;
+}
+
+void Player::SetStarting(const bool state)
+{
+  starting_ = state;
 }
 
 // printers

@@ -18,10 +18,10 @@ void SanitizeCard(int &target, const int originator);
 
 const bool CheckTarget(const int input, const GameState &state);
 void FixTarget(int &input, const GameState &state);
-void SanitizeTarget(int &target, const GameState &state, const int card, Player &aggressor);
+void SanitizeTarget(int &target, const GameState &state, const int card, Player *aggressor);
 
-const bool OpponentsProtected(Player &aggressor, GameState &state);
-Player *GetTarget(Player &aggressor, GameState &state, const int card);
+const bool OpponentsProtected(Player *aggressor, GameState &state);
+Player *GetTarget(Player *aggressor, GameState &state, const int card);
 
 const bool CheckCharacter(const char input, const char target);
 void FixCharacter(char &input, const char target);
