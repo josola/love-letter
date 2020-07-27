@@ -132,8 +132,10 @@ int main()
                     }
 
                     // current player draw card
-                    current_player->Draw(deck.at(0));
+                    // current_player->Draw(deck.at(0));
                     deck.erase(deck.begin() + 0);
+
+                    current_player->Draw(Card("HANDMAID", 4, "REF"));
 
                     // print game state
                     cout << "\nDeck size: \n";
