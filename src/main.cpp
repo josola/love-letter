@@ -340,11 +340,15 @@ int main()
         if (deck.size() == 0)
         {
             cout << "Deck is empty, players compare hands!\n";
-            for (Player &iPlayer : gameState.players_)
+            for (size_t i = 0; i < gameState.players_.size(); i++)
             {
-                if (iPlayer.GetValue() > winner->GetValue())
+                Player *iPlayer = &gameState.players_.at(i);
+                if (i < gameState.players_.size() - 1)
                 {
-                    winner = &iPlayer;
+                    if (iPlayer->GetHand()->at(0).GetValue() > gameState.players_.at(i + 1).GetHand()->at(0).GetValue())
+                    {
+                        winner = &gameState.players_.at(i);
+                    }
                 }
             }
             cout << winner->GetName() << " has the highest hand! " << winner->GetHand()->at(0).GetName() << '\n';
