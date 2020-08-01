@@ -195,28 +195,44 @@ int main()
                     }
 
                     cout << "\nHandmaid protection:\n";
-                    for (size_t i = 0; i < gameState.players_.size(); i++)
+                    bool players_have_handmaid = any_of(gameState.players_.begin(), gameState.players_.end(), [](Player &i) { return i.ProtectionStatus(); });
+                    if (players_have_handmaid)
                     {
-                        if (gameState.players_.size() == 2 && gameState.players_.at(i).GetValue() != current_player->GetValue() && gameState.players_.at(i).ProtectionStatus())
+                        int handmaid_count = count_if(gameState.players_.begin(), gameState.players_.end(), [](Player &i) { return i.ProtectionStatus(); });
+                        if (handmaid_count == 1)
                         {
-                            cout << gameState.players_.at(i).GetName() << '\n';
+                            for (size_t i = 0; i < gameState.players_.size(); i++)
+                            {
+                                Player *handmaidPlayer = &gameState.players_.at(i);
+                                if (handmaidPlayer->ProtectionStatus() && (handmaidPlayer->GetValue() != current_player->GetValue()))
+                                {
+                                    cout << handmaidPlayer->GetName() << '\n';
+                                    break;
+                                }
+                            }
                         }
                         else
                         {
-                            if (gameState.players_.at(i).GetValue() != current_player->GetValue() && gameState.players_.at(i).ProtectionStatus())
+                            int handmaid_tally = 1;
+                            for (size_t i = 0; i < gameState.players_.size(); i++)
                             {
-                                if (i == gameState.players_.size() - 1)
+                                Player *iPlayer = &gameState.players_.at(i);
+                                if (iPlayer->ProtectionStatus() && (iPlayer->GetValue() != current_player->GetValue()))
                                 {
-                                    cout << gameState.players_.at(i).GetName() << '\n';
-                                }
-                                else if (gameState.players_.at(i).ProtectionStatus())
-                                {
-                                    cout << gameState.players_.at(i).GetName() << ", ";
+                                    if (handmaid_tally != handmaid_count)
+                                    {
+                                        cout << iPlayer->GetName() << ", ";
+                                    }
+                                    else
+                                    {
+                                        cout << iPlayer->GetName() << '\n';
+                                    }
+                                    handmaid_tally++;
                                 }
                             }
                         }
                     }
-                    if (none_of(gameState.players_.begin(), gameState.players_.end(), [](Player &i) { return i.ProtectionStatus(); }))
+                    else
                     {
                         cout << "NONE\n";
                     }
