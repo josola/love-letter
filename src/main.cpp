@@ -14,6 +14,7 @@
 
 using std::any_of;
 using std::cin;
+using std::count_if;
 using std::cout;
 using std::none_of;
 using std::numeric_limits;
@@ -93,6 +94,7 @@ int main()
         {
             for (size_t i = 0; i < gameState.players_.size(); i++)
             {
+                // set winner of previous round as starting player
                 if (gameState.round_count_ > 1)
                 {
                     for (size_t j = 0; j < gameState.players_.size(); j++)
@@ -108,10 +110,8 @@ int main()
                 // access to player object during play
                 Player *current_player = &gameState.players_.at(i);
 
-                // player must be playing
                 if (current_player->Status())
                 {
-                    // remove handmaid protection
                     current_player->SetProtection(0);
 
                     // draw input
@@ -194,7 +194,6 @@ int main()
                         }
                     }
 
-                    // print opponents with Handmaid protection
                     cout << "\nHandmaid protection:\n";
                     for (size_t i = 0; i < gameState.players_.size(); i++)
                     {
@@ -218,6 +217,49 @@ int main()
                         }
                     }
                     if (none_of(gameState.players_.begin(), gameState.players_.end(), [](Player &i) { return i.ProtectionStatus(); }))
+                    {
+                        cout << "NONE\n";
+                    }
+
+                    cout << "\nSpy Bonus:\n";
+                    bool players_have_spy = any_of(gameState.players_.begin(), gameState.players_.end(), [](Player &i) { return i.SpyStatus(); });
+                    if (players_have_spy)
+                    {
+                        int spy_count = count_if(gameState.players_.begin(), gameState.players_.end(), [](Player &i) { return i.SpyStatus(); });
+                        if (spy_count == 1)
+                        {
+                            for (size_t i = 0; i < gameState.players_.size(); i++)
+                            {
+                                Player *spyPlayer = &gameState.players_.at(i);
+                                if (gameState.players_.at(i).SpyStatus())
+                                {
+                                    cout << spyPlayer->GetName() << '\n';
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            int spy_tally = 1;
+                            for (size_t i = 0; i < gameState.players_.size(); i++)
+                            {
+                                Player *iPlayer = &gameState.players_.at(i);
+                                if (iPlayer->GetValue() != current_player->GetValue() && iPlayer->SpyStatus())
+                                {
+                                    if (spy_tally == 1)
+                                    {
+                                        cout << iPlayer->GetName() << ", ";
+                                        spy_tally++;
+                                    }
+                                    else
+                                    {
+                                        cout << iPlayer->GetName() << '\n';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
                     {
                         cout << "NONE\n";
                     }
