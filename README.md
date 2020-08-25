@@ -1,4 +1,4 @@
-# Love Letter (text version) 🖥️
+# Love Letter 🖥️
 ### A text based card game inspired by the wildly popular card game Love Letter.
 **CURRENTLY UNDER DEVELOPMENT**
 
