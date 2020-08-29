@@ -110,7 +110,7 @@ int main()
                 // access to player object during play
                 Player *current_player = &gameState.players_.at(i);
 
-                if (current_player->Status())
+                if (current_player->Status() && current_player->GetValue() == 1)
                 {
                     current_player->SetProtection(0);
 
@@ -366,6 +366,10 @@ int main()
                         break;
                     }
                     cout << '\n';
+                }
+                else if (current_player->Status() && current_player->GetValue() != 1)
+                {
+                    /* code */
                 }
 
                 // reset remaining players, so as not to stack remainders
