@@ -369,7 +369,7 @@ int main()
                 }
                 else if (current_player->Status() && current_player->GetValue() != 1)
                 {
-                    /* code */
+                    cout << current_player->GetName() << " turn.\n\n";
                 }
 
                 // reset remaining players, so as not to stack remainders
