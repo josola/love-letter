@@ -2,6 +2,7 @@
 #include "card.h"
 #include <cassert>
 #include <chrono>
+#include <algorithm>
 #include <random>
 
 using std::shuffle;
@@ -41,7 +42,7 @@ void Build(vector<Card> &input)
     input.push_back(Card("PRINCESS", 9, "REF"));
 }
 
-void Shuffle(vector<Card> &input)
+void Mix(vector<Card> &input)
 {
     assert(!input.empty());
     shuffle(input.begin(), input.end(), std::default_random_engine(std::chrono::system_clock::now().time_since_epoch().count()));

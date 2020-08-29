@@ -20,6 +20,6 @@ using std::vector;
 class Card;
 
 void Build(vector<Card> &input);
-void Shuffle(vector<Card> &input);
+void Mix(vector<Card> &input);
 
 #endif
