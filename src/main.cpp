@@ -56,7 +56,7 @@ int main()
         // main deck
         vector<Card> deck;
         Build(deck);
-        Shuffle(deck);
+        Mix(deck);
 
         // face up deck
         vector<Card> aside;
