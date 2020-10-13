@@ -42,3 +42,8 @@ support/**
 
 # macOS Specifics
 .DS_Store
+/Love-Letter/.vs/Love-Letter/v16
+/Love-Letter/Love-Letter.vcxproj.user
+/Love-Letter/Love-Letter.vcxproj.filters
+/Love-Letter/Love-Letter.vcxproj
+/Love-Letter.sln
